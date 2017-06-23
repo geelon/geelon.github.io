@@ -1,0 +1,208 @@
+---
+title: A Mathematical Formulation for Machine Learning
+subtitle: An approach inspired by physics, algebra, and topology
+author: Geelon So
+---
+
+\documentclass[10]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,mathrsfs,mathtools}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+\providecommand{\bbZ}{\mathbb{Z}}
+\providecommand{\bbN}{\mathbb{N}}
+\providecommand{\bbQ}{\mathbb{Q}}
+\providecommand{\bbF}{\mathbb{F}}
+\providecommand{\bbR}{\mathbb{R}}
+\providecommand{\bbC}{\mathbb{C}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{plain}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{proposition}[theorem]{Proposition}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\providecommand{\AND}{\textsc{ and }}
+\providecommand{\OR}{\textsc{ or }}
+\providecommand{\NOT}{\textsc{not }}
+
+
+\title{A Mathematical Formulation of Feature Spaces}
+\author{Aaron Geelon So}
+\date{May 31, 2017}
+
+\begin{document}
+
+\maketitle
+
+\texttt{Note: This report may be downloaded as a pdf} \href{../files/ml_final_report.pdf}{here}.
+
+\textsc{The motivation for} this project comes from the realization that the way data is represented affects what a machine learning algorithms learns from it. In itself, this idea is obvious, but it poses quite a conundrum: the representation often seems very \emph{ad hoc}---it just so happens that these were the features we could measure, the scale we used---so it seems that good machine learning algorithms should be fairly indifferent to how the data is given.
+
+On the other hand, the space in which our data lives also often have relevant properties to the machine learning algorithms---it may be metric space, an inner product space, and so on.
+
+Thus, I am interested in studying the \emph{features} or \emph{representations} of data. First, let me formulate a general framework for what machine learning is.
+
+\section{Framework}
+\textsc{We begin with} a `primitive' set of \emph{observables} (or \emph{features}), $\mathcal{O}$, which consists of the only ways we can obtain data from the `real world', the noumenon, speaking philosophically. For example, a camera with $k$ pixels $p_i$ on its photoreceptor has $k$ features:
+\[\mathcal{O} = \{p_1,\dotsc, p_k\}.\]
+Light strikes the photoreceptor, and each of the pixels return a signal value. Perhaps in $\{0,1\}$, in $[0,1]$, or even in $\bbR$. For now, let's work with $\bbR$. So, we may think of each image as a what's often called a `feature vector' $f \in \bbR^\mathcal{O}$.
+
+Let's call $\bbR^\mathcal{O}$ the \emph{state space} and denote it $\mathcal{X}$ (it is more commonly called the \emph{feature space}, although because I am interested in constructing further features, I'll save \emph{feature space} for a more general definition later on). The space $\mathcal{X}$ is the collection of all possible \emph{states} the object we're looking at can take on. In our camera example, this space includes every possible image of the real world we can take with the camera, in addition to those images that just looks like static on a television.
+
+Thus, $x \in \mathcal{X}$ can be thought of as the state of the world that produces the image the camera sees. Then, each pixel $p_i$ can then be thought of as a functional
+\[p_i: \mathcal{X} \to \bbR,\]
+where $p_i(x) = x(p_i)$. In other words, there is a natural injection of $\mathcal{O}$ into $\bbR^\mathcal{X}$. It is this space $\bbR^\mathcal{X}$ that I want to call a \emph{feature space}. Then, any \emph{feature} is a function that, when given the state $x$, returns the `measured' feature, $f(x)$. To summarize:
+
+\textbf{Definition 1.} \emph{Let $\mathcal{O}$ be a (possibly infinite) countable set, which we call the collection of \emph{primitive observables}, and let $Y$ be the \emph{output space} in which each observation is measured (usually, $\bbR$, $[0,1]$, or some finite set such as $\{0,1\}$).}
+
+\emph{Define the \emph{state space} $\mathcal{X}$ to be the function space $Y^\mathcal{O}$. The \emph{feature space} $\mathcal{F}$ is the set of all functions, which we call \emph{features}, in $Y^\mathcal{X}$. }
+
+
+\textbf{Remark 2.}
+There is an injection $i: \mathcal{O} \rightarrow Y^\mathcal{X}$ where $p \in \mathcal{O}$ is mapped to the function $i(p)(x) = x(p)$. Thus, we may regard $\mathcal{O}$ as a subcollection of features.
+
+
+Returning to our camera, if we only care about images in the real world we can take, this suggests that the state space space is much bigger than we need it to be. Indeed, to represent an image $x \in \mathcal{X}$, we need $k$ values,
+\[x = \langle x_1,\dotsc, x_k\rangle,\]
+and often, $k >> 1$.
+
+What part of the space do we want to focus in on? We hope that this is somewhat represented in our \emph{training set}, $T \subset \mathcal{X}$, that it approximates the sort of images we care about. Then, we can construct new features that more directly describes the apsects of the states we care about. 
+
+For example, a dimensionality reduction algorithm $\phi$ might just be forming a subcollection $\mathcal{Q}$ of $n$ new features from $\mathcal{F}$, where $n << k$. Then, we may view the algorithm as a map
+\[\phi: Y^\mathcal{O} \to Y^\mathcal{Q},\]
+where $Y^\mathcal{O}$ and $Y^\mathcal{Q}$ are different representations of the same data (and if $\phi$ is not injective, then we `lose' information in the $Y^\mathcal{Q}$ representation.
+
+\section{Feature Construction}
+\textsc{Now we have} a feature space $\mathcal{F}$ and a subcollection of features $\mathcal{O}$. However, many features might not be `useful' to us, or if we have a collection of features, certain collections may be `redundant'. But before we enter discussion into how we select the features, there is a more fundamental question: which features can we actually construct?
+
+Consider for example the MNIST data set. We can imagine a feature $f \in Y^\mathcal{X}$ such that for every image in the test set, $x \in \mathcal{X}$, the feature returns $f(x)$, precisely the digit that is depicted. While this $f$ is contained in the feature space, it is not clear how we may construct this function from $\mathcal{O}$.
+
+What do we mean by a \emph{constructible feature} then? We should recall that functions are the same as a computer program. However, whether a program halts or not is important to whether we can actually use the program for practical purposes. To understand this better, we'll consider the following scenario.
+
+\subsection{Toy Example}
+\textsc{Imagine a point particle} on the unit interval, $[0,1]$. We have a device measuring the position of the particle. It has the property of being able to measure the position of the particle to arbitrary, but finite, precision. In other words, if we want the position of the particle
+\[0.x_1x_2x_3\dotsc,\]
+we can get successively better approximations
+\begin{align*}
+    &0.x_1\\
+    &0.x_1x_2\\
+    &0.x_1x_2x_3\\
+    &\ \vdots
+\end{align*}
+but we will never obtain infinite precision because we only have finite time. 
+
+Here, we can think of the primitive collection of observables as 
+\[\mathcal{O} = \{x_i: 1 \leq i < \infty\} = \bbN,\]
+where $x_i$ is the $i$th digit in the binary expansion of the particle's position (or decimal expansion). The output space is just $\{0,1\}$. Then, our state space is just $\mathcal{X} = \{0,1\}^\bbN$. Our feature space is $\mathcal{F} = \{0,1\}^\mathcal{X}$. And as before, we have the natural image of $\mathcal{O} \subset \mathcal{F}$.
+
+Every element $x_i$ in $\mathcal{O}$ is constructible, in the sense that the computer program that looks at the output of $x_i$ will halt in finite time (because we assumed that our device will measure the position in finite time). This motivates the loose definition
+
+\textbf{Definition 3.} \emph{A feature $f \in \mathcal{F}$ is \emph{constructible} if $f$ halts. Let $C(\mathcal{X}) \subset \mathcal{F}$ be the collection of constructible features on $\mathcal{X}$.}
+
+So far, we only constructible features we know are those in $\mathcal{O}$. But can we construct more features from those?
+
+Notice that since $\{0,1\}$ is a Boolean algebra, the space $\mathcal{F}$ actually inherits the algebraic structure. That is, we may define $(f$ \textsc{and} $g)$, $(f$ \textsc{or} $g)$, $($\textsc{not} $f)$ pointwise. In particular, these three operations are constructive in the sense that if $f,g \in C(\mathcal{X})$ are constructible, then so are all three of the above terms. And since the constant functions $0,1 \in \mathcal{F}$ are certainly constructible (just return 0 or 1, respectively), the subcollection of constructible features actually form a subalgebra of $\mathcal{F}$. To formalize this in proposition,
+
+\textbf{Proposition 4.} The constructible features $C(\mathcal{X})$ form a subalgebra of $\mathcal{F}$.
+
+And in fact, we now know that the algebra generated over $\mathcal{O}$ is contained in $C(\mathcal{X})$. But what does $C(\mathcal{X})$ look like? To see this, let's consider instead of the functions, the state space $\mathcal{X}$.
+
+We may think of \emph{features} encoding certain \emph{properties} of points in the state space. That is, take a feature $f \in \mathcal{F}$. We can think of the collection of all points $x \in \mathcal{X}$ such that $f(x) = 0$ to be the collection of points sharing that property.
+
+For example, recalling $x_1 \in \mathcal{O}$ to be the feature indicating the first digit in the binary expansion, the collection of points $x^{-1}(0) \subset \mathcal{X}$ may be thought of the collection of points in the first half of the unit interval. In this way, we motivate the definition
+
+\textbf{Definition 5.}
+\emph{A \emph{property} $\mathrm{P}$ is a subset of the state space $\mathcal{X}$. We say that a point $x \in \mathcal{X}$ satisfies the property $\mathrm{P}$ if $x \in \mathrm{P}$. We notate this by $\mathrm{P}(x)$.}
+
+In other words, we can think of a property as a function $f(x) = 1$ if $\mathrm{P}(x)$, and $f(x) = 0$ otherwise. Thus, $f \in \mathcal{F}$. However, we still have the question of halting, or equivalently, which properties are \emph{decidable}. 
+
+For example, given $f \in \mathcal{F}$, not necessarily constructible, we can ask, for which $x \in \mathcal{X}$ does $f(x) = 1$? Some points will halt, giving an answer $f(x) = 0$ or $f(x) = 1$. But some points will not halt; we don't know whether or not if we wait one more second, we'll know, or if the answer will never come.
+
+But often, we only care whether $x$ satisfies $f(x) = 1$,\footnote{Or, $f(x) = 0$, which is equivalently $(\NOT f)(x) = 1$.} so, we don't care if $f(x)$ doesn't halt on inputs of $x$ where $f(x) = 0$. Thus, we define
+
+\textbf{Definition 6.}
+\emph{Let $\mathrm{P}$ be a property, and $f$ be its indicator function. That is, let $f(x) = 1$ if $\mathrm{P}(x)$, and $f(x) = 0$ otherwise. We say that $\mathrm{P}$ is \emph{semidecidable} if $f$ halts for all $x \in \mathrm{P}$. }
+
+\textbf{Remark 7.}
+We can also say that $\mathrm{P}$ is \emph{decidable} iff both $\mathrm{P}$ and $\mathrm{P}^c$, the set complement of $\mathrm{P}$ in $\mathcal{X}$, are semidecidable.
+
+
+An example of a semidecidable property in our toy example is the collection of all $x \in \mathcal{X}$ such that $x_i = 1$ for some $i$. If the binary expansion of eventually has a 1, then in finite time, our algorithm will terminate. In particular, this property $\mathrm{P}$ `corresponds' with the semiopen interval $(0,1]$ of our original space. However, we need to be sure to remember that $[0,1]$ is not in bijection with $\{0,1\}^\bbN$ (since the binary expansion is not unique).
+
+The operations \textsc{and} and \textsc{or} correspond with intersection and unions, respectively. That is, consider properties $\mathrm{P}$ and $\mathrm{Q}$, and their corresponding indicator functions, $f$ and $g$. Then, 
+\begin{align*}
+    \mathrm{P} \cap \mathrm{Q} &= \{x \in \mathcal{X}: f(x) = 1 \textrm{ AND } g(x) = 1\},\\
+    \mathrm{P} \cup \mathrm{Q} &= \{ x\in \mathcal{X}: f(x) = 1 \textrm{ OR } g(x) = 1\}.
+\end{align*}
+This shows that semidecidable properties are closed under finite unions and intersections. But in fact, we can take countable unions. 
+
+Given a countable set of indicator functions $f_1,f_2,\dotsc$, if 
+\[(f_1 \textrm{ OR } f_2 \textrm{ OR } \dotsm)(x) = 1,\] 
+then it must be the case that $f_i(x) = 1$ for some finite $i$. Thus, $(f_1$ \OR $f_2$ \OR $\dotsm)$ halts on such states $x$. Hence, $\bigcup \mathrm{P}_i$ is semidecidable.
+
+Finally, we remark that the properties $\emptyset$ and $\mathcal{X}$ are also semidecidable, where the constant functions $0$ and $1$ are their indicator functions. What we have just shown is the collection $\mathcal{T}$ of semidecidable properties satisfies
+\begin{enumerate}
+    \item $\mathcal{T}$ contains $\emptyset$ and $\mathcal{X}$,
+    \item $\mathcal{T}$ is closed under finite intersection, and
+    \item $\mathcal{T}$ is closed under countable union.
+\end{enumerate}
+This shows that
+
+\textbf{Proposition 8.}
+The collection of semidecidable properties $\mathcal{T}$ forms a topology over $\mathcal{X}$.
+
+In particular, for our toy example, we know that $x_i^{-1}(0)$ and $x_i^{-1}(1)$ are both semidecidable properties. We can take this as a subbasis for $\mathcal{T}$. And since $x_i: \{0,1\}^\bbN \to \{0,1\}$ is just the projection of the $i$th coordinate, this is precisely saying that $\mathcal{T}$ is the product topology on $\mathcal{X} = \{0,1\}^\bbN$. From this, we can formalize our earlier definition of a constructible feature:
+
+\textbf{Definition 9.}
+\emph{A \emph{constructible feature} $f \in \mathcal{F}$ is a continuous function from $Y^\mathcal{O}$ to $Y$, where $Y^\mathcal{O}$ is given the product topology. The collection of constructible features $C(\mathcal{X})$ is the set of continuous functions on $\mathcal{X}$.}
+
+\textbf{Remark 10.}
+Suppose a machine learning algorithm partitions $\mathcal{X}$ into clusters $C_1,\dotsc, C_n$. Then, each of these $C_i$ must in fact be open sets with respect to the product topology on $\mathcal{X}$.
+
+
+Let's conjecture a way to extend this work to a general machine learning setting.
+
+\subsection{Formalism}
+\textsc{Let the space} of observables, $\mathcal{O}$, and the output space $Y$ be as before. We now require $Y$ to be a topological space. Note that if $Y$ is a finite set, we may use the discrete topology. Recall that we define the state space as $\mathcal{X} = Y^\mathcal{O}$. This is made into a topological space by the product topology.
+
+In fact, it makes sense to require $Y$ to be a topological space, for the topology gives a notion of nearness that is inherited by $\mathcal{X}$. In particular, using the product topology is equivalent to the assuming that \emph{primitive observables are continuous}. This is certainly an assumption of learning: there is something to learn because two states with similar observable measurements are similar because there is something generally causing their similarity. This generalizability is what we hope to learn.
+
+Finally, any feature we can possibly construct as a machine learning algorithm must be continuous. 
+
+Recall that if $\mathcal{Q}$ is a collection of observables in $C(\mathcal{X})$, we may regard $Y^\mathcal{Q}$ as giving representations to states $x \in \mathcal{X}$ in terms of those features. A machine learning algorithm is \[\phi: \mathcal{X} \to Y^\mathcal{Q},\]
+and in particular, $\mathcal{X} = Y^\mathcal{O}$. The continuity of features in $\mathcal{Q}$ is to say that $\phi$ is a continuous function.
+
+Note that $\phi$ induces a coarser topology on $\mathcal{X}$ as follows. We define
+
+\textbf{Definition 11.}
+\emph{Let $\mathcal{X}$ be a state space, and $\mathcal{Q} \subset \mathcal{F}$ be a collection of features. The \emph{topology on $\mathcal{X}$ with respect to $\mathcal{Q}$}, $\mathcal{T}_\mathcal{Q}$ is the coarsest topology such that each $f \in \mathcal{Q}$ is continuous.}
+
+Then, if we assume that $\mathcal{Q} \subset C(\mathcal{X})$, then all of the $f \in \mathcal{Q}$ is continuous in the original topology $\mathcal{T}$ on $\mathcal{X}$. This implies that the subbasis of open sets, $f^{-1}(U)$, that induces the topology $\mathcal{T}_\mathcal{Q}$ are all open sets in $\mathcal{T}$. Thus,
+
+\textbf{Proposition 12.}
+If $\mathcal{Q} \subset C(\mathcal{X})$, then, $\mathcal{T}_\mathcal{Q}$ is a coarser topology than the original topology $\mathcal{T}$ on $\mathcal{X}$.
+
+
+\section{Direction}
+\textsc{Now that we} have formalized what features are ($f \in \mathcal{F}$), and in fact, what constructible features are ($f\in C(\mathcal{X})$), we can begin to study features more directly, and the question of selecting features with respect to a training set $T$.
+
+Let me suggest a few possible directions:
+\begin{enumerate}
+    \item What is a `useful' collection of features $\mathcal{Q}$? It has to do with how well it is able to discern distinct points 'around' the training set $T$ (so hopefully, any points in the test set).
+    
+    Perhaps we can state this topologically. Recall from the end of the previous section, $\phi$. Then, we're saying that $T$ is `essentially' homeomorphic to $\phi(T)$. And since we don't care about points not near $T$, a parsimonious representation (i.e. a succinct collection of features $\mathcal{Q}$) will likely be unable to separate (in a topological sense) or distinguish these points well.
+    
+    \item It seems then that `redundancy' of features, or conversely, 'independence' of features are also partially related to how much overlap their corresponding open sets have (where what I mean by `their corresponding open sets' is the topology generated by the collection of all $f^{-1}(U)$ such that $U$ is open in $Y$).
+    
+    \item How can we compare features? It seems that we can come up with a notion of distance (metric) and a notion of independence (inner product).
+\end{enumerate}
+I feel that there is a lot more potential to go down in this path, and that it is probably worthwhile to do so, to gain a better understanding of how to select hyperparameters or tune. Indeed, we often want to consider a family of features, and we optimize with respect to certain properties while tuning. This is hopefully just the beginnings of an interesting approach to machine learning.\\
+
+\vspace{1em}\qed
+
+\end{document}
