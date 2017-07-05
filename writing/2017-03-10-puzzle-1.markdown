@@ -1,0 +1,13 @@
+---
+title: Puzzle 1
+author: Geelon So
+date: 2017-03-10
+---
+## Problem Statement
+*A helium balloon is attached to the bottom of a truck. If the truck driver accelerates the truck in the direction of travel, in which direction relative tto the driver does the balloon move?*
+<img class="center" src="./files/square.png" alt="figure to puzzle" />
+
+<h2 class="red">Solution</h2>
+Acceleration and gravity are indistinguishable from within the truck. So, when the truck accelerates forward, it is as though there is a force of gravity pulling everything to the back of the truck. This is the familiar feeling of being pushed backward by an accelerating vehicle. However, helium balloons float. So, it turns out the helium balloon will actually move toward the direction of acceleration!
+
+[🡢 next puzzle](2017-06-20-puzzle-2.html)

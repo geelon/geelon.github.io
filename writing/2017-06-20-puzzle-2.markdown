@@ -1,0 +1,77 @@
+---
+title: Puzzle 2
+author: Geelon So
+date: 2017-06-20
+---
+# Problem Statement
+*You're Prisoner 576, one of infinitely many prisoners.*
+
+*Tomorrow is the day each prisoner is either set free or executed. The warden will line you up by your numbers,*
+<span class="center">Prisoner 1, Prisoner 2, Prisoner 3, ...</span>
+*give each prisoner either a red or blue hat, and then set them free if they can correctly guess the color of their own hat. Otherwise, they're executed.*
+
+*Luckily, you're not guessing blindly. Tomorrow, when you're lined up, you'll be facing the back of the line as it reaches to infinity; each prisoner may see the hats of everyone after them. And, today, you may collude. Can you find a strategy so that all but finitely many prisoners will be set free?*
+<img class="center" src="./files/hat.png" alt="figure to puzzle" />
+
+## Hint & Variant
+You'll need the [Axiom of Choice](https://en.wikipedia.org/wiki/Axiom_of_choice), which states that given a union of pairwise-disjoint nonempty sets $\bigcup_{i \in I} X_i$, there exists a collection $\{x_i\}_{i\in I}$ where $x_i \in X_i$.
+
+Once you solve this, you can apply the same method to the same problem, but with uncountably many prisoners and uncountably many (known) hat colors. Rest assured that the warden will be able to well-order all of you.
+
+
+<h1 class="red">Solution</h1>
+### Formulation
+First, we should figure out all the possible assignments of hat-colors, and perhaps more importantly, formulate this problem in a way that helps us solve it.
+
+We can represent an assignment of hat-colors by a sequence
+$$s = (s_1,s_2,s_3,\dotsc),$$
+where $s_i$ is either red or blue, the color of the hat given to the $i$th prisoner. Let $S$ be the collection of all possible sequences, which we may call a [sequence space](https://en.wikipedia.org/wiki/Sequence_space).
+
+This lets us think about the problem as a comparison of two hat-color sequences: the sequence given by the warden, say $s$, and the sequence they end up guessing, $t$.
+
+There's no way for the prisoners to pick $t$ with full certainty so that $s = t$. In other words, the *equality relation* is too strict of a [relation](https://en.wikipedia.org/wiki/Binary_relation) to study for this problem. But lets define a weaker relation $s \sim t$ where all but a finite number of hat-color components are equal.
+
+That is, if $s = t$, then every prisoner survives. If $s \sim t$, then all but finitely many prisoners survive. Now, if the warden chooses $s$, the collection
+$$\{t \in S: s \sim t\}$$
+is the corresponding collection of "good" choices for $t$. 
+
+### Analysis
+Three properties of the relation $\sim$ turns it into a so-called [equivalence relation](https://en.wikipedia.org/wiki/Equivalence_relation).
+
+1. [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation). If the warden chooses $s$ and the prisoners also choose $s$, then all of them will survive (so all but finitely many survive). In other words, $s \sim s$.
+2. [Anti-symmetry](https://en.wikipedia.org/wiki/Antisymmetric_relation). Suppose that $s \sim t$. That is, the warden chose $s$ and the prisoners $t$; the prisoners made a good choice. If on the other hand, the warden chose $t$ and the prisoners chose $s$, still, almost all the prisoners survive. So, $t \sim s$.
+3. [Transitivity](https://en.wikipedia.org/wiki/Transitive_relation). If $s \sim t$ and $t \sim r$, then $s$ and $t$ differ on say $n$ components, and $t$ and $r$ differ on $m$ components. So, $s$ and $r$ can differ on at most $n + m$ components, which is still finite. We get $s \sim r$.
+
+As a result, if $s \sim t$, we may say that $s$ and $t$ are *equivalent* (in a useful way for our problem). Now, we may form collections combining equivalent sequences; we call these collections [equivalence classes](https://en.wikipedia.org/wiki/Equivalence_class). If two equivalence classes $C_1$ and $C_2$ both contain $t$, because our equivalence relation is transitive, they must in fact be the same equivalence class. So, these equivalence classes [partition](https://en.wikipedia.org/wiki/Partition_of_a_set) our sequence space of hat-colors, $S$, in the sense that every sequence $s$ belongs to exactly one equivalence class. We finally see:
+
+**All but finitely many of the prisoners survive if the warden's choice $s$ and their own choice $t$ fall into the same equivalence class.**
+
+How can the prisoners tell which equivalence class the warden's choice falls into? Well, recall that the prisoners are facing the back of the line; each prisoner can see all but a finite number of prisoners (namely the prisoners with numbers less than their own). That's enough information to tell them precisely which equivalence class the warden chose.
+
+How can the prisoners now work together so that their combined choice falls into the same equivalence class? This is where the night of collusion comes in. If the prisoners agree on a specific *representative* from each possible equivalence class, then when morning comes and they make their collective choice $t$, they can be sure that $s \sim t$, which means that they've mostly survived.
+
+## Precise Mathematical Solution & Discussion
+Let $S$ be the sequence space of hat-colors; define an equivalence relation on $S$ where $s \sim t$ iff all but finitely many color components of $s$ and $t$ are equal. From each equivalence class, *choose* a representative. The prisoners should each give the corresponding color in the representative element, ensuring that all but finitely many prisoners survive.
+
+Notice that being able to choose a representative element requires the Axiom of Choice; this puzzle is perhaps useful in pointing out the nonintuitive ramifications of assuming the Axiom of Choice. Its application in this problem is almost the same as in the construction of the [Vitali set](https://en.wikipedia.org/wiki/Vitali_set), a classic example of a [nonmeasurable set](https://en.wikipedia.org/wiki/Non-measurable_set).
+
+### Vitali Set
+To see how the construction of collection of representative elements is like the construction of the Vitali set, let's reformulate the prisoner's situation. Let the hat colors be represented by 0 for red and 1 for blue. Then, the sequence of hat colors may be interpretted as the binary expansion of a real number in $[0,1]$,
+$$s \longmapsto 0.s_1s_2s_3s_4\dotsc$$
+The condition $s \sim t$ is to say that the binary representation of the difference $s - t$ is eventually all 0's; that is, $s - t$ is a [dyadic rational](https://en.wikipedia.org/wiki/Dyadic_rational), a rational number of the form $\frac{a}{2^n}$. Indeed, if the binary expansion of $s - t$ terminates
+$$s - t = 0.s_1s_2\dotsc s_n,$$
+then that implies $s - t$ is just the integer represented in binary, $s_1s_2\dotsc s_n$, divided by $10^n$ (represented also in binary; in decimal, that's just $2^n$).
+
+Well, almost, since the binary representation of dyadic rationals isn't unique: the fraction $\frac{1}{2}$ may be represented either as $0.1$ or $0.01111...$, for example. So to make the analogy to the construction of the Vitali set exact, let's change the prison warden's condition: *if all but a finite number guess their hat correctly* OR *if all but a finite number give the opposite hat color*, then all prisoners go free. Otherwise, if infinitely many guess correctly but also infinitely many guess incorrectly, then they are all executed. This allows us the equivalence:
+
+*Let $s$ be the warden's sequence and $t$ be the prisoner's sequence. The prisoners survive if and only if $s - t$ is a dyadic rational.*
+
+Now, the choice of representatives as before gives us a subset $R \subset [0,1]$. Recall that distinct representatives $r,s \in R$ are not equivalent, so that $r - s$ is not a dyadic rational number. The usual Vitali set $V$ is actually constructed by taking representatives of $\mathbb{R}/\mathbb{Q}$ in $[0,1]$, so that the difference between distinct representatives $r-s$  is not a rational number. But as the [proof](https://en.wikipedia.org/wiki/Vitali_set#Construction_and_proof) of the nonmeasurability of a Vitali set constructed from the rationals may be extended to the dyadic rationals. The proof and construction relies on three properties of the rational numbers: (1) $\mathbb{Q}$ is an additive subgroup of $\mathbb{R}$, (2) $\mathbb{Q}$ is countable, and (3) $\mathbb{Q}$ is dense. The dyadic rationals satisfy all of these.
+
+For completion, the nonmeasurability of $R$ (following the proof from Wikipedia) is, briefly, as follows. Enumerate the dyadic rationals in $[-1,1]$ as $q_1,q_2,\dotsc$. Define $R + q_i$ to be the translate of $R$ by $q_i$. If $R$ were Lesbegue measurable (hence translate-invariant), then $\mu(R + q_i) = \mu(R)$. We have two claims: (1) the collection of $R + q_i$'s are pairwise disjoint, and (2) the countable union of $R + q_i$ satisfy
+$$[0,1] \subset \bigcup_{i = 1}^\infty R + q_i \subset [-1,2].$$
+From these assumptions, it follows that
+$$1 = \mu([0,1]) \leq \sum_{i=1}^\infty \mu(R + q_i) \leq \mu([-1,2]) = 3.$$
+But the infinite sum of $\mu(R + q_i)$, which is just the infinite sum of $\mu(R)$, must either be 0 or infinite, neither of which are between 1 or 3. So $R$ must have been nonmeasurable.
+
+All that remains are the two claims. Pairwise disjoint: if $x \in R + q_i \cap R + q_j$, then $(x - q_i)$ and $(x - q_j)$ are distinct elements of $R$, so their difference is not a dyadic rational. But their difference is $q_i - q_j$, a dyadic rational. Inclusions: the first inclusion follows because every element $x$ of $[0,1]$ is contained in an equivalence class of some $r \in R$. Thus, there is some $q$ such that either $x = r + q$ or $x = r - q$. The second inclusion from the triangle inequality. 

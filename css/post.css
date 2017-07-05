@@ -10,7 +10,7 @@
 }
 
 html {
-    font-size: 130%;
+    font-size: 110%;
 }
 
 body {
@@ -121,7 +121,7 @@ main a:hover { color: rgb(100, 100, 100); }
 main a:visited { color: rgb(100, 100, 100); }
 
 main h1#article_title {
-    font-size:250%;
+    font-size:200%;
     padding-bottom: 0.3em;
 }
 
@@ -136,15 +136,15 @@ section.date_posted {
     font-family: 'Open Sans', sans serif;
     padding-top: 0.5em;
     padding-bottom: 50px;
-    font-size:70%;
+    font-size:60%;
     text-transform: uppercase;
 }
 
 article h1 , h2 , h3 , h4 { font-family: 'Open Sans', sans serif; }
-article h1 { font-size: 180%; }
-article h2 { font-size: 160%; }
-article h3 { font-size: 140%; }
-article h4 { font-size: 120%; }
+article h1 { font-size: 170%; }
+article h2 { font-size: 150%; }
+article h3 { font-size: 130%; }
+article h4 { font-size: 110%; }
 
 
 main p { padding-bottom: 1em; }
@@ -286,4 +286,3 @@ td.sourceCode { padding-left: 5px; }
     main { width: 1000px;     padding-top: 8em;}
     h1, section.header, article { width: 750px;  }
 }
-

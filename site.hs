@@ -9,63 +9,62 @@ import           Text.Pandoc.Options
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-    match "images/*" $ do
-        route   idRoute
-        compile copyFileCompiler
+  match "images/*" $ do
+    route   idRoute
+    compile copyFileCompiler
 
-    match "files/*" $ do
-        route   idRoute
-        compile copyFileCompiler
+  match "css/*" $ do
+    route   idRoute
+    compile compressCssCompiler
 
-    match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
+  match "writing/files/*" $ do
+    route   idRoute
+    compile copyFileCompiler
+    
+  match (fromList ["writing/files/*", "projects/files/*", "me/files/*"]) $ do
+    route   idRoute
+    compile copyFileCompiler
 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
-        route   $ setExtension "html"
-        compile $ pandocMathCompiler
-            >>= loadAndApplyTemplate "templates/default.html" defaultContext
-            >>= relativizeUrls
+  match "writing-index.*" $ do
+    route $ customRoute $ const "writing/index.html"
+    compile $ pandocMathCompiler
+      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
+      >>= relativizeUrls
+         
+  match "writing/*" $ do
+    route $ setExtension "html"
+    compile $ pandocMathCompiler
+      >>= loadAndApplyTemplate "templates/writing-body.html"    postCtx
+      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
+      >>= relativizeUrls
 
-    match "posts/*" $ do
-        route $ setExtension "html"
-        compile $ pandocMathCompiler
-            >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeUrls
+  match (("me/*" .||. "projects/*") .&&. complement
+          ("me/files/" .||. "projects/files/")) $ do
+    route $ setExtension "html"
+    compile $ pandocMathCompiler
+      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
+      >>= relativizeUrls
+           
+  create ["archive.html"] $ do
+    route idRoute
+    compile $ do
+      posts <- recentFirst =<< loadAll "writing/*"
+      let archiveCtx =
+            listField "posts" postCtx (return posts) `mappend`
+            constField "title" "Archives"            `mappend`
+            defaultContext
 
-    create ["archive.html"] $ do
-        route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archives"            `mappend`
-                    defaultContext
-
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-                >>= relativizeUrls
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+        >>= loadAndApplyTemplate "templates/layer0.html" archiveCtx
+        >>= relativizeUrls
 
 
-    match "index.html" $ do
-        route   idRoute
-        compile $ copyFileCompiler
-{-
-copyFileCompiler do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Home"                `mappend`
-                    defaultContext
+  match "index.html" $ do
+    route   idRoute
+    compile $ copyFileCompiler
 
-            getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" indexCtx
-                >>= relativizeUrls -}
-
-    match "templates/*" $ compile templateBodyCompiler
+  match "templates/*" $ compile templateBodyCompiler
 
 
 --------------------------------------------------------------------------------
