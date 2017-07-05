@@ -1,3 +1,6 @@
+---
+title: Writing
+---
 # Writing
 My [archive](../archive.html) for a full list of essays.
 

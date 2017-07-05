@@ -1,3 +1,0 @@
-Welcome Page
-============
-Hello! Welcome.

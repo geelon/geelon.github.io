@@ -13,17 +13,13 @@ main = hakyll $ do
     route   idRoute
     compile copyFileCompiler
 
+  match ("projects/files/*" .||. "me/files/*") $ do
+    route   idRoute
+    compile copyFileCompiler
+
   match "css/*" $ do
     route   idRoute
     compile compressCssCompiler
-
-  match "writing/files/*" $ do
-    route   idRoute
-    compile copyFileCompiler
-    
-  match (fromList ["writing/files/*", "projects/files/*", "me/files/*"]) $ do
-    route   idRoute
-    compile copyFileCompiler
 
   match "writing-index.*" $ do
     route $ customRoute $ const "writing/index.html"
@@ -38,12 +34,21 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/layer1.html" postCtx
       >>= relativizeUrls
 
-  match (("me/*" .||. "projects/*") .&&. complement
-          ("me/files/" .||. "projects/files/")) $ do
+  match "projects/*" $ do
     route $ setExtension "html"
     compile $ pandocMathCompiler
       >>= loadAndApplyTemplate "templates/layer1.html" postCtx
       >>= relativizeUrls
+
+  match ("me/*" .||. "projects/*") $ do
+    route $ setExtension "html"
+    compile $ pandocMathCompiler
+      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
+      >>= relativizeUrls
+
+  match "writing/files/*" $ do
+    route   idRoute
+    compile copyFileCompiler
            
   create ["archive.html"] $ do
     route idRoute
