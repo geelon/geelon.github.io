@@ -13,7 +13,7 @@ main = hakyll $ do
     route   idRoute
     compile copyFileCompiler
 
-  match ("projects/files/*" .||. "me/files/*") $ do
+  match ("projects/files/**" .||. "me/files/**") $ do
     route   idRoute
     compile copyFileCompiler
 
