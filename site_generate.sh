@@ -17,4 +17,4 @@ git push -u origin master
 cd ..
 git add -A
 git commit -m "$DATE"
-git push -u hakyll hakyll
+git push -u origin hakyll
