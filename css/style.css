@@ -157,7 +157,7 @@ a.button:hover {
 	font-size: 15px;
 	text-align: right;
 	position: relative;
-	top:-20px;
+	top:5px;
 	left:-40px;
  }
  
@@ -169,7 +169,7 @@ a.button:hover {
  }
  
  /******* paragraph classes *******/
-  .firstparagraph {
+ .firstparagraph {
 	text-indent:0px !IMPORTANT;
  }
 	

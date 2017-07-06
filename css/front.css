@@ -1,0 +1,72 @@
+#front {
+    position: fixed;
+    padding: 0em;
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+   
+}
+
+article#front-img-box {
+    position: absolute;
+    height: 100%;
+    display: none;
+}
+
+article#front-img-box > img {
+    display:block;
+    max-height: 100%;
+}
+
+article#front-text {
+    position: absolute;
+    background: rgba(255,255,255,0.7);
+    top: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+article#front-text > h1 {
+    font-size:2.5em;
+    color:#444444;
+    line-height:150%;
+    font-weight:600
+}
+
+article#front-text > h2{
+    font-weight:300;
+    font-size:1.5em;
+    text-transform:uppercase
+}
+
+.cu-blue {
+    color: #C4D8E2;
+}
+
+.maroon {
+    color: #800000;
+}
+
+#columbia-logo {
+    display:none;
+}
+
+div#columbia:hover > #columbia-logo{
+    display:inline-block;
+}
+
+#uchicago-logo {
+    display:none;
+}
+
+div#uchicago:hover > #uchicago-logo{
+    display:inline-block;
+}
+
+article#about {
+    position: absolute;
+    right:10%;
+    bottom:50%;
+    width: 50%;
+}
