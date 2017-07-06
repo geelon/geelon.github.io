@@ -36,7 +36,9 @@ p {
     color: rgb(150,0,33);
 }
 
-
+.right {
+    text-align: right;
+}
 /*******HEADER*******/
 header {
     width: 100%;

@@ -8,9 +8,9 @@ title: Projects
 The language with which we ask questions makes a huge difference to *what* we can answer and *how* we can answer them. Indeed, this is a central idea in machine learning: the representations of features dictates what we can learn, no matter how good our algorithms are. My interests are in researching machine from a more theoretical perspective to address learning from a *structural* perspective. I've been able to find very natural inspiration from physics, algebra, topology, constructive mathematics, and so on. Here is some progress (perhaps some of the earlier works are a bit obsolete now, as the ideas are gradually refined):
 
 - [Mathematical Formulation](./)
-- [Unsupervised learning final report](./files/ml_final_report.pdf)
-- [Zeno's Paradox: how constructivism leads to topology](../writing/2017-05-31-learning.html)
-- [UCISTEM Undergraduate Research Poster](./files/poster.pdf)
+- [Unsupervised learning final report](./files/ml_final_report.pdf) (May 31, 2017).
+- [Zeno's Paradox: how constructivism leads to topology](../writing/2017-04-20-zeno.html) (April 20, 2017).
+- [UCISTEM Undergraduate Research Poster](./files/poster.pdf) (September 22, 2016).
 - [Resources](./ml-resources.html)
 
 

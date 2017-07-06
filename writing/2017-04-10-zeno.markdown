@@ -1,0 +1,223 @@
+---
+title: Zeno's Paradox, how constructivism leads to topology
+author: Aaron Geelon So
+date: 2017-04-10
+---
+<div style="padding-left: 3em; padding-right: 2em;">
+*“Achilles! Wake up!” cried the Tortoise.*
+
+*Owlishly, Achilles gazed around until he realized it was only a dream---that he had won the race. In real life, he hadn’t even left the starting line, but Tortoise was already beyond the finish, infuriatingly gleeful.*
+
+*Achilles dashed toward Tortoise, arms flailing in panic. It was a long mile, and Tortoise was determined to undermine Achilles. *
+
+*As Achilles reached the halfway mark, Tortoise called over “Last half mile!” Then:*
+
+*---Last quarter mile!*
+
+*---Last eighth mile!*
+
+*Later still,*
+
+*---Last four-thousand-ninety-sixth mile!*
+
+*By now, Achilles was getting desperate. He saw that Tortoise would continue* ad infinitum, *splitting his mile into infinitely many tasks: run the first half, then the next quarter, then the next eighth, and on and on. How could he ever complete infinitely many tasks?*
+
+*Achilles collapsed just a few inches from the finish line convinced he would never reach the end. Tortoise triumphantly overlooked his opponent; asked, “Did you manage to run the first half mile? What about the first fourth? Eighth?”*
+
+*In an existential crisis, Achilles found himself back at the starting line, paralyzed forevermore by the belief that motion is impossible.*
+
+<span class="right">—Zeno's paradox, adapted.</span>
+</div>
+
+## Introduction
+Zeno’s paradox reflects the struggles of our finite minds---finite in memory, resources, and time---trying to understand an infinitely variable and complex world. Secretly, Zeno’s paradox asserts that in order to travel one mile, we must be able to measure out one mile in all its infinite precision. But when we deal with the real world, one mile actually means one mile up to some small error. If in order to move to any amount of distance we must compute it to infinite precision, then of course we could never move anywhere in finite time; we’d just be stuck computing forever. 
+
+The conflict between being *computable through finite means* and being *infinitely precise* echoes throughout mathematics---at its heart, it turns out, a controversy over the Law of the Excluded Middle: every proposition is either true or false (symbolically, $P \vee \neg P \equiv \top$).
+
+While most of modern mathematics axiomatically accepts the Law of Excluded Middle, constructivism rejects it, with huge implications. Statements might be neither true nor false. We can no longer decide whether two real numbers are equal. Proof by contradiction, the classical *reductio ad absurdum*, is no longer a valid proof method. So far, it seems mad to reject the Law of Excluded Middle! 
+
+But in this paper, we confront the real problem of our finite minds trying to grasp an infinite world mathematically, and we see how constructivism arises through this. In fact, we are forced to reject the Law of Excluded Middle. On the other hand, we will rediscover central mathematical concepts of state spaces, the construction of the real numbers by approximation, topology, and continuity. Naturally, all this will help us resolve Zeno’s paradox, but more importantly, it gives more insight into learning. It is for this purpose that I write this essay, a Chapter 0 of sorts to stimulate a work on the mathematical foundations of learning.
+
+## State Spaces
+Let's reduce Achilles, running his mile race course, into a point living on the real number line between $0$ and $1$, inclusive. We, as privileged outsiders, can observe this, but Point-Achilles lives inside $[0,1]$ itself. He cannot know this information directly. Instead, his experience of the unit interval is mediated by a countable collection of observables[^philosophical-aside]
+$$\mathcal{O} = \{\phi_1,\phi_2,\phi_3,\dotsc\},$$
+not unlike how we experience our own world through some collection of observables such as sensory data from nerves, or in mechanics through
+$$\mathcal{O}_\textrm{us} = \{\mathrm{position}, \mathrm{momentum}, \dotsc\}.$$
+Based in his observables, Achilles' task is now to construct some mental model of his reality. To see how Achilles might do this, let's first give meaning to the $\phi_n$'s.
+
+Each of the $\phi_n$'s give different bits of information about his position on the unit interval. We can loosely think of each $\phi_n$ as a function answering a question about Achilles' current position. The first observable $\phi_1$ signals a $0$ if he is closer to the start than the end of the race, and a $1$ if vice versa. Written more formally: if $\mathrm{x} \in [0,1]$ is Achilles' current position, then
+$$\phi_1(\mathrm{x}) = \begin{cases}
+                0 & \mathrm{x} < 1/2 \\
+                1 & \mathrm{x} > 1/2.
+\end{cases}$$
+The next observable $\phi_2$ gives more precision: is Achilles closer to the beginning or the end of the current half of the race? $\phi_3$ indicates whether Achilles is closer to the beginning or end of the current quarter of the race, $\phi_4$ within the current eighth, and so on.
+
+Individually, the $\phi_n$'s give very little information as to where Achilles is. But from their collective values, it turns out that we can actually recover his position completely, as follows. As defined, $\phi_n$ just returns the $n$th digit of a binary representation of $\mathrm{x}$, so the position is
+$$\mathrm{x} = \frac{1}{2} \phi_1(\mathrm{x}) + \frac{1}{4} \phi_2(\mathrm{x}) + \dotsm + \frac{1}{2^n} \phi_n(\mathrm{x}) + \dotsm.$$
+Achilles though, without outside information, can never know that his information is in fact complete with respect to the interval $[0,1]$. For all he knows, he just lacks the observables that would reveal to him another spatial dimension. In short, everything Achilles knows about his current *state* must be constructed from measurements through his collection of observables.
+
+This motivates the construction of a *state space*, a collection of all the possible states (positions) that Achilles can tell apart. We can think of a state $x$ as a function over the observables, mapping each observable to their corresponding value of 0 or 1
+$$x : \mathcal{O} \longrightarrow \{0,1\},$$
+essentially, $x(\phi_n) = \phi_n(\mathrm{x})$. We denote the collection of all such functions by the function space $\{0,1\}^\mathcal{O}$,  but for brevity, I'll call this state space $X$. Explicitly,
+
+**Definition 1.** *Let $\mathcal{O} = \{\phi_1,\phi_2,\dotsc\}$ be a countable collection of observables. The corresponding* state space $X$ *is defined to be the function space $\{0,1\}^\mathcal{O}$. We denote points in $X$ by*
+$$x = (x_1,x_2,\dotsc),$$
+*where $x_n = x(\phi_n)$.*
+
+
+To give an interpretation, $X$ is the world that Achilles can experience, while $[0,1]$ is the world that we, as omnipotent readers, see he actually lives in. The difference here is subtle (justifying the subtle notational difference earlier between $x$ for state and $\mathrm{x}$ for position). Philosophically, it reflects the Cartesian problem---our knowledge of the world stems from sensory data, but can we trust this information? What might be hidden from us? For Achilles, $X$ is the world built from his sensory data that models the ultimately unknowable world, $[0,1]$. But let's not have Achilles agonize over the epistemological concerns of the latter world. In fact, we have no more need of $[0,1]$, which was just a tool to help us define $X$ (and we'll no longer think of $\phi_n$ as functions on $[0,1]$; instead, $\phi_n$ are now *primitives*). Let's move on to give $X$ some structure by defining a notion of nearness.
+
+[^philosophical-aside]: As a philosophical aside, if we assume the finiteness of Achilles' mind, then he can only ever come across a finite number of observables (regardless of whether or not uncountably many observables exist). And if we postulate that Achilles can combine observables into new observables (an algebra over a finite collection of `primitive' observables), then he can interact with at most countably many observables.
+
+## Topology
+Every state $x = (x_1,x_2,\dotsc)$ corresponds to the output of infinitely many observations. However, because Achilles has finite processing power and finite time, he can observe only finitely many. Suppose he observes only $\phi_1$, $\phi_2$, and $\phi_3$, then he could distinguish between
+$$(\mathbf{0},\mathbf{1},\mathbf{1},0,1,1,\dotsc) \textrm{ and } (\mathbf{1},\mathbf{1},\mathbf{1},1,0,0,\dotsc),$$
+because the values corresponding to $\phi_1$ differ. But he couldn't tell apart
+$$(\mathbf{0},\mathbf{1},\mathbf{1},0,1,1,\dotsc) \textrm{ and } (\mathbf{0},\mathbf{1},\mathbf{1},1,0,0,\dotsc),$$
+since they coincide on the first three observables. 
+
+From this, we see that Achilles can never observe a state $x \in X$ to perfect precision. He is forced to make the assumption that *a finite number of observations on the state will give a decent approximation of that state*. This assumption requires him to *define* some notion of nearness or similarity on $X$, and in particular, two states that share more observable values are nearer or more similar. Of course, this should be very reasonable to us, since we often think of two objects that share many attributes as similar. And we often create categories of different levels of precision. For example, we might have a chain of categories
+$$\textrm{living thing } \supset \textrm{ animal } \supset \textrm{ mammal } \supset \textrm{ cat } \supset \dotsm.$$
+We might have another chain,
+$$\textrm{objects smaller than a house } \supset \textrm{ orange objects smaller than a house}.$$
+And then, we can even have the category
+$$\textrm{orange cats } = \textrm{ cat } \cap \textrm{ orange objects smaller than a house}.$$
+The main point here is that we should think of *subsets* as collections of objects that satisfy a certain property or proposition.
+
+In the same way, we can create subsets of $X$ that collect together states (which by virtue of having been collected together, we now call similar). An example is the collection of states whose corresponding value for $\phi_1$ is $0$,
+$$H = \{x \in X: x(\phi_1) = 0\}.$$
+We can just interpret this as the set of points belonging to the first half of the race course.[^technically] Another such collection might be
+$$G = \{x \in X: x(\phi_2) = 0\}.$$
+Then, the set of points $H \cap G$ are those that belong to the first quarter of the race course. Both $x$ *belongs to the first half* ($x(\phi_1) = 0$) and $x$ *belonging to the first quarter* ($x(\phi_1) = 0$ and $x(\phi_2) = 0$) are propositions, but more importantly, they are propositions that Achilles can determine from the observables.
+
+This brings us to logic: what propositions about his position can Achilles determine the truth value of? What subsets do they correspond to? Certainly, the proposition of $x$ *belongs to the first half* is a decidable proposition: just check the value for $x(\phi_1)$. But not all propositions are decidable.
+
+Achilles cannot determine the truth value of the proposition $x$ *is equal to* $\mathbf{0} = (0,0,0,\dotsc)$. For Achilles to determine if $x \in X$ satisfies this property, he first has to check if $x(\phi_1) = 0$, then $x(\phi_2) = 0$, and so on. However, he has finite time to check infinitely many observables, so he will never be able to observe if $x$ is equal to $\mathbf{0}$. It is unobservable because the corresponding computation will never terminate.
+
+We should ask now what the observable properties are. In order to answer this question, we need a bit more precision. 
+
+**Definition 2.** *A subset $P \subset X$ is* semidecidable *if there is an algorithm terminating in finite time for all states $x \in P$ that decides whether $x \in P$. A subset is* decidable *if there is such an algorithm that terminates for all $x \in X$ (not just $x \in P$). A subset is* undecidable *if it is not semidecidable.*
+
+An example of a decidable subset is $H$, since the one-step algorithm of checking if $x(\phi_1) = 0$ terminates for all $x \in X$. An example of an undecidable subset is $\{\mathbf{0}\}$, corresponding to the unobservable property of equality with $\mathbf{0}$. On the other hand, the set complement of $\{\mathbf{0}\}$ corresponding to property of being not equal to $\mathbf{0}$ is semidecidable; any state $x$ not equal to $\mathbf{0}$ must differ at some $x(\phi_n)$ where $n$ is finite, so in finite time, we'll be able to distinguish a non-$\mathbf{0}$ state and $\mathbf{0}$.
+
+It's not too hard to verify that $P$ is a decidable subset if and only if both $P$ and its complement are semidecidable. Since both decidability and undecidability may be defined in terms of semidecidability, our goal is to now understand what subsets are semidecidable.
+
+Let's define $\mathcal{T}$ to be the collection of all semidecidable subsets (I'll also call them observable subsets). From before, we know $H,G \in \mathcal{T}$. In general
+$$\{x \in X: x(\phi_n) = 0\} \textrm{ and } \{x \in X: x(\phi_n) = 1\} \in \mathcal{T} $$
+for all $n \in \mathbb{N}$. Furthermore, the empty set $\emptyset$ and the whole space $X$ are easily shown to be contained in $\mathcal{T}$ (the programs that returns respectively false or true for every $x \in X$ terminates immediately).
+
+Because we can construct new algorithms from existing algorithms, we can build more other observables from these primitive observables. In logic, we can combine propositional statements with AND and OR. We do this here too. Let $P_1,\dotsc, P_n$ be a collection of semidecidable subsets corresponding to $n$ observable properties. Let $p_i$ be a corresponding algorithm that indicates if a state is in $P_i$ that terminates in finite time if $x \in P_i$. A state satisfies each property if it is contained in each $P_i$. That is, if
+$$x \in \bigcap_{i=1}^n P_i.$$
+The finite intersection is a semidecidable subset because we can just sequentially run the algorithms $p_i$, and if $x \in \bigcap P_i$, then $p_i(x)$ will terminate for all $1 \leq i \leq n$. In other words, if $P_1,\dotsc, P_n \in \mathcal{T}$, the finite intersection
+$$\bigcap_{i=1}^n P_i \in \mathcal{T}$$
+is contained in $\mathcal{T}$ as well.
+
+
+We can perform a similar analysis with OR, which corresponds to taking unions of semidecidable subsets. This time, suppose we have a countably infinite 
+number of semidecidable subset $P_1, P_2, \dotsc$ and corresponding algorithms $p_i$'s. If $x$ is the union
+$$\bigcup_{i = 1}^\infty P_i,$$
+we just need one of the corresponding algorithms for $x \in P_i$ to terminate. Consider the (inefficient) algorithm where we run try running the algorithm $p_1(x)$ for one second. Then, we try running $p_1(x)$ followed by $p_2(x)$ for two seconds each. Then $p_1(x)$, $p_2(x)$, and $p_3(x)$ for three seconds each, in this way
+$$\begin{alignat*}{4}
+  [1\textrm{ sec}]&\phantom{\longrightarrow }\, &p_1(x) &&  && \\
+  & && && && \\
+  [2\textrm{ sec}]&\longrightarrow \, & p_1(x) &&\longrightarrow \, p_2(x) && \\
+  & && && && \\
+  [3\textrm{ sec}]&\longrightarrow \, & p_1(x) &&\longrightarrow \, p_2(x) &&\longrightarrow \, p_3(x) \\
+  & && && && \\
+  &\longrightarrow \, &\dotsm && &&
+\end{alignat*}$$
+Suppose $x \in \bigcup P_n$, so that for some $n$, $x \in P_n$. Suppose also that $p_n(x)$ takes $m$ seconds to compute, then in the block of the algorithm running for $\max\{n,m\}$ seconds, the above algorithm will terminate. In other words, if $P_1,P_2,\dotsc \in \mathcal{T}$ are countably many semidecidable sets, then
+$$\bigcup_{n=1}^\infty P_n \in \mathcal{T}$$
+is also a semidecidable set.
+
+What we've just shown with rules for unions and intersections of semidecidable sets motivates the following definition which gives us the notion of nearness we were looking for.
+
+**Definition 3.** *A* topology $\mathcal{T}$ *on a space $X$ is a collection of subsets of $X$ such that*
+
+a) *both $\emptyset$ and $X$ belong to $\mathcal{T}$,*
+b) *$\mathcal{T}$ is closed under finite intersection, and*
+c) *$\mathcal{T}$ is closed under countable unions,*
+
+*where being closed under finite intersection and countable unions are precisely what we showed above about intersections and unions. We say that a subset of $X$ is* semidecidable *or* open *if it is contained in $\mathcal{T}$.*
+
+The intuition here is that semidecidable sets group together points that share an observable property. As mentioned before, we like to think that two points are very similar (i.e. near each other) if they share many observable properties---if there are many semidecidable sets that contain them both.
+
+Returning to Achilles' particular topology, recall that his observables give rise to the semidecidable sets
+$$\{x \in X: x(\phi_n) = 0\} \textrm{ and } \{x \in X: x(\phi_n) = 1\}.$$
+Because every observable property must be constructed out of his observables, every observable property corresponds to some combination of finite intersections and countable unions of such semidecidable sets.[^topology] 
+
+The fact that the definition of a topology arose so naturally is exciting. For those who study machine learning or human learning, it may be possible to rely on the huge body of knowledge developed on topology in mathematics to quickly advance theory. For physicists, this is reminiscent of the way physical systems are defined in a $C^*$-algebraic formulation of quantum mechanics. For the mathematician, this suggests that the definition of a topology is defined well and worth studying even outside of more usual contexts of analysis and geometry.
+
+The relationship between propositional logic and topology is seen in the study of *Heyting algebras* and *intuitionism* (or *constructivism*). We'll see now how the Law of Excluded Middle in fact does not hold.
+
+[^technically]: Technically $H$ isn't exactly the set of points belonging to the first half of the race course because binary representation of reals is not unique. For example, the real number $1/2$ may be represented in binary by $0.1$ or $0.01111...$, but we'll ignore this for now.
+
+[^topology]: In topology, they form a subbasis for $\mathcal{T}$. And in fact, the reader who has studied topology before can also recognize that this topology is exactly the *product topology*. It is the coarsest topology in which these primitive observables are continuous; if $\pi_n : X \to \{0,1\}$ is the projection onto $\phi_n$, then $\pi_n^{-1}(0)$ and $\pi_n^{-1}(1)$ being open/semidecidable is precisely the condition we need to show that the projections $\pi_n$ are continuous.
+
+
+## Intuitionistic Logic
+We've now formalized observable properties on a space $X$ as semidecidable or open sets of $X$. We've seen how the classical Boolean operations AND and OR operate on open sets (resp., finite intersection and countable unions). But Boolean logic has one more operation: NOT.
+
+Let's return to our earlier example on Achilles' world, $X$. Define the proposition $P$ to be
+$$P(x) \textrm{ is true if } x \ne \mathbf{0}.$$
+Recall that we gave a vague proof that the corresponding subset
+$$U = \{x \in X : x(\phi_n) = 1 \textrm{ for some }n\}$$
+is semidecidable, along the lines of: if $x \ne \mathbf{0}$, then $x(\phi_n) = 1$ for some finite $n$. So the algorithm checking for nonequality will terminate in finite time. We can now prove this with our definition of topology. Write $U$ as the countable union of the set of semidecidable sets
+$$U = \bigcup_{n = 1}^\infty \{x \in X: x(\phi_n) = 1\},$$
+which we now know is semidecidable.
+
+But the classical negation $\neg P$, call it $Q$, is
+$$Q(x) \textrm{ is true if } x = \mathbf{0},$$
+which corresponds with the set complement of $U$ in $X$, which is the subset $V = \{\mathbf{0}\}$. Notice that we can also write $V$ as the infinite intersection
+$$V = \bigcap_{n=1}^\infty \{x \in X: x(\phi_n) = 0\},$$
+which turns out to not be semidecidable. In short, because the set complement of a semidecidable set is not semidecidable set, we cannot always think of $\neg P$ as an observable property in the classical sense; an algorithm that computes whether $P(x)$ is true or false might not terminate for certain states.
+
+We must define $\neg P(x)$ as the proposition: $P(x)$ is *observably* false. If we think of $P$ as a semidecidable subset of $X$, then $\neg P$ is the largest semidecidable subset of $X$ containing no points of $P$. 
+
+In the tradition of topologists, we'll call the largest semidecidable subset contained in a set $A$ the *interior* of $A$, which we denote by $\mathrm{int}(A)$.
+
+In particular, \textsc{not} does not correspond with taking the set complement, but the interior of the set complement:
+$$\neg P = \mathrm{int}(X - P).$$
+Going back to the above example of $P$ (i.e. $x \ne \mathbf{0}$), this discussion shows that the negation of $P$ corresponds to the interior of $V$. However, the only subsets of $V = \{\mathbf{0}\}$ are itself and the empty set. $V$ is not a semidecidable set, so the interior of $V$ is the empty set (corresponding with the undecidability of whether $x = \mathbf{0}$).
+
+This lets us see why the Law of Excluded Middle does not hold in Achilles' world: not all propositions are either true or false, because the computation may never terminate. Here,
+$$P \vee \neg P = U \cup \emptyset = U,$$
+which is not the whole space $X$; hence $P \vee \neg P$ is not tautologically true, in contrast with classical logic.
+
+While over a thousand years of Aristotelian logic has ingrained the Law of Excluded Middle into our way of thinking, perhaps the intuitionist rejection of it reflects the way we think more naturally. Looking more closely, the world isn't as black and white as we thought. But this is point: to see the shades of gray, we need to look more closely, with more precision. And this is perhaps what the study of learning requires. A precise logic that allows us to describe fuzziness.
+
+Especially for the readers who are unsatisfied with my imprecision with language, I will now end with a quick but more formal overview of these ideas.
+
+## Formalism
+Let $\mathcal{O}$ be a countable collection of primitive observables on some system. For example, the observables may be sensory nerves that signal information about the surroundings. Or, observables may be lab instruments measuring a physical system. Or, observables may be a dataset that a statistician or machine learning algorithm is trying to analyze.
+
+The function space $X = \{0,1\}^\mathcal{O}$ is a Boolean algebra whose elements may be thought of as states. Subsets $P$ of $X$ may be thought of as propositions (in the classical sense), where $P(x)$ is true if $x \in P$. However, observable propositions correspond to subcollection of propositions that are open in $X$ when given the product topology (and $\{0,1\}$ has the discrete topology). Finally, continuous functions $f: X \to \{0,1\}$ then are just computable functions. 
+
+However, notice that a computable function $f$ is not the same object as an algorithm or sequence of computation `f`. Specifically, $f$ is the equivalence class of algorithms `f` that give the same output for all inputs (*functional extensionality*). When we discuss $f$, we are more concerned with theoretically possible programs, while when we discuss `f`, we are concerned with their implementations and efficiency.
+
+It is my hopes that this paper draws out the distinction between $f$ and `f`, in all fields. We should care both about the theoretical possibilities (e.g. what sort of functions $f$ are computable) and their actual implementations (e.g. how can \texttt{f} be defined to be efficient, etc.). It seems to the author that much of math focuses much more on the former, while fields such as machine learning focuses on the latter. But we should never allow questions of computability be completely divorced from theory; otherwise, like Achilles, we would be left with the paralyzing possibility of infinite precision.
+
+
+## References
+[1] Bishop, E., Bridges, D. *Constructive analysis.*
+Springer-Verlag, New York, 1985.
+
+[2] Dragalin, A. G.
+*Mathematical intuitionism: introduction to proof theory.*
+American Mathematical Society, 67, 1988.
+ 
+[3]Escard\'o, Mart\'in. 
+*Synthetic topology of data types and classical spaces.*
+Electronic Notes in Theoretical Computer Science 87, 2004.
+ 
+[4] Goodfellow, I., et. al.
+*Deep learning.*
+MIT Press, 2016.
+
+[5] Huggett, Nick.
+*Zeno's Paradox,*
+The Stanford Encyclopedia of Philosophy (Winter 2010 Edition). Edward N. Zalta (ed.), [link](https://plato.stanford.edu/entries/paradox-zeno/).
+
+[6] Munkres, James.*Topology*. Prentice Hall, 2000.
+
+[7] Strocchi, F. *An introduction to the mathematical structure of quantum mechanics: a short course for mathematicians.* World Scientific, Singapore, 2008.
