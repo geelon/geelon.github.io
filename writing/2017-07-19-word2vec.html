@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>An Introduction to Word Embeddings Draft 2</title>
+        <link rel="stylesheet" href="../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../images/haskell.png">	
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../">home</a></li>
+            <li><a href="../writing/">writing</a></li>
+	    <li><a href="../projects/">projects</a></li>
+	    <li><a href="../me/">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">An Introduction to Word Embeddings Draft 2</h1>
+  
+
+  <section class="date_posted">
+    Posted on July 19, 2017
+  </section>
+
+  <section>
+    <p>Try guessing what the word <em>to wapper</em> means from how it’s used in the following two sentences:</p>
+<ol style="list-style-type: decimal">
+<li>After running the marathon, I could barely keep my legs from wappering.</li>
+<li>Thou’ll not see Stratfort to-night, sir, thy horse is wappered out. (Or perhaps a more modern take: I can’t drive you to Stratford tonight for I’m wappered out).</li>
+</ol>
+<p>The second example is from the <a href="http://www.oed.com/view/Entry/225584">Oxford English Dictionary</a> entry. If you haven’t guessed, the word was probably more popular in the late-19th century. But it means <em>to shake, especially from fatigue</em> (and it might share the same linguistic roots as <em>to waver</em>).</p>
+<p>By now, you likely have a pretty good understanding of what <em>to wapper</em> means, how you can use it, and maybe you could tell if someone else is using it in an acceptable way. Furthermore, you probably didn’t need me to tell you the explicit definition; indeed, how many words in <em>this</em> sentence did you learn by reading a dictionary entry? We learn what words mean from their surrounding <em>contexts</em>.</p>
+<p>How different this is to when we communicate to a computer!</p>
+<p>When we program, we must say precisely what we mean. And unless we forget a semicolon somewhere, we mean exactly what we say. But what if computers could learn and use language like we humans do—through <em>natural language</em>?</p>
+<p>You probably already know that the many ongoing attempts to do just this fall under the domain of <em>natural language processing</em> (NLP). There have been some important breakthroughs in NLP in the past few years; famously, Google researchers found a method in 2013 for a computer to discover relations between words such as:<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> <span class="math display">\[\textrm{king} - \textrm{man} + \textrm{woman} \approx \textrm{queen}.\]</span> Or the (possibly specious) relation, <span class="math display">\[\textrm{president} - \textrm{power} \approx \textrm{prime minister}.\]</span> (This one, another <a href="http://byterot.blogspot.in/2015/06/five-crazy-abstractions-my-deep-learning-word2doc-model-just-did-NLP-gensim.html">data scientist</a> come across while playing with the same algorithm).</p>
+<p>The technique the Google researchers refined is called <em>word embeddings</em>. Let’s take a look at (1) the basic approach to the problem taken in order to achieve this, (2) what’s been made possible by word embeddings, and (3) the work to understand and overcome their limitations.</p>
+<h4>
+Table of Contents
+</h4>
+<p>[INCLUDE TABLE OF CONTENTS]</p>
+<h2 id="problem-and-theory">Problem and Theory</h2>
+<p>Recall that we learn what words mean from their surrounding contexts. This implies that even though it appears that the meaning of a word is intrinsic to the word, <strong>some of the meaning of a word also exists in its context</strong>.</p>
+<p>Words, like notes on an instrument, do have their individual tones. But it is their relationship with each other—their interplay—that gives way to fuller music. Thus, context enriches the meaning.</p>
+<p>So, given a context, <span class="math display">\[\textrm{After running the marathon, I could barely keep my legs from ____________.}\]</span> we should have a sense of what words could fill the blank. Words like <em>shaking</em>, <em>trembling</em>, and of course, <em>wappering</em> are much more likely to appear. Especially compared to, say, <em>pickle</em> or <em>big data</em> (even if they are quite popular elsewhere).</p>
+<p>In short, the higher probability of appearing in this context corresponds to greater shared meaning. From this, we can deduce the <a href="https://en.wikipedia.org/wiki/Distributional_semantics#Distributional_hypothesis">distributional hypothesis</a>: words that share <em>many</em> contexts tend to have similar meaning.</p>
+<p>What does this mean for a computer trying to learn what words mean?</p>
+<p>Well, if it can estimate how likely a word is to appear in different contexts, then for most intents and purposes, the computer has learned the meaning of the word.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> Mathematically, we want to approximate the probability distribution of <span class="math display">\[p(\textrm{ word } | \textrm{ context }).\]</span></p>
+<p>Then, the next time the computer sees a specific context <span class="math inline">\(c\)</span>, it can just figure out which words have the highest probability of appearing, <span class="math inline">\(p(\textrm{ word }|\ c\ )\)</span>.</p>
+<h3 id="challenges">Challenges</h3>
+<p>The straightforward and naive approach to approximating the probability distribution is:</p>
+<ul>
+<li>step 1: obtain a huge training corpus of texts,</li>
+<li>step 2: calculate the probability of each <code>(word,context)</code> pair within the corpus.</li>
+</ul>
+<p>The underlying (bad) assumption? The probability distribution learned from the training corpus will approximate the theoretical distribution over all word-context pairs.</p>
+<p>However, if we think about it, the number of contexts is so great that the computer will never see a vast majority of them. That is, many of the probabilities <span class="math inline">\(p(\textrm{ word } |\ c\ )\)</span> will be computed to be 0. This is mostly a terrible approximation.</p>
+<p>The problem we’ve run into is the <strong>curse of dimensionality</strong>. The number of possible contexts grows exponentially relative to the size of our vocabulary—when we <em>add</em> a new word to our vocabulary, we more or less <em>multiply</em> the number of contexts we can make.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>We overcome the curse of dimensionality with <em>word embeddings</em>, otherwise known as <strong>distributed representations of words</strong>. Instead of focusing on words as individual entities to be trained one-by-one, we focus on the attributes or <em>features</em> that words share.</p>
+<p>For example, <em>king</em> is a noun, singular and masculine. Of course, many words are masculine singular nouns. But as we add more features, we narrow down on the number of words satisfying each of those qualities.</p>
+<p>Suppose we could fully represent words with just a handful of features (a handful meaning between 100 and 1000).<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> Then, we could train features instead of individual words. That way, the algorithm learns something like, <em>in this context, we’re likely to see the past participle of a verb having such and such qualities</em> instead of <em>we’re likely to see words X, Y, Z</em>.</p>
+<p>In summary, every word we train actually recalls a whole network of other words. This allows us to overcome the exponential explosion of word-context pairs by training an exponential number of them at a time.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
+<h3 id="the-new-problem">The New Problem</h3>
+<p>Let’s think back to the bad assumption the naive approach made: the probability distribution of word-context pairs in a training corpus approximates its theoretical distribution. It was bad because the training corpus has a really small sample size of word-contexts pairs.</p>
+<p>We get a new assumption now. <em>The probability distribution of feature-feature pairs in a training corpus approximates its theoretical distribution</em>.</p>
+<p>What do I mean by feature-feature pairs?</p>
+<p>Well, because contexts are just collections of words, and words are just collections of features, both words and contexts are essentially just collections of features. Thus, “feature-feature” pairs replace “word-context” pairs. And since we’ve restricted the number of features to a relatively small size, sample size is no longer as huge an issue.</p>
+<p>I’ll just briefly describe what’s happening mathematically, so that the interested reader can go on to quickly understand the journal articles.</p>
+<p>For our new formulation, we <em>parametrize</em> the probabilities <span class="math display">\[p(\textrm{ word }|\textrm{ context }) \quad\textrm{and}\quad p(\textrm{ context }|\textrm{ word })\]</span> by their features. If we encapsulate the parameters (i.e. the many feature values) by the symbol <span class="math inline">\(\theta\)</span>, we can write the above probabilities as <span class="math inline">\(p(w|c;\theta)\)</span> or <span class="math inline">\(p(c|w;\theta)\)</span>. Now, we can take a neural network approach to solve this problem.<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
+<p>Let’s assume we have a training corpus—an ordered list of words, <span class="math inline">\(w_1, w_2, \dotsc, w_T\)</span>. Each word <span class="math inline">\(w_t\)</span> has a surrounding context, <span class="math inline">\(C_t\)</span>, which is just a collection of surrounding context words <span class="math inline">\(w_c \in C_t\)</span>.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a></p>
+<p>Instead of explicitly trying to calculate the probabilities <span class="math inline">\(p(\textrm{ context }|\textrm{ word })\)</span> for each word/context, we can consider the total probability of seeing our training corpus, <span class="math display">\[p(\textrm{corpus};\theta) = \prod_{w_t}\prod_{C_t} p(w_c|w_t;\theta).\]</span> Now, it’s a matter of choosing parameters to maximize <span class="math inline">\(p(\textrm{corpus};\theta)\)</span>. Since the parameters correspond to the feature values for each word in the vocabulary, <em>solving this maximization problem produces the (distributed) feature representation of each word</em>.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> And this provides us a possible solution to our original problem of approximating the above probability distributions.</p>
+<p>There are actually more layers of abstraction and bits of brilliance between theory and implementation. While I hope that I’ve managed to give you some understanding on where research is proceeding, the successes of the current word embedding methods are still rather mysterious. The intuition we’ve developed on the way is still, as Goldberg, et. al. wrote, “very hand-wavy” (Goldberg 2014).</p>
+<h2 id="uses-for-word-embeddings">Uses for Word Embeddings</h2>
+<p>Even though more research is required to understand how these word embedding algorithms work, they do have rather impressive results. So, let’s spend some time on what they make possible.</p>
+<p>The <em>de facto</em> effect of these algorithms is <strong>to embed words into a space that comes with its own intrinsic measures of similarity</strong>. In particular, the words are embedded into a real vector space <span class="math inline">\(\mathbb{R}^d\)</span>, which importantly comes with notions of <em>distance</em> and <em>angle</em>.<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a></p>
+<p>We hope that they extend to the embedded words in meaningful ways, quantifying relations or similarity between different words. And empirically, they actually do!</p>
+<p>For example, the Google algorithm I mentioned above discovered that certain nouns have gender or are singular/plural (Mikolov 2013abc):</p>
+<p>[FIGURE HERE, from Mikolov showing gender/plural]</p>
+<p>They also found a country–capital relationship:</p>
+<p>[FIGURE HERE, from Mikolov showing capital]</p>
+<p>And as further evidence that meaning comes from the relationships a word forms, they actually found that the learned structure for one language often correlated to that of another language (Mikolov 2013d).</p>
+<p>[FIGURE HERE, from Mikolov showing analgous structures between English/Spanish]</p>
+<p>They released their C code as the <a href="https://code.google.com/p/word2vec">word2vec</a> package, and soon after, others adapted the algorithm for more programming languages. Notably, for <a href="https://radimrehurek.com/gensim/index.html">gensim</a> (Python) and <a href="https://deeplearning4j.org/word2vec">deeplearning4j</a> (Java).</p>
+<p>Today, many companies and data scientists have found different ways to incorporate word2vec into their businesses and research. <a href="https://www.slideshare.net/eshvk/spotifys-music-recommendations-lambda-architecture">Spotify</a> uses it to help provide music recommendation. <a href="http://multithreaded.stitchfix.com/blog/2015/03/11/word-is-worth-a-thousand-vectors/">Stitch Fix</a> uses it to recommend clothing. Google is thought to use word2vec in <a href="http://searchengineland.com/faq-all-about-the-new-google-rankbrain-algorithm-234440">RankBrain</a> as part of their search algorithm.</p>
+<p>Other researchers are using word2vec for sentiment analysis, which attempts to identify the emotions words convey. For example, one <a href="https://arxiv.org/pdf/1606.02820.pdf">Stanford research group</a> followed how the word <em>terrific</em>, which meant <em>horrific</em> for the majority of the 20th century, has come to mean <em>great</em> today.</p>
+<p>[FIGURE HERE, showing sentiment of terrific]</p>
+<p>Another <a href="http://www.pelleg.org/shared/hp/download/fun-facts-wsdm.pdf">research group</a> used word2vec to help them determine whether a fact is surprising, to automatically generate trivia facts.</p>
+<p>The successes and the opensourcing of word2vec have helped spur on other forms of word embedding—<a href="https://arxiv.org/pdf/1506.02761.pdf">WordRank</a>, Stanford’s <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a>, and Facebook’s <a href="https://research.fb.com/projects/fasttext/">fastText</a>, to name a few major ones.</p>
+<p>In the rest of this article, let’s dive into the design problems NLP researchers have been facing, the theory that helped solve some of it, and future/limitations of the algorithms we have now.</p>
+<h2 id="learning-words">Learning Words</h2>
+<h2 id="references">References</h2>
+<p>[Bengio 2003] Bengio, Yoshua, et al. “A neural probabilistic language model.” Journal of machine learning research 3.Feb (2003): 1137-1155.</p>
+<p>[Bojanowski 2016] Bojanowski, Piotr, et al. “Enriching word vectors with subword information.” arXiv preprint arXiv:1607.04606 (2016).</p>
+<p>[Goldberg 2014] Goldberg, Yoav, and Omer Levy. “word2vec Explained: deriving Mikolov et al.’s negative-sampling word-embedding method.” arXiv preprint arXiv:1402.3722 (2014).</p>
+<p>[Mikolov 2013a] Mikolov, Tomas, Wen-tau Yih, and Geoffrey Zweig. “Linguistic regularities in continuous space word representations.” hlt-Naacl. Vol. 13. 2013.</p>
+<p>[Mikolov 2013b] Mikolov, Tomas, et al. “Efficient estimation of word representations in vector space.” arXiv preprint arXiv:1301.3781 (2013).</p>
+<p>[Mikolov 2013c] Mikolov, Tomas, et al. “Distributed representations of words and phrases and their compositionality.” Advances in neural information processing systems. 2013.</p>
+<p>[Mikolov 2013d] Mikolov, Tomas, Quoc V. Le, and Ilya Sutskever. “Exploiting similarities among languages for machine translation.” arXiv preprint arXiv:1309.4168 (2013).</p>
+<p>[Rong 2014] Rong, Xin. “word2vec parameter learning explained.” arXiv preprint arXiv:1411.2738 (2014).</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Mikolov 2013.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>And let’s not get into any philosophical considerations of whether the computer really <em>understands</em> the word. Come to think of it, how do I even know you understand a word of what I’m saying? Maybe it’s just a matter of serendipity that the string of words I write make sense to you. But here I am really talking about how to oil paint clouds, and you’re thinking I’m talking about machine learning.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Consider a 20-word context. If we assume that the average English speaker’s vocabulary is 25,000 words, then the increase of 1 word corresponds to an increase of about <span class="math inline">\(7.2\times 10^{84}\)</span> contexts, which is actually more than the <a href="https://en.wikipedia.org/wiki/Observable_universe#Matter_content">number of atoms</a> in the universe. Of course, most of those contexts wouldn’t make any sense.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>In fact, the emphasis of representing words by their shared features is what gives this technique the name <em>distributed representations</em> of words.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>The distributed representations of words “allows each training sentence to inform the model about an exponential number of semantically neighboring sentences,” (Bengio 2003).<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>We can use neural networks to simultaneously discover the features and represent the words in terms of those features. See the appendix of <a href="https://arxiv.org/pdf/1411.2738.pdf">this paper</a> for more details on neural networks applied to the word embedding problem. The rest of the paper also explains the word2vec’s word embedding algorithm by Mikolov, et. al. 2013 (Rong 2014).<a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p>One can control the algorithm by specifying different hyperparameters: do we care about order of words? How many surrounding words do we consider? And on.<a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p>This maximization problem is often equivalently written as <span class="math display">\[\operatorname*{arg\,max}_\theta \sum_{w_t} \sum_{C_t} \log p(w_c|w_t;\theta).\]</span><a href="#fnref8">↩</a></p></li>
+<li id="fn9"><p>To connect back to the previous section, we can think of the dimension <span class="math inline">\(d\)</span> as the number of features we use to encode each word.<a href="#fnref9">↩</a></p></li>
+</ol>
+</div>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
