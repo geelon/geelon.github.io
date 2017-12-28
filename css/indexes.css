@@ -16,6 +16,12 @@ html {
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
+    min-height: 100vh;
+    background-image: url(../images/attractor.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-opactiy: 0.6;
+
 }
 
 p {
@@ -120,17 +126,22 @@ main {
     padding-top: 3em;
     font-family: 'Mate', serif;
     font-weight: 300;
+    background-color: rgba(255,255,255,0.8);
 }
 
 main a {
     color: rgb(150,0,33);
     font-family: 'Open Sans', sans serif;
-    font-weight: 600;
+    font-weight: 300;
     text-decoration: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px dashed currentColor;
 }
 
 main a:hover { color: rgb(100, 100, 100); }
-main a:visited { color: rgb(100, 100, 100); }
+main a:visited { color: rgb(165, 15, 48); }
 
 main h1#article_title {
     font-family: 'Mate', serif;
@@ -211,6 +222,14 @@ p span.sc {
 }
 
 p span.centered { text-align: center; }
+
+img.photo {
+    float: right;
+    border-style: solid;
+    border-width: 2px;
+    border-color: grey;
+    margin: 5px;
+}
 
 /*******FOOTER*******/
 footer {

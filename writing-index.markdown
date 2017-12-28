@@ -5,7 +5,9 @@ title: Writing
 My [archive](../archive.html) for a full list of essays.
 
 # Math
-- [Zeno's Paradox - constructivism and topology](./2017-04-20-zeno.html): The axioms of a topology are pretty abstract and unmotivated. In an undergraduate math course, you'd hear "topology generalizes the idea of a metric" or that it gives a space a "notion of nearness". But it's still pretty unmotivated. Here, I wrote an essay showing how anyone could have actually invented a topology, all the while giving another resolution to Zeno's Paradox.
+- [Zeno's Paradox - constructivism and topology](./2017-04-10-zeno.html): The axioms of a topology are pretty abstract and unmotivated. In an undergraduate math course, you'd hear "topology generalizes the idea of a metric" or that it gives a space a "notion of nearness". But it's still pretty mysterious. Here, I wrote an essay showing how anyone could have actually invented a topology, all the while giving another resolution to Zeno's Paradox.
+- [Quantum Computing: efficient prime factorization](http://math.uchicago.edu/~may/REU2015/REUPapers/So.pdf): an expository paper introducing quantum computing and an application to cracking RSA encryption, written for the 2015 University of Chicago Math REU (Research for Undergraduates) program.
+- [Symbolic Dynamics](http://math.uchicago.edu/~may/REU2014/REUPapers/So.pdf): an expository paper introducing dynamical systems, specifically symbolic dynamics. This paper was written for the 2014 University of Chicago Math REU program.
 
 # Society
 - [Memory, Myth and Identity - the role of memory in Latin American movements](2017-03-01-latin-america.html): An essay I wrote for my *Latin America: Revolution, Violence, and Dictatorship* course. 
