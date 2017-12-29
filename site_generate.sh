@@ -11,10 +11,10 @@ stack exec site rebuild
 cp git-save/.git _site/.git
 cp git-save/.gitignore _site/.gitignore
 cd _site
-git add -A
+git add .
 git commit -m "$DATE"
 git push -u origin master
 cd ..
-git add -A
+git add .
 git commit -m "$DATE"
 git push -u origin hakyll
