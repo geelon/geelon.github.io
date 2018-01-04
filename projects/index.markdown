@@ -3,6 +3,9 @@ title: Projects
 ---
 
 # Projects
+## Thesis Direction
+I am beginning work on my Master's thesis at Columbia University. At this point, I am working on clarifying my research direction by reading a lot. Here is an overview of my research direction followed by a reading list: [beginnings](./files/research_direction.pdf). 
+
 ## Graduate Courses
 In Fall 2017, I took four courses, each with a project component:
 
@@ -27,6 +30,11 @@ The language with which we ask questions makes a huge difference to *what* we ca
 - [UCISTEM Undergraduate Research Poster](./files/poster.pdf) (September 22, 2016).
 - [Resources](./ml-resources.html)
 
+## Undergraduate: Math REU at UChicago
+I participated in the UChicago Math REU in [2014](http://math.uchicago.edu/~may/REU2014/) and [2015](http://math.uchicago.edu/~may/REU2015/). Here are the resulting expository papers on:
+
+- [Symbolic dynamics](http://math.uchicago.edu/~may/REU2014/REUPapers/So.pdf)
+- [Quantum computing](http://math.uchicago.edu/~may/REU2015/REUPapers/So.pdf)
 
 ## Undergraduate: Campus Catalyst Nonprofit Consulting
 As a student at the University of Chicago, I participated in a course titled *The Business of Nonprofits and the Evolving Social Sector*, which provided me and four others the chance to help a nonprofit in the Hyde Park area, [Options for Youth](http://options4youth.org/). 
