@@ -17,7 +17,7 @@ In Fall 2017, I took four courses, each with a project component:
 Three of these courses also had a lecture-scribing component:
 
 - [COMS-6998-02 Information Theory](./files/2017-fall/information-theory-scribe-notes.pdf): [Lecture 3](http://infotheorytcs.wikischolars.columbia.edu/), on graph embeddings, mutual information and KL divergence. Course taught by Omri Weinstein.
-- [COMS-6998-04 Topics in Learning Theory](./files/2017-fall/learning-theory-scribe-notes.pdf): a lecture following [Blum, A. and Hardt, M. 2015](https://arxiv.org/abs/1502.04585). Course taught by Daniel Hsu.
+- COMS-6998-04 Topics in Learning Theory: a lecture following [Blum, A. and Hardt, M. 2015](https://arxiv.org/abs/1502.04585). Course taught by Daniel Hsu.
 - [COMS-6998-05 Algorithms through Geometric Lens](./files/2017-fall/algorithms-scribe-notes.pdf): [Lecture 13](https://ilyaraz.org/static/class/materials.html), finishing up graph coloring and beginning spectral graph theory. Course taught by Alex Andoni and Ilya Razenshteyn.
 
 
