@@ -4,7 +4,8 @@ title: Projects
 
 # Projects
 ## Thesis Direction
-I am beginning work on my Master's thesis at Columbia University. At this point, I am working on clarifying my research direction by reading a lot. Here is an overview of my research direction followed by a reading list: [beginnings](./files/research_direction.pdf). 
+I am beginning work on my Master's thesis at Columbia University. At this point, I am working on clarifying my research direction by reading a lot. Here is an overview of my research direction followed by a [reading list](./files/research_direction.pdf). [Notes](./notes)
+
 
 ## Graduate Courses
 In Fall 2017, I took four courses, each with a project component:

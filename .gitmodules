@@ -1,3 +1,6 @@
 [submodule "_site"]
 	path = _site
 	url = https://github.com/geelon/geelon.github.io.git
+[submodule "projects/notes"]
+	path = projects/notes
+	url = https://github.com/geelon/ml-article-notes.git

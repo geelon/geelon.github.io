@@ -2,6 +2,12 @@
 
 DATE=$(date)
 
+# Import Reading Notes
+cd projects/notes
+git pull
+cd ../../
+
+# Build site
 stack build
 cd _site
 mv .git ../git-save/.git
