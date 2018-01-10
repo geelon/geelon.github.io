@@ -42,6 +42,7 @@ main = hakyll $ do
     route $ constRoute "projects/notes/index.html"
     compile $ pandocMathCompiler
       >>= loadAndApplyTemplate "templates/layer1.html" postCtx
+      >>= liftURL
       >>= mdToHTML
       >>= relativizeUrls
 
@@ -120,7 +121,7 @@ mdToHTMLWith :: String  -- ^ HTML to relativize
 mdToHTMLWith = withUrls md
   where
     md x
-      | endswith ".md" x = (replace ".md" ".html" <$> replace "./" "./notes/") x
+      | endswith ".md" x = (replace ".md" ".html") x -- <$> replace "./" "./notes/") x
       | otherwise = x
 
 
