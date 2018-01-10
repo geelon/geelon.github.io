@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Evolution Strategies as a Scalable Alternative to Reinforcement Learning</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">	
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing/">writing</a></li>
+	    <li><a href="../../../projects/">projects</a></li>
+	    <li><a href="../../../me/">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Evolution Strategies as a Scalable Alternative to Reinforcement Learning</h1>
+  
+
+  <section class="date_posted">
+    Posted on January 10, 2018
+  </section>
+
+  <section>
+    <h2 id="summary">Summary</h2>
+<p>Usually, learning strategies attempt to minimize/maximize an objective function <span class="math inline">\(F\)</span> parametrized by <span class="math inline">\(\theta\)</span>. Thus, the goal is to search for the best <em>point</em> (or <em>individual</em>) inside the parameter space.</p>
+<p>Evolution strategies (ES) frames the search problem in terms of <em>populations</em> instead of individuals. Each parameter <span class="math inline">\(\tau\)</span> represents a population’s ‘genotype’, but the genotype of each individual is ‘mutated’ or perturbed. The goal is to maximize the ‘fitness’ of the population instead of the individual.</p>
+<p>Mathematically, the ‘population genotype’ <span class="math inline">\(\psi\)</span> corresponds to a distribution of ‘individual genotypes’ <span class="math inline">\(\theta \sim p_\psi\)</span>. The goal is then to maximize the expected objective function: <span class="math display">\[\mathbb{E}_{\theta \sim p_\psi} F(\theta).\]</span> This may be done using gradient ascent/descent, the gradient is estimated by: <span class="math display">\[\nabla_\psi \mathbb{E}_{\theta \sim p_\psi} F(\theta) \approx
+\mathbb{E}_{\theta \sim p_\psi} \big\{F(\theta) \nabla_\psi \log
+p_\psi(\theta)\big\}.\]</span> And when <span class="math inline">\(p_\psi\)</span> is factored Gaussian (?? what is meant by factored ??), the estimator is also known as <a href="http://www.jhuapl.edu/spsa/pdf-spsa/spall_tac92.pdf">simultaneous perturbation stochastic approximation (Spall 1992)</a>, <a href="http://kyb.mpg.de/fileadmin/user_upload/files/publications/attachments/Neural-Networks-2010-Sehnke_%5b0%5d.pdf">parameter exploring policy gradients (Sehnke 2010)</a>, and <a href="https://core.ac.uk/download/pdf/6340930.pdf">zero-order gradient estimation (Nesterov 2011)</a>.</p>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
