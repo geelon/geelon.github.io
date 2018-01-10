@@ -121,7 +121,7 @@ mdToHTMLWith :: String  -- ^ HTML to relativize
 mdToHTMLWith = withUrls md
   where
     md x
-      | endswith ".md" x = ((replace ".md" ".html")) x -- <$> replace "./" "./notes/") x
+      | endswith ".md" x = ((replace ".md" ".html") <$> replace "../" "./") x
       | otherwise = x
 
 
