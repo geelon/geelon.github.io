@@ -16,7 +16,8 @@ main = hakyll $ do
     route   idRoute
     compile copyFileCompiler
 
-  match ("projects/files/**" .||. "me/files/**") $ do
+  match ("projects/files/**" .||. "me/files/**" 
+        .||. "projects/notes/files/**") $ do
     route   idRoute
     compile copyFileCompiler
 
@@ -46,7 +47,8 @@ main = hakyll $ do
       >>= mdToHTML
       >>= relativizeUrls
 
-  match ("projects/notes/**" .&&. complement "projects/notes/readme*") $ do
+  match ("projects/notes/**" .&&.
+         complement ("projects/notes/readme*" .||. "projects/notes/files/**")) $ do
     route $ setExtension "html"
     compile $ pandocMathCompiler
       >>= loadAndApplyTemplate "templates/writing-body.html"    postCtx
