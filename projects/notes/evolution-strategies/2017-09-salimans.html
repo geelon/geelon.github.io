@@ -37,12 +37,40 @@
   </section>
 
   <section>
-    <h2 id="summary">Summary</h2>
+    <p>Salimans, Tim, et al. “Evolution strategies as a scalable alternative to reinforcement learning.” arXiv preprint arXiv:1703.03864 (2017).</p>
+<h2 id="summary">Summary</h2>
 <p>Usually, learning strategies attempt to minimize/maximize an objective function <span class="math inline">\(F\)</span> parametrized by <span class="math inline">\(\theta\)</span>. Thus, the goal is to search for the best <em>point</em> (or <em>individual</em>) inside the parameter space.</p>
-<p>Evolution strategies (ES) frames the search problem in terms of <em>populations</em> instead of individuals. Each parameter <span class="math inline">\(\tau\)</span> represents a population’s ‘genotype’, but the genotype of each individual is ‘mutated’ or perturbed. The goal is to maximize the ‘fitness’ of the population instead of the individual.</p>
+<p>Evolution strategies (ES) frames the search problem in terms of <em>populations</em> instead of individuals. Each parameter <span class="math inline">\(\psi\)</span> represents a population’s ‘genotype’, but the genotype of each individual is ‘mutated’ or perturbed. The goal is to maximize the ‘fitness’ of the population instead of the individual.</p>
 <p>Mathematically, the ‘population genotype’ <span class="math inline">\(\psi\)</span> corresponds to a distribution of ‘individual genotypes’ <span class="math inline">\(\theta \sim p_\psi\)</span>. The goal is then to maximize the expected objective function: <span class="math display">\[\mathbb{E}_{\theta \sim p_\psi} F(\theta).\]</span> This may be done using gradient ascent/descent, the gradient is estimated by: <span class="math display">\[\nabla_\psi \mathbb{E}_{\theta \sim p_\psi} F(\theta) \approx
 \mathbb{E}_{\theta \sim p_\psi} \big\{F(\theta) \nabla_\psi \log
-p_\psi(\theta)\big\}.\]</span> And when <span class="math inline">\(p_\psi\)</span> is factored Gaussian (?? what is meant by factored ??), the estimator is also known as <a href="http://www.jhuapl.edu/spsa/pdf-spsa/spall_tac92.pdf">simultaneous perturbation stochastic approximation (Spall 1992)</a>, <a href="http://kyb.mpg.de/fileadmin/user_upload/files/publications/attachments/Neural-Networks-2010-Sehnke_%5b0%5d.pdf">parameter exploring policy gradients (Sehnke 2010)</a>, and <a href="https://core.ac.uk/download/pdf/6340930.pdf">zero-order gradient estimation (Nesterov 2011)</a>.</p>
+p_\psi(\theta)\big\}.\]</span> And when <span class="math inline">\(p_\psi\)</span> is factored Gaussian (?? what is meant by factored ??), the estimator is also known as <a href="http://www.jhuapl.edu/spsa/pdf-spsa/spall_tac92.pdf">simultaneous perturbation stochastic approximation (Spall 1992)</a>, <a href="http://kyb.mpg.de/fileadmin/user_upload/files/publications/attachments/Neural-Networks-2010-Sehnke_%5b0%5d.pdf">parameter exploring policy gradients (Sehnke 2010)</a>, and <a href="https://core.ac.uk/download/pdf/6340930.pdf">zero-order gradient estimation (Nesterov 2011)</a>. We can think of this as applying a Gaussian blur to the original objective function <span class="math inline">\(F\)</span>.</p>
+<p>In particular, consider the Gaussian centered at <span class="math inline">\(\theta\)</span> with covariance <span class="math inline">\(\sigma^2 I\)</span>, so that the gradient may be defined over <span class="math inline">\(\theta\)</span>, and estimated by <span class="math display">\[\nabla_\theta \mathbb{E}_{\epsilon \sim \mathcal{N}(0,I)} F(\theta +
+\sigma \epsilon) = \frac{1}{\sigma} \mathbb{E}_{\epsilon \sim
+\mathcal{N}(0,I)} \big\{F(\theta + \sigma \epsilon) \epsilon\big\},\]</span> which may be estimated by samples, yielding the natural algorithm labeled Algorithm 1 in the paper. This algorithm is easily parallelizable, given as Algorithm 2.</p>
+<h3 id="empirical-results">Empirical Results</h3>
+<p>In some cases, the Gaussian parameter perturbations did not lead to adequate exploration of the parameter space; however, they ameliorated this by virtual batch normalization.</p>
+<h3 id="comparison-of-es-and-policy-gradients">Comparison of ES and Policy Gradients</h3>
+<p>Non-smoothness is a fundamental problem in RL, especially in discrete situations. Generally, according to the parameters <span class="math inline">\(\theta\)</span>, the learner performs an action <span class="math inline">\(\mathbf{a}(\theta)\)</span>, which induces feedback to the learner, <span class="math inline">\(F(\mathbf{a}(\theta))\)</span>. Now, to enable gradient-based methods, both ES and policy gradients add noise: ES smooths the objective function (by adding noise to the parameter space) while policy gradients add noise to the action space.</p>
+<p>As the dimension <span class="math inline">\(T\)</span> of <span class="math inline">\(\mathbf{a}(\theta)\)</span> grows, the corresponding policy gradient estimator for <span class="math inline">\(\nabla_\theta F(\theta)\)</span> will have variance that scales with <span class="math display">\[\sum_{t=1}^T \nabla_\theta \log p(a_t; \theta),\]</span> so that the variance grows about linearly with <span class="math inline">\(T\)</span>. The estimator using ES is independent of <span class="math inline">\(T\)</span>.</p>
+<h3 id="interpretation-as-finite-differences">Interpretation as Finite Differences</h3>
+<p>Using the fact that <span class="math inline">\(\mathbb{E}_{\epsilon \sim \mathcal{N}(0,I)} \big\{F(\theta) \epsilon /\sigma\big\} = 0,\)</span> we can rewrite: <span class="math display">\[\mathbb{E}_{\theta \sim \mathcal{N}(0,I)} \big\{F(\theta + \sigma
+\epsilon) \epsilon / \sigma\big\} = \mathbb{E}_{\theta \sim
+\mathcal{N}(0,I)} \big\{(F(\theta + \sigma \epsilon) -
+F(\theta))\epsilon / \sigma\big\}\]</span>, so that we can interpret ES as computing finite differences in a randomly chosen direction.</p>
+<p>This suggests that, as finite differences methods scale poorly with dimension of <span class="math inline">\(\theta\)</span>, that ES may also scale poorly. But the dimension perhaps depends more on the effective dimensionality of the optimization problem and not of the learning model. (?? why is this the case ??)</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1:</strong> Mathematically, we want to perform gradient descent/ascent on the new objective function <span class="math inline">\(G = F * g\)</span>, the convolution with a Gaussian in the parameter space: <span class="math display">\[\nabla_\psi
+  G(\psi) = \nabla_\psi \int_{\Theta} f(\theta) g(\psi - \theta)
+  d\theta.\]</span> Why is Equation (2) an estimator? That is: <span class="math display">\[\nabla_\psi G(\psi) = \int_Theta f(\theta) \nabla_\psi \log g(\psi
+  - \theta) d\theta.\]</span></p>
+<p><strong>Question 2:</strong> The current ES algorithm convolves the objective function <span class="math inline">\(F\)</span> with the Gaussian <span class="math inline">\(\mathcal{N}(0,\sigma^2I)\)</span>. But suppose we want to apply ES to a learning model with some hierarchical structure (layers of a neural network, sequential actions, etc.). Then consider convolving with a Gaussian that has smaller variance for early layers and greater variance for later layers. Thus allowing it to learn layers first. Then, as training goes on, reduce variance of later layers. Is this analogous to the batch normalization procedure this paper used? Does this work according to intuition? How may this framed in terms of entropy/generalization as discussed in <a href="https://geelon.github.io/projects/files/research_direction.pdf">research directions</a>?</p>
+<h3 id="keywordsfurther-reading">Keywords/Further Reading</h3>
+<ul>
+<li>policy gradients</li>
+<li>Q-learning</li>
+<li>batch normalization</li>
+<li>importance sampling, <a href="http://ib.berkeley.edu/labs/slatkin/eriq/classes/guest_lect/mc_lecture_notes.pdf">Monte Carlo methods</a></li>
+</ul>
   </section>
 
 </article>
