@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ES Is More Than Just a Traditional Finite-Difference Approximator</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">	
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing/">writing</a></li>
+	    <li><a href="../../../projects/">projects</a></li>
+	    <li><a href="../../../me/">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">ES Is More Than Just a Traditional Finite-Difference Approximator</h1>
+  
+
+  <section class="date_posted">
+    Posted on January 11, 2018
+  </section>
+
+  <section>
+    <p>Lehman, Joel, et al. “ES Is More Than Just a Traditional Finite-Difference Approximator.” arXiv preprint arXiv:1712.06568 (2017).</p>
+<h2 id="summary">Summary</h2>
+<p>First, the <em>finite difference</em> method estimates the gradient by approximating the derivative by small perturbations. For example, in one dimension, we can estimate <span class="math inline">\(f'(x)\)</span> by: <span class="math display">\[f'(x) \approx \frac{f(x + \delta) - f(x)}{\delta}.\]</span> However, this method scales poorly when we extend it to higher dimensions, if we perturb each parameter individually. Furthermore, this method is designed to estimate the gradient of a function <span class="math inline">\(F\)</span> at a single point <span class="math inline">\(\theta\)</span> in the parameter space. This allows a learner to optimize an objective function <span class="math inline">\(F\)</span> using gradient techniques, even if <span class="math inline">\(F\)</span> is not differentiable.</p>
+<p>In contrast, the goal of <em>ES</em> is to optimize the objective function: <span class="math display">\[J(\theta) = \mathbb{E}_{z \sim p_\theta} F(z) = \int f(z)
+\pi(z|\theta) dz.\]</span> And so, the difference is that ES optimizes <em>distributional parameters</em>. Indeed, the learner is not looking for the ‘fittest’ individual point in parameter space, but the fittest population (defined by the distribution parameters <span class="math inline">\(\theta\)</span>).</p>
+<p>In ES, the population distribution is an isotropic Gaussian, with covariance <span class="math inline">\(\sigma^2 I\)</span>. Here, <span class="math inline">\(\sigma\)</span> controls the <em>robustness</em> of the population genotype: a smaller <span class="math inline">\(\sigma\)</span> corresponds with smaller perturbations, and if <span class="math inline">\(F\)</span> is continuous (almost everywhere), then this also implies smaller ‘genotype variation’ across the population.</p>
+<p>The <em>robustness</em> of the population genotype is linked with <em>evolvability</em>. If the population genotype is not robust, then it is not very meaningful beyond being the mean of individual genotypes; its evolution might also not mean very much.</p>
+<p>However, allowing the learning mechanism to adjust robustness may lead to prioritizing robustness over evolvability (e.g. trivially, the Dirac delta distribution is completely robust, but loses all advantages of optimizing population distributions).</p>
+<p>Conversely, if <span class="math inline">\(\sigma\)</span> is large and ES converges, then it finds a region of the search space with robust parameters: the behavior of the objective function doesn’t change much even with relatively large perturbations of the parameters.</p>
+<h3 id="empirical-results">Empirical Results</h3>
+<p>This paper also tested ES on different ‘fitness landscapes’ to compare the behavior of ES with finite-difference gradient descent. One landscape that ES had trouble with was the ‘narrowing path landscape’, where the path to the global minimum had increasingly steep walls in one direction—ultimately ES demands too much robustness to move further along the path:</p>
+<video autoplay controls controlslist="nodownload" loop preload="metadata" width="480" height="270" class="arve-video fitvidsignore">
+<source type="video/mp4" src="https://eng.uber.com/wp-content/uploads/2017/12/narrowing_path_composite.mp4">
+</video>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1:</strong> It seems that if the objective function were Lipschitz (possibly a.e.), then ES would always converge to a local minimum provided that <span class="math inline">\(\sigma\)</span> is small enough. Can we prove this?</p>
+<p><strong>Question 2:</strong> Let <span class="math inline">\(\mathcal{G}_\sigma(F)\)</span> be the new objective function constructed from <span class="math inline">\(F\)</span> (i.e. <span class="math inline">\(\mathcal{G}(F) = J\)</span>, in the notation above). What is the behavior of if <span class="math inline">\(\mathcal{G}_\sigma\)</span> is applied to <span class="math inline">\(F\)</span> iteratively? Is there a fixed point? What if <span class="math inline">\(\sigma\)</span> is varied continuously? Is <span class="math inline">\(\mathcal{G}_\sigma^2 =  \mathcal{G}_{2\sigma}\)</span> (unlikely, but are there such algebraic properties)?</p>
+<p><strong>Note 3:</strong> Different landscapes have different ideal covariances. One natural generalization is to allow the covariance <span class="math inline">\(\Sigma\)</span> of the population parameters to be diagonal (and not just <span class="math inline">\(\sigma^2  I\)</span>). One can think of this as a rescaling of the parameter space.</p>
+<p><strong>Aside 4:</strong> It seems that the language of ‘genotype’, ‘robustness’, ‘population’ may be replaced with more topological language. The population’s parameter distribution as a proxy for an open set (or in the case of ES, an open ball) on the parameter space, or vice versa.</p>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
