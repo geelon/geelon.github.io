@@ -61,7 +61,7 @@ F(\theta))\epsilon / \sigma\big\}\]</span>, so that we can interpret ES as compu
 <h2 id="discussion">Discussion</h2>
 <p><strong>Question 1:</strong> Mathematically, we want to perform gradient descent/ascent on the new objective function <span class="math inline">\(G = F * g\)</span>, the convolution with a Gaussian in the parameter space: <span class="math display">\[\nabla_\psi
   G(\psi) = \nabla_\psi \int_{\Theta} f(\theta) g(\psi - \theta)
-  d\theta.\]</span> Why is Equation (2) an estimator? That is: <span class="math display">\[\nabla_\psi G(\psi) = \int_Theta f(\theta) \nabla_\psi \log g(\psi
+  d\theta.\]</span> Why is Equation (2) an estimator? That is: <span class="math display">\[\nabla_\psi G(\psi) = \int_\Theta f(\theta) \nabla_\psi \log g(\psi
   - \theta) d\theta.\]</span></p>
 <p><strong>Question 2:</strong> The current ES algorithm convolves the objective function <span class="math inline">\(F\)</span> with the Gaussian <span class="math inline">\(\mathcal{N}(0,\sigma^2I)\)</span>. But suppose we want to apply ES to a learning model with some hierarchical structure (layers of a neural network, sequential actions, etc.). Then consider convolving with a Gaussian that has smaller variance for early layers and greater variance for later layers. Thus allowing it to learn layers first. Then, as training goes on, reduce variance of later layers. Is this analogous to the batch normalization procedure this paper used? Does this work according to intuition? How may this framed in terms of entropy/generalization as discussed in <a href="https://geelon.github.io/projects/files/research_direction.pdf">research directions</a>?</p>
 <h3 id="keywordsfurther-reading">Keywords/Further Reading</h3>
