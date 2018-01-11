@@ -48,9 +48,16 @@
 <p>Conversely, if <span class="math inline">\(\sigma\)</span> is large and ES converges, then it finds a region of the search space with robust parameters: the behavior of the objective function doesn’t change much even with relatively large perturbations of the parameters.</p>
 <h3 id="empirical-results">Empirical Results</h3>
 <p>This paper also tested ES on different ‘fitness landscapes’ to compare the behavior of ES with finite-difference gradient descent. One landscape that ES had trouble with was the ‘narrowing path landscape’, where the path to the global minimum had increasingly steep walls in one direction—ultimately ES demands too much robustness to move further along the path:</p>
+<div class="center puzzle-figure">
+<video autoplay controls controlslist="nodownload" loop preload="metadata" width="480" height="270" class="arve-video fitvidsignore">
+<source type="video/mp4" src="https://eng.uber.com/wp-content/uploads/2017/12/gradient_gap_composite.mp4">
+</video>
 <video autoplay controls controlslist="nodownload" loop preload="metadata" width="480" height="270" class="arve-video fitvidsignore">
 <source type="video/mp4" src="https://eng.uber.com/wp-content/uploads/2017/12/narrowing_path_composite.mp4">
 </video>
+</br> Finite differences fails to cross narrow gap, while ES fails to traverse a narrow path. Source: <a href="https://eng.uber.com/deep-neuroevolution/">Uber Engineering</a>
+</div>
+<p></br></p>
 <h2 id="discussion">Discussion</h2>
 <p><strong>Question 1:</strong> It seems that if the objective function were Lipschitz (possibly a.e.), then ES would always converge to a local minimum provided that <span class="math inline">\(\sigma\)</span> is small enough. Can we prove this?</p>
 <p><strong>Question 2:</strong> Let <span class="math inline">\(\mathcal{G}_\sigma(F)\)</span> be the new objective function constructed from <span class="math inline">\(F\)</span> (i.e. <span class="math inline">\(\mathcal{G}(F) = J\)</span>, in the notation above). What is the behavior of if <span class="math inline">\(\mathcal{G}_\sigma\)</span> is applied to <span class="math inline">\(F\)</span> iteratively? Is there a fixed point? What if <span class="math inline">\(\sigma\)</span> is varied continuously? Is <span class="math inline">\(\mathcal{G}_\sigma^2 =  \mathcal{G}_{2\sigma}\)</span> (unlikely, but are there such algebraic properties)?</p>
