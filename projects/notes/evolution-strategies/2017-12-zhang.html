@@ -39,6 +39,25 @@
   <section>
     <p>Zhang, Xingwen, Jeff Clune, and Kenneth O. Stanley. “On the Relationship Between the OpenAI Evolution Strategy and Stochastic Gradient Descent.” arXiv preprint arXiv:1712.06564 (2017).</p>
 <h2 id="summary">Summary</h2>
+<p>ES as in <a href="https://arxiv.org/pdf/1703.03864.pdf">Salimans 2017</a> estimates the gradient: <span class="math display">\[g^{ES} = \nabla_\theta \mathbb{E}_{\epsilon \sim \mathcal{N}(0,I)}
+F(\theta + \sigma \epsilon).\]</span> Note that this gradient is estimated by sampling <span class="math inline">\(N\)</span> “pseudo-offsprings” according to the distribution <span class="math inline">\(\mathcal{N}(\theta,\sigma^2I)\)</span>. This paper seeks to determine the relationship between <span class="math inline">\(g^{ES}\)</span> and the ‘true’ gradient <span class="math inline">\(g = \nabla_\theta F(\theta)\)</span>. Theoretically, as <span class="math inline">\(\sigma \to 0\)</span> and <span class="math inline">\(N \to \infty\)</span>, then <span class="math inline">\(g^{ES} \to g\)</span>.</p>
+<p><strong>Empirical results on MNIST data:</strong></p>
+<ul>
+<li>the average correlation between <span class="math inline">\(g^{ES}\)</span> and <span class="math inline">\(g\)</span> is 39.04%, where correlation is calculated at each time step <span class="math inline">\(t\)</span> in the ES algorithm (?? is this a typo—the paper also seems to suggest 3.9% later on??)</li>
+<li>oddly, the correlation between <span class="math inline">\(g^{ES}\)</span> and <span class="math inline">\(g\)</span> is very stable; small variance. Note that this is run with a relatively small value of <span class="math inline">\(\sigma = 0.002\)</span>: <img class="center" src="../.././images/zhang-correlation.png" alt="Correlation between ES gradient and SGD gradient." /></li>
+<li>running ES and SGD on the same architecture/hyperparameters led to 96.99% and 98.69% validation accuracy, respectively.</li>
+<li><span class="math inline">\(g^{ES}\)</span> may be approximated, at least at the <span class="math inline">\(\sigma = 0.002\)</span> level by the estimator: <span class="math display">\[g^{\mathrm{Proxy}} = g + m g^{\mathrm{Noise}},\]</span> where <span class="math inline">\(g^{\mathrm{Noise}}\)</span> is an independent noise vector and <span class="math inline">\(m\)</span> is set so that the correlation between <span class="math inline">\(g^{\mathrm{Proxy}}\)</span> and <span class="math inline">\(g\)</span> is equal to the correlation between <span class="math inline">\(g^{ES}\)</span> and <span class="math inline">\(g\)</span>: <img class="center" src="../.././images/zhang-es-proxy.png" alt="Comparison of ES and SGD-based proxy for ES." /></li>
+</ul>
+<h3 id="additional-comments">Additional Comments</h3>
+<ul>
+<li>This paper takes the perspective that the gradient computed for SGD is the “optimal gradient”, surprised that even a low correlation (3.9%) to this optimal gradient can lead to validation accuracy within 1.70%.</li>
+<li>It remarks that ES is not appropriate for supervised learning, where “the optimal gradient…is perfectly accessible” and the additional overhead in ES is “clearly unwarranted”. However, its advantage is its parallelizability.</li>
+</ul>
+<h2 id="discussion">Discussion</h2>
+<p>Two of the most interesting aspects to this paper are (1) the correlation between <span class="math inline">\(g^{ES}\)</span> and <span class="math inline">\(g\)</span> has very low variance; it looks like standard deviation of &lt; 0.1%, and (2) the validation accuracy of ES and ES-proxy are almost identical. Why should this be the case?</p>
+<p>Perhaps this suggests that there is a subcollection of more sensitive parameters where even letting <span class="math inline">\(\sigma = 0.002\)</span> is too high variance. Would this correspond to different layers of the network (probably the earlier layers)?</p>
+<p><strong>Question 1:</strong> After training a neural network, compute the sensitivity of each layer of the network. Can we characterize the effects of the subsequent layer as ‘damping’ or ‘amplifying’? In the sense that if layer <span class="math inline">\(i\)</span> is highly sensitive, then the subsequent layers must amplify the output of layer <span class="math inline">\(i\)</span> (so layer <span class="math inline">\(i\)</span> better be relatively precise). C.f. hyperbolic dynamical systems, expanding and contracting maps. Relation to partial derivatives?</p>
+<p><strong>Question 2:</strong> Perhaps ES-proxy makes a good proxy for ES only for certain values of <span class="math inline">\(\sigma\)</span>. At what point might the correspondence break down?</p>
   </section>
 
 </article>
