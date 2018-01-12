@@ -8,16 +8,13 @@ import           Text.Pandoc.Options
 import qualified Text.HTML.TagSoup as T
 import           Data.List.Utils
 import           Control.Monad.Loops (concatM)
+import           Control.Monad 
 
 --------------------------------------------------------------------------------
+{- MAIN -}
 main :: IO ()
 main = hakyll $ do
-  match "images/*" $ do
-    route   idRoute
-    compile copyFileCompiler
-
-  match ("projects/files/**" .||. "me/files/**" 
-        .||. "projects/notes/files/**") $ do
+  match directCopy $ do
     route   idRoute
     compile copyFileCompiler
 
@@ -25,51 +22,33 @@ main = hakyll $ do
     route   idRoute
     compile compressCssCompiler
 
-  match "writing-index.*" $ do
-    route $ customRoute $ const "writing/index.html"
-    compile $ pandocMathCompiler
-      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
-      >>= relativizeUrls
-         
-  match "writing/*" $ do
+  match "templates/*" $ compile templateBodyCompiler
+
+
+  {- Index Files -}
+  match ("writing/index.*" .||. "me/*" .||. "projects/*") $ do
     route $ setExtension "html"
     compile $ pandocMathCompiler
-      >>= loadAndApplyTemplate "templates/writing-body.html"    postCtx
-      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
-      >>= relativizeUrls
+      >>= applyStandardTemplate
 
-
-  match "projects/notes/readme*" $ do
+  match "projects/notes/readme.*" $ do
     route $ constRoute "projects/notes/index.html"
     compile $ pandocMathCompiler
-      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
-      >>= liftURL
-      >>= mdToHTML
-      >>= relativizeUrls
+      >>= applyStandardTemplate >>= mdToHTML
 
-  match ("projects/notes/**" .&&.
-         complement ("projects/notes/readme*" .||. "projects/notes/files/**")) $ do
+
+  {- Post Files -}
+  match (writingPosts .||. projectPosts) $ do
     route $ setExtension "html"
     compile $ pandocMathCompiler
-      >>= loadAndApplyTemplate "templates/writing-body.html"    postCtx
-      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
-      >>= liftURLlevel 2
-      >>= relativizeUrls
+      >>= loadAndApplyTemplate "templates/post.html" postCtx
+      >>= applyStandardTemplate
 
-  match ("me/*" .||. "projects/*") $ do
-    route $ setExtension "html"
-    compile $ pandocMathCompiler
-      >>= loadAndApplyTemplate "templates/layer1.html" postCtx
-      >>= relativizeUrls
 
-  match "writing/files/*" $ do
-    route   idRoute
-    compile copyFileCompiler
-           
   create ["archive.html"] $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "writing/*"
+      posts <- recentFirst =<< loadAll (projectPosts .||. writingPosts)
       let archiveCtx =
             listField "posts" postCtx (return posts) `mappend`
             constField "title" "Archives"            `mappend`
@@ -77,25 +56,43 @@ main = hakyll $ do
 
       makeItem ""
         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-        >>= loadAndApplyTemplate "templates/layer0.html" archiveCtx
-        >>= relativizeUrls
-        >>= mdToHTML
+        >>= applyStandardTemplate
 
-
-  match "index.html" $ do
-    route   idRoute
-    compile $ copyFileCompiler
-
-  match "templates/*" $ compile templateBodyCompiler
 
 
 --------------------------------------------------------------------------------
-postCtx :: Context String
-postCtx = mconcat
-          [ dateField "date" "%B %e, %Y"
-          , defaultContext
-          ]
+{- PATTERNS -}
+directCopy :: Pattern
+directCopy = "index.html"              .||.
+             "images/*"                .||.
+             "writing/files/**"        .||.
+             "projects/files/**"       .||.
+             "projects/notes/files/**" .||.
+             "me/files/**" 
 
+writingPosts :: Pattern
+writingPosts = "writing/*" .&&.
+               complement "writing/index.*"
+
+projectPosts :: Pattern
+projectPosts = "projects/notes/**" .&&.
+               complement ("projects/notes/readme.*" .||.
+                           "projects/notes/files/**")
+
+--------------------------------------------------------------------------------
+{- CONTEXTS -}
+postCtx :: Context String
+postCtx = mconcat [ dateField "date" "%B %e, %Y"
+                  , defaultContext ]
+
+--------------------------------------------------------------------------------
+{- TEMPLATES -}
+applyStandardTemplate :: Item String  -> Compiler (Item String)
+applyStandardTemplate = loadAndApplyTemplate "templates/standard.html" defaultContext
+                        >=> relativizeUrls
+
+--------------------------------------------------------------------------------
+{- COMPILERS -}             
 pandocMathCompiler =
     let mathExtensions = [Ext_tex_math_dollars, Ext_tex_math_double_backslash,
                           Ext_latex_macros]
@@ -107,8 +104,6 @@ pandocMathCompiler =
                         }
     in pandocCompilerWith defaultHakyllReaderOptions writerOptions
 
-
-
 mdToHTML :: Item String -> Compiler (Item String)
 mdToHTML item = do
     route <- getRoute $ itemIdentifier item
@@ -117,30 +112,14 @@ mdToHTML item = do
         Just r  -> fmap mdToHTMLWith item
 
 
--- | Relativize URL's in HTML
 mdToHTMLWith :: String  -- ^ HTML to relativize
              -> String  -- ^ Resulting HTML
 mdToHTMLWith = withUrls md
   where
     md x
-      | endswith ".md" x = ((replace ".md" ".html") <$> replace "../" "./") x
+      | endswith ".md" x = ((replace ".md" ".html")) x
       | otherwise = x
 
-
-liftURL :: Item String -> Compiler (Item String)
-liftURL item = do
-    route <- getRoute $ itemIdentifier item
-    return $ case route of
-        Nothing -> item
-        Just r  -> fmap (withUrls up) item
-          where
-            up x
-              | startswith "http" x = x
-              | startswith "." x = "../" ++ x
-              | otherwise = x
-
-liftURLlevel :: Int -> Item String -> Compiler (Item String)
-liftURLlevel n = concatM $ replicate n liftURL
 --------------------------------------------------------------------------------
 
 
