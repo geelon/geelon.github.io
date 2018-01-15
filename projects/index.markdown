@@ -14,6 +14,7 @@ In Fall 2017, I took four courses, each with a project component:
 - [COMS-6998-04 Topics in Learning Theory](./files/2017-fall/learning-theory-final-report.pdf): this project compares the relative power of disagreement- and diameter-based active learning methods. [Slides](./files/2017-fall/learning-theory-presentation.pdf)
 - [COMS-6998-05 Algorithms through Geometric Lens](./files/2017-fall/algorithms-final-report.pdf): this is an expository paper on kernel methods and a specific application to locality sensitive hashing (LSH), resulting in kernel LSH (KLSH).
 - [ECBM-4040 Neural Networks and Deep Learning](./files/2017-fall/neural-networks-final-report.pdf): this project reproduced some results of Zhang, et. al. [Understanding deep learning requires rethinking generalization](https://arxiv.org/abs/1611.03530), giving some interpretation using basic information theory.
+  - [Code](https://github.com/geelon/ecbm-generalization) to project.
 
 Three of these courses also had a lecture-scribing component:
 
