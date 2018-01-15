@@ -5,6 +5,8 @@ title: Writing
 My [archive](../archive.html) for a full list of essays.
 
 # Computer Science
+- [Information Theory Scribing](./files/information-theory-scribe-notes.pdf): on graph embeddings, mutual information and KL divergence. [Course](http://infotheorytcs.wikischolars.columbia.edu/) taught by Omri Weinstein.
+- [Algorithms Scribing](./files/2017-fall/algorithms-scribe-notes.pdf): on graph color and spectral graph theory. [Course](https://ilyaraz.org/static/class/materials.html) taught by Alex Andoni and Ilya Razenshteyn.
 - [An Introduction to Word Embeddings; Applications](https://www.springboard.com/blog/introduction-word-embeddings/): One of the first steps to teaching a computer human language is to figure out how to encode language in a way that's meaningful to a computer. Recent breakthroughs have resulted in many new applications; I survey some of them here.
 - [An Introduction to Word Embeddings; Theory](http://www.learndatasci.com/intro-to-word-embeddings-problems-theory/): In this post, we'll get to know the difficulties a computer must face when extracting meaning from a body of text. Our attempts to overcome these challenges will motivate the current theory of word embeddings.
 
