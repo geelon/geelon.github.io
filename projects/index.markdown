@@ -10,10 +10,10 @@ I am beginning work on my Master's thesis at Columbia University. At this point,
 ## Graduate Courses
 In Fall 2017, I took four courses, each with a project component:
 
+- [ECBM-4040 Neural Networks and Deep Learning](./files/2017-fall/neural-networks-final-report.pdf): reproduced and reinterpreted using information theory some results of [Zhang, et. al.](https://arxiv.org/abs/1611.03530) Understanding deep learning requires rethinking generalization. [Code](https://github.com/geelon/ecbm-generalization)
 - [COMS-6998-02 Information Theory](./files/2017-fall/information-theory-final-report.pdf): in this project, we look at some tradeoffs between the complexity and learnability of a hypothesis class.
 - [COMS-6998-04 Topics in Learning Theory](./files/2017-fall/learning-theory-final-report.pdf): this project compares the relative power of disagreement- and diameter-based active learning methods. [Slides](./files/2017-fall/learning-theory-presentation.pdf)
 - [COMS-6998-05 Algorithms through Geometric Lens](./files/2017-fall/algorithms-final-report.pdf): this is an expository paper on kernel methods and a specific application to locality sensitive hashing (LSH), resulting in kernel LSH (KLSH).
-- [ECBM-4040 Neural Networks and Deep Learning](./files/2017-fall/neural-networks-final-report.pdf): reproduced and reinterpreted using information theory some results of [Zhang, et. al.](https://arxiv.org/abs/1611.03530) Understanding deep learning requires rethinking generalization. [Code](https://github.com/geelon/ecbm-generalization)
 
 Three of these courses also had a lecture-scribing component:
 
