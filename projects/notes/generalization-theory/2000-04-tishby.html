@@ -40,15 +40,14 @@
     <p>Tishby, Naftali, Fernando C. Pereira, and William Bialek. “The information bottleneck method.” arXiv preprint physics/0004057 (2000).</p>
 <h2 id="summary">Summary</h2>
 <p>Many learning problem have the same structure: “extract the information from one variable <span class="math inline">\(X\)</span> that is relevant for the prediction of another one, <span class="math inline">\(Y\)</span>.” This problem generalizes one in <em>rate-distortion theory</em>: let <span class="math inline">\(\tilde{X}\)</span> encode the signal <span class="math inline">\(X\)</span>. What is, on average, the minimal bits per signal (the <em>rate</em> <span class="math inline">\(R\)</span>) needed so that the reconstruction of the signal has distortion at most <span class="math inline">\(D\)</span>?</p>
-<p>This is characterized by the <em>rate-distortion function</em>, <span class="math inline">\(R(D)\)</span>, where the distortion is determined by some <em>distortion function</em>, <span class="math inline">\(d : X \times \tilde{X} \to \mathbb{R}^+\)</span>.</p>
-<p>In learning, instead of reconstructing <span class="math inline">\(X\)</span> from <span class="math inline">\(\tilde{X}\)</span>, we attempt to determine <span class="math inline">\(Y\)</span> from <span class="math inline">\(\tilde{X}\)</span>. Still, it is not clear what the correct distortion function is; indeed, if we associate each distortion function to a maximally “relevant” feature, this is equivalent to a feature selection.</p>
+<p>This latter question is characterized by the <em>rate-distortion function</em>, <span class="math inline">\(R(D)\)</span>, where the distortion is determined by some <em>distortion function</em>, <span class="math inline">\(d : X \times \tilde{X} \to \mathbb{R}^+\)</span>.</p>
+<p>In learning, instead of reconstructing <span class="math inline">\(X\)</span> from <span class="math inline">\(\tilde{X}\)</span>, we attempt to determine <span class="math inline">\(Y\)</span> from <span class="math inline">\(\tilde{X}\)</span>. Still, it is not clear what the correct choice of distortion function is; indeed, if we associate each distortion function to a maximally “relevant” feature, this is equivalent to a feature selection.</p>
 <h3 id="rate-distortion-theory">Rate-distortion theory</h3>
 <p>We think of the encoding or <em>quantization</em> of <span class="math inline">\(X\)</span> to <span class="math inline">\(\tilde{X}\)</span> as a stochastic function, given as a distribution by <span class="math inline">\(p(\tilde{x} | x)\)</span>. Note that:</p>
 <ul>
-<li>on average, we need <span class="math inline">\(H(X|\tilde{X})\)</span> many bits to specify <span class="math inline">\(X\)</span> given <span class="math inline">\(\tilde{X}\)</span>. So, in other words, on average, <span class="math inline">\(2^{H(X|\tilde{X})}\)</span> sources are encoded with the same code.</li>
-<li></li>
+<li>given <span class="math inline">\(\tilde{X}\)</span>, on average, we need <span class="math inline">\(H(X|\tilde{X})\)</span> many bits to specify <span class="math inline">\(X\)</span>. So, on average, <span class="math inline">\(2^{H(X|\tilde{X})}\)</span> sources are encoded with the same code;</li>
+<li>it follows that there are <span class="math inline">\(2^{H(X)}/2^{H(X|\tilde{X})} = 2^{I(X;\tilde{X})}\)</span> codes. Thus the minimal number of bits per symbol (i.e. rate) is bounded below by <span class="math inline">\(I(X;\tilde{X})\)</span> (i.e. information rate).</li>
 </ul>
-<p>particular, the expected distortion is: <span class="math display">\[\mathbb{E}_{p(x,\tilde{x})}\left[d(x,\tilde{x})\right].\]</span></p>
 <h2 id="discussion">Discussion</h2>
 <h3 id="keywords">Keywords</h3>
 <ul>
