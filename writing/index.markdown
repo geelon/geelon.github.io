@@ -2,7 +2,8 @@
 title: Writing
 ---
 # Writing
-My [archive](../archive.html) for a full list of essays.
+
+[Archive](../archive.html) for a full list of essays.
 
 # Computer Science
 - [Information Theory Scribing](./files/information-theory-scribe-notes.pdf): on graph embeddings, mutual information and KL divergence. [Course](http://infotheorytcs.wikischolars.columbia.edu/) taught by Omri Weinstein.

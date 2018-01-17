@@ -4,6 +4,9 @@ DATE=$(date)
 
 # Import Reading Notes
 cd projects/notes
+git add .
+git commit -m "Automatic Commit $DATE"
+git push
 git pull
 cd ../../
 

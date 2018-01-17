@@ -44,6 +44,19 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/post.html" postCtx
       >>= applyStandardTemplate
 
+  {- Archives -}
+  create ["thesis-notes.html"] $ do
+    route idRoute
+    compile $ do
+      posts <- recentFirst =<< loadAll projectPosts
+      let archiveCtx =
+            listField "posts" postCtx (return posts)  `mappend`
+            constField "title" "Notes: Chronological" `mappend`
+            defaultContext
+
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+        >>= applyStandardTemplate
 
   create ["archive.html"] $ do
     route idRoute
