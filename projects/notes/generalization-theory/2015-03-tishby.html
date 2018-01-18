@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Deep learning and the information bottleneck principle</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Deep learning and the information bottleneck principle</h1>
+  
+
+  <section class="date_posted">
+    Posted on January 17, 2018
+  </section>
+
+  <section>
+    <p>Tishby, Naftali, and Noga Zaslavsky. “Deep learning and the information bottleneck principle.” Information Theory Workshop (ITW), 2015 IEEE. IEEE, 2015.</p>
+<h2 id="summary">Summary</h2>
+<p>This paper elaborates on <a href="https://arxiv.org/pdf/physics/0004057.pdf">Tishby 2000</a>, expecially clarifying the <em>information plane</em> and the “structure of solutions” (c.f. <a href="./2000-04-tishby.html#structure-of-solution">notes</a>):</p>
+<p>In the learning problem, we want to extract the <em>relevant information</em> about a variable <span class="math inline">\(Y\)</span> from the input source <span class="math inline">\(X\)</span> into the representation <span class="math inline">\(\hat{X}\)</span>. And so <span class="math inline">\(\hat{X}\)</span> is a <em>minimal sufficient statistics</em> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> (i.e. it captures as much of the mutual information <span class="math inline">\(I(X;Y)\)</span> as possible while minimizing <span class="math inline">\(I(X;\hat{X})\)</span>, other irrelvant information). This suggests the following Lagrangian to maximize <span class="math inline">\(I(\hat{X};Y)\)</span>: <span class="math display">\[\mathcal{L}\big[p(\hat{x}|x)\big] = I(X;\hat{X}) - \beta I(\hat{X};Y).\]</span> Or, equivalently, the Lagrangian minimizing all information of <span class="math inline">\(Y\)</span> in <span class="math inline">\(X\)</span> not captured by <span class="math inline">\(\hat{X}\)</span>: <span class="math display">\[\tilde{\mathcal{L}} \big[p(\hat{x}|x)\big] = I(X;\hat{X}) + \beta I(X;Y|\hat{X}).\]</span></p>
+<p>From Equation (2), we see that this is precisely a rate-distortion problem, where the expected distortion is <span class="math inline">\(D_{IB} = I(X;Y|\hat{X})\)</span>. The information-theoretic limit of the tradeoff between distortion <span class="math inline">\(D_{IB}\)</span> and rate <span class="math inline">\(R\)</span> (i.e. <span class="math inline">\(I(X;\hat{X})\)</span>, the expected bit-ratio of <span class="math inline">\(\hat{X}\)</span> and <span class="math inline">\(X\)</span>) is given by the black curve on the <em>information plane</em> below:</p>
+<div class="center puzzle-figure">
+<p><img src="../files/tishby-information-plane.png" alt="tradeoff on
+information plane" /></p>
+The tradeoff between rate <span class="math inline">\(R\)</span> of encoding <span class="math inline">\(X \to \hat{X}\)</span> and the distortion <span class="math inline">\(D_{IB}\)</span>. The black line is the information-theoretic limit. The blue lines correspond to the limits for “different topological representations of <span class="math inline">\(\hat{X}\)</span>, such as different cardinality in clustering by deterministic annealing”. Source: <a href="https://arxiv.org/pdf/1503.02406.pdf">Tishby 2015</a>
+</div>
+<p></br></p>
+<p>In the above figure, the green line corresponds to the information <span class="math inline">\(I(Y;\mathbf{h}_i)\)</span> about <span class="math inline">\(Y\)</span> contained in the hidden layer <span class="math inline">\(\mathbf{h}_i\)</span> in a neural network (say, the below figure). As information cannot be recovered once lost, the curve is monotonic increasing.</p>
+<div class="center puzzle-figure">
+<p><img src="../files/tishby-learning-model.png" alt="neural network
+model" /></p>
+A neural network; given input <span class="math inline">\(X\)</span>, it returns an estimator <span class="math inline">\(\hat{Y}\)</span> of <span class="math inline">\(Y\)</span> through a series of hidden layers with weights <span class="math inline">\(\mathbf{h}_i\)</span>. Source: <a href="https://arxiv.org/pdf/1503.02406.pdf">Tishby 2015</a>
+</div>
+<p></br></p>
+<p>Finally, the quantities <span class="math inline">\(\Delta G\)</span> and <span class="math inline">\(\Delta C\)</span> are the <em>generalization gap</em> and the <em>complexity gap</em>, respectively. The generalization gap is the amount of information the network failed to capture while the complexity gap is the amount of unnecessary complexity in the network.</p>
+<h3 id="asides">Asides</h3>
+<p>Consider a single neuron in a usual neural network, parametrized by weights <span class="math inline">\(\mathbf{w}\)</span> and biases <span class="math inline">\(\mathbf{b}\)</span>: <span class="math display">\[\mathrm{Neuron}(\mathbf{x}) = \mathrm{sigmoid}(\mathbf{w} \cdot
+\mathbf{x} + \mathbf{b}).\]</span> Such a neuron can only classify linearly separable inputs. They are linearly separable if the inputs are conditionally independent. See <a href="http://www.ee.iisc.ac.in/new/people/faculty/prasantg/downloads/NeuralNetworksPosteriors_Lippmann1991.pdf">Richard 1991</a> for more details.</p>
+<p>Hidden layers within a neural network then allow for representational changes, to decouple the inputs. Other techniques can also decouple inputs—embedding into higher dimension (kernels) or random expansion.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1:</strong> this paper notes that this analysis is possible through viewing “DNN training as a successive (Markovian)” compressions of data. Can we use this perspective to explicitly view neural networks as dynamical systems? (c.f. question 1 in <a href="../evolution-strategies/2017-12-zhang.html#discussion">notes</a>).</p>
+<p><strong>Question 2:</strong> can this perspective be used to analyze other learning models?</p>
+<h3 id="keywordsfurther-reading">Keywords/Further Reading</h3>
+<ul>
+<li><a href="https://arxiv.org/pdf/1410.3831.pdf">Mehta 2014</a>, An exact mapping between Variational Renormalization Group and Deep Learning</li>
+<li><a href="http://www.ee.iisc.ac.in/new/people/faculty/prasantg/downloads/NeuralNetworksPosteriors_Lippmann1991.pdf">Richard 1991</a>, Neural network classifiers estimate Bayesian <em>a posteriori</em> probabilities</li>
+<li>On dynamical systems and neural networks, perhaps <a href="http://www.sciencedirect.com/science/article/pii/S0925231204005120">Haschke 2004</a> may be useful.</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
