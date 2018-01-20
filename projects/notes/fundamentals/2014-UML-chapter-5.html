@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Understanding Machine Learning (Chapter 5)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Understanding Machine Learning (Chapter 5)</h1>
+  
+
+  <section class="date_posted">
+    Posted on January 19, 2018
+  </section>
+
+  <section>
+    <p>Shai Shalev-Shwartz &amp; Shai Ben-David, <a href="http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/">Understanding Machine Learning</a></p>
+<h2 id="summary">Summary</h2>
+<h3 id="no-free-lunch-theorem">No Free Lunch Theorem</h3>
+<p>The No Free Lunch theorem shows that there is no universal learner: that is, for every learning algorithm <span class="math inline">\(A\)</span>, there will be a situation in which the learner will fail. Rigorously,</p>
+<p><strong>Theorem 1.</strong> Let <span class="math inline">\(A\)</span> be a learning algorithm, with the binary classification task, 0-1 loss over the domain <span class="math inline">\(\mathcal{X}\)</span>. Let <span class="math inline">\(m  \leq |\mathcal{X}|/2\)</span> be the training sample size. Then, there exists distribution <span class="math inline">\(\mathcal{D}\)</span> over <span class="math inline">\(\mathcal{X} \times \{0,1\}\)</span> such that:</p>
+<ol style="list-style-type: decimal">
+<li>There exists a function <span class="math inline">\(f: \mathcal{X} \to \{0,1\}\)</span> with <span class="math inline">\(L_\mathcal{D}(f) = 0\)</span>.</li>
+<li>With probability at least <span class="math inline">\(1/7\)</span> over the choice of <span class="math inline">\(S \sim  \mathcal{D}^m\)</span>, we have <span class="math inline">\(L_\mathcal{D}(A(S)) \geq 1/8\)</span>.</li>
+</ol>
+<h3 id="error-decomposition">Error Decomposition</h3>
+<p>Let <span class="math inline">\(h_S\)</span> be an <span class="math inline">\(\mathrm{ERM}_\mathcal{H}\)</span> hypothesis. Then, we can decompose the true risk into the sum of <em>approximation error</em> and <em>estimation error</em>: <span class="math display">\[L_\mathcal{D}(h_S) = \epsilon_{\mathrm{app}} +
+\epsilon_{\mathrm{est}}.\]</span> The <em>approximation error</em> is the minimum risk achievable by a hypothesis in <span class="math inline">\(\mathcal{H}\)</span>. That is: <span class="math display">\[\epsilon_{\mathrm{app}} = \min_{h \in \mathcal{H}}
+L_\mathcal{D}(h).\]</span> In other words, if we take <span class="math inline">\(\mathcal{H}\)</span> to be a <em>model</em>, then the approximation error is the error in the model—the <em>inductive bias</em> due to how we restricted the hypothesis class. Approximation error is independent of the learning algorithm.</p>
+<p>The <em>estimation error</em> is the error due to the learning algorithm—the failure to determine the true ERM predictor (as the empirical risk is only an estimator of the true risk).</p>
+<p>This error depends on the size of <span class="math inline">\(\mathcal{H}\)</span> and the sample size <span class="math inline">\(m\)</span>. Recalling the previous <a href="./fundamentals/2014-UML-chapter-4.html">notes</a> (Corollay 5), the relationship is: <span class="math display">\[\epsilon = O\left(\sqrt{\frac{\log |\mathcal{H}|}{m}}\right).\]</span></p>
+<p>Thus, to reduce approximation error, we should increase the size of <span class="math inline">\(\mathcal{H}\)</span> (i.e. increase the <em>complexity</em> of the model). However, this may lead to an increase in estimation error (in particular, <em>overfitting</em> if the sample size is not sufficiently large). And so, we face the <em>bias-complexity tradeoff</em>.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1.</strong> Can we prove the analogous No Free Lunch theorem from a computational complexity point of view? That is, for any polynomial-time learner, there exists a task that the learner will fail to learn. Does the complexity point of view generalize the PAC learning setting?</p>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
