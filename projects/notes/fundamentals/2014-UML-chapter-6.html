@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Understanding Machine Learning (Chapter 6)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Understanding Machine Learning (Chapter 6)</h1>
+  
+
+  <section class="date_posted">
+    Posted on January 20, 2018
+  </section>
+
+  <section>
+    <p>Shai Shalev-Shwartz &amp; Shai Ben-David, <a href="http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/">Understanding Machine Learning</a></p>
+<h2 id="summary">Summary</h2>
+<p>The main result in this chapter is that finite VC dimension characterize PAC learnability. In addition, it gives upper and lower bounds on sample complexity.</p>
+<p><strong>Definition 1.</strong> The <em>VC-dimension</em> of a hypothesis class <span class="math inline">\(\mathcal{H}\)</span>, denoted <span class="math inline">\(\mathrm{VCdim}(\mathcal{H})\)</span>, is the maximal size of a set <span class="math inline">\(C \subset \mathcal{X}\)</span> that can be shattered by <span class="math inline">\(\mathcal{H}\)</span>. If <span class="math inline">\(\mathcal{H}\)</span> can shatter sets of arbitrarily large size we say that <span class="math inline">\(\mathcal{H}\)</span> has infinite VC-dimension.</p>
+<p>Here is one direction of how VC dimension characterizes PAC-learnability:</p>
+<p><strong>Theorem 2.</strong> If <span class="math inline">\(\mathcal{H}\)</span> has infinite VC dimension, then it is not PAC learnable.</p>
+<p><em>Proof.</em> For all sample size <span class="math inline">\(m\)</span>, consider a subset <span class="math inline">\(C \subset  \mathcal{X}\)</span> of size <span class="math inline">\(2m\)</span> that is shattered by <span class="math inline">\(\mathcal{H}\)</span>. Then, by the No Free Lunch theorem in <a href="./2014-UML-chapter-5.html">notes</a> of the previous chapter, there exists a distribution on <span class="math inline">\(\mathcal{X}  \times \{0,1\}\)</span> such that <span class="math inline">\(\mathcal{H}\)</span> is realizable but the learning algorithm will fail to produce hypothesis with low true risk. Thus, no finite sample size is sure to be sufficient to learn the model <span class="math inline">\(\mathcal{H}\)</span>. ☐</p>
+<p>To prove the other direction, we need to define the <em>growth function</em> of a hypothesis class and show Sauer’s lemma:</p>
+<p><strong>Defintion 3.</strong> The <em>growth function</em> of <span class="math inline">\(\mathcal{H}\)</span>, <span class="math inline">\(\tau_\mathcal{H} : \mathbb{N} \to \mathbb{N}\)</span>, is defined as: <span class="math display">\[\tau_\mathcal{H}(m) = \max_{C\subset \mathcal{X}: |C| = m}
+  \big|\mathcal{H}_C\big|.\]</span></p>
+<p><strong>Lemma 3 (Sauer-Shelah-Perles).</strong> Let <span class="math inline">\(\mathrm{VCdim}(\mathcal{H})  \leq d &lt; \infty\)</span>. Then, for all <span class="math inline">\(m\)</span>, <span class="math inline">\(\tau_\mathcal{H}(m)  \leq\sum_{i=0}^d \binom{m}{i}\)</span>. In particular, if <span class="math inline">\(m &gt; d + 1\)</span> then <span class="math inline">\(\tau_\mathcal{H}(m) \leq (em/d)^d\)</span>.</p>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
