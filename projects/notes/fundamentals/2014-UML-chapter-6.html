@@ -42,11 +42,15 @@
   
 
   <section class="date_posted">
-    Posted on January 20, 2018
+    Posted on January 22, 2018
   </section>
 
   <section>
     <p>Shai Shalev-Shwartz &amp; Shai Ben-David, <a href="http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/">Understanding Machine Learning</a></p>
+<ul>
+<li><a href="./2014-UML-chapter-5.html">previous chapter</a>: No Free Lunch and Error Decomposition</li>
+<li><a href="#">next chapter</a>: Nonuniform Learnability</li>
+</ul>
 <h2 id="summary">Summary</h2>
 <p>The main result in this chapter is that finite VC dimension characterize PAC learnability. In addition, it gives upper and lower bounds on sample complexity.</p>
 <p><strong>Definition 1.</strong> The <em>VC-dimension</em> of a hypothesis class <span class="math inline">\(\mathcal{H}\)</span>, denoted <span class="math inline">\(\mathrm{VCdim}(\mathcal{H})\)</span>, is the maximal size of a set <span class="math inline">\(C \subset \mathcal{X}\)</span> that can be shattered by <span class="math inline">\(\mathcal{H}\)</span>. If <span class="math inline">\(\mathcal{H}\)</span> can shatter sets of arbitrarily large size we say that <span class="math inline">\(\mathcal{H}\)</span> has infinite VC-dimension.</p>
@@ -56,7 +60,66 @@
 <p>To prove the other direction, we need to define the <em>growth function</em> of a hypothesis class and show Sauer’s lemma:</p>
 <p><strong>Defintion 3.</strong> The <em>growth function</em> of <span class="math inline">\(\mathcal{H}\)</span>, <span class="math inline">\(\tau_\mathcal{H} : \mathbb{N} \to \mathbb{N}\)</span>, is defined as: <span class="math display">\[\tau_\mathcal{H}(m) = \max_{C\subset \mathcal{X}: |C| = m}
   \big|\mathcal{H}_C\big|.\]</span></p>
+<p>Next, Sauer’s lemma will show that <span class="math inline">\(|\mathcal{H}_C|\)</span> will grow only polynomially in <span class="math inline">\(|C|\)</span>, if <span class="math inline">\(\mathcal{H}\)</span> has finite VC dimension:</p>
 <p><strong>Lemma 3 (Sauer-Shelah-Perles).</strong> Let <span class="math inline">\(\mathrm{VCdim}(\mathcal{H})  \leq d &lt; \infty\)</span>. Then, for all <span class="math inline">\(m\)</span>, <span class="math inline">\(\tau_\mathcal{H}(m)  \leq\sum_{i=0}^d \binom{m}{i}\)</span>. In particular, if <span class="math inline">\(m &gt; d + 1\)</span> then <span class="math inline">\(\tau_\mathcal{H}(m) \leq (em/d)^d\)</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">\(C = \{c_1,\dotsc, c_m\} \subset \mathcal{X}\)</span> be any sample of size <span class="math inline">\(m\)</span>. We can show the stronger statement: <span class="math display">\[\tau_\mathcal{H}(m) \leq \big|\{B \subset C : \mathcal{H}_C
+\textrm{ shatters } B\}\big| \leq \sum_{i=0}^d \binom{m}{i}.\]</span> The max number of possible subsets of <span class="math inline">\(C\)</span> that are shattered by <span class="math inline">\(\mathcal{H}\)</span> is given by the right hand side, if the size of the shattered set is at most <span class="math inline">\(d\)</span>. This shows the second inequality.</p>
+<p>To prove the first inequality, we use induction. The base case is trivial (note that <span class="math inline">\(\mathcal{H}\)</span> always shatters <span class="math inline">\(\emptyset \subset \mathcal{X}\)</span>). To show the inductive step, let <span class="math inline">\(C' = \{c_1, \dotsc, c_{m-1}\}\)</span>. Consider <span class="math inline">\(\mathcal{H}_{C'}\)</span>, which partitions <span class="math inline">\(\mathcal{H}_C\)</span> into classes of sizes 1 or 2 (partitioned by the equivalence relation, <span class="math inline">\(h_0 \sim h_1\)</span> iff <span class="math inline">\(h_0\big|_{C'} = h_1\big|_{C'}\)</span>). Notice that the classes of size 2 are only possible if there exists <span class="math inline">\(h_0 \sim h_1\)</span> that disagree on <span class="math inline">\(c_m\)</span>. Denote by <span class="math inline">\(\mathcal{H}'\)</span> the union of such equivalence classes with 2 elements, so that: <span class="math display">\[|\mathcal{H}_C| = |\mathcal{H}_{C'}| + |\mathcal{H}_{C'}'|.\]</span> Now, we can apply the inductive hypothesis: <span class="math display">\[\begin{eqnarray*}
+|\mathcal{H}_{C'}| \leq \big|\{B \subset C' : \mathcal{H}_{C'}
+\textrm{ shatters } B\}\big| = \big|\{B \subset C : \mathcal{H}_C
+\textrm{ shatters } B \wedge c_m \notin B\}\big|,\\
+|\mathcal{H}_{C'}'| \leq \big|\{B \subset C' : \mathcal{H}_{C'}'
+\textrm{ shatters } B\}\big| = \big|\{B \subset C : \mathcal{H}_C
+\textrm{ shatters } B \wedge c_m \in B\}\big|.
+\end{eqnarray*}\]</span></p>
+<p>We conclude by appealing to Equation (4); we sum the two above inequalities, and since: <span class="math display">\[\begin{gather*}\{B \subset C: \mathcal{H}_C \textrm{ shatters } B\}
+\\
+=\\
+\big|\{B \subset C : \mathcal{H}_C \textrm{ shatters } B \wedge c_m
+\notin B\}\big| \cup \big|\{B \subset C : \mathcal{H}_C
+\textrm{ shatters } B \wedge c_m \in B\}\big|,\end{gather*} \]</span> we obtain our desired inequality. (See Lemma A.1 below for analytic bound). ☐</p>
+<p>The following lemma helps us bound the estimation error, as a function of how fast the effective size of the hypothesis class grows with respect to the sample size:</p>
+<p><strong>Lemma 4.</strong> For every <span class="math inline">\(\mathcal{D}\)</span> and <span class="math inline">\(\delta \in (0,1)\)</span>, with probability at least <span class="math inline">\(1 - \delta\)</span> over the choice of <span class="math inline">\(S \sim  \mathcal{D}^m\)</span>, we have: <span class="math display">\[|L_\mathcal{D}(h) - L_S(h)| \leq \frac{4 + \sqrt{\log
+  \tau_\mathcal{H}(2m)}}{\delta \sqrt{2m}}.\]</span></p>
+<p><strong>Theorem 5 (Fundamental Theorem of Statistical Learning).</strong> Let <span class="math inline">\(\mathcal{H}\)</span> be a hypothesis class of funtions from <span class="math inline">\(\mathcal{X}\)</span> to <span class="math inline">\(\{0,1\}\)</span> with the 0-1 loss. Then, <span class="math inline">\(\mathcal{H}\)</span> has uniform convergence property if and only if <span class="math inline">\(\mathcal{H}\)</span> has finite VC dimension.</p>
+<p><em>Proof of Theorem 5.</em> Reiterating, if <span class="math inline">\(\mathcal{H}\)</span> has infinite VC dimension, then it is not PAC learnable; hence, it does not have uniform convergence property. What’s left to show is that if <span class="math inline">\(\mathcal{H}\)</span> has finite VC dimension, then it has uniform convergence property.</p>
+<p>So, let us just plug the upper bound on <span class="math inline">\(\tau_\mathcal{H}\)</span> from Sauer’s lemma into Lemma 4 (Equation 4):<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> <span class="math display">\[|L_S(h) - L_\mathcal{D}(h)| \leq \frac{1}{\delta} \sqrt{\frac{2d
+ \log(2em/d)}{m}}.\]</span> This term may be bounded above by arbitrarily small epsilon, given the appropriate choice of <span class="math inline">\(m\)</span>. But notice that it was crucial that <span class="math inline">\(\tau_\mathcal{H}\)</span> is polynomial and not exponential in <span class="math inline">\(m\)</span>. Otherwise, a bound by an arbitrary <span class="math inline">\(\epsilon &gt; 0\)</span> would have been impossible. ☐</p>
+<p><em>Proof of Lemma 4.</em> We’ll just show that: <span class="math display">\[\underset{S\sim \mathcal{D}^m}{\mathbb{E}}\left[\sup_{h \in
+\mathcal{H}}|L_S(h) - L_\mathcal{D}(h)|\right] \leq \frac{4 +
+\sqrt{\log\tau_\mathcal{H}(2m)}}{\sqrt{2m}},\]</span> where applying Markov’s inequality will immediately yield the lemma.</p>
+<p>Notice that <span class="math inline">\(L_\mathcal{D}(h) = \mathbb{E}_{S' \sim \mathcal{D}^m} L_{S'}(h)\)</span>. So, in fact, we can replace and apply Jensen’s inequality: <span class="math display">\[\begin{align*}
+\underset{S\sim \mathcal{D}^m}{\mathbb{E}}\left[\sup_{h \in
+\mathcal{H}}|L_S(h) - L_\mathcal{D}(h)|\right] &amp;=
+\underset{S\sim \mathcal{D}^m}{\mathbb{E}}\left[\sup_{h \in
+\mathcal{H}}|L_S(h) - \underset{S' \sim \mathcal{D}^m}{\mathbb{E}}
+L_{S'}(h)|\right] \\
+&amp;\leq  \underset{S, S' \sim \mathcal{D}^m}{\mathbb{E}} \left[\sup_{h
+\in \mathcal{H}} |L_S(h) - L_{S'}(h)|\right] .
+\end{align*}\]</span> But since <span class="math inline">\(S = \{z_1,\dotsc, z_m\}\)</span> and <span class="math inline">\(S' = \{z_1',\dotsc, z_m'\}\)</span> are i.i.d., we can sample <span class="math inline">\(S\)</span> and <span class="math inline">\(S'\)</span> and swap them without affecting the expectation. Indeed, we can swap the individual <span class="math inline">\(z_i\)</span> and <span class="math inline">\(z_i'\)</span> as well. So, for each index <span class="math inline">\(1 \leq i \leq m\)</span>, uniformly at random choose choose <span class="math inline">\(\sigma_i\in_R \{\pm 1\}\)</span>. We have: <span class="math display">\[\begin{align*}
+  \underset{S, S' \sim \mathcal{D}^m}{\mathbb{E}} \left[\sup_{h
+\in \mathcal{H}} |L_S(h) - L_{S'}(h)|\right]
+&amp;= \underset{\sigma \sim
+U_{\pm}^m}{\mathbb{E}} \underset{\ S, S' \sim \mathcal{D}^m\ }{\mathbb{E}} \left[\sup_{h\in \mathcal{H}}
+\frac{1}{m}\left|\sum_{i=1}^m \sigma_i(\ell(h,z_i) -
+\ell(h,z_i'))\right|\right]\\
+&amp;= \underset{\ S, S' \sim \mathcal{D}^m\ }{\mathbb{E}} \left[\underset{\sigma \sim
+U_{\pm}^m}{\mathbb{E}} \max_{h\in \mathcal{H}}
+\underbrace{\frac{1}{m}\left|\sum_{i=1}^m \sigma_i(\ell(h,z_i) -
+\ell(h,z_i'))\right|}_{\theta_h}\right]
+\end{align*}\]</span> Call the braced term <span class="math inline">\(\theta_h\)</span>. Since <span class="math inline">\(\mathbb{E}[\theta_h] = 0\)</span> is the average of independent variables, Hoeffding’s implies that for all <span class="math inline">\(\rho &gt; 0\)</span>, <span class="math display">\[\mathbb{P}\big[|\theta_h|&gt; \rho\big] \leq 2 \exp(-2 m\rho^2).\]</span> Applying union bound implies <span class="math display">\[\mathbb{P}\left[\max_{h \in \mathcal{H}_C}|\theta_h|&gt; \rho\right] \leq
+2|\mathcal{H}_C| \exp(-2 m\rho^2).\]</span> Using Lemma A.2 below, this implies Equation (6). ☐</p>
+<h3 id="aside">Aside</h3>
+<p><strong>Lemma A.1.</strong> Let <span class="math inline">\(m,d\)</span> be two positive integers such that <span class="math inline">\(d \leq m-2\)</span>. Then, <span class="math display">\[\sum_{k=0}^d \binom{m}{k} \leq \left(\frac{em}{d}\right)^d.\]</span> See text for proof; note also that it uses Stirling’s formula.</p>
+<p><strong>Lemma A.2.</strong> Let <span class="math inline">\(X\)</span> be a random variable and <span class="math inline">\(x' \in \mathbb{R}\)</span> be a scalar. Assume that there exists <span class="math inline">\(a &gt; 0\)</span> and <span class="math inline">\(b \geq e\)</span> such that for all <span class="math inline">\(t \geq 0\)</span>, we have <span class="math inline">\(\mathbb{P}\big[|X - x'| &gt; t\big] \leq  2be^{-t^2/a^2}\)</span>. Then, <span class="math display">\[\mathbb{E}\big[|X - x'|\big] \leq a(2 + \sqrt{\log b}).\]</span></p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Note 1.</strong> In the statistical setting, we assume an upper limit in how many samples <span class="math inline">\(m\)</span> we see. Then, bounds are shown by exhibiting distributions for which such a limited sample size will fail to reduce error. If we want to take a complexity view, though, the limit is in the number of computations. This should give rise to a sample complexity bound lower than that given by PAC learning (a PAC learning algorithm is computable).</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Note that we assume that <span class="math inline">\(\sqrt{d \log (2em/d)} \geq 4\)</span> for simplicity.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
   </section>
 
 </article>

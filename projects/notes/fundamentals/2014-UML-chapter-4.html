@@ -47,6 +47,9 @@
 
   <section>
     <p>Shai Shalev-Shwartz &amp; Shai Ben-David, <a href="http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/">Understanding Machine Learning</a></p>
+<ul>
+<li><a href="./2014-UML-chapter-5.html">next chapter</a>: No Free Lunch and Error Decomposition</li>
+</ul>
 <h2 id="summary">Summary</h2>
 <p><strong>Notation:</strong> <span class="math inline">\(\mathcal{H}\)</span> is a <em>hypothesis class</em> on the domain <span class="math inline">\(Z\)</span>, with loss function <span class="math inline">\(\ell\)</span> and distribution <span class="math inline">\(\mathcal{D}\)</span>. Denote the <em>empirical risk</em> of a hypothesis <span class="math inline">\(h \in \mathcal{H}\)</span> on a sample <span class="math inline">\(S  \subset Z\)</span> by <span class="math inline">\(L_S(h)\)</span> and the <em>true risk</em> by <span class="math inline">\(L_\mathcal{D}(h)\)</span>. Let <span class="math inline">\(h^*\)</span> be the <em>target hypothesis</em>, minimizing <span class="math inline">\(L_D\)</span>. Let <span class="math inline">\(h_S\)</span> be the <em>empirical risk minimizer</em>, <span class="math inline">\(\mathrm{ERM}(S)\)</span>.</p>
 <p><strong>Definition 1.</strong> A training set <span class="math inline">\(S\)</span> is called <em><span class="math inline">\(\epsilon\)</span>-representative</em> if the empirical risk <span class="math inline">\(L_S\)</span> is always within <span class="math inline">\(\epsilon\)</span> of the true risk <span class="math inline">\(L_\mathcal{D}\)</span>: <span class="math display">\[\forall h \in \mathcal{H}, |L_S(h) - L_\mathcal{D}(h)| \leq
