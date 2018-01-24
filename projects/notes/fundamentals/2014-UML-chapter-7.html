@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Understanding Machine Learning (Chapter 7)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Understanding Machine Learning (Chapter 7)</h1>
+  
+
+  <section class="date_posted">
+    Posted on January 23, 2018
+  </section>
+
+  <section>
+    <p>Shai Shalev-Shwartz &amp; Shai Ben-David, <a href="http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/">Understanding Machine Learning</a></p>
+<ul>
+<li><a href="./2014-UML-chapter-6.html">previous chapter</a>: VC dimension</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>This chapter generalizes ERM to SRM (structural risk minimization); instead of viewing hypothesis class as just a combinatorial object (i.e. a set), SRM provides a framework to encode priors and structure into the hypothesis class. As a result, we no longer view hypotheses <em>uniformly</em> (in the sense that we can have priors on <span class="math inline">\(\mathcal{H}\)</span> that aren’t uniform, and in the sense that different <span class="math inline">\(h \in \mathcal{H}\)</span> have different ‘learnability’ properties).</p>
+<p><strong>Definition 1.</strong> A hypothesis class <span class="math inline">\(\mathcal{H}\)</span> is <em>nonuniformly learnable</em> if there exists a learning algorithm, <span class="math inline">\(A\)</span>, and a function <span class="math inline">\(m_\mathcal{H}^\textrm{NUL}: (0,1)^2 \times \mathcal{H} \to  \mathbb{N}\)</span> such that, for every <span class="math inline">\(\epsilon, \delta \in (0,1)\)</span> and for every <span class="math inline">\(h \in \mathcal{H}\)</span>, if <span class="math inline">\(m \geq  m_\mathcal{H}^\textrm{NUL}(\epsilon, \delta, h)\)</span>, then for every distribution <span class="math inline">\(\mathcal{D}\)</span>, with probability at least <span class="math inline">\(1 - \delta\)</span> over the choice of <span class="math inline">\(S \sim \mathcal{D}^m\)</span>, it holds that: <span class="math display">\[L_\mathcal{D}(A(S)) \leq L_\mathcal{D}(h) + \epsilon.\]</span></p>
+<p>In PAC learning, the sample complexity is independent of the hypothesis; thus nonuniform learnability is a relaxation of agnostic PAC learnability.</p>
+<p><strong>Lemma 2.</strong> If <span class="math inline">\(\mathcal{H} = \bigcup_{n \in \mathbb{N}}  \mathcal{H}_n\)</span>, where each <span class="math inline">\(\mathcal{H}_n\)</span> has the uniform convergence property, then <span class="math inline">\(\mathcal{H}\)</span> is nonuniformly learnable.</p>
+<p><strong>Theorem 3.</strong> <span class="math inline">\(\mathcal{H}\)</span> is nonuniformly learnable if and only if it is a countable union of hypothesis classes with the uniform convergence property.</p>
+<p><em>Proof of Theorem.</em> If <span class="math inline">\(\mathcal{H}\)</span> is nonuniformly learnable, for fixed <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(\delta\)</span>, consider the collection <span class="math inline">\(\mathcal{H}_n\)</span> of hypothesis learnable using sample size less than <span class="math inline">\(n\)</span> for each <span class="math inline">\(n \in \mathbb{N}\)</span>. Then, <span class="math inline">\(\mathcal{H} = \bigcup_{n \in  \mathbb{N}} \mathcal{H}_n\)</span>. The reverse direction is immediate from Lemma 2. ☐</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1.</strong> What does a nonuniformly learnable hypothesis class look like? Obviously, as a result of Theorem 3 from above, it must be an uncountable union of hypothesis classes. But that itself is not sufficient, for how do we know that it cannot be written in another way as a countable union of uniformly learnable subclasses?</p>
+<p>It seems that at first glance, if <span class="math inline">\(\mathcal{X}\)</span> is uncountable, then the hypothesis class <span class="math inline">\(\{0,1\}^\mathcal{X}\)</span> of all possible functions is nonuniformly learnable. But in this case, a more fundamental problem occurs, where not all functions are measurable. In which case, <span class="math inline">\(L_\mathcal{D}(h)\)</span> may not be well-defined. (?? what about when <span class="math inline">\(\mathcal{X}\)</span> is countably infinite??)</p>
+<p>So perhaps the largest possible hypothesis class is all measurable functions. How could one prove whether or not this is nonuniformly learnable?</p>
+<p><strong>Note 2.</strong> Perhaps we could instead think of the collection of all possible distributions…approximation with respect to this? c.f. approximating measurable functions with simple functions.</p>
+<p><strong>Further reading:</strong></p>
+<ul>
+<li><a href="https://arxiv.org/abs/1504.00134">Brian 2015</a>: From Haar to Lesbegue via domain theory. (To answer question whether the Cantor space with the Haar measure is “equivalent” (?) to the unit interval <span class="math inline">\([0,1]\)</span> with the Lebesgue measure; thus, this can produce a Vitali set on the Cantor space).</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
