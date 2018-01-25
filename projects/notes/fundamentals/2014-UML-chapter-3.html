@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Understanding Machine Learning (Chapter 3)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Understanding Machine Learning (Chapter 3)</h1>
+  
+
+  <section class="date_posted">
+    Posted on January 24, 2018
+  </section>
+
+  <section>
+    <p>Shai Shalev-Shwartz &amp; Shai Ben-David, <a href="http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/">Understanding Machine Learning</a></p>
+<ul>
+<li><a href="./2014-UML-chapter-4.html">next chapter</a>: Learning via Uniform Convergence</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>In this chapter, PAC learning is formally defined.</p>
+<p><strong>Definition 1 (Realizable PAC learning).</strong> A (realizable) hypothesis class <span class="math inline">\(\mathcal{H}\)</span> is PAC learnable if there exists an algorithm <span class="math inline">\(A\)</span> such that for all <span class="math inline">\(\epsilon, \delta \in (0,1)\)</span>, if we draw sufficiently many i.i.d. samples <span class="math inline">\(S\)</span>, then for every distribution <span class="math inline">\(\mathcal{D}\)</span> over <span class="math inline">\(\mathcal{X}\)</span> and for all labeling function <span class="math inline">\(f :  \mathcal{X} \to \{0,1\}\)</span>, the algorithm returns a hypothesis <span class="math inline">\(h =  A(S)\)</span> such that with probability <span class="math inline">\(1 - \delta\)</span>, <span class="math inline">\(L_{(\mathcal{D},f)}(h) \leq \epsilon\)</span>.</p>
+<p>The minimal numver of samples required <span class="math inline">\(m_\mathcal{H}(\epsilon,\delta)\)</span> given an <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(\delta\)</span> is called the <em>sample complexity</em>.</p>
+<p>We can generalize by removing the realizability assumption, leading to <em>agnostic PAC learning</em> (i.e. it is not guaranteed that there exists some hypothesis in <span class="math inline">\(\mathcal{H\)</span>} that can obtain zero risk. In this setting, we consider a distribution <span class="math inline">\(\mathcal{D}\)</span> over the product <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>, where <span class="math inline">\(\mathcal{X}\)</span> is the instance space and <span class="math inline">\(\mathcal{Y}\)</span> is the label set. Samples are drawn from this distribution, and in general, it is not necessarily the case that each instance <span class="math inline">\(x\)</span> corresponds with only one label <span class="math inline">\(y\)</span>.</p>
+<p>The risk is then defined: <span class="math display">\[L_\mathcal{D}(h) = \underset{(x,y) \sim
+\mathcal{D}}{\mathbb{P}}[h(x) \ne y].\]</span> It follows that the optimal classifier is defined to be: <span class="math display">\[f_\mathcal{D}(x) = \begin{cases}
+1 &amp; \mathbb{P}[y = 1 | x] \geq 1/2 \\
+0 &amp; \textrm{o.w.}
+\end{cases}\]</span> This is called the <em>Bayes optimal predictor</em>. However, it is not always possible to compute this predictor, especially if we do not know what the distribution <span class="math inline">\(\mathcal{D}\)</span> is.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Note 1.</strong> Here, ‘knowledge’ about the relationship between <span class="math inline">\(\mathcal{X}\)</span> and <span class="math inline">\(\mathcal{Y}\)</span> is encoded into a distribution <span class="math inline">\(\mathcal{D}\)</span> over <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. The learner accesses knowledge through finite i.i.d. samples from that distribution.</p>
+<p>From this framework, the question of generalizability is fundamentally about the relationship between the empirical and the true distribution. That is, given that we have a finite amount of knowledge on <span class="math inline">\(\mathcal{X}\times \mathcal{Y}\)</span> (i.e. the empirical distribution), can we ensure that there is a bound on how different the behavior is with respect to the true distribution?</p>
+<p>You might ask, the behavior according to what? It is important to note we only about the behavior facilitated through the hypothesis class H. So ultimately, we have two questions to answer: what are the relevant properties on D over <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>? and what are the relevant properties of H? so that we may prove generalization bounds.</p>
+<p><strong>Note 2.</strong> This theory seems limited because it only allows for i.i.d. samples <span class="math inline">\(S\)</span> from <span class="math inline">\(\mathcal{D}\)</span>. Thus, ruling out analysis on active learning algorithms. Furthermore, knowledge is understood distributionally, which also limits the theory. Sort of in the sense that a hidden Markov process behind cannot be discovered.</p>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
