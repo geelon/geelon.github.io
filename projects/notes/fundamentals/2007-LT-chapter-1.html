@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Learning Theory, an approximation viewpoint (Chapter 1)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Learning Theory, an approximation viewpoint (Chapter 1)</h1>
+  
+
+  <section class="date_posted">
+    Posted on July 28, 2018
+  </section>
+
+  <section>
+    <p>Felipe Cucker &amp; Ding Xuan Zhou, <a href="http://www.cambridge.org/gb/academic/subjects/computer-science/pattern-recognition-and-machine-learning/learning-theory-approximation-theory-viewpoint">Learning Theory: an approximation viewpoint</a></p>
+<ul>
+<li><a href="./2007-LT-chapter-2.html">next chapter</a>: Basic Hypothesis Spaces</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>This chapter introduces the standard statistical learning framework and discusses a number of ways to decompose generalization error.</p>
+<h3 id="notation">Notation</h3>
+<p>In the following, we let:</p>
+<ul>
+<li><span class="math inline">\(X\)</span> is a compact metric space, <span class="math inline">\(Y = \mathbb{R}^k\)</span></li>
+<li><span class="math inline">\(Z = X \times Y\)</span> with Borel probability measure <span class="math inline">\(\rho\)</span></li>
+</ul>
+<p>We also denote by <span class="math inline">\(\rho(y|x)\)</span> the <em>conditional probability measure</em> on <span class="math inline">\(Y\)</span>. We also have <span class="math inline">\(\rho_X\)</span> as the <em>marginal probability measure</em> on <span class="math inline">\(X\)</span>. That is, if <span class="math inline">\(\pi: X \times Y \to X\)</span> is the projection, then <span class="math display">\[\begin{equation*}\rho_X(S) = \rho(\pi^{-1}(S)).\end{equation*}\]</span> Fubini’s theorem states that if <span class="math inline">\(\phi: X \times Y \to \mathbb{R}\)</span> is integrable, then: <span class="math display">\[\begin{equation*}
+\int_{X \times Y} \phi(x,y) \ d\rho = \int_X \left(\int_Y \phi(x,y)
+\ d\rho(y|x)\right) \ d\phi_X.\end{equation*}\]</span> To make notation more concise, we write: <span class="math display">\[\begin{align*}
+\mathbb{E}_Z[\phi(x,y)] &amp;:= \int_Z \phi(x,y) \ d\rho,\\
+\mathbb{E}_Y[\phi(x,y)|x] &amp;:= \int_Y \phi(x,y) \ d\rho(y|x),\\
+\mathbb{E}_X[f(x)] &amp;:= \int_X f(x) \ d\rho_X.
+\end{align*}\]</span></p>
+<h3 id="the-formal-setting">The Formal Setting</h3>
+<p><strong>Definition 1.</strong> The <em>generalization error</em> (alsk called <em>error</em> or <em>risk</em>) of a function <span class="math inline">\(f: X \to Y\)</span> is defined as: <span class="math display">\[\mathrm{err}(f) := \mathbb{E}_Z \left[\big(f(x) -
+  y\big)^2\right].\]</span></p>
+<p>The goal is to find the <span class="math inline">\(f\)</span> that minimizes <span class="math inline">\(\mathrm{err}(f)\)</span>. To do this, define <span class="math inline">\(f_\rho:X \to Y\)</span> to be the <em>regression function</em> or the <span class="math inline">\(L^2\)</span> <em>regressor</em> as: <span class="math display">\[f_\rho(x) = \mathbb{E}_Y[y| x ].\]</span> The value <span class="math inline">\(f_\rho(x)\)</span> is just the average value of <span class="math inline">\(y\)</span> on <span class="math inline">\(\{x\} \times Y\)</span>. We assume that <span class="math inline">\(f_\rho\)</span> is bounded. This function is the <em>Bayes estimator</em> in the sense that it minimizes <span class="math inline">\(\mathrm{err}(f)\)</span>. In fact, we can prove something stronger:</p>
+<p><strong>Proposition 2.</strong> For every <span class="math inline">\(f: X \to Y\)</span>, <span class="math display">\[\mathrm{err}(f) = \mathbb{E}_X \left[ \big(f(x) -
+f_\rho(x)\big)^2\right]  + \mathrm{err}(f_\rho).\]</span></p>
+<p><em>Proof.</em> We can decompose the error of <span class="math inline">\(f\)</span> as: <span class="math display">\[\begin{align*}
+\mathrm{err}(f) &amp;= \mathbb{E}_Z \left[\big(f(x) - f_\rho(x) +
+f_\rho(x) - y\big)^2\right]\\
+&amp;= \mathbb{E}_Z \left[\big(f(x) - f_\rho(x)\big)^2 + 2 \big(f(x) -
+f_\rho(x)\big)\big(f_\rho(x) - y\big) +\big(f_\rho(x) - y\big)^2\right].
+\end{align*}\]</span> So we just need to show that the expectation of <span class="math inline">\(2 \big(f(x) - f_\rho(x)\big)\big(f_\rho(x) - y\big)\)</span> is zero. Indeed, because <span class="math inline">\(f(x) - f_\rho(x)\)</span> is constant in <span class="math inline">\(Y\)</span>, Fubini’s gives us: <span class="math display">\[\begin{equation*}\mathbb{E}_X\bigg[2\big(f(x) - f_\rho(x)\big) \cdot
+\mathbb{E}_Y\left[ f_\rho(x) - y \ \big|\ x\right]\bigg] =
+\mathbb{E}_X \big[2\big(f(x) - f_\rho(x)\big) \cdot 0\big] = 0.
+\end{equation*}\]</span> This proves the desired equation. ☐</p>
+<p>Not only does this show that <span class="math inline">\(f_\rho\)</span> obtains is the best possible classifier, we can rephrase the goal of learning as finding the best possible approximator of <span class="math inline">\(f_\rho\)</span> using random samples from <span class="math inline">\(Z\)</span>.</p>
+<p>Let <span class="math inline">\(\mathbf{z} = (z_1, \dotsc, z_m) \in Z^m\)</span> be <span class="math inline">\(m\)</span> samples drawn independently from <span class="math inline">\(Z\)</span> according to <span class="math inline">\(\rho\)</span>. Then, we define the <em>empirical mean</em> of a random variable <span class="math inline">\(\xi\)</span> on <span class="math inline">\(Z\)</span> by: <span class="math display">\[\hat{\mathbb{E}}_\mathbf{z} (\xi) := \frac{1}{m} \sum_{i=1}^m
+\xi(z_i).\]</span> And so, we can define the <em>empirical error</em> or the <em>empirical risk</em> of <span class="math inline">\(f\)</span> using the sample <span class="math inline">\(\mathbf{z}\)</span> as: <span class="math display">\[\widehat{\mathrm{err}}_\mathbf{z}(f) :=
+\hat{\mathbb{E}}_\mathbf{z}\left[\big(f(x) - y\big)^2\right] =
+\frac{1}{m} \sum_{i=1}^m \big(f(x_i) - y_i\big)^2.\]</span></p>
+<h3 id="hypothesis-space">Hypothesis Space</h3>
+<p>Learning occurs over a <em>hypothesis space</em>, a subset <span class="math inline">\(\mathcal{H} \subset \mathscr{C}(X)\)</span> of the continuous functions on <span class="math inline">\(X\)</span>. We work with the <span class="math inline">\(L^\infty\)</span>-norm, <span class="math display">\[\begin{equation*} ||f||_\infty = \sup_{x \in X}
+|f(x)|. \end{equation*}\]</span> The hypothesis spaces studied in this book tends to be compact, infinite-dimensional subsets of <span class="math inline">\(\mathscr{C}(X)\)</span>. We also consider closed balls in finite-dimensional subspaces and whole linear spaces.</p>
+<p>The <em>target function</em> <span class="math inline">\(f_\mathcal{H}\)</span> is the function <span class="math inline">\(f \in \mathcal{H}\)</span> that minimizes the error: <span class="math display">\[f_\mathcal{H} := \mathrm{arg\ min}_{f \in \mathcal{H}} \mathbb{E}_Z
+\left[\big(f(x) - y \big)^2\right].\]</span> By Proposition 2, the optimizer of <span class="math inline">\(\mathrm{err}(f)\)</span> over <span class="math inline">\(f \in \mathcal{H}\)</span>, by Proposition 2, is also an optimizer of: <span class="math display">\[f_\mathcal{H} = \mathrm{arg\ min}_{f\in \mathcal{H}}
+\mathbb{E}_X\left[\big(f - f_\rho\big)^2\right].\]</span> However, we cannot optimize over <span class="math inline">\(\mathrm{err}(f)\)</span> directly, since we don’t know the distribution <span class="math inline">\(\rho\)</span>. But we can sample from the distribution and optimize for the empirical error.</p>
+<p>The <em>empirical target function</em> using a collection of random samples <span class="math inline">\(\mathbf{z} \in Z^m\)</span> is similarly defined to be the optimizer of the empirical error: <span class="math display">\[f_\mathbf{z} := f_{\mathcal{H},\mathbf{z}} := \mathrm{arg\ min}_{f
+\in \mathcal{H}} \frac{1}{m} \sum_{i=1}^m \left[f(x_i) -
+y_i\right]^2.\]</span> This function in <span class="math inline">\(\mathcal{H}\)</span> is also called the <em>empirical risk minimizer</em> of <span class="math inline">\(\mathcal{H}\)</span>.</p>
+<p>We now need guarantees on the existence of the optimizers <span class="math inline">\(f_\mathcal{H}\)</span> and <span class="math inline">\(f_\mathbf{z}\)</span> and bounds on how different the empirical target function is from the actual target function. To show existence, we first show that <span class="math inline">\(\mathrm{err}\)</span> and <span class="math inline">\(\widehat{\mathrm{err}}_\mathbf{z}\)</span> are continuous on <span class="math inline">\(\mathcal{H}\)</span> with the <span class="math inline">\(L^\infty\)</span>-norm. And by our assumption that <span class="math inline">\(\mathcal{H}\)</span> is compact, optimizers exist.</p>
+<p><strong>Lemma 3.</strong> Let <span class="math inline">\(f_1, f_2\)</span> satisfy <span class="math inline">\(|f_i(x) - y| \leq M\)</span> almost everywhere in <span class="math inline">\(Z\)</span>. Then both of: <span class="math display">\[\begin{align*}
+    \big|\ \mathrm{err}(f_1) - \mathrm{err}(f_2)\ \big| \quad \textrm{
+  and }\quad    \big|\ \widehat{\mathrm{err}}_\mathbf{z}(f_1) -
+  \widehat{\mathrm{err}}_\mathbf{z}(f_2)\ \big|
+  \end{align*}\]</span> are less than <span class="math inline">\(2 M ||f_1 - f_2||_\infty\)</span>.</p>
+<p><em>Proof.</em> Notice that we can decompose <span class="math inline">\(\big(f_1(x) - y\big)^2 -  \big(f_2(x) - y \big)^2\)</span> into: <span class="math display">\[\begin{equation*}
+ \big(f_1(x) + f_2(x) - 2y\big) \big(f_1(x) - f_2(x)\big).
+ \end{equation*}\]</span> This implies: <span class="math display">\[\begin{align*}
+   \left|\mathrm{err}(f_1) - \mathrm{err}(f_2)\right| &amp;= \left| \int_Z
+ \big(f_1(x) - y\big)^2 -  \big(f_2(x) - y \big)^2 \ d\rho \right| \\
+ &amp;=\left|\int_Z
+ \big(f_1(x) + f_2(x) - 2y\big) \big(f_1(x) - f_2(x)\big) \
+ d\rho\right|\\
+ &amp;\leq \int_Z \big|f_1(x) + f_2(x) - 2y\big| \cdot ||f_1 -
+ f_2||_\infty \ d\rho\\
+ &amp;\leq 2M ||f_1 - f_2||_\infty.
+ \end{align*}\]</span> A similar calculation shows the same for the empirical error. ☐</p>
+<p>Further note that the bound for the empirical error requires <span class="math inline">\(|| \cdot ||_\infty\)</span> as a condition. In contrast, a weaker condition that is say, distribution-dependent, may still give the same result for the true error. In any case, this lemma implies that <span class="math inline">\(\mathrm{err}\)</span> and <span class="math inline">\(\widehat{\mathrm{err}}_\mathbf{z}\)</span> are continuous.</p>
+<h3 id="sample-approximation-and-generalization-errors">Sample, Approximation, and Generalization Errors</h3>
+<p>Given any function <span class="math inline">\(f\)</span>, we saw earlier that <span class="math inline">\(\mathrm{err}(f)\)</span> is always lower bounded by <span class="math inline">\(\mathrm{err}(f_\rho)\)</span>. And so, we call their difference the <em>excess generalization error</em>: <span class="math display">\[\mathrm{err}(f) - \mathrm{err}(f_\rho).\]</span></p>
+<p>However, given a hypothesis class <span class="math inline">\(\mathcal{H}\)</span>, the minimum attainable error may be greater than <span class="math inline">\(\mathrm{err}(f_\rho)\)</span>. In particular, the error of any <span class="math inline">\(f \in \mathcal{H}\)</span> is lower bounded by the best-in-class <span class="math inline">\(f_\mathcal{H}\)</span>. We can say that our model <span class="math inline">\(\mathcal{H}\)</span> will always incur an <em>approximation error</em>, <span class="math display">\[\mathrm{err}(\mathcal{H}) := \mathrm{err}(f_\mathcal{H}).\]</span></p>
+<p>And so, given <span class="math inline">\(f_\mathbf{z}\)</span>, we can decompose its error into a sum of the <em>sample/estimation error</em> and the <em>approximation error</em>:: <span class="math display">\[\mathrm{err}(f_\mathbf{z}) = \underbrace{\mathrm{err}(f_\mathbf{z})
+-\mathrm{err}(f_\mathcal{H})}_{\textrm{estimation error}} +
+\underbrace{\mathrm{err}(f_\mathcal{H})}_{\textrm{approximation error}}.\]</span> This decomposition highlights the <strong>bias-variance problem</strong>, described as follows.</p>
+<p>When our hypothesis space <span class="math inline">\(\mathcal{H}\)</span> is small, then the approximation error may be very large; this contributes to the <em>bias</em>. However, when <span class="math inline">\(\mathcal{H}\)</span> is large, then it may be possible to attain a very low excess generalization error. However, the same number of samples <span class="math inline">\(\mathbf{z}\)</span> may have large estimation error; there is much more <em>variance</em> of the sample error. When bias is large, we tend to <em>underfit</em> the sample data, while a large variance lets us <em>overfit</em> sample data.</p>
+<p>In the following chapters, we’ll see that under certain condition of <span class="math inline">\(\rho\)</span> and <span class="math inline">\(\mathcal{H}\)</span>, the excess generalization error may approach zero as the number samples tend to infinity. The sort of bounds <span class="math inline">\(B(m, \mathcal{H})\)</span> we might hope for are:<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<ul>
+<li>error bound: <span class="math inline">\(\mathrm{err}(f_\mathbf{z}) \leq  \widehat{\mathrm{err}}_\mathbf{z}(f_\mathbf{z}) + B(m, \mathcal{H})\)</span></li>
+<li>error bound relative to best in class: <span class="math inline">\(\mathrm{err}(f_\mathbf{z})  \leq \mathrm{err}(f_\mathcal{H}) + B(m, \mathcal{H})\)</span></li>
+<li>error bound relative to Bayes risk: <span class="math inline">\(\mathrm{err}(f_\mathbf{z}) \leq  \mathrm{err}(f_\rho) + B(m,\mathcal{H})\)</span>.</li>
+</ul>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>[<a href="https://mitpress.mit.edu/books/introduction-computational-learning-theory">Kearns Vazirani 1994</a>] An Introduction to Computational Learning Theory, a standard reference to PAC learning.</li>
+<li>[<a href="http://www.kyb.mpg.de/fileadmin/user_upload/files/publications/pdfs/pdf2819.pdf">Bosquet Boucheron Lugosi 2004</a>] Introduction to Statistical Learning Theory.</li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>this classification of error bounds is from (Bosquet Boucheron Lugosi 2004), see Further Reading.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
