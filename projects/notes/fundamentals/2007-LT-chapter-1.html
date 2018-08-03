@@ -71,7 +71,7 @@
 <p>The goal is to find the <span class="math inline">\(f\)</span> that minimizes <span class="math inline">\(\mathrm{err}(f)\)</span>. To do this, define <span class="math inline">\(f_\rho:X \to Y\)</span> to be the <em>regression function</em> or the <span class="math inline">\(L^2\)</span> <em>regressor</em> as: <span class="math display">\[f_\rho(x) = \mathbb{E}_Y[y| x ].\]</span> The value <span class="math inline">\(f_\rho(x)\)</span> is just the average value of <span class="math inline">\(y\)</span> on <span class="math inline">\(\{x\} \times Y\)</span>. We assume that <span class="math inline">\(f_\rho\)</span> is bounded. This function is the <em>Bayes estimator</em> in the sense that it minimizes <span class="math inline">\(\mathrm{err}(f)\)</span>. In fact, we can prove something stronger:</p>
 <p><strong>Proposition 2.</strong> For every <span class="math inline">\(f: X \to Y\)</span>, <span class="math display">\[\mathrm{err}(f) = \mathbb{E}_X \left[ \big(f(x) -
 f_\rho(x)\big)^2\right]  + \mathrm{err}(f_\rho).\]</span></p>
-<p><em>Proof.</em> We can decompose the error of <span class="math inline">\(f\)</span> as: <span class="math display">\[\begin{align*}
+<em>Proof.</em> We can decompose the error of <span class="math inline">\(f\)</span> as: <span class="math display">\[\begin{align*}
 \mathrm{err}(f) &amp;= \mathbb{E}_Z \left[\big(f(x) - f_\rho(x) +
 f_\rho(x) - y\big)^2\right]\\
 &amp;= \mathbb{E}_Z \left[\big(f(x) - f_\rho(x)\big)^2 + 2 \big(f(x) -
@@ -79,7 +79,10 @@ f_\rho(x)\big)\big(f_\rho(x) - y\big) +\big(f_\rho(x) - y\big)^2\right].
 \end{align*}\]</span> So we just need to show that the expectation of <span class="math inline">\(2 \big(f(x) - f_\rho(x)\big)\big(f_\rho(x) - y\big)\)</span> is zero. Indeed, because <span class="math inline">\(f(x) - f_\rho(x)\)</span> is constant in <span class="math inline">\(Y\)</span>, Fubini’s gives us: <span class="math display">\[\begin{equation*}\mathbb{E}_X\bigg[2\big(f(x) - f_\rho(x)\big) \cdot
 \mathbb{E}_Y\left[ f_\rho(x) - y \ \big|\ x\right]\bigg] =
 \mathbb{E}_X \big[2\big(f(x) - f_\rho(x)\big) \cdot 0\big] = 0.
-\end{equation*}\]</span> This proves the desired equation. ☐</p>
+\end{equation*}\]</span> This proves the desired equation.
+<div align="right">
+☐
+</div>
 <p>Not only does this show that <span class="math inline">\(f_\rho\)</span> obtains is the best possible classifier, we can rephrase the goal of learning as finding the best possible approximator of <span class="math inline">\(f_\rho\)</span> using random samples from <span class="math inline">\(Z\)</span>.</p>
 <p>Let <span class="math inline">\(\mathbf{z} = (z_1, \dotsc, z_m) \in Z^m\)</span> be <span class="math inline">\(m\)</span> samples drawn independently from <span class="math inline">\(Z\)</span> according to <span class="math inline">\(\rho\)</span>. Then, we define the <em>empirical mean</em> of a random variable <span class="math inline">\(\xi\)</span> on <span class="math inline">\(Z\)</span> by: <span class="math display">\[\hat{\mathbb{E}}_\mathbf{z} (\xi) := \frac{1}{m} \sum_{i=1}^m
 \xi(z_i).\]</span> And so, we can define the <em>empirical error</em> or the <em>empirical risk</em> of <span class="math inline">\(f\)</span> using the sample <span class="math inline">\(\mathbf{z}\)</span> as: <span class="math display">\[\widehat{\mathrm{err}}_\mathbf{z}(f) :=
@@ -100,7 +103,7 @@ y_i\right]^2.\]</span> This function in <span class="math inline">\(\mathcal{H}\
   and }\quad    \big|\ \widehat{\mathrm{err}}_\mathbf{z}(f_1) -
   \widehat{\mathrm{err}}_\mathbf{z}(f_2)\ \big|
   \end{align*}\]</span> are less than <span class="math inline">\(2 M ||f_1 - f_2||_\infty\)</span>.</p>
-<p><em>Proof.</em> Notice that we can decompose <span class="math inline">\(\big(f_1(x) - y\big)^2 -  \big(f_2(x) - y \big)^2\)</span> into: <span class="math display">\[\begin{equation*}
+<em>Proof.</em> Notice that we can decompose <span class="math inline">\(\big(f_1(x) - y\big)^2 -  \big(f_2(x) - y \big)^2\)</span> into: <span class="math display">\[\begin{equation*}
  \big(f_1(x) + f_2(x) - 2y\big) \big(f_1(x) - f_2(x)\big).
  \end{equation*}\]</span> This implies: <span class="math display">\[\begin{align*}
    \left|\mathrm{err}(f_1) - \mathrm{err}(f_2)\right| &amp;= \left| \int_Z
@@ -111,7 +114,10 @@ y_i\right]^2.\]</span> This function in <span class="math inline">\(\mathcal{H}\
  &amp;\leq \int_Z \big|f_1(x) + f_2(x) - 2y\big| \cdot ||f_1 -
  f_2||_\infty \ d\rho\\
  &amp;\leq 2M ||f_1 - f_2||_\infty.
- \end{align*}\]</span> A similar calculation shows the same for the empirical error. ☐</p>
+ \end{align*}\]</span> A similar calculation shows the same for the empirical error.
+<div align="right">
+☐
+</div>
 <p>Further note that the bound for the empirical error requires <span class="math inline">\(|| \cdot ||_\infty\)</span> as a condition. In contrast, a weaker condition that is say, distribution-dependent, may still give the same result for the true error. In any case, this lemma implies that <span class="math inline">\(\mathrm{err}\)</span> and <span class="math inline">\(\widehat{\mathrm{err}}_\mathbf{z}\)</span> are continuous.</p>
 <h3 id="sample-approximation-and-generalization-errors">Sample, Approximation, and Generalization Errors</h3>
 <p>Given any function <span class="math inline">\(f\)</span>, we saw earlier that <span class="math inline">\(\mathrm{err}(f)\)</span> is always lower bounded by <span class="math inline">\(\mathrm{err}(f_\rho)\)</span>. And so, we call their difference the <em>excess generalization error</em>: <span class="math display">\[\mathrm{err}(f) - \mathrm{err}(f_\rho).\]</span></p>

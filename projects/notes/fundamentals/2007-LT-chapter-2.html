@@ -42,13 +42,14 @@
   
 
   <section class="date_posted">
-    Posted on July 29, 2018
+    Posted on July 30, 2018
   </section>
 
   <section>
     <p>Felipe Cucker &amp; Ding Xuan Zhou, <a href="http://www.cambridge.org/gb/academic/subjects/computer-science/pattern-recognition-and-machine-learning/learning-theory-approximation-theory-viewpoint">Learning Theory: an approximation viewpoint</a></p>
 <ul>
 <li><a href="./2007-LT-chapter-1.html">previous chapter</a>: The Framework of Learning</li>
+<li><a href="./2007-LT-chapter-3.html">next chapter</a>: Estimating the Sample Error</li>
 </ul>
 <h2 id="summary">Summary</h2>
 <h3 id="review-of-mathematics">Review of Mathematics</h3>
@@ -83,9 +84,12 @@
 <p>Moreover, <span class="math inline">\(\mathcal{H}_K\)</span> consists of continuous functions and the inclusion <span class="math inline">\(I_K: \mathcal{H}_K \to \mathscr{C}(X)\)</span> is bounded with <span class="math inline">\(||I_K|| \leq \mathbf{C}_K\)</span>.</p>
 <p><em>Proof.</em> Let <span class="math inline">\(H_0\)</span> be the span of <span class="math inline">\(\{K_x : x \in X\}\)</span>. Define the inner product on the generators by <span class="math inline">\(\langle K_x, K_t\rangle =  K(x,t)\)</span>, and extend by linearity. Because <span class="math inline">\(K\)</span> is symmetric and positive semidefinite, this defines an inner product on <span class="math inline">\(H_0\)</span>.</p>
 <p>Define <span class="math inline">\(\mathcal{H}_K\)</span> as the completion of <span class="math inline">\(H_0\)</span> with the norm induced by this inner product, and this <span class="math inline">\(\mathcal{H}_K\)</span> satisfies the three above conditions. By construction, <span class="math inline">\(\mathcal{H}_K\)</span> is unique.</p>
-<p>To see that elements of <span class="math inline">\(\mathcal{H}_K\)</span> are continuous, consider: <span class="math display">\[|f(x)| = |\langle K_x, f\rangle_{\mathcal{H}_K}| \leq
+To see that elements of <span class="math inline">\(\mathcal{H}_K\)</span> are continuous, consider: <span class="math display">\[|f(x)| = |\langle K_x, f\rangle_{\mathcal{H}_K}| \leq
  ||f||_{\mathcal{H}_K} \sqrt{K(x,x)}.\]</span> This implies <span class="math display">\[||f||_\mathrm{\infty}  \leq \mathbf{C}_K\cdot
- ||f||_{\mathcal{H}_K}.\]</span> This shows that <span class="math inline">\(||I_K||_\mathrm{op} \leq \mathbf{C}_K\)</span> and so, convergence in <span class="math inline">\(||\cdot ||_{\mathcal{H}_K}\)</span> implies convergence in <span class="math inline">\(||\cdot ||_\infty\)</span>. And as <span class="math inline">\(f \in \mathcal{H}_K\)</span> is the limit of linear combinations of continuous functions <span class="math inline">\(K_x\)</span>, <span class="math inline">\(f\)</span> is continuous. ☐</p>
+ ||f||_{\mathcal{H}_K}.\]</span> This shows that <span class="math inline">\(||I_K||_\mathrm{op} \leq \mathbf{C}_K\)</span> and so, convergence in <span class="math inline">\(||\cdot ||_{\mathcal{H}_K}\)</span> implies convergence in <span class="math inline">\(||\cdot ||_\infty\)</span>. And as <span class="math inline">\(f \in \mathcal{H}_K\)</span> is the limit of linear combinations of continuous functions <span class="math inline">\(K_x\)</span>, <span class="math inline">\(f\)</span> is continuous.
+<div align="right">
+☐
+</div>
 <p><strong>Definition 8.</strong> The Hilbert space <span class="math inline">\(\mathcal{H}_K\)</span> in the previous theorem is called a <em>reproducing kernel Hilbert space</em> (RKHS), where property (3) is called the <em>reproducing property</em>.</p>
 <h3 id="examples-mercer-kernels">Examples Mercer Kernels</h3>
 <p><strong>Example 9.</strong> Let <span class="math inline">\(X = \{x \in \mathbb{R}^n : ||x|| \leq R\}\)</span>. The <em>dot product kernel</em> is a function <span class="math inline">\(K: X \times X \to \mathbb{R}\)</span> with: <span class="math display">\[K(x,y) = \sum_{i=1}^\infty a_d (x \cdot y)^d,\]</span> where <span class="math inline">\(a_d \geq 0\)</span> and <span class="math inline">\(\sum a_d R^{2d} &lt; \infty\)</span>.</p>
@@ -100,18 +104,27 @@
 <h3 id="hypothesis-space-associated-with-an-rkhs">Hypothesis space associated with an RKHS</h3>
 <p>Here, we show that if <span class="math inline">\(K\)</span> is a Mercer kernel, and <span class="math inline">\(X\)</span> is a compact metric space, then closed balls of <span class="math inline">\(\mathcal{H}_K\)</span> are compact in <span class="math inline">\(\mathscr{C}(X)\)</span>. First, we need that it is closed:</p>
 <p><strong>Lemma 14.</strong> Let <span class="math inline">\(K\)</span> be a Mercer kernel on a compact metric space <span class="math inline">\(X\)</span>, and <span class="math inline">\(\mathcal{H}_K\)</span> be its RKHS. For all <span class="math inline">\(R &gt; 0\)</span>, the ball <span class="math inline">\(B_R := \{f \in \mathcal{H}_K : ||f||_K \leq R\}\)</span> is a closed subset of <span class="math inline">\(\mathscr{C}(X)\)</span>.</p>
-<p><em>Proof.</em> Let <span class="math inline">\(\{f_n\} \subset B_R\)</span> converge to some <span class="math inline">\(f \in  \mathscr{C}(X)\)</span>. Since <span class="math inline">\(B_R\)</span> is weakly compact, there is a subsequence <span class="math inline">\(\{f_{n_k}\}\)</span> such that: <span class="math display">\[\lim_{k \to \infty} \langle f_{n_k}, g\rangle_K = \langle
- \tilde{f}, g\rangle_K\]</span> for all <span class="math inline">\(g \in \mathcal{H}_K\)</span>. In particular, letting <span class="math inline">\(g = K_x\)</span> for all <span class="math inline">\(x \in X\)</span> shows that <span class="math inline">\(\tilde{f}(x) = f(x)\)</span> for all <span class="math inline">\(x\)</span>; thus, <span class="math inline">\(f\)</span> is in <span class="math inline">\(B_R\)</span>.</p>
+<em>Proof.</em> Let <span class="math inline">\(\{f_n\} \subset B_R\)</span> converge to some <span class="math inline">\(f \in  \mathscr{C}(X)\)</span>. Since <span class="math inline">\(B_R\)</span> is weakly compact, there is a subsequence <span class="math inline">\(\{f_{n_k}\}\)</span> such that: <span class="math display">\[\lim_{k \to \infty} \langle f_{n_k}, g\rangle_K = \langle
+ \tilde{f}, g\rangle_K\]</span> for all <span class="math inline">\(g \in \mathcal{H}_K\)</span>. In particular, letting <span class="math inline">\(g = K_x\)</span> for all <span class="math inline">\(x \in X\)</span> shows that <span class="math inline">\(\tilde{f}(x) = f(x)\)</span> for all <span class="math inline">\(x\)</span>; thus, <span class="math inline">\(f\)</span> is in <span class="math inline">\(B_R\)</span>.
+<div align="right">
+☐
+</div>
 <p>Now, we show that <span class="math inline">\(\mathcal{H}_K\)</span> is equicontinuous.</p>
 <p><strong>Lemma 15.</strong> Let <span class="math inline">\(K\)</span> be a Mercer kernel on a compact metric space <span class="math inline">\(X\)</span>, and <span class="math inline">\(\mathcal{H}_K\)</span> be its RKHS. For all <span class="math inline">\(R &gt; 0\)</span>, the inclusion <span class="math inline">\(I_K(B_R)\)</span> is equicontinuous.</p>
-<p><em>Proof.</em> Since <span class="math inline">\(K: X \times X \to \mathbb{R}\)</span> is continuous, and <span class="math inline">\(X  \times X\)</span> is compact, <span class="math inline">\(K\)</span> is uniformly continuous. In particular, for all <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists <span class="math inline">\(\delta &gt; 0\)</span> such that for all <span class="math inline">\(x  \in X\)</span>, if <span class="math inline">\(y, y' \in X\)</span> where <span class="math inline">\(d(y, y') \leq \delta\)</span>: <span class="math display">\[\begin{align*}
+<em>Proof.</em> Since <span class="math inline">\(K: X \times X \to \mathbb{R}\)</span> is continuous, and <span class="math inline">\(X  \times X\)</span> is compact, <span class="math inline">\(K\)</span> is uniformly continuous. In particular, for all <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists <span class="math inline">\(\delta &gt; 0\)</span> such that for all <span class="math inline">\(x  \in X\)</span>, if <span class="math inline">\(y, y' \in X\)</span> where <span class="math inline">\(d(y, y') \leq \delta\)</span>: <span class="math display">\[\begin{align*}
    |K(x,y) - K(x,y')| &lt; \epsilon.
  \end{align*}\]</span> Let <span class="math inline">\(f \in B_R\)</span>, and <span class="math inline">\(y,y'\)</span> as before. Then: <span class="math display">\[\begin{align*}
    |f(y) - f(y')| \leq |\langle f, K_y - K_{y'}\rangle_K| \leq ||f||_K
  ||K_y - K_{y'}||_K \leq R \sqrt{ 2 \epsilon}.
- \end{align*}\]</span></p>
+ \end{align*}\]</span>
+<div align="right">
+☐
+</div>
 <p>Arzelá-Ascoli now implies:</p>
-<p><strong>Proposition 16.</strong> Let <span class="math inline">\(K\)</span> be a Mercer kernel on a compact metric space <span class="math inline">\(X\)</span>, and <span class="math inline">\(\mathcal{H}_K\)</span> be its RKHS. Then closed balls <span class="math inline">\(B_R\)</span> in <span class="math inline">\(\mathcal{H}_K\)</span> are compact in <span class="math inline">\(\mathscr{C}(X)\)</span>.</p>
+<strong>Proposition 16.</strong> Let <span class="math inline">\(K\)</span> be a Mercer kernel on a compact metric space <span class="math inline">\(X\)</span>, and <span class="math inline">\(\mathcal{H}_K\)</span> be its RKHS. Then closed balls <span class="math inline">\(B_R\)</span> in <span class="math inline">\(\mathcal{H}_K\)</span> are compact in <span class="math inline">\(\mathscr{C}(X)\)</span>.
+<div align="right">
+☐
+</div>
 <p>And so, these are compact metric hypothesis spaces.</p>
 <p><strong>Example 17.</strong> We’ll consider more deeply a specific dot product kernel on <span class="math inline">\(\mathbb{R}^{n+1}\)</span>: <span class="math display">\[K(x,y) = \langle x,y\rangle^d.\]</span> First, we need some notation. Let <span class="math inline">\(\alpha = (a_0, \dotsc, a_n)\)</span> be nonnegative integers such that <span class="math inline">\(|\alpha| := \sum \alpha_i = d\)</span>. These are multi-indices, where given an <span class="math inline">\(x \in S^n \subset \mathbb{R}^{n+1}\)</span> in the unit <span class="math inline">\(n\)</span>-sphere, we let <span class="math inline">\(x^\alpha\)</span> denote the value <span class="math inline">\(x_0^{\alpha_0}\dotsm x_n^{\alpha_n}\)</span>. We also define the multinomial coefficients as:<br />
 <span class="math display">\[C_\alpha^d = \frac{d!}{\alpha_1! \dotsm \alpha_n!},\]</span> so that if <span class="math inline">\(x, y \in \mathbb{R}^{n+1}\)</span>, then: <span class="math display">\[\begin{align*}
@@ -146,7 +159,10 @@
 <p>If <span class="math inline">\(\mathcal{H} = I_K(B_R)\)</span> as in Proposition 16, then computing the empirical target function <span class="math inline">\(f_\mathbf{z}\)</span> is a convex optimization problem.</p>
 <p>Let <span class="math inline">\(\mathcal{H}_{K,\mathbf{z}}\)</span> be the subspace of <span class="math inline">\(\mathcal{H}_K\)</span> spanned by <span class="math inline">\(\{K_{x_1}, \dotsc, K_{x_m}\}\)</span>. Let <span class="math inline">\(\Pi: \mathcal{H}_K \to \mathcal{H}_{K,\mathbf{z}}\)</span> be the orthogonal projection onto the subspace. Then, the following shows that a minimizer of the empirical risk is contained in the span of <span class="math inline">\(K_{x_i}\)</span>:</p>
 <p><strong>Proposition 20.</strong> Let <span class="math inline">\(B \subset \mathcal{H}_K\)</span>. If <span class="math inline">\(f \in  \mathcal{H}_K\)</span> is a minimizer of <span class="math inline">\(\widehat{\mathrm{err}}_\mathbf{z}\)</span> over <span class="math inline">\(B\)</span>, then <span class="math inline">\(\Pi f\)</span> minimizes <span class="math inline">\(\widehat{\mathrm{err}}_\mathbf{z}\)</span> over <span class="math inline">\(\Pi (B)\)</span>.</p>
-<p><em>Proof.</em> If <span class="math inline">\(f \in \mathcal{H}_K\)</span> is a minimizer of empirical error, then <span class="math inline">\(f\)</span> decomposes into the sum of orthogonal components—the component <span class="math inline">\(\Pi f\)</span> contained in the span of <span class="math inline">\(K_{x_i}\)</span> and those perpendicular. And since: <span class="math display">\[f(x_i) = \langle f, K_{x_i}\rangle,\]</span> the orthogonal component has no contribution, implying <span class="math display">\[\Pi f(x_i) = f(x_i).\]</span> It follows <span class="math inline">\(\Pi f\)</span> also minimizes the empirical error. ☐</p>
+<em>Proof.</em> If <span class="math inline">\(f \in \mathcal{H}_K\)</span> is a minimizer of empirical error, then <span class="math inline">\(f\)</span> decomposes into the sum of orthogonal components—the component <span class="math inline">\(\Pi f\)</span> contained in the span of <span class="math inline">\(K_{x_i}\)</span> and those perpendicular. And since: <span class="math display">\[f(x_i) = \langle f, K_{x_i}\rangle,\]</span> the orthogonal component has no contribution, implying <span class="math display">\[\Pi f(x_i) = f(x_i).\]</span> It follows <span class="math inline">\(\Pi f\)</span> also minimizes the empirical error.
+<div align="right">
+☐
+</div>
 <p>So, when <span class="math inline">\(B = B_R\)</span>, a solution will be of the form <span class="math inline">\(f_\mathbf{z} = \sum_{i=1}^m c_i^* K_{x_i}\)</span>, minimizing: <span class="math display">\[\begin{align*}
 \min \ &amp; \ \frac{1}{m} \sum_{j=1}^m \left(\sum_{i=1}^m c_i K(x_i,x_j)
 - y_j\right)^2\\

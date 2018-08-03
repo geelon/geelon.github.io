@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Geometric median and robust estimation in Banach spaces</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Geometric median and robust estimation in Banach spaces</h1>
+  
+
+  <section class="date_posted">
+    Posted on August  1, 2018
+  </section>
+
+  <section>
+    <p>Minsker, Stanislav, et al. “Scalable and robust Bayesian inference via the median posterior.” International conference on machine learning. 2014.</p>
+<h2 id="summary">Summary</h2>
+<p>Given <span class="math inline">\(n\)</span> points in a Banach space, any point that is close to a constant fraction of those points must also be close to the geometric median of those points (this is formally stated below). Using this fact, suppose we have <span class="math inline">\(n\)</span> empirical estimates <span class="math inline">\(\hat{\mu}_1,\dotsc, \hat{\mu}_n\)</span>, and that we know that with high probability, each of these are within some distance of the true value. Then, their median will also be within some distance of the true value with high probability. The median of these means has a tighter concentration bound around the true parameter.</p>
+<h3 id="problem-introduction">Problem Introduction</h3>
+<p>Let <span class="math inline">\(\mu = \mathbb{E}X\)</span> be the mean for a real-valued random variable with bounded variance. Using i.i.d. samples <span class="math inline">\(X_1,\dotsc, S_n\)</span>, can we construct and estimator <span class="math inline">\(\hat{\mu}\)</span> of the mean such that for all <span class="math inline">\(t &gt; 0\)</span>: <span class="math display">\[\mathrm{Pr}\big[|\hat{\mu} - \mu| &gt; t\big] \leq
+\mathrm{exp}\left(- \frac{C n^2 t^2}{\mathrm{Var}(X)}\right),\]</span> where <span class="math inline">\(C\)</span> is some absolute constant, without any addition assumption on the distribution?</p>
+<p>It turns out that this is possible, as seen, for example in [Oliveira Lerasle 2011], where the sample is split into <span class="math inline">\(V \approx t\)</span> blocks, the sample mean is computed on each of those blocks, and the median of the means is the new empirical estimator. Similar ideas were used in [Alon Matias Szegedy 1996] to approximate frequency moments of a sequence and [Bubeck Cesa-Bianchi Lugosi 2013] in multi-armed bandits. Another approach in [Cantoni 2012] used PAC-Bayesian truncation.</p>
+<p>This paper extends the <em>median of the means</em> to general Banach spaces.</p>
+<h3 id="geometric-median">Geometric Median</h3>
+<p>If <span class="math inline">\(\mathbb{X}\)</span> is a Banach space with norm <span class="math inline">\(|| \cdot ||\)</span> and probability measure <span class="math inline">\(\mu\)</span>, the <em>geometric median</em> (or <em>Fermat-Weber point</em>) is any <span class="math inline">\(x_*\)</span> that satisfies:<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> <span class="math display">\[x_* = \mathrm{arg\ min}_{y \in \mathbb{X}} \int_{\mathbb{X}} (||y -
+x|| - ||x||) \ \mu (\mathrm{d}x).\]</span> A sufficient condition on <span class="math inline">\(\mathbb{X}\)</span> for the existence of a geometric median:<span class="math inline">\(\mathbb{X}\)</span> is separable and reflexive. We’ll assume this from now on.</p>
+<p>The particular geometric median we’re interested in corresponds to the empirical measure on a collection <span class="math inline">\(x_1, \dotsc, x_k \in \mathbb{X}\)</span>, where: <span class="math display">\[x_* = \mathrm{med}(x_1,\dotsc, x_k) := \mathrm{arg\ min}_{y \in
+\mathbb{X}} \sum_{j=1}^k ||y - x_j||.\]</span> If <span class="math inline">\(\mathbb{X}\)</span> is strictly convex, then <span class="math inline">\(x_*\)</span> is unique unless <span class="math inline">\(x_1, \dotsc, x_n\)</span> are collinear.</p>
+<p>The geometric result we need is:</p>
+<strong>Lemma 1.</strong> Let <span class="math inline">\(x_1, \dotsc, x_k \in \mathbb{X}\)</span> and let <span class="math inline">\(x_*\)</span> be their geometric median. Let <span class="math inline">\(\alpha \in (0, \frac{1}{2})\)</span> and <span class="math inline">\(r &gt;  0\)</span>. There is a constant <span class="math inline">\(C_\alpha\)</span> such that whenever a point <span class="math inline">\(z \in  \mathbb{X}\)</span> is far away from the geometric median: <span class="math display">\[||x_* - z|| &gt; C_\alpha r,\]</span> then it must be far from an <span class="math inline">\(\alpha\)</span>-fraction of <span class="math inline">\(x_1,\dotsc, x_k\)</span>: <span class="math display">\[||x_j - z|| &gt; r\]</span> for <span class="math inline">\(j \in J \subset [k]\)</span> where <span class="math inline">\(|J| &gt; \alpha k\)</span>. Respectively, when <span class="math inline">\(\mathbb{X}\)</span> is a general Banach space or a Hilbert space: <span class="math display">\[C_\alpha = \frac{2(1 - \alpha)}{1 - 2\alpha} \quad \quad C_\alpha
+  = (1 - \alpha) \sqrt{\frac{1}{1 - 2 \alpha}}.\]</span>
+<div align="right">
+☐
+</div>
+<p><em>Note:</em> in the Banach space case, <span class="math inline">\(C_\alpha \to 2\)</span> as <span class="math inline">\(\alpha \to 0\)</span>, while in the Hilbert space case, <span class="math inline">\(C_\alpha \to 1\)</span> as <span class="math inline">\(\alpha \to 0\)</span>.</p>
+<h3 id="boosting-the-confidence">Boosting the Confidence</h3>
+<p><strong>Theorem 2.</strong> Assume that <span class="math inline">\(\mu \in \mathbb{X}\)</span> is a parameter of interest and <span class="math inline">\(\hat{\mu}_1,\dotsc, \hat{\mu}_k \in \mathbb{X}\)</span> are a collection of independent estimators of <span class="math inline">\(\mu\)</span>. Fix <span class="math inline">\(\alpha \in  (0,\frac{1}{2})\)</span>. Let <span class="math inline">\(0 &lt; p &lt; \alpha\)</span> and <span class="math inline">\(\epsilon &gt; 0\)</span>. If for all estimators <span class="math inline">\(\hat{\mu}_j\)</span>, <span class="math display">\[\mathrm{Pr}\big[||\hat{\mu}_j - \mu || &gt; \epsilon \big]\leq p,\]</span> then setting <span class="math inline">\(\hat{\mu} = \mathrm{med}(\hat{\mu}_1,\dotsc, \hat{\mu}_k)\)</span>, <span class="math display">\[\mathrm{Pr}\big[||\hat{\mu} - \mu|| &gt;
+  C_\alpha \epsilon\big] \leq \mathrm{exp}\big(- k \cdot
+  \mathrm{KL}(\alpha || p)\big)\]</span></p>
+<em>Proof.</em> If the event <span class="math inline">\(||\hat{\mu} - \mu|| &gt; C_\alpha \epsilon\)</span> occurs, then Lemma 1 shows that for at least <span class="math inline">\(\alpha k\)</span> estimators <span class="math inline">\(\hat{\mu}_j\)</span>, the event <span class="math inline">\(||\hat{\mu}_j - \mu || &gt;  \epsilon\)</span> occurred. In contrast, the expected number of estimators for which this occurs is at most <span class="math inline">\(pk\)</span>. A Chernoff bound gives: <span class="math display">\[\mathrm{Pr}\left[\sum_{j=1}^k \mathbf{1} \left\{||\hat{\mu}_j
+ - \mu|| &gt; \epsilon\right\} \geq \alpha k \right] \leq \mathrm{exp} \big( - k \cdot
+ \mathrm{KL}(\alpha || p)\big).\]</span>
+<div align="right">
+☐
+</div>
+<p><em>Note:</em> if the error <span class="math inline">\(\epsilon\)</span> is of the form: <span class="math display">\[\begin{equation*}
+\epsilon = \textrm{approximation error} + \textrm{random error},
+\end{equation*}\]</span> the first term is constant while the second term goes to zero as sample size increases. The difference, therefore, between the Hilbert space and Banach space cases may be large, since <span class="math inline">\(C_\alpha \to 1\)</span> in the first case, while <span class="math inline">\(C_\alpha \to 2\)</span> in the second (as <span class="math inline">\(\alpha \to 0\)</span>).</p>
+<h3 id="example-mean-in-hilbert-space">Example: Mean in Hilbert Space</h3>
+<p>Our setting here is as follows: let <span class="math inline">\(X_1, \dotsc, X_n\)</span> where <span class="math inline">\(n \geq 2\)</span> be i.i.d. estimators in a Hilbert space with mean <span class="math inline">\(\mu = \mathbb{E} X\)</span>. Let <span class="math inline">\(\Sigma = \mathbb{E}[(X - \mu)\otimes (X - \mu)]\)</span> be the covariance operator, with <span class="math inline">\(\mathrm{tr}(\Sigma) &lt; \infty\)</span>.</p>
+<strong>Corollary 3.</strong> Let <span class="math inline">\(0 &lt; \delta &lt; 1\)</span> be the confidence parameter. Divide <span class="math inline">\(X_1,\dotsc, X_n\)</span> into <span class="math inline">\(k(\delta)\)</span> disjoint groups of size <span class="math inline">\(\left\lfloor \frac{n}{k}\right\rfloor\)</span> each,<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> and let <span class="math inline">\(\hat{\mu}_j\)</span> be the mean of each of these groups. Let the median be <span class="math inline">\(\hat{\mu} = \mathrm{med}(\hat{\mu}_1,\dotsc,  \hat{\mu}_k)\)</span>. Then, <span class="math display">\[\mathrm{Pr}\left[||\hat{\mu} - \mu || \geq 11
+  \sqrt{\frac{\mathrm{tr}(\Sigma)\log \frac{7}{5\delta}}{n}}\right]
+  \leq \delta.\]</span>
+<div align="right">
+☐
+</div>
+<p>When the Hilbert space is <span class="math inline">\(\mathbb{R}^D\)</span>, then would could also perform a coordinate-wise median means. As we then need to union bound over the coordinates, this leads to a dimension-dependent bound.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>It turns out that the coordinate-wise bound outpeforms the geometric median bound for low dimensional Euclidean space. However, as <span class="math inline">\(D\)</span> becomes very large (or even infinite), the latter bound becomes trivial. In particular, the former becomes better as <span class="math inline">\(D \geq 165\)</span> (when <span class="math inline">\(\delta = 0.1)\)</span>, and as <span class="math inline">\(D \geq 15,806\)</span> (when <span class="math inline">\(\delta = 0.01\)</span>).</p>
+<h3 id="example-robust-pca">Example: Robust PCA</h3>
+<p>Our setting is as follows: let <span class="math inline">\(X, X_1, \dotsc, X_n \in \mathbb{R}^D\)</span> be i.i.d. random vectors, where <span class="math inline">\(\mu = \mathbb{E}X\)</span>, <span class="math inline">\(\Sigma = \mathbb{E}[(X - \mu)(X - \mu)^T]\)</span>, and <span class="math inline">\(\mathbb{E}||X||^4 &lt; \infty\)</span>. For simplicity, assume that all positive eigenvalues of <span class="math inline">\(\Sigma\)</span> have algebraic multiplicity 1. Let the eigenvalues be <span class="math inline">\(\lambda_1 &gt; \lambda_2 \geq \dotsm \geq 0\)</span>. PCA estimates the projection operator <span class="math inline">\(\mathrm{Proj}_m\)</span> onto the subspace spanned by the top <span class="math inline">\(m\)</span> eigenvectors.</p>
+<p>There are examples of robust PCA the rely on certain assumptions about the data. For example, if the observations are contained in a low-dimensional subspace, with noise corruption, the low-dimensional subspace may be recovered exactly, see [Candès Li Ma Wright 2011] and [Zhang Lerman 2014].</p>
+<p>When there are no further assumptions about the data, then the geometric median approach computes sample covariances. We can group the data <span class="math inline">\(X_1,\dotsc, X_n\)</span> into <span class="math inline">\(k\)</span> groups, and calculate the sample covariances within each of those groups: <span class="math display">\[\hat{\Sigma}_j := \frac{1}{|G_j|} \sum_{i\in G_j} X_i X_i^T.\]</span> The median <span class="math inline">\(\hat{\Sigma}\)</span> is computed with respect to the Frobenius norm. For example, if we suppose the data is zero-centered (i.e. <span class="math inline">\(\mu = 0\)</span>). Let <span class="math inline">\(Y_j = X_j X_j^T\)</span>. Then, <span class="math display">\[\begin{equation*}\mathbb{E}||Y - \mathbb{E}Y||^2 = \mathbb{E}||X|^4
+- \mathrm{tr}(\Sigma^2)\end{equation*}.\]</span> Plugging directly into Corollary 3, we get: <span class="math display">\[\begin{equation*}
+\mathrm{Pr}\left[||\Sigma - \hat{\Sigma}||_F \geq 11
+\sqrt{\frac{\left[\mathbb{E}||X||^4 - \mathrm{tr}(\Sigma^2)\right]
+\log \frac{7}{5 \delta}}{n}} \right]\leq \delta. 
+\end{equation*}\]</span></p>
+<p>From <span class="math inline">\(\hat{\Sigma}\)</span>, we can estimate the projection operator. To pass a bound on the covariance estimate to the projection operator estimate, we rely on the Davis-Kahan perturbation theorem:</p>
+<strong>Theorem 4 (Davis-Kahan, see [Zwald Blanchard 2005]).</strong> Let <span class="math inline">\(A\)</span> be a symmetric positive Hilbert-Schmidt operator<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> on a Hilbert space. Suppose it has nonzero eigenvalues <span class="math inline">\(\lambda_1 &gt; \lambda_2 &gt;  \dotsm\)</span>, and let <span class="math inline">\(\Delta_m = \lambda_m - \lambda_{m+1}\)</span> be the <span class="math inline">\(m\)</span>th eigengap. Let <span class="math inline">\(B\)</span> another symmetric operator such that <span class="math inline">\(||B|| &lt;  \frac{\Delta_m}{4}\)</span> and <span class="math inline">\((A+B)\)</span> is still positive. Let <span class="math inline">\(\mathrm{Proj}^A_m\)</span> be the projector onto the first <span class="math inline">\(m\)</span> eigendirections of <span class="math inline">\(A\)</span>, and similarly for <span class="math inline">\(A+B\)</span>. Then: <span class="math display">\[|| \mathrm{Proj}^A_m - \mathrm{Proj}^{A+B}_m|| \leq \frac{2
+  ||B||}{\Delta_m}.\]</span>
+<div align="right">
+☐
+</div>
+<p>Explicitly, if the eigengap <span class="math inline">\(\Delta_m = \lambda_m - \lambda_{m+1}\)</span> of <span class="math inline">\(\Sigma\)</span> is sufficiently large, so that <span class="math inline">\(\Delta_m &gt; 4 ||\Sigma - \hat{\Sigma}||_F\)</span>, then Davis-Kahan directly yields a bound between <span class="math inline">\(\widehat{\mathrm{Proj}}_m\)</span> and <span class="math inline">\(\mathrm{Proj}_m\)</span>. That is:</p>
+<strong>Corollary 5.</strong> Let <span class="math inline">\(X_1,\dotsc, X_n\)</span> be drawn from a zero-mean distribution with covariance <span class="math inline">\(\Sigma\)</span>, and <span class="math inline">\(\mathbb{E}||X||^4 &lt; \infty\)</span>. Let: <span class="math display">\[\epsilon = 11 \sqrt{\frac{\left[\mathbb{E}||X||^4 -
+\mathrm{tr}(\Sigma^2)\right] \log \frac{7}{5 \delta}}{n}}.\]</span> If the eigengap of <span class="math inline">\(\Sigma\)</span> is at least <span class="math inline">\(\Delta_m &gt; 4 \epsilon\)</span>, then: <span class="math display">\[\mathrm{Pr}\left[||\widehat{\mathrm{Proj}}_m -
+\mathrm{Proj}_m||_\mathrm{F} \geq \frac{2 \epsilon}{\Delta_m} \right] \leq \delta.\]</span>
+<div align="right">
+☐
+</div>
+<p><em>Note:</em> when the data is not zero-centered, then the covariance estimator is: <span class="math display">\[\begin{equation*}
+\hat{\Sigma}_j = \frac{1}{|G_j|} \sum_{i \in G_j} (X_i - \mu)(X_i -
+\mu)^T - (\mu - \hat{\mu}_j)(\mu - \hat{\mu}_j)^T,
+\end{equation*}\]</span> which gives a worse dependence with <span class="math inline">\(\epsilon = O\left(\frac{\mathrm{tr}(\Sigma) \log \frac{1}{\delta}}{n}\right)\)</span>; see paper for details.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1.</strong> If <span class="math inline">\(\hat{\mu}_1,\dotsc, \hat{\mu}_k\)</span> are a collection of i.i.d. estimators with <span class="math inline">\(\mu = \mathbb{E}\hat{\mu}_i\)</span>, is <span class="math inline">\(\mathrm{med}(\hat{\mu}_1,\dotsc, \hat{\mu}_k)\)</span> an unbiased estimator of <span class="math inline">\(\mu\)</span>? It seems like it should not be, for otherwise the geometric median and mean should coincide.</p>
+<p><strong>Question 2.</strong> What if instead of minimizing the ‘<span class="math inline">\(\ell^1\)</span>-median’: <span class="math display">\[\begin{equation*}
+\mathrm{arg\ min}_{y \in \mathbb{X}} \sum_{j =1}^k ||y - x_j||,
+\end{equation*}\]</span> we minimized an ‘<span class="math inline">\(\ell^p\)</span>-median’: <span class="math display">\[\begin{equation*}
+\mathrm{arg\ min}_{y \in \mathbb{X}} \sum_{j =1}^k ||y - x_j||^p.
+\end{equation*}\]</span> As <span class="math inline">\(p\)</span> takes on values between <span class="math inline">\(1\)</span> and <span class="math inline">\(\infty\)</span>, what ‘median’ do we obtain? For <span class="math inline">\(p \in (1,2)\)</span>, are there different tradeoffs? Perhaps <span class="math inline">\(C_\alpha\)</span> relaxes (so that it is easier to produce the individual estimators), while the concentration bounds are also looser (though perhaps still tighter than using all of our sample size ‘budget’ in one go). This question seems related to <span class="math inline">\(M\)</span>-estimation.</p>
+<h3 id="further-reading-and-keywords">Further Reading and Keywords</h3>
+<ul>
+<li>[<a href="https://arxiv.org/abs/1112.3914">Oliveira Lerasle 2011</a>] Robust empirical mean estimators.</li>
+<li>[<a href="https://www.tau.ac.il/~nogaa/PDFS/amsz4.pdf">Alon Matias Szegedy 1996</a>] The space complexity of approximating the frequency moments.</li>
+<li>[<a href="https://arxiv.org/abs/1209.1727">Bubeck Cesa-Bianchi, Lugosi 2013</a>] Bandits with heavy tail.</li>
+<li>[<a href="https://arxiv.org/abs/1009.2048">Catoni 2012</a>] Challenging the empirical mean and empirical variance: a deviation study.</li>
+<li>[<a href="https://www.wiley.com/en-us/Robust+Statistics%2C+2nd+Edition-p-9780470129906">Huber Ronchetti 2009</a>] <em>Robust Statistics</em>.</li>
+<li>[<a href="https://arxiv.org/pdf/0808.0657.pdf">Hubert Rousseeuw Aelst 2008</a>] High-breakdown robust multivariate methods.</li>
+<li>[<a href="https://www.jstor.org/stable/pdf/1403809.pdf">Small 1990</a>] A survey of multidimensional medians.</li>
+<li>[<a href="https://arxiv.org/pdf/0912.3599.pdf">Candès Li Ma Wright 2011</a>] Robust principal component analysis?</li>
+<li>[<a href="https://arxiv.org/abs/1112.4863">Zhang Lerman 2014</a>] A novel <span class="math inline">\(M\)</span>-estimator for robust PCA.</li>
+<li>[<a href="https://arxiv.org/pdf/1606.05225.pdf">Cohen Lee Miller 2016</a>] Geometric median in nearly linear time</li>
+<li>[<a href="http://ljk.imag.fr/membres/Laurent.Zwald/paper/Nips2005mod.pdf">Zwald Blanchard 2005</a>] On the convergence of eigenspaces in kernel principla component analysis.</li>
+<li>M-estimation</li>
+<li>U-statistic, e.g. see <a href="https://link.springer.com/content/pdf/10.1007%2F978-94-017-3515-5.pdf">Theory of U-Statistics</a></li>
+<li>Robust estimation</li>
+<li>Empirical processes</li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See [Small 1990] for a survey of other multidimensional medians.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Let <span class="math inline">\(\alpha_* = \frac{7}{18}\)</span> and <span class="math inline">\(p_* = 0.1\)</span> and <span class="math inline">\(k = \left\lfloor\frac{\log \frac{1}{\delta}}{\mathrm{KL}(\alpha_* || p_*)} \right\rfloor.\)</span><a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>A coordinate-wise median leads to the following bound: <span class="math display">\[\mathrm{Pr}\left[||\hat{\mu}_* - \mu|| \geq \frac{22}{5}
+\sqrt{\mathrm{tr}(\Sigma) \frac{\log \frac{8 D}{5\delta}}{n -
+\frac{12}{5} \log \frac{8D}{5\delta}}}\right] \leq \delta.\]</span><a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Note that the Hilbert-Schmidt norm on Euclidean space is also called the Frobenius norm.<a href="#fnref4">↩</a></p></li>
+</ol>
+</div>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
