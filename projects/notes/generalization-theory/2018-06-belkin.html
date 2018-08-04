@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>To Understand Deep Learning We Need to Understand Kernel Learning</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">To Understand Deep Learning We Need to Understand Kernel Learning</h1>
+  
+
+  <section class="date_posted">
+    Posted on August  4, 2018
+  </section>
+
+  <section>
+    <p>Mikhail Belkin, Siyuan Ma, and Soumik Mandal. “To understand deep learning we need to understand kernel learning.” 2018.</p>
+<h2 id="summary">Summary</h2>
+<p>Let <span class="math inline">\(\mathcal{H}\)</span> be the RKHS of a kernel <span class="math inline">\(K\)</span>. Let <span class="math inline">\(f \in \mathcal{H}\)</span> be any function that achieves perfect (binary) classification with margin <span class="math inline">\(t\)</span>. Then, with high probability, the norm <span class="math inline">\(||f||_\mathcal{H} = \Omega\left(\mathrm{exp}(n^{1/d})\right)\)</span> with high probability. On the other hand, most generalization bounds on kernel methods are on the order of <span class="math inline">\(O\left(\frac{||f||_\mathcal{H}^\alpha}{n^\beta}\right)\)</span>. Thus, these bounds become trivial as <span class="math inline">\(n\)</span> becomes large.</p>
+<p>Still, empirically, a function that interpolates the dataset tend to perform near optimal.</p>
+<h3 id="setup">Setup</h3>
+<p>Let <span class="math inline">\(K(\mathbf{x},\mathbf{z}) : \mathbb{R}^d \times \mathbb{R}^d \to \mathbb{R}\)</span> be a positive definite kernel. Let <span class="math inline">\(\mathcal{H}\)</span> be the corresponding RKHS. Given a dataset <span class="math inline">\(\{(\mathbf{x}_i, y_i), i = 1,\dotsc, n\}\)</span>, let <span class="math inline">\(K\)</span> be the associated kernel matrix <span class="math inline">\(K_{ij} = K(\mathbf{x}_i, \mathbf{x}_j)\)</span>. Define <span class="math inline">\(f^*\)</span> to be the <em>minimum norm interpolant</em>, <span class="math display">\[f^* = \mathrm{arg\ min}_{f \in \mathcal{H}, f(\mathbf{x}_i) = y_i}
+||f||_\mathcal{H}.\]</span> The classical representer theorem implies that <span class="math inline">\(f^*\)</span> exists (assuming <span class="math inline">\(\mathbf{x}_i \ne \mathbf{x}_j\)</span> when <span class="math inline">\(i \ne j\)</span>). In particular, <span class="math display">\[\begin{equation*}
+f^* = \sum \alpha_i^* K(\mathbf{x}_i, \cdot),
+\end{equation*}\]</span> where <span class="math inline">\((\alpha_1^*, \dotsc, \alpha_n^*) = K^{-1}(y_1,\dotsc, y_n)^T\)</span>.</p>
+<p>The function <span class="math inline">\(f^*\)</span> also minimizes <span class="math inline">\(\sum \ell(f(\mathbf{x}_i), y_i)\)</span> for any nonnegative loss function <span class="math inline">\(\ell(\tilde{y},y)\)</span> such that <span class="math inline">\(\ell(y,y) = 0\)</span>. If <span class="math inline">\(\ell\)</span> is strictly convex, then <span class="math inline">\(\mathbf{\alpha}^*\)</span> is the unique vector satisfying <span class="math display">\[\mathbf{\alpha}^* = \mathrm{arg\ min}_{\alpha \in \mathbb{R}^n}
+\sum_{i=1}^n \ell\left(\left(\sum_{j=1}^n \alpha_i K(\mathbf{x}_j,
+\mathbf{x}_i)\right), y_i\right).\]</span> Note that this allows for iterative methods to solve for <span class="math inline">\(\mathbf{\alpha}^*\)</span>, whereas a matrix inverse requres <span class="math inline">\(n^3\)</span> operations.</p>
+<p>If <span class="math inline">\(f(\cdot) = \sum \alpha_i K(\mathbf{x}_i, \cdot)\)</span> is any function in the RKHS, its norm is: <span class="math display">\[\begin{equation*}
+||f||_H^2 = \langle \mathbf{\alpha}, K \mathbf{\alpha}\rangle.
+\end{equation*}\]</span> Two kernels to consider are the smooth Gaussian kernel <span class="math inline">\(K(\mathbf{x},\mathbf{z}) = \mathrm{exp}\left(-\frac{||\mathbf{x} - \mathbf{z}||^2}{2\sigma^2}\right)\)</span> and the nonsmooth Laplacian (exponential) kernel, <span class="math inline">\(K(\mathbf{x}, \mathbf{z}) = \mathrm{exp}\left(- \frac{||\mathbf{x} - \mathbf{z}||}{\sigma}\right)\)</span>.</p>
+<h3 id="current-bounds">Current Bounds</h3>
+<p>Let <span class="math inline">\((\mathbf{x}_i, y_i) \in \Omega \times \{-1,1\}\)</span> be a labeled dataset where <span class="math inline">\(\Omega \subset \mathbb{R}^d\)</span> is a bounded domain. Let <span class="math inline">\(P\)</span> be a probability measure on <span class="math inline">\(\Omega \times \{-1,1\}\)</span>, where the Bayes classifier does not achieve zero loss.</p>
+<p><strong>Definition 1.</strong> A function <span class="math inline">\(h \in \mathcal{H}\)</span> <span class="math inline">\(t\)</span>-<em>overfits</em> the data if it achieves zero classification loss and for a fixed portion of the dataset, <span class="math inline">\(y_ih(\mathbf{x}_i) &gt; t &gt; 0\)</span>.</p>
+<p>Note that this margin condition is weaker than the interpolating condition, where we require <span class="math inline">\(h(\mathbf{x}_i) = y_i\)</span>.</p>
+<p>In the following theorem, we see that if a function <span class="math inline">\(f \in \mathcal{H}\)</span> <span class="math inline">\(t\)</span>-overfits the data (assuming that Bayes optimal classifier has nonzero loss), then <span class="math inline">\(||f||_\mathcal{H} = \Omega(\mathrm{exp}(n^{1/d}))\)</span> with high probability.</p>
+<p>This shows that as <span class="math inline">\(n\)</span> grows, the norm of <span class="math inline">\(||f||\)</span> must grow exponentially. However, generalization bounds tend to be polynomial in <span class="math inline">\(n\)</span>, and so the bounds diverge to infinity. Still, empirically, performance of interpolated classifiers remain near optimal, even with label noise.</p>
+<p><strong>Theorem 2.</strong> Let <span class="math inline">\((\mathbf{x}_i, y_i)\)</span> be data sampled from <span class="math inline">\(P\)</span> (we assume that <span class="math inline">\(y\)</span> is not a deterministic function of <span class="math inline">\(x\)</span> on a subset of non-zero measure). Then, with high probability, any <span class="math inline">\(h\)</span> that <span class="math inline">\(t\)</span>-overfits the data satisfies: <span class="math display">\[||h||_{\mathcal{H}} &gt; A e^{B n^{1/d}},\]</span> for constants <span class="math inline">\(A,B &gt; 0\)</span> depending on <span class="math inline">\(t\)</span>.</p>
+<p><em>Proof.</em> The goal will be to show that the open ball <span class="math inline">\(B_R \subset  \mathcal{H}\)</span> of radius <span class="math inline">\(R\)</span> contains no functions that <span class="math inline">\(t\)</span>-overfit the data with high probability. The proof uses a classical result on fat-shattering dimension: let <span class="math inline">\(V_\gamma(B_R)\)</span> be the fat-shattering dimension of <span class="math inline">\(B_R\)</span> with parameter <span class="math inline">\(\gamma\)</span> and let <span class="math inline">\(\ell\)</span> be the hinge loss with margin <span class="math inline">\(t\)</span>. Then, there exists <span class="math inline">\(C_1, C_2 &gt; 0\)</span> such that with high probability, for all <span class="math inline">\(f \in B_R\)</span>, <span class="math display">\[\left|\frac{1}{n} \sum_i \ell(f(\mathbf{x}_i, y_i) -
+ \mathbb{E}_P[\ell(f(\mathbf{x}), )]\right| \leq C_1 \gamma + C_2
+ \sqrt{\frac{V_\gamma(B_R)}{n}}.\]</span></p>
+If <span class="math inline">\(f\)</span> <span class="math inline">\(t\)</span>-overfits the data, then the empirical loss is zero. We can choose <span class="math inline">\(\gamma\)</span> small enough so that <span class="math inline">\(C_1 \gamma &lt;  \mathbb{E}_P[\ell(f(\mathbf{x}),y)]\)</span>, leaving a lower bound: <span class="math display">\[\begin{align*}
+ \mathbb{E}_P[\ell(f(\mathbf{x}),y)] - C_1 \gamma &lt; C_2
+ \sqrt{\frac{V_\gamma(B_R)}{n}}.\end{align*}\]</span> In short, this shows that <span class="math inline">\(n &lt; C V_\gamma(B_R)\)</span>. However, <span class="math inline">\(V_\gamma(B_R) &lt;  O\left(\log^d\left(\frac{R}{\gamma}\right)\right)\)</span>. This implies that <span class="math inline">\(R &gt; A e^{B n^{1/d}}\)</span> for some positive constants <span class="math inline">\(A,B &gt; 0\)</span>.
+<div align="right">
+☐
+</div>
+<p><strong>Remark 3.</strong> Most bounds on kernel methods are of the form: <span class="math display">\[\left|\frac{1}{n} \sum_i \ell(f(\mathbf{x}),y) -
+\mathbb{E}_P[\ell(f(\mathbf{x}), y)]\right| \leq C_1 + C_2
+\frac{||f||_\mathcal{H}^\alpha}{n^\beta},\]</span> for <span class="math inline">\(C_1, C_2, \alpha, \beta \geq 0\)</span>. Thus, the superpolynomial bound on <span class="math inline">\(||f||_\mathcal{H}\)</span> means that these bounds become trivial as <span class="math inline">\(n\)</span> becomes large.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Note 1.</strong> It is noted that “kernel machines can be viewed as linear regression in infinite dimensional RKHS’s…they can also be interpreted as two-layer neural networks with a fixed first layer.” Should understand what this means more deeply.</p>
+<p><strong>Note 2.</strong> Their optimization method is the EigenPro-SGD method. Should understand what this is.</p>
+<p><strong>Question 3.</strong> Can one apply this method and say something about bounds on other (not kernel-based) methods? They do say that it is not clear how to construct a norm for deep neural networks analogous to RKHS. A recent attempt: (Neyshabur Bhojanapalli McAllester Srebro 2017).</p>
+<p><strong>Note 4.</strong> They mention that they know of only a few non “norm-based concentration bounds” for kernel methods. These include one based on 1-nearest neighbor classification (Cover Hart 1967).</p>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>[<a href="https://ieeexplore.ieee.org/document/1053964/">Cover Hart 1967</a>] Nearest neight pattern classification.</li>
+<li>[<a href="./">Neyshabur Bhojanapalli McAllester Srebro 2017</a>] Exploring generalization in deep learning.</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
