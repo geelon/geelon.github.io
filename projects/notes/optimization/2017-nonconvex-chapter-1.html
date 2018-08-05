@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Non-convex Optimization for Machine Learning (Chapter 1)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Non-convex Optimization for Machine Learning (Chapter 1)</h1>
+  
+
+  <section class="date_posted">
+    Posted on August  5, 2018
+  </section>
+
+  <section>
+    <p>Prateek Jain &amp; Purushottam Kar, <a href="https://arxiv.org/pdf/1712.07897.pdf">Non-convex Optimization for Machine Learning</a></p>
+<ul>
+<li><a href="./2017-nonconvex-chapter-2.md">next chapter</a>: Mathematical Tools</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>The generic form of an analytic optimization problem is: <span class="math display">\[\begin{align*}
+\min_{\mathbf{x} \in\mathbb{R}^p} &amp;\quad f(\mathbf{x})\\
+\mathrm{s.t.} &amp;\quad \mathbf{x} \in \mathcal{C},
+\end{align*}\]</span> where <span class="math inline">\(f\)</span> is the <em>objective function</em> and <span class="math inline">\(\mathcal{C}\)</span> is the <em>constraint set</em>. An optimization problem is convex only if both the objective and constraint are convex.</p>
+<p><strong>Example 1 (Sparse Regression).</strong> Given a set of <span class="math inline">\(n\)</span> covariate/response pairs <span class="math inline">\((\mathbf{x}_1, y_1), \dotsc,  (\mathbf{x}_n, y_n)\)</span>, where <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^p\)</span> and <span class="math inline">\(y_i  \in \mathbb{R}\)</span>, the linear regression approach makes the modeling assumption <span class="math display">\[\begin{align*}
+  y_i = \mathbf{x}_i^\top \mathbf{w}^* + \eta_i,
+  \end{align*}\]</span> where <span class="math inline">\(\mathbf{w}^* \in \mathbb{R}^p\)</span> is the underlying linear model and <span class="math inline">\(\eta_i\)</span> is additive noise.</p>
+<p>Sometimes, we expect only a few of the <span class="math inline">\(p\)</span> features/covariates to be relevant. Other times, we are in a data-starved setting, with <span class="math inline">\(n \ll  p\)</span>. Standard statistical approaches require at least <span class="math inline">\(n \geq p\)</span> data points for consistency. The <em>sparse recovery</em> approach optimizes: <span class="math display">\[\begin{align*}
+  \hat{\mathbf{w}}_\mathrm{sp} = \mathrm{arg\ min}_{\mathbf{w}\in
+  \mathbb{R}^p} &amp; \quad \sum_{i=1}^n \left(y_i - \mathbf{x}_i^\top
+  \mathbf{w}\right)^2 \\ 
+  \mathrm{s.t.}&amp; \quad \mathbf{w} \in \mathcal{B}_0(s),
+  \end{align*}\]</span> where <span class="math inline">\(\mathcal{B}_0(s) = \{\mathbf{w} \in \mathbb{R}^p:  ||\mathbf{w}||_0 \leq s\}\)</span> is the set of vectors in <span class="math inline">\(\mathbb{R}^p\)</span> with no more than <span class="math inline">\(s\)</span> non-zero entries. Spare recovery requires <span class="math inline">\(\Omega(s\log p)\)</span> data points, compared to the <span class="math inline">\(\Omega(p)\)</span>. However, sparse recovery is NP-hard (Natarajan 1995).</p>
+<p><strong>Example 2 (Recommender Systems).</strong> Given a collection of <span class="math inline">\(m\)</span> users <span class="math inline">\(u_1,\dotsc, u_m\)</span> and <span class="math inline">\(n\)</span> items, <span class="math inline">\(a_1,\dotsc, a_n\)</span>, let <span class="math inline">\(A\)</span> be the <span class="math inline">\(m\times n\)</span> preference matrix, where <span class="math inline">\(A_{ij}\)</span> is the <span class="math inline">\(i\)</span>th user’s preference for the <span class="math inline">\(j\)</span>th item. However, there are only a small number of entries that are available; we would like to recover the remaining entries: a <em>matrix completion</em> problem.</p>
+<p>It is a common to make the structural assumption that <span class="math inline">\(A\)</span> is low-rank. Then, let <span class="math inline">\(\Omega \subset [m] \times [n]\)</span>, the set of observed entries of <span class="math inline">\(A\)</span>. Then the low-rank matrix completion problem is: <span class="math display">\[\begin{align*}
+  \hat{A}_{\mathrm{lr}} = \mathrm{arg\ min}_{X \in \mathbb{R}^{m
+  \times n}} &amp; \quad \sum_{(i,j) \in \Omega} (X_{ij} - A_{ij})^2 \\
+  \mathrm{s.t.} &amp; \quad \mathrm{rank}(X) \leq r.
+  \end{align*}\]</span> Here, the constraint is also non-convex, and the problem is also NP-hard. This problem is equivalently written as: <span class="math display">\[\begin{align*}
+  \hat{A}_\mathrm{lr} = \mathrm{arg\ min}_{\substack{U \in
+  \mathbb{R}^{m \times r} \\ V \in \mathbb{R}^{n\times r}}}
+  \sum_{(i,j) \in \Omega} \left(U_i^\top V_j - A_{ij}\right)^2. 
+  \end{align*}\]</span> Here, there are no constraints, but the objective function over the pair <span class="math inline">\((U,V)\)</span> is no longer convex.</p>
+<h3 id="approaches">Approaches</h3>
+<p>One method to tackle nonconvex problems is through <em>relaxing</em> the problem into a convex optimization problem. For example, spare regression can be relaxed to lasso regression.</p>
+<p>However, the solutions to the relaxed problem may be poor approximations to the original problem. Sometimes, the <em>relaxation gap</em> may be small or absent, with nice enough structure.</p>
+<p>Other methods attempt to solve nonconvex optimization problems directly, for example, <em>projected gradient descent</em>, <em>alternating minimization</em>, the <em>expectation-maximization</em> algorithm, and <em>stochastic optimization</em>.</p>
+<h2 id="exercises">Exercises</h2>
+<p><strong>Problem 1.</strong> <em>[Exercise 2.6]</em> Show that the set of sparse vectors <span class="math inline">\(\mathcal{B}_0(s) \subset \mathbb{R}^p\)</span> is non-convex for any <span class="math inline">\(s &lt;  p\)</span>. What happens when <span class="math inline">\(s = p\)</span>?</p>
+<p><em>When <span class="math inline">\(0 &lt; s &lt; p\)</span>, then <span class="math inline">\(\mathcal{B}_0(s)\)</span> contains the coordinate axes. The convex hull of the coordinate axes is the whole space <span class="math inline">\(\mathbb{R}^p\)</span>, so it follows that <span class="math inline">\(\mathcal{B}_0(s)\)</span> for <span class="math inline">\(0 &lt; s &lt; p\)</span> is not a convex set. When <span class="math inline">\(s = p\)</span>, then <span class="math inline">\(\mathcal{B}_0(s) =  \mathbb{R}^p\)</span>. </em></p>
+<p><strong>Problem 2.</strong> <em>[Exercise 2.7]</em> Show that <span class="math inline">\(\mathcal{B}_\mathrm{rank}(r) \subset \mathbb{R}^{n\times n}\)</span>, the set of <span class="math inline">\(n \times n\)</span> matrices with rank at most <span class="math inline">\(r\)</span>, is non-convex for any <span class="math inline">\(r &lt; n\)</span>. What happens when <span class="math inline">\(r = n\)</span>?</p>
+<p><em>This follows immediately from Problem 1, since <span class="math inline">\(\mathcal{B}_0(1) \subset \mathcal{B}_\mathrm{rank}(r)\)</span> for any <span class="math inline">\(0 &lt;  r &lt; p\)</span>. When <span class="math inline">\(r = n\)</span>, then <span class="math inline">\(\mathcal{B}_\mathrm{rank}(r) =  \mathbb{R}^{n\times n}\)</span>. </em></p>
+<p><strong>Problem 3.</strong> <em>[Exercise 3.3]</em> Show that the ratings matrix is at most rank <span class="math inline">\(r\)</span> iff for every user <span class="math inline">\(i \in [m]\)</span>, there is an associated vector <span class="math inline">\(\mathbf{u}_i \in\mathbb{R}^r\)</span> describing that user, and with every item <span class="math inline">\(j \in [n]\)</span>, there is a vector <span class="math inline">\(\mathbf{v}_i \in  \mathbb{R}^r\)</span> such that <span class="math inline">\(A_{ij} = \mathbf{u}_i^\top \mathbf{v}_j\)</span>.</p>
+<p><em>If <span class="math inline">\(A\)</span> is a rank <span class="math inline">\(r\)</span> matrix, then there is a singular value decomposition of <span class="math inline">\(A = U \Sigma V^\top\)</span>, with <span class="math inline">\(U \in \mathbb{R}^{m  \times m}\)</span>, <span class="math inline">\(V \in \mathbb{R}^{n\times n}\)</span> and <span class="math inline">\(\Sigma \in  \mathbb{R}^{m \times n}\)</span> is a diagonal where only top <span class="math inline">\(r\)</span> entries are nonzero. It follows that we can truncate the matrices, so that we’re left with <span class="math inline">\(\hat{U} \in \mathbb{R}^{m \times r}\)</span>, the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(U\)</span>, <span class="math inline">\(\hat{\Sigma} \in \mathbb{R}^{r\times r}\)</span> the top <span class="math inline">\(r\)</span> rows and columns, and <span class="math inline">\(\hat{V} \in \mathbb{R}^{n\times r}\)</span>, the first <span class="math inline">\(r\)</span> columns of <span class="math inline">\(V\)</span>. Still, we have <span class="math inline">\(A = \hat{U}  \hat{\Sigma}\hat{V}^\top\)</span>. We may let <span class="math inline">\(\mathbf{u}_i\)</span> be the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(\hat{U}\)</span>, and <span class="math inline">\(\mathbf{v}_j\)</span> be the <span class="math inline">\(j\)</span>th column of <span class="math inline">\(\hat{\Sigma}\hat{V}^\top\)</span>, so that <span class="math inline">\(A_{ij} = \mathbf{u}_i^\top  \mathbf{v}_j\)</span>.</em></p>
+<p><em>Conversely, if such <span class="math inline">\(\mathbf{u}_i\)</span> and <span class="math inline">\(\mathbf{v}_j\)</span> exist, then let <span class="math inline">\(U\)</span> be the <span class="math inline">\(m \times r\)</span> matrix whose rows are <span class="math inline">\(\mathbf{u}_i^top\)</span> and <span class="math inline">\(V\)</span> be the <span class="math inline">\(r \times n\)</span> matrix whose columns are <span class="math inline">\(\mathbf{v}_j\)</span>. The rank of either of these matrices are bounded above by <span class="math inline">\(r\)</span>, so their product <span class="math inline">\(A= UV\)</span> is also at most rank <span class="math inline">\(r\)</span>.</em></p>
+<p><strong>Problem 4.</strong> <em>[Exercise 4.1]</em> Show that the objective in the low-rank matrix completion problem: <span class="math display">\[\begin{align*}
+  \hat{A}_\mathrm{lr} = \mathrm{arg\ min}_{\substack{U \in
+  \mathbb{R}^{m \times r} \\ V \in \mathbb{R}^{n\times r}}}
+  \sum_{(i,j) \in \Omega} \left(U_i^\top V_j - A_{ij}\right)^2, 
+  \end{align*}\]</span> is not jointly convex in <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>. Show also that the objective is marginally convex in both variables.</p>
+<p><em>For simplicity, we’ll show that the problem is not jointly convex in <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> in the special case of <span class="math inline">\(m = n = 1\)</span> and <span class="math inline">\(A = 0\)</span>. The same argument easily extends to arbitrary <span class="math inline">\(m, n &gt; 0\)</span> and <span class="math inline">\(A \in  \mathbb{R}^{m\times n}\)</span>. Here, the objective simply becomes:</em> <span class="math display">\[\begin{align*}
+ \hat{A}_\mathrm{lr} = \mathrm{arg\ min}_{\mathbf{u}, \mathbf{v} \in
+ \mathbb{R}^m} &amp; \quad \left(\mathbf{u}^\top \mathbf{v}\right)^2
+ \end{align*}\]</span> <em>Let</em> <span class="math inline">\(\mathbf{e}_1 \in \mathbb{R}^m\)</span> <em>be the first basis vector. Consider two cases:</em> <span class="math display">\[\begin{align*}
+ (\mathbf{u},\mathbf{v}) &amp;= (2\mathbf{e}_1, 0)\\
+ (\mathbf{u}',\mathbf{v}') &amp;= (0, 2\mathbf{e}_1).
+ \end{align*}\]</span> <em>In both cases, their squared dot product is zero. However, their convex combination:</em> <span class="math display">\[\begin{equation*}
+ \frac{1}{2} (\mathbf{u}, \mathbf{v}) + \frac{1}{2}
+ (\mathbf{u}',\mathbf{v}') = (\mathbf{e}_1,\mathbf{e}_1)
+ \end{equation*}\]</span> <em>has positive squared dot product. Thus, the objective is not convex.</em></p>
+<p><em>In contrast, the objective is marginally convex: fixing <span class="math inline">\(V\)</span>, the function <span class="math inline">\(\left(U_i^\top V_j - A_{ij}\right)^2\)</span> is convex in <span class="math inline">\(U_i\)</span>. So, the sum over all <span class="math inline">\(i,j\)</span> is still convex in <span class="math inline">\(U\)</span>.</em></p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Note 1.</strong> This section states that “it turns out that problem structures that allow nonconvex approaches to avoid NP-hardness results are very similar to those that allow their convex relaxation counterparts to avoid distortions and a large relaxation gap”. Should understand what this means more.</p>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>[<a href="https://epubs.siam.org/doi/pdf/10.1137/S0097539792240406">Natarajan 1995</a>] Sparse Approximation Solutions to Linear Systems.</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
