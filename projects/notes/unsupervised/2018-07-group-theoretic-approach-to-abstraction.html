@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>A Group-Theoretic Approach to Abstraction, hierarchical, interpretable and task-free clustering</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">A Group-Theoretic Approach to Abstraction, hierarchical, interpretable and task-free clustering</h1>
+  
+
+  <section class="date_posted">
+    Posted on August  5, 2018
+  </section>
+
+  <section>
+    <p>Yu, Haizi, Igor Mineyev, and Lav R. Varshney. “A Group-Theoretic Approach to Abstraction: Hierarchical, Interpretable, and Task-Free Clustering.” arXiv preprint arXiv:1807.11167 (2018).</p>
+<h2 id="summary">Summary</h2>
+<p>This paper approaches abstraction through clustering. In particular, the partitioning of a space into partitions of equivalent objects.</p>
+<h3 id="mathematical-formalism">Mathematical Formalism</h3>
+<p>Let <span class="math inline">\(X\)</span> be the instance space (the set over which to form the abstraction). An <em>abstraction</em> is defined to be a partition of the space <span class="math inline">\(X / \sim\)</span> with respect to some equivalence relation <span class="math inline">\(\sim\)</span>. Note that the space <span class="math inline">\(\mathfrak{P}_X^*\)</span> of all partitions over <span class="math inline">\(X\)</span> is a poset; the <em>join</em> of two partitions is the coarsest common refinement, while the <em>meet</em> is the finest common coarsening.</p>
+<p><strong>Definition 1.</strong> An <em>abstraction universe</em> for a set <span class="math inline">\(X\)</span> is a sublattice of <span class="math inline">\(\mathfrak{P}_X^*\)</span>. An <em>abstraction join-semiuniverse</em> (resp. <em>meet-semiuniverse</em>) is a join-semilattice (resp. meet-semilattice) of <span class="math inline">\(\mathfrak{P}_X^*\)</span> (closed under joins, resp. meets). Thus, an abstraction universe is both an join-semiuniverse and meet-semiuniverse.</p>
+<p><strong>Remark 2.</strong> Let <span class="math inline">\(\mathsf{F}(X)\)</span> denote the space of permutations on <span class="math inline">\(X\)</span> (i.e. bijections from <span class="math inline">\(X\)</span> to <span class="math inline">\(X\)</span>). Let <span class="math inline">\(H \leq \mathsf{F}(X)\)</span> be any subgroup. The orbit of <span class="math inline">\(x \in X\)</span> under <span class="math inline">\(H\)</span> is the set <span class="math inline">\(Hx :=  \{h(x) : h \in H\}\)</span>. The quotient space <span class="math inline">\(X/H\)</span> is the space of abstractions that respect <span class="math inline">\(H\)</span>-symmetry or <span class="math inline">\(H\)</span>-invariance.</p>
+<p><strong>Definition 3.</strong> An <em>abstraction generating function</em> is a mapping <span class="math inline">\(\pi : \mathcal{H}_{\mathsf{F}(X)}^* \to \mathfrak{P}_X^*\)</span> where <span class="math inline">\(\mathcal{H}_{\mathsf{F}(X)}^*\)</span> is the collection of all subgroups of <span class="math inline">\(\mathsf{F}(X)\)</span>. In particular, <span class="math inline">\(\pi(H) = X/H\)</span>.</p>
+<p><strong>Proposition 4.</strong> The abstraction generating function is surjective but not necessarily injective.</p>
+<p>[See paper for additional propositions]</p>
+<h3 id="information-theory">Information Theory</h3>
+<p><strong>Definition 5.</strong> An <em>information element</em> is an equivalence class of random variables (of a common sample space) with respect to the `being informationally equivalent’ relation. An <em>information lattice</em> is a lattice of information elements, where partial order is defined by <span class="math inline">\(x \leq y \Leftrightarrow H(x|y) = 0\)</span>, where <span class="math inline">\(H\)</span> is entropy.</p>
+<h2 id="discussion">Discussion</h2>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>[<a href="https://pdfs.semanticscholar.org/f20a/51915b922c83cb91202580d4e533149c509e.pdf">Li Chong 2011</a>] On a connection between information and group lattices.</li>
+<li>[<a href="https://link.springer.com/content/pdf/10.1007/978-1-4614-7052-6.pdf">Saitta Zucker 2013</a>] <em>Abstraction in Artificial Intelligence and Complex Systems.</em></li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
