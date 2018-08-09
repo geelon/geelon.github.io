@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Nonconvex Optimization for Machine Learning (Chapter 5)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Nonconvex Optimization for Machine Learning (Chapter 5)</h1>
+  
+
+  <section class="date_posted">
+    Posted on August  8, 2018
+  </section>
+
+  <section>
+    <p>Prateek Jain &amp; Purushottam Kar, <a href="https://arxiv.org/pdf/1712.07897.pdf">Non-convex Optimization for Machine Learning</a></p>
+<ul>
+<li><a href="./2017-nonconvex-chapter-4.html">previous chapter</a>: Alternating Minimization</li>
+<li>current chapter: The EM Algorithm</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>Denote by <span class="math inline">\(f(\cdot | \theta)\)</span> or <span class="math inline">\(f_\theta(\cdot)\)</span> a parametric distribution over a domain <span class="math inline">\(\mathcal{X}\)</span>, with parameter <span class="math inline">\(\theta\)</span>. We assume that i.i.d. samples <span class="math inline">\(\mathbf{x}_1,\dotsc, \mathbf{x}_n\)</span> are sampled from an unknown distribution <span class="math inline">\(f^*\)</span>. Assume that <span class="math inline">\(f^*\)</span> belongs to a <em>parametric family</em> of distributions <span class="math inline">\(\mathcal{F} = \{f_\theta : \theta \in \Theta\}\)</span>.</p>
+<p>The goal is to recover the true parameter <span class="math inline">\(\theta^*\)</span> using only the samples. We can write the probability that we drew that data given a if the distribution were parametrized by <span class="math inline">\(\theta\)</span>: <span class="math display">\[f(\mathbf{x}_1,\dotsc, \mathbf{x}_n | \theta) = \prod_{i=1}^n
+f(\mathbf{x}_i | \theta).\]</span> So, we can define the <em>likelihood</em> of a parameter <span class="math inline">\(\theta\)</span> given our data as: <span class="math display">\[\mathcal{L}(\theta| \mathbf{x}_1,\dotsc, \mathbf{x}_n) =
+f(\mathbf{x}_1,\dotsc, \mathbf{x}_n | \theta).\]</span> The <em>maximum likelihood estimate</em> (MLE) of <span class="math inline">\(\theta^*\)</span> is just the parameter that maximizes <span class="math inline">\(\mathcal{L}\)</span>: <span class="math display">\[\hat{\theta}_\mathrm{MLE} := \mathrm{arg\ max}_{\theta \in \Theta}
+\mathcal{L}(\theta| \mathbf{x}_1,\dotsc, \mathbf{x}_n). \]</span> Other estimation techniques include <em>maximum a posteriori</em> (MAP), which incoporates a prior distribution over <span class="math inline">\(\theta\)</span>.</p>
+<p>The probabilistic model becomes more challenging with the presence of <em>latent variables</em>. For example, consider a statistical model that generates two random variables, <span class="math inline">\(Y \in \mathcal{Y}\)</span> and <span class="math inline">\(Z \in \mathcal{Z}\)</span>, from a parametric family <span class="math inline">\(\mathcal{F} = \{f_\theta = f(\cdot, \cdot| \theta): \theta \in \Theta\}\)</span>. However, we only observe <span class="math inline">\(Y\)</span> components. So, the corresponding marginal likelihood function is then: <span class="math display">\[\mathcal{L}(\theta, \mathbf{y}_1, \dotsc, \mathbf{y}_n) =
+\prod_{i=1}^n \sum_{\mathbf{z}_i \in \mathcal{Z}} f(\mathbf{y}_i,
+\mathbf{z}_i|\theta).\]</span> Notice that when expanded, this is a sum of <span class="math inline">\(|\mathcal{Z}|^n\)</span> terms, so is often NP-hard.</p>
+<h3 id="alternating-maximization">Alternating Maximization</h3>
+<p>MLE with latent variables becomes intractable; however, if we had them, then it would have been simple to find the MLE solution: <span class="math display">\[\hat{\theta}_\mathrm{MLE} = \mathrm{arg\ max}_{\theta \in \Theta}
+\log \mathcal{L}(\theta; \{(\mathbf{y}_i, \mathbf{z}_i)\}_{i=1}^n).\]</span> On the other hand, if we knew <span class="math inline">\(\theta^*\)</span>, we could also estimate the latent variables: <span class="math display">\[\hat{\mathbf{z}}_i = \mathrm{arm\ max}_{\mathbf{z} \in \mathcal{Z}}
+f(\mathbf{z} |\mathbf{y}_i ,\theta^*).\]</span> And so, we could apply a gAM-style algorithm to solve this MLE problem with latent variables:</p>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="2%" />
+<col width="80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Algorithm 1</th>
+<th></th>
+<th align="left">AltMax for Latent Variable Models (AM-LVM)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><pre><code>       Input</code></pre></td>
+<td></td>
+<td align="left">Data points <span class="math inline">\(\mathbf{y}_1,\dotsc, \mathbf{y}_n\)</span></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>      Output</code></pre></td>
+<td></td>
+<td align="left">An approximate MLE <span class="math inline">\(\hat{\theta} \in \Theta\)</span></td>
+</tr>
+<tr class="odd">
+<td align="right"><pre><code>           1</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\theta^1 \leftarrow \mathsf{INITIALIZE}()\)</span></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>           2</code></pre></td>
+<td></td>
+<td align="left"><strong>for</strong> <span class="math inline">\(t = 1, 2, \dotsc\)</span> <strong>do</strong></td>
+</tr>
+<tr class="odd">
+<td align="right"><pre><code>           3</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\quad\)</span> <strong>for <span class="math inline">\(i = 1,2, \dotsc, n\)</span> </strong>do**</td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>           4</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\quad \quad \hat{\mathbf{z}}_i^t \leftarrow \mathrm{arg\ max}_{\mathbf{z} \in \mathcal{Z}} f(\mathbf{z} |\mathbf{y}_i, \theta^t)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="right"><pre><code>           5</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\quad\)</span> <strong>end for</strong></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>           6</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\quad \theta^{t+1} \leftarrow \mathrm{arg\ max}_{\theta \in \Theta}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="right"><pre><code>           7</code></pre></td>
+<td></td>
+<td align="left"><strong>end for</strong></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>           8</code></pre></td>
+<td></td>
+<td align="left"><strong>return</strong> <span class="math inline">\(\mathbf{w}^t\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><em>At step 4, we estimate the latent variables, and at step 6, we update the parameters.</em></p>
+<p>At each time step <span class="math inline">\(t\)</span>, AM-LVM makes a “hard assignment”, each datapoint <span class="math inline">\(\mathbf{y}_i\)</span> gets assigned to one <span class="math inline">\(\mathbf{z}_i\)</span>. This is a drawback, especially when <span class="math inline">\(\mathcal{Z}\)</span> is a large space; there may be other values <span class="math inline">\(\mathbf{z}' \in \mathcal{Z}\)</span> such that <span class="math inline">\(f(\mathbf{z}'|\mathbf{y}_i, \theta^t)\)</span> is also large neglected by AM-LVM.</p>
+<h3 id="variational-lower-bound-prelude-to-em-algorithm">Variational Lower Bound: prelude to EM algorithm</h3>
+<p>Let’s consider a single sample <span class="math inline">\(\mathbf{y}\)</span>. The log-likelihood is then: <span class="math display">\[\begin{equation}
+\log \mathcal{L}(\theta | \mathbf{y}) = \log f(\mathbf{y}|\theta) =
+\log \sum_{\mathbf{z} \in \mathcal{Z}} f(\mathbf{y}, \mathbf{z} | \theta).
+\end{equation}\]</span> It is hard to work with the log of a sum; however, Jensen’s inequality gives us a way to move the log past a sum. In doing so, we might be able to give a lower bound on the log-likelihood. Recall that Jensen’s states that for any random variable <span class="math inline">\(X\)</span>:<br />
+<span class="math display">\[\begin{equation}
+\mathbb{E}\left[\log X\right] \leq \log \mathbb{E}[X]. \tag{Jensen's inequality}
+\end{equation}\]</span> Indeed, notice that for any distribution <span class="math inline">\(q(\mathbf{z})\)</span> with support over <span class="math inline">\(\mathcal{Z}\)</span>, we have: <span class="math display">\[\begin{align*}
+\log \sum_{\mathbf{z} \in\mathcal{Z}} f(\mathbf{y},\mathbf{z}|\theta)
+= \log \mathbb{E}_{\mathbf{z} \sim q} \left[\frac{f(\mathbf{y},
+\mathbf{z}|\theta)}{q(\mathbf{z})}\right].
+\end{align*}\]</span> Thus, it is always true that: <span class="math display">\[\begin{align}
+\log \mathcal{L}(\theta | \mathbf{y}) &amp;\geq \mathbb{E}_{\mathbf{z}
+\sim q} \left[\log f(\mathbf{y},\mathbf{z}|\theta) - \log
+q(\mathbf{z})\right] \nonumber \\
+&amp;= \mathbb{E}_{\mathbf{z} \sim q} \left[\log
+f(\mathbf{y},\mathbf{z}|\theta)\right] + H(\mathbf{z}). \label{elbo}
+\end{align}\]</span> This value is called the <em>variational lower bound</em> or <em>evidence lower bound</em> (ELBO), as it lower bounds the log likelihood. It follows that to maximize the log likelihood, we can also attempt to maximize the variational lower bound.</p>
+<p>One question we should ask is how large is the gap between the log likelihood and this lower bound. It turns out that this inequality is actually tight. When <span class="math inline">\(q(\mathbf{z}) = f(\mathbf{z}| \mathbf{y}, \theta)\)</span>, then we have: <span class="math display">\[\begin{align*}
+\log \mathbb{E}_{\mathbf{z} \sim f(\cdot | \mathbf{y} ,\theta)}
+\left[\frac{f(\mathbf{y},
+\mathbf{z}|\theta)}{f(\mathbf{z}|\mathbf{y},\theta)}\right] =
+\underbrace{\log \mathbb{E}_{\mathbf{z} \sim
+f(\cdot|\mathbf{y},\theta)} \big[f(\mathbf{y}|\theta)\big]}_{(*)} =
+\log f(\mathbf{y}|\theta). 
+\end{align*}\]</span> But what about for other distributions over the latent variable? To obtain a bound, let’s analyze the term <span class="math inline">\((*)\)</span>, where we can change the expectation from the distribution over <span class="math inline">\(f(\cdot | \mathbf{y},\theta)\)</span> to any other distribution <span class="math inline">\(q\)</span>, by: <span class="math display">\[\begin{align}
+\log \mathbb{E}_{\mathbf{z} \sim
+f(\cdot|\mathbf{y},\theta)} \big[f(\mathbf{y}|\theta)\big] &amp;= \log
+\mathbb{E}_{\mathbb{z} \sim q} \left[\frac{f(\mathbf{y}|\theta)
+f(\mathbf{z}|\mathbf{y}, \theta)}{q(\mathbf{z})}\right]\nonumber \\
+&amp;\geq \mathbb{E}_{\mathbf{z} \sim q} \left[\log
+f(\mathbf{y}|\theta)\right]  - \mathbb{E}_{\mathbf{z} \sim q}
+\left[\log\frac{q(\mathbf{z})}{f(\mathbf{z}|\mathbf{y},
+\theta)}\right] \nonumber\\
+&amp;= \log f(\mathbf{y}|\theta) - \mathrm{KL}\big(q(\mathbf{z})\
+\big|\big|\ f(\mathbf{z}|\mathbf{y}, \theta)\big). 
+\end{align}\]</span> This shows that the gap between the log-likelihood and the variational lower bound using the distribution <span class="math inline">\(q\)</span> is the KL-divergence between <span class="math inline">\(q\)</span> and the actual conditional distribution <span class="math inline">\(f(\cdot | \mathbf{y}, \theta)\)</span> of <span class="math inline">\(\mathbf{z}\)</span> given the observed data <span class="math inline">\(\mathbf{y}\)</span>.</p>
+<p>Now that we have a better understanding of the variational lower bound, let’s use it to derive the EM algorithm.</p>
+<h3 id="em-algorithm">EM Algorithm</h3>
+<p>Because the inequality in Equation <span class="math inline">\(\ref{elbo}\)</span> is tight when <span class="math inline">\(q = f(\cdot | y, \theta)\)</span>, this implies that optimizing the log-likelihood <span class="math inline">\(\mathcal{L}(\theta | \mathbf{y})\)</span> is equivalent to the optimization problem: <span class="math display">\[\begin{equation}
+(q^*, \theta^*) = \mathrm{arg\ max}_{\substack{q \in \mathcal{Q}\\
+\theta \in \Theta}} \ \mathbb{E}_{\mathbf{z} \sim q}[\log
+f(\mathbf{y}, \mathbf{z} | \theta)] + H(\mathbf{z}),\label{objective}
+\end{equation}\]</span> when <span class="math inline">\(\mathcal{Q} = \{ f(\cdot | \mathbf{y}, \theta) : \theta \in \Theta\}\)</span> is this family of distributions over <span class="math inline">\(\mathcal{Z}\)</span>.</p>
+<p>We can attempt to optimize this in an alternating-maximization-style algorithm. Fixing <span class="math inline">\(q \in \mathcal{Q}\)</span> to be <span class="math inline">\(f(\cdot |\mathbf{y}, \theta')\)</span> for some (fixed) <span class="math inline">\(\theta'\)</span>, we just need to optimze <span class="math inline">\(\theta\)</span> over the first term: <span class="math display">\[\begin{equation*}
+\hat{\theta} = \mathrm{arg\ max}_{\theta \in \Theta}
+\mathbb{E}_{\mathbf{z} \sim q} [\log f(\mathbf{y},\mathbf{z} |
+\theta)].
+\end{equation*}\]</span> The objective here is called the <em>pointwise <span class="math inline">\(Q\)</span>-function</em> (depending on the point <span class="math inline">\(\mathbf{y}\)</span>): <span class="math display">\[Q_\mathbf{y}(\theta | \theta') = \mathbb{E}_{\mathbf{z} \sim f(\cdot
+| \mathbf{y}, \theta')} [\log f(\mathbf{y},\mathbf{z} | \theta)].\]</span> This new <span class="math inline">\(\hat{\theta}\)</span> obtained then gives us an updated distribution for the latent variable, <span class="math inline">\(f(\cdot | \mathbf{y}, \hat{\theta})\)</span>. The construction of the objective function <span class="math inline">\(Q\)</span> is called the E-step, while the optimization over <span class="math inline">\(\theta\)</span> is called the M-step. Together, they make up the EM algorithm:</p>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="2%" />
+<col width="80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Algorithm 2</th>
+<th></th>
+<th align="left">Expectation Maximiation (EM)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><pre><code>       Input</code></pre></td>
+<td></td>
+<td align="left">Implementations of the E-step <span class="math inline">\(E(\cdot)\)</span> and M-step <span class="math inline">\(M(\cdot)\)</span></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>      Output</code></pre></td>
+<td></td>
+<td align="left">A good parameter <span class="math inline">\(\hat{\theta} \in \Theta\)</span></td>
+</tr>
+<tr class="odd">
+<td align="right"><pre><code>           1</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\theta^1 \leftarrow \mathsf{INITIALIZE}()\)</span></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>           2</code></pre></td>
+<td></td>
+<td align="left"><strong>for</strong> <span class="math inline">\(t = 1, 2, \dotsc\)</span> <strong>do</strong></td>
+</tr>
+<tr class="odd">
+<td align="right"><pre><code>           3</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\quad\)</span> <span class="math inline">\(Q_t(\cdot | \theta^t) \leftarrow E(\theta^t)\)</span></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>           4</code></pre></td>
+<td></td>
+<td align="left"><span class="math inline">\(\quad\)</span> <span class="math inline">\(\theta^{t+1} \leftarrow M(\theta^t, Q_t)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="right"><pre><code>           5</code></pre></td>
+<td></td>
+<td align="left"><strong>end for</strong></td>
+</tr>
+<tr class="even">
+<td align="right"><pre><code>           6</code></pre></td>
+<td></td>
+<td align="left"><strong>return</strong> <span class="math inline">\(\theta^t\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We haven’t specified the E-step and M-step because there are a few ways we can construct <span class="math inline">\(E(\cdot)\)</span> and <span class="math inline">\(M(\cdot)\)</span>. If we have a single sample, <span class="math inline">\(\mathbf{y}\)</span>, then a natural way to construct the <span class="math inline">\(Q\)</span> function from a parameter <span class="math inline">\(\theta'\)</span> in the E-step is just by returning <span class="math inline">\(Q_\mathbf{y}(\cdot | \theta')\)</span>.</p>
+<p><strong>E-step Constructions.</strong> For the purpose of theoretical analysis, suppose we could use this pointwise <span class="math inline">\(Q\)</span>-function to create the <em>population <span class="math inline">\(Q\)</span>-function</em>—if the true parameter is <span class="math inline">\(\theta^*\)</span>, then from the <span class="math inline">\(\theta'\)</span> we can generate: <span class="math display">\[\begin{align*}
+Q^\mathrm{pop}(\theta| \theta') &amp;= \mathbb{E}_{\mathbf{y} \sim
+f_{\theta^*}} Q_\mathbf{y} (\theta | \theta')\\
+&amp;= \sum_{\mathbf{y} \in \mathcal{Y}} \sum_{\mathbf{z} \in \mathcal{Z}}
+f(\mathbf{y}|\theta^*) \cdot f(\mathbf{z}|\mathbf{y}, \theta') \log
+f(\mathbf{y},\mathbf{z} | \theta). 
+\end{align*}\]</span> Of course, this construction is infeasible. But we could construct the <em>sample <span class="math inline">\(Q\)</span>-function</em>, using <span class="math inline">\(n\)</span> data points <span class="math inline">\(\mathbf{y}_1,\dotsc, \mathbf{y}_n\)</span>, by: <span class="math display">\[\begin{align*}
+Q^\mathrm{sam}(\theta | \theta') &amp;= \frac{1}{n} \sum_{i=1}^n
+Q_{\mathbf{y}_i} (\theta | \theta') \\
+&amp;= \frac{1}{n} \sum_{i=1}^n \sum_{\mathbf{z} \in \mathcal{Z}}
+f(\mathbf{z} | \mathbf{y}, \theta') \log f(\mathbf{y}_i, \mathbf{z} |
+\theta). 
+\end{align*}\]</span> More generally, for any family of distributions <span class="math inline">\(\mathcal{Q}\)</span> with support over <span class="math inline">\(\mathbf{Z}\)</span>, given a sample of <span class="math inline">\(n\)</span> i.i.d. observed data, we’ve ended up optimizing over the objective: <span class="math display">\[\frac{1}{n} \sum_{i=1}^n \sum_{\mathbf{z} \in \mathcal{Z}}
+q(\mathbf{z}) \left[ \log f(\mathbf{y}_i, \mathbf{z}|\theta)\right].\]</span> This shows where the computational speed-up occurs. Instead of calculating <span class="math inline">\(f(\mathbf{z} | \mathbf{y}_i, \theta)\)</span> for each <span class="math inline">\(1 \leq i \leq n\)</span> and <span class="math inline">\(\mathbf{z} \in \mathcal{Z}\)</span>, we just need to calculate the values <span class="math inline">\(q(\mathbf{z})\)</span> once; these are reused for all <span class="math inline">\(n\)</span> data points. Compared the <span class="math inline">\(|\mathcal{Z}|^n\)</span> terms we had before, we now just have <span class="math inline">\(n |\mathcal{Z}|\)</span>.</p>
+<p><strong>M-step Constructions.</strong> At the M-step, we can choose to perform a descent step instead of fully optimizing <span class="math inline">\(\theta\)</span>. When the M-step returns the maximizer of the given <span class="math inline">\(Q\)</span>-function, we say that this is the <em>fully corrective</em> version of EM: <span class="math display">\[\begin{equation*}
+  M^{\mathrm{fc}} (\theta', Q) = \mathrm{arg\ max}_{\theta \in \Theta}
+  Q(\theta | \theta').
+  \end{equation*}\]</span> The <em>gradient descent</em> verion of EM performs a gradient step, <span class="math display">\[\begin{equation*}
+  M^{\mathrm{grad}}(\theta',Q) = \theta' + \alpha \cdot \nabla
+  Q(\theta'|\theta').\end{equation*}\]</span></p>
+<p><strong>Stochastic EM Construction.</strong> The <em>stochastic update</em> version of EM uniformly chooses a sample <span class="math inline">\(\mathbf{y}_i\)</span> at random and performs a gradient step on the pointwise <span class="math inline">\(Q\)</span>-function at <span class="math inline">\(\mathbf{y}_i\)</span>. That is, the M-step is: <span class="math display">\[\begin{equation*}
+  M^{\mathrm{sto}}(\theta') = \theta' + \alpha \cdot \nabla
+  Q_Y(\theta' | \theta'),
+  \end{equation*}\]</span> where <span class="math inline">\(Y \sim \mathrm{Uniform}(\mathbf{y}_1,\dotsc, \mathbf{y}_n)\)</span>.</p>
+<h3 id="exercises">Exercises</h3>
+<p><strong>Problem 1.</strong> <em>[Exercise 5.1]</em> Show that for Gaussian mixture models with a balanced isotropic mixture, the AM-LVM algorithm exactly recovers Lloyd’s algorithm for <span class="math inline">\(k\)</span>-means clustering. Note that AM-LVM in this case prescribes setting <span class="math inline">\(w_t^0(\mathbf{y}) = 1\)</span> if <span class="math inline">\(||\mathbf{y} - \mathbf{\mu}^{t,0}||_2 \leq ||\mathbf{y} -  \mathbf{\mu}^{t,1}||_2\)</span> and 0 otherwise, and also setting <span class="math inline">\(w_t^1(\mathbf{y}) = 1 - w_t^0(\mathbf{y})\)</span>.</p>
+<h2 id="discussion">Discussion</h2>
+<p>Perhaps can also become more intuitive to describe log likelihood using number of bits to represent data…</p>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>[<a href="https://www.researchgate.net/file.PostFileLoader.html?id=563870c360614b09c78b456f&amp;assetKey=AS%3A291621783523328%401446539459191">Huber Ronchetti 2009</a>] <em>Robust Statistics</em>, on <span class="math inline">\(M\)</span>-estimators</li>
+<li>[<a href="https://arxiv.org/pdf/1601.00670.pdf">Blei Kucukelbir McAuliffe 2018</a>] Variational Inference: A Review of Statisticians</li>
+<li>[<a href="http://legacydirs.umiacs.umd.edu/~xyang35/files/understanding-variational-lower.pdf">Yang 2017</a>] Understanding the Variational Lower Bound</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>

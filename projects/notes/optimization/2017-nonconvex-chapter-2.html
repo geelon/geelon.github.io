@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Non-convex Optimization for Machine Learning (Chapter 2)</title>
+        <title>Nonconvex Optimization for Machine Learning (Chapter 2)</title>
         <link rel="stylesheet" href="../../../css/indexes.css" />
 	<link rel="icon" type="image/png" href="../../../images/haskell.png">
 	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
@@ -38,7 +38,7 @@
       
       <main role="main">
         <article>
-  <h1 id="article_title">Non-convex Optimization for Machine Learning (Chapter 2)</h1>
+  <h1 id="article_title">Nonconvex Optimization for Machine Learning (Chapter 2)</h1>
   
 
   <section class="date_posted">
@@ -48,9 +48,57 @@
   <section>
     <p>Prateek Jain &amp; Purushottam Kar, <a href="https://arxiv.org/pdf/1712.07897.pdf">Non-convex Optimization for Machine Learning</a></p>
 <ul>
-<li><a href="./2017-nonconvex-chapter-2.md">previous chapter</a>: Introduction</li>
+<li><a href="./2017-nonconvex-chapter-1.html">previous chapter</a>: Introduction</li>
+<li>current chapter: Mathematical Tools</li>
 </ul>
 <h2 id="summary">Summary</h2>
+<p><strong>Definition 1.</strong> A <em>convex combination</em> of a set of <span class="math inline">\(n\)</span> vectors <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^p\)</span> is a vector <span class="math inline">\(\mathbf{x}_{\mathbf{\theta}}\)</span>: <span class="math display">\[\begin{equation*}
+\mathbf{x}_{\mathbf{\theta}} = \sum_{i=1}^n \theta_i \mathbf{x}_i,
+\end{equation*}\]</span> where <span class="math inline">\(\theta_i \geq 0\)</span> and <span class="math inline">\(\sum \theta_i = 1\)</span>.</p>
+<p><strong>Definition 2.</strong> A set <span class="math inline">\(\mathcal{C} \subset \mathbb{R}^p\)</span> is <em>convex</em> if for all <span class="math inline">\(\mathbf{x},\mathbf{y} \in \mathbb{R}^p\)</span> and <span class="math inline">\(\lambda \in  [0,1]\)</span>, the point <span class="math inline">\((1 - \lambda) \mathbf{x} + \lambda \mathbf{y}\)</span> is contained in <span class="math inline">\(\mathcal{C}\)</span>.</p>
+<p><strong>Definition 3.</strong> A continuously differentiable function <span class="math inline">\(f :  \mathbb{R}^p \to \mathbb{R}\)</span> is <em>convex</em> if for every <span class="math inline">\(\mathbf{x},\mathbf{y} \in \mathbb{R}^p\)</span>, we have: <span class="math display">\[\begin{align*}
+  f(\mathbf{y}) \geq f(\mathbf{x}) + \langle \nabla f(\mathbf{x}),
+  \mathbf{y} - \mathbf{x}\rangle.
+  \end{align*}\]</span></p>
+<p><em>Note:</em> we can extend convexity to nondifferentiable functions using subgradients.</p>
+<p><strong>Definition 4.</strong> A continuously differentiable function <span class="math inline">\(f:  \mathbb{R}^p \to \mathbb{R}\)</span> is <span class="math inline">\(\alpha\)</span>-<em>strongly convex</em> (SC) and <span class="math inline">\(\beta\)</span>-<em>strongly smooth</em> (SS) if for every <span class="math inline">\(\mathbf{x},\mathbf{y}  \in \mathbb{R}^p\)</span>, we have <span class="math display">\[\begin{equation*}
+  \frac{\alpha}{2} ||\mathbf{x} - \mathbf{y}||^2_2 \leq f(\mathbf{y})
+  - f(\mathbf{x}) - \langle \nabla f(\mathbf{x}), \mathbf{y} -
+  \mathbf{x}\rangle \leq \frac{\beta}{2} ||\mathbf{x} - \mathbf{y}||_2^2.
+  \end{equation*}\]</span></p>
+<div class="center puzzle-figure">
+<img src="../files/jain-kar-convex.png" alt="convex-functions" /> “A convex function is lower bounded by its own tangent at all points. Strongly convex and smooth functions are, repsectively, lower and upper bounded in the rate at which they may grow…In each figure, the shaded area describes regions the function curve is permitted to pass through.” Source: <a href="https://arxiv.org/pdf/1712.07897.pdf">Jain Kar 2017</a>
+</div>
+<p></br></p>
+<p>Both strong convexity and strong smoothness bound the rate at which a function grows; this is useful when bounding rate of convergence of optimization algorithms.</p>
+<p><strong>Definition 5.</strong> A function <span class="math inline">\(f: \mathbb{R}^p \to \mathbb{R}\)</span> is <span class="math inline">\(L\)</span>-Lipschitz if for every <span class="math inline">\(\mathbf{x},\mathbf{y} \in \mathbb{R}^p\)</span>, we have: <span class="math display">\[\begin{align*}
+    |f(\mathbf{x}) - f(\mathbf{y})| \leq L ||\mathbf{x} - \mathbf{y}||_2.
+  \end{align*}\]</span></p>
+<p>Thus, Lipschitzness upper bounds the growth linearly, while strong-smoothness upper bounds growth quadratically. However, Lipschitz makes no assumption about differentiability.</p>
+<p><strong>Lemma 6 (Jensen’s Inequality).</strong> If <span class="math inline">\(X\)</span> is a random variable taking valules in a domain of a convex function <span class="math inline">\(f\)</span>, then <span class="math inline">\(\mathbb{E}[f(X)]  \geq f(\mathbb{E}[X])\)</span>.</p>
+<h3 id="convex-projections">Convex Projections</h3>
+<p>Given any closed set <span class="math inline">\(\mathcal{C} \subset \mathbb{R}^p\)</span>, the projection operator <span class="math inline">\(\Pi_\mathcal{C}(\cdot)\)</span> is defined as: <span class="math display">\[\Pi_\mathcal{C}(\mathbf{z}) := \mathrm{arg\ min}_{\mathbf{x} \in
+\mathcal{C}} ||\mathbf{x} - \mathbf{z}||_2.\]</span></p>
+<p>If <span class="math inline">\(\mathcal{C}\)</span> is convex, then this problem is a convex optimization problem. Sometimes, there are closed-form solutions. When <span class="math inline">\(\mathcal{C} = \mathcal{B}_1(1)\)</span>, then projection is the <em>soft thresholding</em> operation: <span class="math display">\[\begin{equation*}
+\left(\Pi_\mathcal{C}\mathbf{z}\right)_i = \max \{\mathbf{z}_i -
+\theta, 0\}, 
+\end{equation*}\]</span> where <span class="math inline">\(\theta\)</span> is a threshold that can be determined by a sorting operation on <span class="math inline">\(\mathbf{z}\)</span>.</p>
+<p><strong>Lemma 7 (Projection Property-O).</strong> For any set <span class="math inline">\(\mathcal{C} \subset  \mathbb{R}^p\)</span> and <span class="math inline">\(\mathbf{z} \in \mathbb{R}^p\)</span>, let <span class="math inline">\(\hat{\mathbf{z}} = \Pi_\mathcal{C}(\mathbf{z})\)</span>. Then, for all <span class="math inline">\(\mathbf{x} \in \mathcal{C}\)</span>, <span class="math inline">\(||\hat{\mathbf{z}} - \mathbf{z}||_2  \leq ||\mathbf{x} - \mathbf{z}||_2\)</span>.</p>
+<p><strong>Lemma 8 (Projection Property-I).</strong> For any convex set <span class="math inline">\(\mathcal{C} \subset \mathbb{R}^p\)</span> and let <span class="math inline">\(\mathbf{z}, \hat{\mathbf{z}}\)</span> as before. Then, for all <span class="math inline">\(\mathbf{x} \in \mathcal{C}\)</span>, <span class="math inline">\(\langle \mathbf{x} - \hat{\mathbf{z}}, \mathbf{z} - \hat{\mathbf{z}}\rangle \leq 0\)</span>.</p>
+<p><strong>Lemma 9 (Projection Property-II).</strong> Let <span class="math inline">\(\mathcal{C}\)</span>, <span class="math inline">\(\mathbf{z}\)</span>, and <span class="math inline">\(\hat{\mathbf{z}}\)</span> as in the previous lemma. Then, for all <span class="math inline">\(\mathbf{x} \in \mathcal{C}\)</span>, <span class="math inline">\(||\hat{\mathbf{z}} - \mathbf{x}||_2  \leq ||\mathbf{z} - \mathbf{x}||_2\)</span>.</p>
+<div class="center puzzle-figure">
+<img src="../files/jain-kar-projection.png" alt="projection properties" " /> “The projection operator properties. Projection property II may be violated by nonconvex sets. Projecting onto them may take the projected point <span class="math inline">\(\mathbf{z}\)</span> closer to certain points in the set (for example <span class="math inline">\(\hat{\mathbf{z}}\)</span>) but farther from others (for example, <span class="math inline">\(\mathbf{x}\)</span>).” Source: <a href="https://arxiv.org/pdf/1712.07897.pdf">Jain Kar 2017</a>
+</div>
+<p></br></p>
+<em>Proof of Lemma 7.</em> This follows because <span class="math inline">\(\Pi_\mathcal{C}(\mathbf{z})\)</span> solves the above optimization problem.
+<div align="right">
+☐
+</div>
+<p><em>Proof of Lemma 8.</em></p>
+<h2 id="exercises">Exercises</h2>
+<p><strong>Problem 1.</strong> <em>[Exercise 2.1]</em> Show that strong smoothness does not imply convexity by constructing a nonconvex function <span class="math inline">\(\mathbb{R}^p  \to \mathbb{R}\)</span> that is 1-SS.</p>
+<p><strong>Problem 2.</strong> <em>[Exercise 2.2]</em> Show that if a differentiable function <span class="math inline">\(f\)</span> has bounded gradient for all <span class="math inline">\(\mathbf{x} \in \mathbb{R}^d\)</span>, the <span class="math inline">\(f\)</span> is Lipschitz. What is its Lipschitz constant?</p>
+<p><strong>Problem 3.</strong> <em>[Exercise 2.3]</em> Show that for any point <span class="math inline">\(\mathbf{z}  \in \mathcal{B}_2(r)\)</span>, the projection onto the ball is given by <span class="math inline">\(\Pi_{\mathcal{B}_2(r)}(\mathbf{z}) = \frac{r}{||\mathbf{z}||_2}  \cdot \mathbf{z}\)</span>.</p>
 <h2 id="discussion">Discussion</h2>
 <h3 id="further-reading">Further Reading</h3>
   </section>
