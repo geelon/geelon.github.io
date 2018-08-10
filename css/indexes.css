@@ -149,7 +149,17 @@ main h1#article_title {
     padding-bottom: 0.3em;
 }
 
+
 article { line-height: 1.6; }
+
+blockquote {
+    font-family: 'Open Sans', sans serif;
+    font-size: 90%;
+    color: rgb(30,30,30);
+    padding-left: 1.7em;
+    padding-right: 1.7em;
+}
+
 
 section.subtitle {
     padding-bottom: 0.3em;
@@ -230,6 +240,9 @@ img.photo {
     border-color: grey;
     margin: 5px;
 }
+
+
+
 
 /*******FOOTER*******/
 footer {
