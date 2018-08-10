@@ -6,6 +6,16 @@ title: Projects
 ## Thesis Work
 I am beginning work on my Master's thesis at Columbia University. At this point, I am working on clarifying my research direction by reading a lot. Here is an overview of my research direction followed by a [reading list](./files/research_direction.pdf). [Notes](./notes/)
 
+## Teaching
+I am passionate about teaching. Courses I have been a TA for at Columbia University:
+
+- [COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), *by Nakul Verma* (graduate level). Slides/notes to my lectures:
+    + spectral graph theory, [notes](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec4_spectral_graph_theory_and_clustering.pdf)
+    + tensor decomposition, [slides](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec10_tensors_slides.pdf)
+    + topological data analysis, [slides](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec11_tda_slides.pdf)
+- [COMS 4771 Machine Learning](https://www.cs.columbia.edu/~verma/classes/ml/index.html), *by Nakul Verma*.
+- COMS 4203 Graph Theory, *by Tim Sun*.
+- QMSS 4070 GIS/Spatial Analysis, *by Michael Parrott* (graduate level). 
 
 ## Graduate Courses
 In Fall 2017, I took four courses, each with a project component:
