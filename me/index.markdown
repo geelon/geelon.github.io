@@ -20,8 +20,9 @@ geometry*, and *information theory*.
 Here are some of my [reading notes](https://geelon.github.io/projects/notes)
 as I work on my thesis.
 
-The motivation stems from an odd paradox of the *curse of
-dimensionality*. The curse states that much more data is required to
+### Research Motivation
+My curiosity stems from an odd paradox of the *curse of
+dimensionality*. The curse states that much more data is required to 
 learn something statistically significant in higher dimensions. That
 is, as we add more views or features into our data, the problem
 becomes harder to learn. This runs counter to the intuition that if
@@ -29,7 +30,8 @@ the underlying object is of a fixed complexity, measuring more
 features should make it easier to learn.
 
 The problem is therefore that our *representation* is
-high-dimensional, even if the *structure* is low-dimensional. This
-suggests that we study our data from a more geometric perspective
-(c.f. coordinate-free linear algebra), where the ways the data behave
-or transform are just as important as the data itself.
+high-dimensional, despite situations when the *structure* is actually
+low-dimensional. This suggests that we study our data from a more
+geometric perspective (c.f. coordinate-free linear algebra), where we
+free ourselves from representation by studying data in concert with
+the ways they behave or transform. 
