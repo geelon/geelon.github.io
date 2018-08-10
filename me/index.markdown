@@ -5,8 +5,8 @@ title: Aaron Geelon So
 
 # About Me
 <br />
-I am a Master's student working in [Computer Science at Columbia University](http://www.cs.columbia.edu)
-on the Thesis Track. In June 2017, I earned my Bachelor's degree in [Mathematics at the University of Chicago](https://math.uchicago.edu).
+I am a Thesis Track Master's student working in [Computer Science at Columbia University](http://www.cs.columbia.edu).
+In June 2017, I earned my Bachelor's degree in [Mathematics at the University of Chicago](https://math.uchicago.edu).
 With the knowledge and skill I've gained, I hope that I may contribute to
 [human flourishing](https://mathyawp.wordpress.com/2017/01/08/mathematics-for-human-flourishing/).
 
@@ -14,8 +14,8 @@ With the knowledge and skill I've gained, I hope that I may contribute to
 
 I am primarily interested in the **geometry of learning**. I work on
 understanding machine learning and generalization theory using
-perspectives from *algebra*, *functional analysis*, *algebraic
-geometry*, and *information theory*. 
+perspectives from not only *statistics*, but also *algebra*,
+*functional analysis*, *algebraic geometry*, and *information theory*.  
 
 Here are some of my [reading notes](https://geelon.github.io/projects/notes)
 as I work on my thesis.
