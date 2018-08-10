@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Machine Learning, a probabilistic approach (Chapter 3)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Machine Learning, a probabilistic approach (Chapter 3)</h1>
+  
+
+  <section class="date_posted">
+    Posted on August  9, 2018
+  </section>
+
+  <section>
+    <p>Murphy, K. “Machine Learning: A Probabilistic Approach” <em>Massachusetts Institute of Technology</em> (2012).</p>
+<ul>
+<li>current chapter: Generative Models for Discrete Data</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<h3 id="setting">Setting</h3>
+<p>In <em>concept learning</em>, we begin with a <em>hypothesis space</em> <span class="math inline">\(\mathcal{H}\)</span> of concepts, with the goal of learning a specific concept from data/examples <span class="math inline">\(D\)</span>. The subset of <span class="math inline">\(\mathcal{H}\)</span> consistent with <span class="math inline">\(D\)</span> is called the <em>version space</em>.</p>
+<p>For example, consider a <em>number game</em> from Tenenbaum’s PhD thesis (Tenenbaum 1999), where the learner is presented with a sequence of randomly drawn positive examples of class of numbers <span class="math inline">\(C\)</span> between 1 and 100. For example, we might see a sequence of data <span class="math inline">\(8, 2, 64\)</span>.</p>
+<h3 id="likelihood">Likelihood</h3>
+<p>From this data, we might decide to learn the concept “powers of two” or “even numbers”, as both concepts are consistent with the evidence. However, intuitively, it seems unlikely that if the class were “even numbers”, then we’d see only powers of twos. We want to avoid <em>suspicious coincidences</em>.</p>
+<p>More formally, we take the <em>strong sampling assumption</em>, where the data we see are samled uniformly from the <em>extension</em> of a concept (i.e. the positive instances of a concept). Then, the probability of independently sampling <span class="math inline">\(N\)</span> items from a concept <span class="math inline">\(h\)</span> is: <span class="math display">\[p(D|h) = \left[\frac{1}{|h|}\right]^N,\]</span> where <span class="math inline">\(|h|\)</span> is the size of the extension. This is <em>Occam’s razor</em>.</p>
+<p>For example, suppose we see data <span class="math inline">\(D = \{16\}\)</span>. Then, the likelihood that the concept is “powers of two” is <span class="math inline">\(p(D|h_{\mathrm{two}}) = 1/6\)</span>, since there are 6 powers of two less than 100. Similarly, <span class="math inline">\(p(D|h_{\mathrm{even}}) = 1/50\)</span>.</p>
+<p>After four examples, <span class="math inline">\(D = \{16, 8, 64, 2\}\)</span>, their respective likelihoods are <span class="math inline">\(p(D|h_\mathrm{two}) = (1/6)^4\)</span> and <span class="math inline">\(p(D|h_\mathrm{even}) = (1/50)^4\)</span>, with a <em>likelihood ratio</em> of almost 5000:1 in favor of <span class="math inline">\(h_\mathrm{two}\)</span>.</p>
+<h3 id="prior">Prior</h3>
+<p>Notice however that the concept “powers of two except 32” will be more likely than “powers of two”. We’d like to say that the former concept is ‘unnatural’ with respect to a <em>prior</em>. This <em>subjective</em> aspect of Bayesian reasoning is quite controversial, for two individuals with different priors will reach different answers.</p>
+<p>Without priors, then it is information-theoretically impossible to learn from small samples.</p>
+<h3 id="posterior">Posterior</h3>
+<p>The <em>posterior distribution</em> after seeing data <span class="math inline">\(D\)</span> is the likelihood of that data times the prior <span class="math inline">\(p\)</span>, normalized. That is, <span class="math display">\[p(h|D) = \frac{p(D|h) p(h)}{\sum_{h' \in \mathcal{H}} p(D, h')}.\]</span> The concept <span class="math inline">\(h\)</span> with the highest posterior <span class="math inline">\(p(h|D)\)</span> becomes the <em>maximum a posteriori (MAP) estimate</em>. Notice that as the likelihood term depends exponentially on the number samples, <span class="math inline">\(N\)</span>, the MAP estimate converges toward the <em>maximum likelihood estimator</em> (MLE), <span class="math display">\[\hat{h}_\mathrm{MLE} := \mathrm{arg\ max}_h p(D | h).\]</span> In other words, with enough data, the data overwhelms the prior. If the true hypothesis is in <span class="math inline">\(\mathcal{H}\)</span>, then the MAP estimate/MLE will converge to the true hypothesis.</p>
+<p>Here, Bayesian inference and MLE are consistent estimators, and we say that the hypothesis space is <em>identifiable in the limit</em>.</p>
+<h3 id="naive-bayes-classifiers">Naive Bayes Classifiers</h3>
+<p>Consider vectors of discrete-valued features, <span class="math inline">\(\mathbf{x} \in \{1,\dotsc, K\}^D\)</span>, where <span class="math inline">\(K\)</span> is the number of values for each feature, and <span class="math inline">\(D\)</span> is the number of features.</p>
+<p>Taking a generative approach, we specify the class conditional distribution <span class="math inline">\(p(\mathbf{x}|y = c)\)</span>. If we make the (naive) assumption that the features are conditionally independent given the class, the resulting model is a <em>naive Bayes classifier</em> (NBC). We have the class condition density: <span class="math display">\[p(\mathbf{x}| y = c, \theta) = \prod_{j=1}^D p(x_j | y = c,
+\theta_{jc}). \]</span></p>
+<p>Examples of NBCs:</p>
+<ul>
+<li>Gaussian distributions, <span class="math inline">\(p(\mathbf{x} | y = c, \theta) =  \prod_{j=1}^D \mathcal{N}(x_j | \mu_{jc}, \sigma_{jc}^2)\)</span>.</li>
+<li>Multivariate Bernoulli naive Bayes model, for binary features: <span class="math inline">\(p(\mathbf{x}|y = c,\theta) = \prod_{j=1}^D \mathrm{Ber}(x_j |  \mu_{jc})\)</span>.</li>
+<li>Multinoulli distribution, where <span class="math inline">\(x_j \in \{1,\dotsc, K\}\)</span>, and <span class="math inline">\(p(\mathbf{x}|y = c, \theta) = \prod_{j=1}^D \mathrm{Cat}(x_j  |\mathbf{\mu}_{jc})\)</span>.</li>
+</ul>
+<h3 id="model-fitting">Model Fitting</h3>
+<p>We can use MLE to estimate the parameters. However, it can overfit the data. One solution to overfitting is to be Bayesian, using a prior <span class="math inline">\(\mathbf{\pi}\)</span>.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1.</strong> What does it mean to “take a generative approach”? Does this mean that we assume samples are generated according the class they come from?</p>
+<p><strong>Note 2.</strong> One model for document classification is using the multinomial classifier. However, it does not take into account the <em>burstiness</em> of a word: here, given a document, most words will never appear. But if it appears once, it is much more likely to appear more than once; i.e. words occur in bursts. One way to account for this is to use the Dirichlet Compound Multinomial (DCM) density. If the multinomial model corresponds to drawing a ball from an urn with <span class="math inline">\(K\)</span> colors, the DCM model draws a ball then replaces it while also adding an additional copy. This is <em>Polya’s urn</em>.</p>
+<p><strong>Note 3.</strong> Should go back and work out some more examples.</p>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>

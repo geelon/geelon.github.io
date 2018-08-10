@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Machine Learning, a probabilistic approach (Chapter 10)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Machine Learning, a probabilistic approach (Chapter 10)</h1>
+  
+
+  <section class="date_posted">
+    Posted on August  9, 2018
+  </section>
+
+  <section>
+    <p>Murphy, K. “Machine Learning: A Probabilistic Approach” <em>Massachusetts Institute of Technology</em> (2012).</p>
+<ul>
+<li>current chapter: Directed Graphical Models</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>This chapter begins with an interesting quotation:</p>
+<blockquote>
+I basically know of two principles for treating complicated systems in simple ways: the first is the principle of modularity and the second is the principle of abstraction. I am an apologist for computational probability in machine learning because I believe that probability theory implements these two principles in deep and intriguing ways—namely through factorization and through averaging. Exploiting these two mechanisms as fully as possible seems to me to be the way forward in machine learning.
+<div align="right">
+Michael Jordan, (Frey 1998).
+</div>
+</blockquote>
+<p>Suppose we had <span class="math inline">\(V\)</span> random variables <span class="math inline">\(x_{1:V}\)</span>, each taking on one out of <span class="math inline">\(K\)</span> values. The <em>chain rule</em> states that <span class="math display">\[p(x_{1:V}) = p(x_1) p(x_2|x_1) \dotsm p(x_V| x_{1:V-1}).\]</span> We can construct <em>conditional probability tables</em> <span class="math inline">\(T\)</span>: <span class="math display">\[T_{i_1i_2\dotsm i_{V-1} k} = p(x_k | x_{i_1},\dotsc, x_{i_{V-1}}).\]</span> But then, there are <span class="math inline">\(O(K^V)\)</span> parameters, needing a lot of data to learn.</p>
+<p>If we only care about evaluating the probability of a fully observed vector <span class="math inline">\(\mathbf{x}_{1 : T}\)</span>, then the more parsimonius <em>conditional probability distribution</em> (CPD) suffices, <span class="math inline">\(p(x_t = k| \mathbf{x}_{1: t-1})\)</span>, using only <span class="math inline">\(O(K^2V^2)\)</span> parameters.</p>
+<p>Other than CPDs, we can reduce the number of parameters by assuming conditional independence. Recall the definition of conditional independence: <span class="math display">\[X \perp Y | Z \Leftrightarrow p(X,Y|Z) = p(X|Z)p(Y|Z).\]</span> For example, for 1D sequences, the (first order) <em>Markov assumption</em> states that <span class="math inline">\(x_{t+1} \perp x_{1: t-1} | x_t,\)</span> and so the joint distribution, <span class="math display">\[p(x_{1:V}) = p(x_1) \prod_{i=1}^V p(x_t | x_{t-1}),\]</span> is characterized by the initial probability distribution and a <em>state transition matrix</em> <span class="math inline">\(p(x_t = j|x_{t-1} = i)\)</span>.</p>
+<p>More generally, if we want to other types of models of conditional independence (not necessarily a 1D sequence), there are graphical models:</p>
+<p><strong>Definition 1.</strong> A <em>graphical model</em> (GM) is a representation of a joint distribution as a (directed/undirected) graph. The nodes of the graph represent random variables and the lack of an edge between two nodes represents a CI assumption. Generally, observed variables are shaded in.</p>
+<p><strong>Notation.</strong> Let <span class="math inline">\(G = (V,E)\)</span> be a graph. If <span class="math inline">\(s,t \in V\)</span>, then let <span class="math inline">\(G(s,t) = \mathbf{1}[(s,t) \in E]\)</span> indicate when the edge <span class="math inline">\((s,t)\)</span> is an edge. A graph is <em>undirected</em> when <span class="math inline">\(G(s,t) = 1 \Leftrightarrow  G(t,s) = 1\)</span> for all <span class="math inline">\(s,t \in V\)</span>. The <em>family</em> of a node is the node and all of its parents.</p>
+<h3 id="directed-graphical-models">Directed Graphical Models</h3>
+<p><strong>Definition 2.</strong> A <em>directed graphical model</em> (DGM) is a GM whose graph is a DAG. These are more commonly called <em>Bayesian networks</em>, <em>belief networks</em>, or <em>causual networks</em>.</p>
+<p><em>Note:</em> there is nothing inherently “Bayesian” about Bayesian nets, nor anything inherently “causal”.</p>
+<p>Because DAGs have a topological ordering, a node <span class="math inline">\(x_s\)</span> only depends on its parents, so DGMs satisfy the <em>ordered Markov property</em>: <span class="math display">\[x_s \perp \mathbf{x}_{\mathrm{predecessors}(s) \setminus
+\mathrm{parents}(s)} | \mathbf{x}_{\mathrm{parents}(s)},\]</span> where <span class="math inline">\(x_s\)</span> is conditionally independent with its nonimmediate predecessors. And so, in general, we have a <em>factorization</em> property for DAGs: <span class="math display">\[\begin{equation} \label{F}
+p(\mathbf{x}_{1:V} | G) = \prod_{t=1}^V p(x_t |
+\mathbf{x}_{\mathrm{parents}(t)}).
+\end{equation}\]</span> If the family of each node is size <span class="math inline">\(O(F)\)</span>, then there are at most <span class="math inline">\(O(VK^F)\)</span> parameters, compared to the original <span class="math inline">\(O(K^V)\)</span>.</p>
+<p><strong>Example 3 (Naive Bayes Classifier).</strong> Recall that the NBC (see <a href="./2012-MLPA-chapter-3.html#naive-bayes-classifiers">chapter 3</a>) assumes that features are conditionally independent given the class label: <span class="math display">\[p(y, \mathbf{x}) = p(y) \prod_{j=1}^D p(x_j|y).\]</span></p>
+<div class="center puzzle-figure">
+<p><img src="../files/murphy-nbc.png" alt="naive bayes classifier GM" " /></p>
+<strong>Figure 1.</strong> A graphical model corresponding to a NBC model.
+<div align="right">
+Source: <a href="https://mitpress.mit.edu/books/machine-learning-1">Murphy 2012</a>
+</div>
+</div>
+<p></br></p>
+<p>A graphical model can capture correlation between features. For example, if the model is a tree, then we can use a <em>tree-augmented naive Bayes classifier</em> (TAN) model (Friedman et. al. 1997). An example is:</p>
+<div class="center puzzle-figure">
+<p><img src="../files/murphy-tan.png" alt="a tree-augmented naive bayes GM" " /></p>
+<strong>Figure 2.</strong> A graphical model corresponding to a TAN model for <span class="math inline">\(D= 4\)</span> features. In general, the tree topology may change depending on the value of <span class="math inline">\(y\)</span>.
+<div align="right">
+Source: <a href="https://mitpress.mit.edu/books/machine-learning-1">Murphy 2012</a>
+</div>
+</div>
+<p></br></p>
+<p>There are two reasons for using a tree instead of a generic graph:</p>
+<ol style="list-style-type: decimal">
+<li>it is easy to find the optimal tree structure using the Chow-Liu algorithm (Section 26.3).</li>
+<li>It is easy to handle missing features in a tree-structured model (Section 20.2).</li>
+</ol>
+<p><strong>Example 4 (Directed Gaussian graphical models).</strong> A <em>Gaussian Bayes net</em> is the model where the CPDs are: <span class="math display">\[p(x_t | \mathbf{x}_{\mathrm{parents}(t)}) = \mathcal{N}(x_t |
+  \mu_t + \mathbf{w}_t\cdot \mathbf{x}_{\mathrm{parents}(t)},
+  \sigma_t^2).\]</span> This is called a <em>linear Gaussian</em> CPD. The product of these CPDs yields: <span class="math inline">\(p(\mathbf{x}) = \mathcal{N}(\mathbf{x}| \mathbf{\mu},  \mathbf{\Sigma}).\)</span> Let <span class="math inline">\(\mathbf{W}\)</span> be the matrix whose rows are <span class="math inline">\(\mathbf{w}_t^T\)</span>. Let <span class="math inline">\(\mathbf{S} =  \mathrm{diag}(\mathbf{\sigma})\)</span>. Then, we have: <span class="math display">\[\begin{align*}
+  (\mathbf{x} - \mathbf{\mu}) = \mathbf{W}(\mathbf{x} - \mathbf{\mu})
+  + \mathbf{e},
+  \end{align*}\]</span> where <span class="math inline">\(\mathbf{e} \sim \mathcal{N}(0, \mathbf{S})\)</span>. Because of the DAG assumption, <span class="math inline">\(\mathbf{W}\)</span> is lower triangular. It follows that <span class="math inline">\(\mathbf{e} = (\mathbf{I} - \mathbf{W}) (\mathbf{x} -  \mathbf{\mu})\)</span>. Letting <span class="math inline">\(\mathbf{U} = (\mathbf{I} -  \mathbf{W})^{-1}\)</span>, we have: <span class="math display">\[\begin{align*}
+  \mathbf{\mu} &amp;= \mathbf{x} - \mathbf{U} \mathbf{e}\\
+  \mathbf{\Sigma} &amp;= \mathrm{cov}[\mathbf{x} - \mathbf{\mu}] =
+  \mathrm{cov}[\mathbf{U} \mathbf{e}] = \mathbf{U} \mathbf{S}^2 \mathbf{U}^T.
+  \end{align*}\]</span> Thus, the regression weights correspond to a Cholesky decomposition of <span class="math inline">\(\mathrm{\Sigma}\)</span>.</p>
+<h3 id="inference">Inference</h3>
+<p>Graphical models let us perform <em>probabilistic inference</em>, where given observed or visible variables <span class="math inline">\(\mathbf{x}_v\)</span>, we try to compute a posterior distribution on hidden variables <span class="math inline">\(\mathbf{x}_h\)</span>. That is, we <em>condition</em> on the observed data by <em>clamping</em> the visible variables to their observed values: <span class="math display">\[p(\mathbf{x}_h| \mathbf{x}_v) = \frac{p(\mathbf{x}_h,
+\mathbf{x}_v)}{p(\mathbf{x}_v|\theta)}.\]</span> The normalization constant <span class="math inline">\(p(\mathbf{x}_v|\theta)\)</span> is the <em>likelihood of the data</em> or the <em>probability of the evidence</em>.</p>
+<p>If we only care about some of the hidden variables, we partition the hidden variables into the <em>query variables</em> <span class="math inline">\(\mathbf{x}_q\)</span> that we hope to understand and the <em>nuisance variables</em> <span class="math inline">\(\mathbf{x}_n\)</span> that we want to <em>marginalize out</em>. Thus, <span class="math display">\[p(\mathbf{x}_q | \mathbf{x}_v, \theta) = \sum_{\mathbf{x}_n}
+p(\mathbf{x}_q, \mathbf{x}_n| \mathbf{x}_v, \theta).\]</span> Notice that if there <span class="math inline">\(V\)</span> hidden variables, each of which taking on one of <span class="math inline">\(K\)</span> values, then there are <span class="math inline">\(O(K^V)\)</span> terms in the marginal distribution <span class="math inline">\(p(\mathbf{x}_v | \theta)\)</span>. It is possible to exploit the factorization in GM to use <span class="math inline">\(O(VK^{w+1})\)</span> computations, where <span class="math inline">\(w\)</span> is the <em>treewidth</em> of the graph. (See Chapter 20).</p>
+<h3 id="learning">Learning</h3>
+<p>While inference is the computation of <span class="math inline">\(p(\mathbf{x}_h| \mathbf{x}_v, \theta)\)</span> where the parameters <span class="math inline">\(\theta\)</span> are assumed to be known, <em>learning</em> is the estimation of parameters of the model. The MAP estimate of the parameters give data is: <span class="math display">\[\hat{\theta} = \mathrm{arg\ max}_{\theta} \sum_{i=1}^N \log
+p(\mathbf{x}_{i,v}|\theta) + \log p(\theta).\]</span> If the prior is uniform, then this is just MLE. The Bayesian perspective sees the parameters as unknown variables, so from that perspective, there is no difference between inference and learning.</p>
+<p>Thus, from a Bayesian perspective, the only difference between hidden variables and parameters is that the number of hidden variables grows with the data, while the parameters are fixed. In order to avoid overfitting, we must integrate out the hidden variables, while a point estimation techniques may work for parameters.</p>
+<h3 id="plate-notation">Plate Notation</h3>
+<p>Suppose <span class="math inline">\(X_1,\dotsc, X_N\)</span> are conditionally independent on <span class="math inline">\(\theta\)</span>. If our beliefs about <span class="math inline">\(\theta\)</span> don’t depend on the order that the <span class="math inline">\(X_i\)</span>’s came, then we say that the data is <em>exchangeable</em>. In such a case, the <em>plate notation</em> can reduce visual clutter: we draw a <em>plate</em> around repeated variables, and we say that the nodes within the plate will be repeated when the model is <em>unrolled</em>. For example:</p>
+<div class="center puzzle-figure">
+<p><img src="../files/murphy-plate.png" alt="example plate notation" " /></p>
+<strong>Figure 3.</strong> Left: the data <span class="math inline">\(X_i\)</span> are conditionally i.i.d. given <span class="math inline">\(\theta\)</span>. Right: the same model, in plate notation.
+<div align="right">
+Source: <a href="https://mitpress.mit.edu/books/machine-learning-1">Murphy 2012</a>
+</div>
+</div>
+<p></br></p>
+<p>More complicated examples can be constructed. For example, the following is the DGM of a naive Bayes classifiers with parameter <span class="math inline">\(\theta\)</span>.</p>
+<div class="center puzzle-figure">
+<p><img src="../files/murphy-nested-plates.png" alt="nested plate notation" " /></p>
+<strong>Figure 4.</strong> Left: <span class="math inline">\(D\)</span> conditionally independent variables <span class="math inline">\(X_1,\dotsc, X_D\)</span> are generated given a <span class="math inline">\(Y\)</span>. Here, there are parameters <span class="math inline">\(\theta_{c}\)</span> for every class <span class="math inline">\(c\)</span> for <span class="math inline">\(Y\)</span>. It is implied that <span class="math inline">\(\theta_{jc}\)</span> is used to generate <span class="math inline">\(x_{ij}\)</span> iff <span class="math inline">\(y_i =c\)</span>. Otherwise, it is ignored.<br />
+
+<div align="right">
+Source: <a href="https://mitpress.mit.edu/books/machine-learning-1">Murphy 2012</a>
+</div>
+</div>
+<p></br></p>
+<p>This is an example of <em>context specific independence</em>, since <span class="math inline">\(x_{ij} \perp \theta_{jc}\)</span> holds iff <span class="math inline">\(y_i \ne c\)</span>.</p>
+<h3 id="learning-from-complete-data">Learning from Complete Data</h3>
+<p>If there are no hidden variables, then we say that the data is <em>complete</em>. Then, the likelihood of the parameter <span class="math inline">\(\theta\)</span> factorizes: <span class="math display">\[p(D|\theta) = \prod_{i=1}^N p(\mathbf{x}_i|\theta) = \prod_{t=1}^V
+p(D_t | \theta_t),\]</span> where <span class="math inline">\(D_t\)</span> is the data associated with the node <span class="math inline">\(t\)</span> and its parents. That is, the likelihood <em>decomposes</em> according to its graph structure. If the prior factorizes as well, <span class="math inline">\(p(\theta) = \prod_{t=1}^V p(\theta_t)\)</span>, then the posterior also factorizes: <span class="math display">\[p(\theta|D) \propto \prod_{t=1}^V p(D_t|\theta_t) p(\theta_t).\]</span></p>
+<h3 id="conditional-independence-properties-of-dgms">Conditional Independence Properties of DGMs</h3>
+<p>Let <span class="math inline">\(I(G)\)</span> be the set of all conditional independence (CI) assumptions that a graph makes. We say that <span class="math inline">\(G\)</span> is an <em>I-map</em> (independence map) for a probability distribution <span class="math inline">\(p\)</span>, or that <span class="math inline">\(p\)</span> is <em>Markov</em> with respect to <span class="math inline">\(G\)</span> iff <span class="math inline">\(I(G) \subset I(p)\)</span>, where <span class="math inline">\(I(p)\)</span> is the set of all CI statments that hold for <span class="math inline">\(p\)</span>.</p>
+<p>The complete graph is an I-map for any probability distribution over its nodes. We can also consider any <em>minimal I-map</em> for a probability distribution <span class="math inline">\(p\)</span>. Our goal now is to determine when <span class="math inline">\(\mathbf{x}_A \perp_G \mathbf{x}_B | \mathbf{x}_C\)</span>.</p>
+<p>The following topological definition can characterize when subsets of nodes of a graph are conditionally independent.</p>
+<p><strong>Definition 5.</strong> An undirected path <span class="math inline">\(P\)</span> is <em>d-separated</em> by a set of nodes <span class="math inline">\(E\)</span> (containing the evidence) iff at least one of the following conditions hold:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P\)</span> contains a chain <span class="math inline">\(s \to m \to t\)</span> or <span class="math inline">\(s \leftarrow m  \leftarrow t\)</span>, where <span class="math inline">\(m \ in E\)</span></li>
+<li><span class="math inline">\(P\)</span> contains a tent or form, <span class="math inline">\(s \swarrow ^m \searrow t\)</span>, where <span class="math inline">\(m  \in E\)</span></li>
+<li><span class="math inline">\(P\)</span> contains a <em>collider</em> or <em>v-structure</em>, <span class="math inline">\(s \searrow _m  \swarrow t\)</span>, where <span class="math inline">\(m\)</span> is not in <span class="math inline">\(E\)</span> and neither is any descendents of <span class="math inline">\(m\)</span>.</li>
+</ol>
+<p><strong>Definition 6.</strong> We say that a set of nodes <span class="math inline">\(A\)</span> is d-separated from a different set of nodes <span class="math inline">\(B\)</span> given a third observed set <span class="math inline">\(E\)</span> iff each undirected path from every node <span class="math inline">\(a \in A\)</span> to every node <span class="math inline">\(b \in B\)</span> is d-separated by <span class="math inline">\(E\)</span>.</p>
+<p><strong>Proposition 7.</strong> Let <span class="math inline">\(G\)</span> be a DAG. Then: <span class="math display">\[\begin{equation}\label{G}
+\mathbf{x}_A \perp_G \mathbf{x}_B |\mathbf{x}_E \Longleftrightarrow 
+\textrm{$A$ is d-separated from $B$ given $E$}.
+\end{equation}\]</span></p>
+<p>This is the <em>directed global Markov property</em>.</p>
+<div class="center puzzle-figure">
+<p><img src="../files/murphy-bayes-ball-rules.png" alt="bayes ball rules" " /></p>
+<strong>Figure 5.</strong> Visualize our knowledge of a variable that is not explained away by evidence as a ball moving around the nodes; we call this the <em>Bayes ball</em>. Arrows with a line across the head indicate when the ball is blocked. Otherwise, the ball may freely traverse the edges.
+<div align="right">
+Source: <a href="https://mitpress.mit.edu/books/machine-learning-1">Murphy 2012</a>
+</div>
+</div>
+<p></br></p>
+<p>The three rules of the Bayes ball follows.</p>
+<ol style="list-style-type: decimal">
+<li>The chain structure <span class="math inline">\(X \to Y \to Z\)</span> encodes: <span class="math display">\[\begin{align*}
+p(x,y,z) = p(x) p(y|x) p(z|y).
+\end{align*}\]</span> Conditioning on <span class="math inline">\(y\)</span> then yields: <span class="math display">\[\begin{align*}
+p(x,z|y) = \frac{p(x) p(y|x) p(z|y)}{p(y)} = p(x|y) p(z|y),
+\end{align*}\]</span> and so <span class="math inline">\(x \perp z |y\)</span>.</li>
+<li>The tent structure <span class="math inline">\(X \leftarrow Y \rightarrow Z\)</span> encodes: <span class="math display">\[\begin{align*}
+p(x,y,z) = p(y) p(x|y) p(z|y),
+\end{align*}\]</span> so similarly, when we condition on <span class="math inline">\(y\)</span>, we see that <span class="math inline">\(x \perp z | y\)</span>.</li>
+<li>The v-structure <span class="math inline">\(X \rightarrow Y \leftarrow Z\)</span> encodes: <span class="math display">\[\begin{align*}
+p(x,y,z) = p(x) p(y|x,z) p(z),
+\end{align*}\]</span> where conditioning on <span class="math inline">\(y\)</span> leads to: <span class="math display">\[\begin{align*}
+p(x,z|y) = \frac{p(x) p(z) p(y|x,z)}{p(y)},
+\end{align*}\]</span> so <span class="math inline">\(x \not\perp z|y\)</span>, even though <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> are marginally independent, <span class="math inline">\(p(x,z) = p(x)p(z)\)</span>. This effect is called <em>explaining away</em>, <em>inter-causal reasoning</em> or <em>Berkson’s paradox</em>. For example, if we observe the sum of two independent coin flips, then conditioned on this knowledge, the two flips are no longer independent.</li>
+</ol>
+<p>Furthermore, if instead of observing <span class="math inline">\(Y\)</span>, we observe a descendent, then we could learn something about <span class="math inline">\(Y\)</span>. Then, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> must compete to explain this. For example, though we not observe <span class="math inline">\(Y\)</span>, if we observe a descendant <span class="math inline">\(Y'\)</span> that always take on the same value as <span class="math inline">\(Y\)</span>, we effectively observe <span class="math inline">\(Y\)</span>.</p>
+<p><strong>Corollary 8.</strong> Let <span class="math inline">\(t\)</span> be a node, and let <span class="math inline">\(\mathrm{nd}(t)\)</span> be its <em>non-descendants</em>. Let <span class="math inline">\(\mathrm{pa}(t)\)</span> be its parents. Then, <span class="math display">\[\begin{equation}
+  \label{L}
+    t \perp \mathrm{nd}(t) \setminus \mathrm{pa}(t) | \mathrm{pa}(t). 
+  \end{equation}\]</span> This is called the <em>directed local Markov property</em>.</p>
+<p><strong>Corollary 9.</strong> Let <span class="math inline">\(t\)</span> as before. Let <span class="math inline">\(\mathrm{pred}(t)\)</span> be its predecessors. Then, <span class="math display">\[\begin{equation}\label{O}
+  t \perp \mathrm{pred}(t) \setminus \mathrm{pa}(t) | \mathrm{pa}(t). 
+\end{equation}\]</span> This follows because <span class="math inline">\(\mathrm{pred}(t) \subset \mathrm{nd}(t)\)</span>. This property is called the <em>ordered Markov property</em>.</p>
+<p>Thus, we have three Markov properties for DAGs: the directed global Markov property G, the directed local Markov property L, and the ordered Markov property O, Equations <span class="math inline">\(\ref{G}\)</span>, <span class="math inline">\(\ref{L}\)</span>, and <span class="math inline">\(\ref{O}\)</span>, respectively.</p>
+<p>We see that <span class="math inline">\(G \implies L \implies O\)</span>. In fact, <span class="math inline">\(O \implies L \implies G\)</span>, as in (Koller and Friedman 2009). Additionally, we saw that DAGs satisfy the factorization property F in Equation <span class="math inline">\(\ref{F}\)</span>. It’s clear that <span class="math inline">\(O \implies F\)</span>, and in fact, the converse <span class="math inline">\(F \implies O\)</span> is also true (Koller and Friedman 2009).</p>
+<p><strong>Definition 10.</strong> The <em>Markov blanket</em> of a node <span class="math inline">\(t\)</span> is the set of nodes that renders a node <span class="math inline">\(t\)</span> conditionally independent of all other nodes in the graph.</p>
+<p>In particular, the Markov blanket <span class="math inline">\(\mathrm{mb}(t)\)</span> is equal to the nodes parents, children, and <em>coparents</em> (any node that are also parents of its children). Thus, <span class="math inline">\(t\)</span>’s <em>full conditional</em> (i.e. conditioning everything except <span class="math inline">\(t\)</span>) depends only on its Markov blanket. That is, if we let <span class="math inline">\(\mathbf{x}_{\hat{t}}\)</span> denote all variables except for <span class="math inline">\(x_t\)</span>, the full conditional is: <span class="math display">\[\begin{align*}
+p(x_t| \mathbf{x}_{\hat{t}}) &amp;= \frac{p(x_t,
+\mathbf{x}_{\hat{t}})}{p(\mathbf{x}_{\hat{t}})}\\
+&amp;\propto p\left(x_t|\mathbf{x}_{\mathrm{pa}(t)}\right) \prod_{s \in
+\mathrm{ch}(t)}
+p\left(x_s| \mathbf{x}_{\mathrm{pa}(s)}\right),
+\end{align*}\]</span> since any term not involved with <span class="math inline">\(x_t\)</span> will cancel out; the only terms left are those that contain <span class="math inline">\(x_t\)</span> in the <em>scope</em>.</p>
+<p>For example, in the DGM below, we have: <span class="math display">\[\begin{equation*}
+p(x_5 | \mathbf{x}_{\hat{5}}) \propto p(x_5|x_2,x_3) p(x_6 | x_3,x_5)
+p(x_7| x_4,x_5,x_6).
+\end{equation*}\]</span></p>
+<div class="center puzzle-figure">
+<p><img src="../files/murphy-dgm.png" alt="dgm" " /></p>
+<strong>Figure 6.</strong> An example of a directed graphical model.
+<div align="right">
+Source: <a href="https://mitpress.mit.edu/books/machine-learning-1">Murphy 2012</a>
+</div>
+</div>
+<p></br></p>
+<h3 id="exercises">Exercises</h3>
+<p><strong>Problem 1.</strong> <em>[Exercise 10.1]</em> Marginalizing a node in a DGM. Consider the following DAG <span class="math inline">\(G\)</span>:</p>
+<div class="center puzzle-figure">
+<p><img src="../files/murphy-dgm-problem.png" alt="dgm problem" " /></p>
+<div align="right">
+Source: <a href="https://mitpress.mit.edu/books/machine-learning-1">Murphy 2012</a>
+</div>
+</div>
+<p></br></p>
+<p>Assume it is a minimal I-map for <span class="math inline">\(p(A,B,C,D,E,F,X)\)</span>. Now consider marginalizing out <span class="math inline">\(X\)</span>. Construct a new DAG <span class="math inline">\(G'\)</span> which is a minimal I-map for <span class="math inline">\(p(A,B,C,D,E,F)\)</span>. Specify and justify which extra edges need to be added.</p>
+<em>To marginalize out <span class="math inline">\(X\)</span>, we need to connect every single parent of <span class="math inline">\(X\)</span> to every one of its children, and form an acyclic tournament on its children:</em>
+<div class="center puzzle-figure">
+<p><img src="../files/problem-murphy-marginalize.png" alt="I map" " /></p>
+</div>
+<p><em>As a simple example of <span class="math inline">\(p(A,B,C,D,E,F,X)\)</span> such that the new collection of arrows is minimal, let the random variable <span class="math inline">\(X =  (A,B,Z)\)</span>, where <span class="math inline">\(Z\)</span> is some extra randomness independent of <span class="math inline">\(A,B,C,D\)</span>. Furthermore, let <span class="math inline">\(E = (C,X,Z)\)</span>, and <span class="math inline">\(F= (D,X,Z)\)</span>. Then, when we marginalize away <span class="math inline">\(X\)</span>, we see that each of the new arrows above are necessary.</em></p>
+<p><em>On the other hand, before we marginalized away <span class="math inline">\(X\)</span>, for any of the remaining pairs of nodes <span class="math inline">\((R,S)\)</span> with no edge between them, we knew that <span class="math inline">\(p(R,S) = p(R)p(S)\)</span>. Thus, even after marginalizing out <span class="math inline">\(X\)</span>, this remains true.</em></p>
+<p><strong>Problem 2.</strong> <em>[Exercise 10.3]</em> Markov blanket for a DGM. Prove that the full conditional for a node <span class="math inline">\(i\)</span> in a DGM is given by: <span class="math display">\[\begin{align*}
+p(x_t| \mathbf{x}_{\hat{t}}) &amp;\propto
+  p\left(x_t|\mathbf{x}_{\mathrm{pa}(t)}\right) \prod_{s \in
+  \mathrm{ch}(t)} p\left(x_s| \mathbf{x}_{\mathrm{pa}(s)}\right).
+\end{align*}\]</span></p>
+<p><strong>Problem 3.</strong> <em>[Exercise 10.9]</em> Moralization does not introduce new independence statements. Recall that the process of moralizing a DAG means connecting together all “unmarried” parents that share a common child, and then dropping all the arrows. Let <span class="math inline">\(M\)</span> be the moralization of a DAG <span class="math inline">\(G\)</span>. Show that <span class="math inline">\(\mathrm{CI}(M) \subset  \mathrm{CI}(G)\)</span>, where CI are the set of conditional independence statements implied by the model.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Note 1.</strong> In the <em>Conditional Independence Properties of DGMs</em> section, we said that the complete graph is an I-map for any probability distribution. To be rigorous, we need to make sure that there exists a complete DAG on a collection of <span class="math inline">\(n\)</span> nodes, for all <span class="math inline">\(n  \in \mathbb{N}\)</span> (i.e. there exists acyclic tournaments). Indeed, this is easily shown by just giving a total order on the vertices.</p>
+<p>Furthermore, there exist probability distributions over <span class="math inline">\(G\)</span> such that the complete DAG is I-map minimal. In particular, let <span class="math inline">\(X_1,\dotsc, X_n\)</span> be <span class="math inline">\(n\)</span> nodes on a complete graph. Independently assign each edge the result of a coin toss. Let <span class="math inline">\(X_i\)</span> be the results of all coin tosses for edges adjacent to <span class="math inline">\(i\)</span>. From this construction, no two distinct <span class="math inline">\(X_i, X_j\)</span>’s are conditionally independent, even after conditioning on everything else.</p>
+<p><strong>Note 2.</strong> It seems that given a graph <span class="math inline">\(G\)</span> and any probability distribution <span class="math inline">\(p\)</span> over its node, for any node <span class="math inline">\(X\)</span> in <span class="math inline">\(G\)</span>, the construction described in Problem 1 will always produce a new graph <span class="math inline">\(G'\)</span> that is Markov over the distribution <span class="math inline">\(p_{\hat{X}}\)</span> where <span class="math inline">\(X\)</span> is marginalized away. We only need to worry about the Markov blanket of <span class="math inline">\(X\)</span>. Marginalizing away <span class="math inline">\(X\)</span> won’t change conditional independence relations between parents of <span class="math inline">\(X\)</span>. All other edges between parents of <span class="math inline">\(X\)</span> and children of <span class="math inline">\(X\)</span>, and edges within children have been added.</p>
+<p>Furthermore, there are probability distributions where each of the new edges are necessary. In particular, consider the graph that is a directed rooted tree of depth 1, where the root <span class="math inline">\(X\)</span> has <span class="math inline">\(n\)</span> children <span class="math inline">\(X_1,\dotsc, X_n\)</span>. Let <span class="math inline">\(X_1,\dotsc, X_n\)</span> correspond to the random variables from the previous note, and let <span class="math inline">\(X = (X_1,\dotsc,  X_n)\)</span>. The <span class="math inline">\(X_i\)</span>’s are all conditionally independent given <span class="math inline">\(X\)</span>, though once we marginalize out <span class="math inline">\(X\)</span>, we are left with the previous situation, where we saw we needed an acyclic tournament.</p>
+<p><strong>Question 3.</strong> I don’t understand the distinction the book makes between a conditional probability table and a conditional probability distribution from the very beginning of the chapter. Why does the latter only use <span class="math inline">\(O(K^2V^2)\)</span> parameters?</p>
+<p><strong>Question 4.</strong> This section defines a <em>directed acyclic graph</em> as “a directed graph with no directed cycles” and a <em>directed tree</em> as “a DAG in which there are no directed cycles”. There seems to be no distinction?</p>
+<p><strong>Question 5.</strong> What does it mean that “there is nothing inherently ‘Bayesian’ about Bayesian networks” or “nothing inherently causal”?</p>
+<p><strong>Note 6.</strong> Follow up on chapters 20, 26 on TAN models and the use of trees.</p>
+<p><strong>Note 7.</strong> Review the Cholesky decomposition.</p>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>Chapter 20, for how to use only <span class="math inline">\(O(VK^{w+1})\)</span> time instead of <span class="math inline">\(O(K^V)\)</span>.</li>
+<li>[<a href="https://pdfs.semanticscholar.org/04f3/9720b9b20f8ab990228ae3fe4f473e750fe3.pdf">Koller and Friedman 2009</a>] <em>Probabilistic Graphical Models: principles and techniques</em>.</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
