@@ -27,12 +27,13 @@ With the knowledge and skill I've gained, I hope that I may contribute to
 </div>
 
 
+
 ## Research Interests
 
 I am primarily interested in the **geometry of learning**. I work on
 understanding machine learning and generalization theory using
-perspectives from not only *statistics*, but also *algebra*,
-*functional analysis*, *algebraic geometry*, and *information theory*.  
+perspectives from not only statistics, but also algebra,
+functional analysis, algebraic geometry, and information theory.  
 
 Here are some of my [reading notes](https://geelon.github.io/projects/notes)
 as I work on my thesis.
