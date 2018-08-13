@@ -14,7 +14,8 @@ With the knowledge and skill I've gained, I hope that I may contribute to
 
 
 
-<div class="center" style="width:60%;>
+<div style="overflow:auto;text-align:center;">
+<div  style="display:inline-block;">
   <a href="./files/cv.pdf" style="border-bottom:none;">
      <img src="./files/cv.png" alt="cv link" style="opacity: 0.5;"/>
   </a>&nbsp;
@@ -24,6 +25,7 @@ With the knowledge and skill I've gained, I hope that I may contribute to
   <a href="https://linkedin.com/in/geelon" style="border-bottom:none;">
      <img src="./files/in.png" alt="linkedin link" style="opacity: 0.5;"/>
   </a>
+</div>
 </div>
 
 
