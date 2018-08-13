@@ -36,7 +36,7 @@ perspectives from not only statistics, but also algebra,
 functional analysis, algebraic geometry, and information theory.  
 
 Here are some of my [reading notes](https://geelon.github.io/projects/notes)
-as I work on my thesis. I am very fortunate to be advised by [Prof. Daniel Hsu](http://www.cs.columbia.edu/~djhsu/).
+as I work on my thesis. I am very grateful to be advised by [Prof. Daniel Hsu](http://www.cs.columbia.edu/~djhsu/).
 
 ### Research Motivation
 My curiosity stems from an odd paradox of the *curse of
