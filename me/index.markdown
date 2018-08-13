@@ -2,7 +2,7 @@
 title: Aaron Geelon So
 ---
 
-<img class="photo" src="../images/geelon.png" height="275px"/>
+<img class="photo" src="../images/headshot.png" height="275px"/>
 
 
 # About Me
@@ -14,7 +14,7 @@ With the knowledge and skill I've gained, I hope that I may contribute to
 
 
 
-<div class="center" style="width:40%;>
+<div class="center" style="width:60%;>
   <a href="./files/cv.pdf" style="border-bottom:none;">
      <img src="./files/cv.png" alt="cv link" style="opacity: 0.5;"/>
   </a>&nbsp;
