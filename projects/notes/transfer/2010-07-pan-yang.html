@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>A Survey on Transfer Learning</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">A Survey on Transfer Learning</h1>
+  
+
+  <section class="date_posted">
+    Posted on August 14, 2018
+  </section>
+
+  <section>
+    <p>Pan, Sinno Jialin, and Qiang Yang. “A survey on transfer learning.” IEEE Transactions on knowledge and data engineering 22.10 (2010): 1345-1359.</p>
+<h2 id="summary">Summary</h2>
+<p>As an example, a place where tranfer learning is needed is when data becomes outdated.</p>
+<h3 id="history">History</h3>
+<p>Since 1995, transfer learning has been called learning to learn, life-long learning, knowledge transfer, inductive transfer, multitask learning, knowledge consolidation, context-sensitive learning, knowledge-based inductive bias, metalearning, and incremental/cumulative learning. In multitask learning, one common method is the attempt to uncover latent variables shared among individual tasks.</p>
+<p>Later on, transfer learning tends to specify a <em>source task</em> and a <em>target task</em>, where knowledge learned from the former is applied to the latter.</p>
+<div class="center puzzle-figure">
+<p><img src="../files/pan-yang-transfer.png" alt="tradition vs transfer" " /></p>
+<strong>Figure 1.</strong> Traditional vs. transfer machine learning.
+<div align="right">
+Source: <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5288526">Pan, Yang 2010</a>
+</div>
+</div>
+<p></br></p>
+<h3 id="setting">Setting</h3>
+<p>A <em>domain</em> <span class="math inline">\(\mathcal{D} = (\mathcal{X},P(X))\)</span>$ is a feature space <span class="math inline">\(\mathcal{X}\)</span> with a marginal probability distribution <span class="math inline">\(P(X)\)</span>, where <span class="math inline">\(X = \{x_1,\dotsc, x_n\} \subset \mathcal{X}\)</span> is a particular learning sample.</p>
+<p>Given a domain, a <em>task</em> <span class="math inline">\(\mathcal{T} = \{\mathcal{Y}, f\}\)</span> consists of a label space <span class="math inline">\(\mathcal{Y}\)</span> and an objective predictive function <span class="math inline">\(f\)</span>. Though we don’t observe <span class="math inline">\(f\)</span>, we can observe labeled samples <span class="math inline">\(\{x_i, y_i\}\)</span>. We let <span class="math inline">\(\mathcal{D}_S\)</span> be the source domain and <span class="math inline">\(\mathcal{D}_T\)</span> be the target domain.</p>
+<p><strong>Definition 1 (Transfer learning).</strong> Given a source domain <span class="math inline">\(\mathcal{D}_S\)</span> and a learning task <span class="math inline">\(\mathcal{T}_S\)</span>, a target domain <span class="math inline">\(\mathcal{D}_T\)</span> and learning task <span class="math inline">\(\mathcal{T}_T\)</span>, <em>transfer learning</em> aims to help improve the learning of the target predictive function <span class="math inline">\(f_T\)</span> using knowledge in <span class="math inline">\(\mathcal{D}_S\)</span> and <span class="math inline">\(\mathcal{T}_S\)</span>, where <span class="math inline">\(\mathcal{D}_S \ne \mathcal{D}_T\)</span>, or <span class="math inline">\(\mathcal{T}_S \ne \mathcal{T}_T\)</span>.</p>
+<p>For example, a transfer learning setting is document classification, where <span class="math inline">\(\mathcal{D}_S\)</span> and <span class="math inline">\(\mathcal{D}_T\)</span> correspond to different languages (<span class="math inline">\(\mathcal{X}_S \ne \mathcal{X}_T\)</span>), or the target and source are focused on different topics (<span class="math inline">\(P(X_S)\ne P(X_T)\)</span>).</p>
+<p>Research issues in transfer learning are focused on:</p>
+<ul>
+<li>what to transfer</li>
+<li>how to transfer</li>
+<li>when to transfer (e.g. how to avoid <em>negative transfer</em>)</li>
+</ul>
+<p>And depending on the learning situation, there are three subsettings:</p>
+<ul>
+<li>inductive transfer learning</li>
+<li>transductive transfer learning</li>
+<li>unsupervised transfer learning</li>
+</ul>
+<div class="center puzzle-figure">
+<p><img src="../files/pan-yang-transfer-overview-small.png" alt="tradition vs transfer" " /></p>
+<strong>Figure 2.</strong> Subsettings in transfer learning. [<a href="../files/pan-yang-transfer-overview.png">large</a>]
+<div align="right">
+Source: <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5288526">Pan, Yang 2010</a>
+</div>
+</div>
+<p></br></p>
+<div class="center puzzle-figure">
+<p><img src="../files/pan-yang-transfer-settings-small.png" alt="tradition vs transfer" " /></p>
+<strong>Figure 3.</strong> Overview of settings in transfer learning. [<a href="../files/pan-yang-transfer-settings.png">large</a>]
+<div align="right">
+Source: <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5288526">Pan, Yang 2010</a>
+</div>
+</div>
+<p></br></p>
+<p>The methods of transfer learning are generally classified into:</p>
+<ul>
+<li>instance transfer: reweight labeled data in source domain for use in target domain (instance reweighting, importance sampling)</li>
+<li>feature-representation transfer: find a ‘good’ feature representation that reduces differences between source and target domains and the error of classification/regression models</li>
+<li>parameter transfer: discover shared parameters or priors between source domain and target domain</li>
+<li>relational-knowledge transfer: build mapping of relational knowledge between source domain and the target domain. Both domains are relational domains and i.i.d. assumption is relaxed (Mihalkova Huynh Mooney 2007).</li>
+</ul>
+<p>Note that unsupervised transfer learning only makes use of feature-representation transfer. Transuctive transfer learning can also make use of instance-transfer. Inductive transfer learning can use all four methods.</p>
+<h3 id="inductive-transfer-learning">Inductive Transfer Learning</h3>
+<p>In the inductive transfer learning setting, the target task differs from the source task. When a lot of labeled data are available in the source task, then this setting is similar to multitask learning (though here, we only care about the target task). When there is no labeled data in the source task, then this is similar to <em>self-taught learning</em>.</p>
+<p><strong>Definition 2 (Inductive Transfer Learning).</strong> Given source domain and task <span class="math inline">\(\mathcal{D}_S, \mathcal{T}_S\)</span> and target domain and task <span class="math inline">\(\mathcal{D}_T, \mathcal{T}_T\)</span>, <em>inductive transfer learning</em> aims to improve the learning of the target predictive function <span class="math inline">\(f_T\)</span> using the knowledge in <span class="math inline">\(\mathcal{D}_S\)</span> and <span class="math inline">\(\mathcal{T}_S\)</span> where <span class="math inline">\(\mathcal{T}_S \ne \mathcal{T}_T\)</span>.</p>
+<p>Thus, labeled training data <em>induce</em> the target predictive function.</p>
+<p><strong>Instance Transfer Approach.</strong> One method is the <em>TrAdaBoost</em> algorithm (Dai Yang Xue Yu 2007), which assumes that the source and target domain share the same features and labels, but with different distributions. Due to the difference in distribution, some source data may be helpful, while other may be harmful. The method iteratively reweights source data to reduce “bad” effects while encouraging “good” effects.</p>
+<p>Another is an active learning method that selects unlabeled data in the target domain to be labeled with the help of source domain data (Liao Xue Carin 2005).</p>
+<p>One compares conditional probabilities <span class="math inline">\(P(y_T|x_T)\)</span> and <span class="math inline">\(P(y_S|x_S)\)</span> to remove “misleading” training examples (Jiang Zhai 2007).</p>
+<p><strong>Feature Representation Transfer.</strong> In the supervised setting, the goal is to learn a low-dimensional representation shared across related tasks. For example, (Argyriou Evegniou Pontil 2007) proposed a sparse feature learning method, by solving the optimization problem: <span class="math display">\[\begin{align*}
+  \mathrm{arg\ min}_{A,U}&amp; \quad \sum_{t \in \{T,S\}} \sum_{i=1}^{n_t}
+  L(y_{t_i}, \langle a_t, U^\top x_{t_i}\rangle) + \gamma
+  ||A||^2_{2,1}\\
+  \mathrm{s.t.} &amp; \quad U \in O(d).
+  \end{align*}\]</span> where <span class="math inline">\(||A ||_{r,p} := \left(\sum_{i=1}^d  ||a^i||_r^p\right)^{1/p}\)</span> is the <span class="math inline">\((r,p)\)</span>-norm of <span class="math inline">\(A\)</span>, and <span class="math inline">\(O(d)\)</span> is the collection of <span class="math inline">\(d \times d\)</span> unitary matrices. This is just a regularized empirical loss over both source and target tasks. This was followed up by (Argyriou Micchelli Pontil Ying 2008) a spectral method. See also (Lee Chatalbashev Vickrey Koller 2007). For kernel selection, see (Jebara 2004) and (Rücker Kramer 2008).</p>
+<p>See paper for the unsupervised setting, with methods using sparse coding (Raina 2007) and manifold learning (Wang Mahadevan 2008), e.g. to align manifolds and transfer knowledge via aligned manifold.</p>
+<p><strong>Parameter Transfer.</strong> One method proposes a Gaussian Process (GP) prior that is shared across multiple tasks. Covariance matrix over tasks can model intertask dependences (Lwarence Platt 2004).</p>
+<p>Another method assumes that the parameter <span class="math inline">\(w\)</span> in SVMs for each task can be separated into two terms: a common term and a task-specific term, so that: <span class="math display">\[\begin{equation*}
+  w_S = w_0 + v_S \quad\quad w_T = w_0 + v_T.
+  \end{equation*}\]</span></p>
+<p><strong>Relational Knowledge Transfer.</strong> This method using <em>statistical relational learning techniques</em> deals with relational domains (such as networked data). See (Mihalkova Huynh Mooney 2007) for the algorithm TAMAR, relying on Markov Logic Networks (MLNs). See (Richardson Domingos 2005) on MLNs, combining first-order logic with probability. Further extensions in (Mihalkova Mooney 2008) and (Davis Domingos 2009).</p>
+<h3 id="transductive-transfer-learning">Transductive Transfer Learning</h3>
+<p>The source and target are the same, but the domains are different. In particular, the feature space may differ, or the marginal distributions may differ. In the latter case, this is related to domain adaptation for knowledge transfer in text classification (Daume Marcu 2006), sample selection bias (Zadrozny 2004), and covariate shift (Shimodaira 2000).</p>
+<p><strong>Definition 3 (Transductive Transfer Learning.</strong> Given a source domain and task <span class="math inline">\(\mathcal{D}_S\)</span> and <span class="math inline">\(\mathcal{T}_T\)</span>, a target domain and task <span class="math inline">\(\mathcal{D}_T\)</span> and <span class="math inline">\(\mathcal{T}_T\)</span>, <em>transductive transfer learning</em> aims to learn the target predictive function using the knowledge <span class="math inline">\(\mathcal{D}_S\)</span> and <span class="math inline">\(\mathcal{T}_S\)</span> where <span class="math inline">\(\mathcal{D}_S  \ne \mathcal{D}_T\)</span> and <span class="math inline">\(\mathcal{T}_S = \mathcal{T}_T\)</span>. In addition, some unlabeled target-domain data must be available at training time.</p>
+<p><strong>Instance Transfer.</strong> When <span class="math inline">\(P(D_S) \ne P(D_T)\)</span>, then we need to modify the usual optimization problem: <span class="math display">\[\begin{equation}
+\theta^* = \mathrm{arg\ min}_{\theta \in \Theta} \sum_{(x,y) \in D_T}
+P(D_T) \ell(x,y,\theta) \tag{usual problem}
+\end{equation}\]</span> with the problem: <span class="math display">\[\begin{align}
+\theta^* &amp;= \mathrm{arg\ min}_{\theta\in\Theta} \sum_{(x,y) \in D_S}
+\frac{P(D_T)}{P(D_S)} P(D_S) \ell(x,y,\theta) \tag{modified problem}\\
+&amp;\approx \mathrm{arg\ min}_{\theta \in \Theta} \sum_{i=1}^{n_S}
+\frac{P_T(x_{T_i}, y_{T_i})}{P(x_{S_i}, y_{S_i})}
+\ell(x_{S_i},y_{S_i}, \theta)\nonumber
+\end{align}\]</span> There are a few ways to estimate <span class="math inline">\(P(x_S)/P(x_T)\)</span>. See (Zadrozny 2004) and (Huang Smola Gretton Borgwardt Scholkopf 2007) for kernel-mean matching (KMM). For the Kullback-Leibler Importance Estimation Procedure (KLIEP), see (Sugiyama et. al. 2008).</p>
+<p><strong>Feature Representation Transfer.</strong> The <em>structural correponsdence learning</em> (SCL) algorithm defines a set of <em>pivot</em> features (relevant features that may reduce difference between domains, depending on domain and prior knowledge). SCL removes pivot features from the data and treats these as label vectors. Choosing the pivot features is difficult; one method uses mutual information (MI-SCL) to find pivot features that have high dependence on the labels in source domain.</p>
+<p>In NLP, transfer learning is also called <em>domain adaptation</em> (Daume 2007).</p>
+<h3 id="unsupervised-transfer-learning">Unsupervised Transfer Learning</h3>
+<p>In unsupervised transfer learning, the task is different, such as clustering (Dai Yang Xue Yu 2008), dimensionality reduction (Wang Song Zhang 2008), and density estimation.</p>
+<p><strong>Definition 4 (Unsupervised Transfer Learning).</strong> Given source domain and task <span class="math inline">\(\mathcal{D}_S\)</span> and <span class="math inline">\(\mathcal{T}_S\)</span> and target domain and task <span class="math inline">\(\mathcal{D}_T\)</span> and <span class="math inline">\(\mathcal{T}_T\)</span>, <em>unsupervised transfer learning</em> aims to learn the target predictive function <span class="math inline">\(f_T\)</span> using knowledge in <span class="math inline">\(\mathcal{D}_S\)</span> and <span class="math inline">\(\mathcal{T}_S\)</span> where <span class="math inline">\(\mathcal{T}_S \ne \mathcal{T}_T\)</span> and <span class="math inline">\(\mathcal{Y}_S\)</span> and <span class="math inline">\(\mathcal{Y}_T\)</span> are not observable.</p>
+<p><strong>Feature Representation Transfer.</strong> <em>Self-taught clustering</em> is an example of unsupervised transfer learning, trying to learn a common feature space across domains. Similarly, there is also a transfer dimensionality reduction (TDA) problem.</p>
+<h3 id="transfer-bounds-and-negative-transfer">Transfer Bounds and Negative Transfer</h3>
+<p>Theoretical bounds are proved using Kolmogorov complexity in (Mahmud Ray 2008).</p>
+<p>Little work shows how to avoid negative transfer, when reduce performance occurs due to transfer of knowledge. It is shown empirically that if the tasks are too dissimilar, then negative transfer may occur.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1.</strong> What sort of target tasks become really easy to learn once you’ve learned a source task? Tensor decomposition seems like an example, where it’s hard to learn a latent variable model. But constructing data for higher order interaction leads to a different problem that’s easier. Then, the solution to that problem also gives a solution to the target task.</p>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>[<a href="https://link.springer.com/content/pdf/10.1023/A:1007379606734.pdf">Caruana 1997</a>] Multitask Learning</li>
+<li>[<a href="http://ai.stanford.edu/~hllee/icml07-selftaughtlearning.pdf">Raina 2007</a>] Self-Taught Learning: Transfer Learning from Unlabeled Data</li>
+<li>[<a href="https://arxiv.org/pdf/1109.6341.pdf">Daume Marcu 2006</a>] Domain Adaptation for Statistical Classifiers</li>
+<li>[<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.92.170&amp;rep=rep1&amp;type=pdf">Zadrozny 2004</a>] Learning and evaluating classifiers under sample selection bias</li>
+<li>[<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.370.4921&amp;rep=rep1&amp;type=pdf">Shimodaira 2000</a>] Improving predictive inference under covariate shift by weighting the log-likelihood function</li>
+<li>[<a href="https://www.cse.ust.hk/~qyang/Docs/2008/dwyakicml.pdf">Dai Yang Xue Yu 2008</a>] Self-Taught Clustering</li>
+<li>[<a href="https://link.springer.com/content/pdf/10.1007%2F978-3-540-87481-2_36.pdf">Wang Song Zhang 2008</a>] Transferred Dimensionality Reduction</li>
+<li>[<a href="http://www.cs.utexas.edu/~ai-lab/pubs/mihalkova-aaai07.pdf">Mihalkova Huynh Mooney 2007</a>] Mapping and Revising Markov Logic Networks for Transfer Learning</li>
+<li>[<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.646.8484&amp;rep=rep1&amp;type=pdf">Dai Yang Xue Yu 2007</a>] Boosting for Transfer Learning</li>
+<li>[<a href="http://people.ee.duke.edu/~xjliao/paper/ICML05_MigLogit.pdf">Liao Xue Carin 2005</a>] Logistic Regression with an Auxiliary Data Source</li>
+<li>[<a href="http://sifaka.cs.uiuc.edu/czhai/pub/acl07.pdf">Jiang Zhai 2007</a>] Instance Weighting for Domain Adaptation in NLP</li>
+<li>[<a href="https://papers.nips.cc/paper/3143-multi-task-feature-learning.pdf">Argyriou Evgeniou Pontil 2007</a>] Multi-Task Feature Learning</li>
+<li>[<a href="http://www0.cs.ucl.ac.uk/staff/M.Pontil/reading/spectral_mtl.pdf">Agryriou Micchelli Pontil Ying 2008</a>] A Spectral Regularization Framework for Multi-Task Structure Learning</li>
+<li>[<a href="http://www.jmlr.org/papers/volume11/argyriou10a/argyriou10a.pdf">Agryriou Michelli Potnil 2010</a>] On Spectral Learning</li>
+<li>[<a href="https://link.springer.com/content/pdf/10.1007%2Fs10994-013-5366-3.pdf">Signoretto Dinh Lathauwer Suykens 2014</a>] Learning with tensors: a framework based on convex optimization and spectral regularization</li>
+<li>[<a href="https://ai.stanford.edu/~koller/Papers/Lee+al:ICML07.pdf">Lee Chatalbashev Vickrey Koller 2007</a>] Learning a Meta-Level Prior for Feature Relevance from Multiple Related Tasks</li>
+<li>[<a href="http://www.cs.columbia.edu/~jebara/papers/metalearn.pdf">Jebara 2004</a>] Multi-Task Feature and Kernel Selection for SVMs</li>
+<li>[<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.164.343&amp;rep=rep1&amp;type=pdf">Rücker Kramer 2008</a>] Kernel-Based Inductive Transfer</li>
+<li>[<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.440.3620&amp;rep=rep1&amp;type=pdf">Lawrence Platt 2004</a>] Learning to Learn with the Informative Vector Machine</li>
+<li>[<a href="https://homes.cs.washington.edu/~pedrod/papers/mlj05.pdf">Richardson Domingos 2005</a>] Markov Logic Networks</li>
+<li>[<a href="http://pages.cs.wisc.edu/~jdavis/davisICML09.pdf">Davis Domingos 2009</a>] Deep Transfer via Second-Order Markov Logic</li>
+<li>[<a href="http://www.cs.utexas.edu/~ml/papers/lily-ws-aaai-08.pdf">Mihalkova Mooney 2008</a>] Transfer Learning by Mapping with Minimal Target Data</li>
+<li>[<a href="https://papers.nips.cc/paper/3075-correcting-sample-selection-bias-by-unlabeled-data.pdf">Huang Smola Gretton Borgwardt Scholkopf 2007</a>] Correcting Sample Selection Bias by Unlabeled Data</li>
+<li>[<a href="https://papers.nips.cc/paper/3248-direct-importance-estimation-with-model-selection-and-its-application-to-covariate-shift-adaptation.pdf">Sugiyama et. al. 2008</a>] Direct Importance Estimation with Model Selection and its Application to Covariate Shift Adaptation</li>
+<li>[<a href="http://users.umiacs.umd.edu/~hal/docs/daume07easyadapt.pdf">Daume III 2007</a>] Frustratingly easy domain adaptation</li>
+<li>[<a href="https://papers.nips.cc/paper/3228-transfer-learning-using-kolmogorov-complexity-basic-theory-and-empirical-evaluations.pdf">Mahmud Ray 2008</a>] Transfer Learning Using Kolmogorov Complexity: Basic Theory and Empirical Evaluations</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
