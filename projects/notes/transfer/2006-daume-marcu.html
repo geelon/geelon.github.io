@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Domain adaptation for statistical classifiers</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Domain adaptation for statistical classifiers</h1>
+  
+
+  <section class="date_posted">
+    Posted on August 16, 2018
+  </section>
+
+  <section>
+    <p>Daume III, Hal, and Daniel Marcu. “Domain adaptation for statistical classifiers.” Journal of Artificial Intelligence Research 26 (2006): 101-126.</p>
+<h2 id="summary">Summary</h2>
+<p>Techniques used before this paper included:</p>
+<ol style="list-style-type: decimal">
+<li>treat out-of-domain data as <em>prior knowledge</em> by performing a MAP estimate using this prior distribution</li>
+<li>use out-of-domain data to estimate a prior distribution in the context of a maximum entropy model, and this becomes the mean weights for a Gaussian prior for the in-domain data</li>
+<li>build an out-of-domain model and use its predictions as features for the in-domain data</li>
+</ol>
+<p>This paper considers three distributions, <span class="math inline">\(q^{(o)}\)</span>, <span class="math inline">\(q^{(g)}\)</span> and <span class="math inline">\(q^{(i)}\)</span>, where the out-of-domain distribution <span class="math inline">\(p^{(o)}\)</span> is a mixture of a domain-specific and general distribution, <span class="math inline">\(q^{(o)}\)</span> and <span class="math inline">\(q^{(g)}\)</span>. Likewise, the in-domain distribution <span class="math inline">\(p^{(i)}\)</span> is a mixture of <span class="math inline">\(q^{(i)}\)</span> and <span class="math inline">\(q^{(g)}\)</span>.</p>
+<p>They apply it to log-linear conditional maximum entropy models and their linear chain counterparts.</p>
+<h3 id="review-of-maximum-entropy-models">Review of Maximum Entropy Models</h3>
+<p>The maximum entropy framework seeks the conditional distribution <span class="math inline">\(p(y | x)\)</span> that is closest to the uniform distribution while matching a set of training data <span class="math inline">\(\mathcal{D}\)</span> with respect to feature function expectations. That is, it seeks for the minimizer of <span class="math inline">\(\mathrm{KL}\big( p(y|x)\ \big|\big|\ \mathrm{uniform}(y)\big)\)</span>.</p>
+<p>Introducing a Lagrange multiplier for each feature function <span class="math inline">\(f_i\)</span> yields a probability distribution function of the form: <span class="math display">\[\begin{equation}\label{class}
+p(y | x; \lambda) = \frac{1}{Z_{\lambda,x}}
+\mathrm{exp}\left[\lambda^\top \mathbf{f}(x,y)\right],
+\end{equation}\]</span> called an <em>exponential distribution</em> or a <em>Gibbs distribution</em>. A regularization term is often included to prevent overfitting by placing a Gaussian prior over <span class="math inline">\(\lambda\)</span> with mean 0 and covariance <span class="math inline">\(\sigma^2I\)</span>. Furthermore, we may assume that we can identify <span class="math inline">\(x\)</span> with a binary feature vector, and so instead of <span class="math inline">\(\lambda^\top mathbf{f}(x,y)\)</span>, we can consider <span class="math inline">\(\lambda_y^\top x\)</span>. And so, the log-likelihood becomes: <span class="math display">\[\mathcal{L} = - \frac{1}{2\sigma^2} \lambda^\top \lambda +
+\sum_{i=1}^N \left[\lambda_{y_i}^\top x_n - \log \sum_{y' \in
+\mathcal{Y}} \mathrm{exp}\left[\lambda_{y'}^\top x_n\right]\right] + C.
+\]</span></p>
+<h3 id="maximum-entropy-genre-adaptation-model">Maximum Entropy Genre Adaptation Model</h3>
+<p>This paper then extends the maximum entropy model to the <em>maximum entropy genre adaptation</em> (MEGA) model. This model assumes that each in-domain data point <span class="math inline">\((x^{(i)},y^{(i)})\)</span> has a corresponding latent binary indicator <span class="math inline">\(z\)</span> that is equal to 1 when the data point is drawn from <span class="math inline">\(q^{(i)}\)</span> and 0 when drawn from <span class="math inline">\(q^{(g)}\)</span> (likewise for out-of-domain data). The <span class="math inline">\(z\)</span>’s are drawn from a Bernoulli distribution with parameter <span class="math inline">\(\pi^{(i)}\)</span>. And correspondingly, there are <span class="math inline">\(\lambda^{(i)}\)</span>, <span class="math inline">\(\lambda^{(g)}\)</span> and <span class="math inline">\(\lambda^{(o)}\)</span> for the three distributions <span class="math inline">\(q^{(i)}\)</span>, <span class="math inline">\(q^{(g)}\)</span> and <span class="math inline">\(q^{(o)}\)</span>.</p>
+<p>Finally, the model also assumes that the data <span class="math inline">\(x^{(i)}\)</span> are drawn from Bernoulli distributions parametrized either by <span class="math inline">\(\psi^{(i)}\)</span> or <span class="math inline">\(\psi^{(g)}\)</span> (and likewise for <span class="math inline">\(x^{(o)}\)</span>). The <span class="math inline">\(\psi\)</span>’s are given a Beta prior. Thus, the generative story for an in-domain data point <span class="math inline">\(x^{(i)}\)</span> is:</p>
+<ol style="list-style-type: decimal">
+<li>select whether <span class="math inline">\(x^{(i)}\)</span> will be in-domain or general-domain, indicated by <span class="math inline">\(z^{(i)}\)</span>, where <span class="math inline">\(z^{(i)} \sim \mathrm{Ber}(\pi^{(i)})\)</span>.</li>
+<li>For each component <span class="math inline">\(f\)</span> of <span class="math inline">\(x^{(i)}\)</span>, choose <span class="math inline">\(x_f^{(i)}\)</span> according to the distribution <span class="math inline">\(\mathrm{Ber}(\psi_f^{z^{(i)}})\)</span>.</li>
+<li>Choose <span class="math inline">\(y\)</span> according to Equation <span class="math inline">\(\ref{class}\)</span> using the parameter <span class="math inline">\(\lambda^{z^{(i)}}\)</span>.</li>
+</ol>
+<div class="center puzzle-figure">
+<p><img src="../files/daume-marcu-graphical-model.png" alt="graphical model" " /></p>
+<strong>Figure 1.</strong> (Left) standard logistic regression model (right) MEGA model.
+<div align="right">
+Source: <a href="https://arxiv.org/pdf/1109.6341.pdf">Daume Marcu 2006</a>
+</div>
+</div>
+<p></br></p>
+<h3 id="linear-chain-model">Linear Chain Model</h3>
+<p>The <em>maximum entropy Markov model</em> (MEMM) is obtained by assuming that the targest <span class="math inline">\(y_n\)</span> are a sequence of labels. For example, parts of speech tagging may be achieved by introducing a first-order Markov assumption on the tag sequence (as a discriminative counterpart to the standard generative HMM).</p>
+<h3 id="conditional-expectation-maximization">Conditional Expectation Maximization</h3>
+<p>A nice summary comparing EM vs. CEM:</p>
+<blockquote>
+At a high level, EM is useful for computing in <em>generative</em> models with hidden variables, while conditional expectation maximization (CEM) is useful for computing in <em>discriminative</em> models with hidden variables.
+<div align="right">
+(Daume Marcu 2006).
+</div>
+</blockquote>
+<p>The standard EM maximizes a joint likelihood over data. However, conditional models need to maximize the conditional likelihood: <span class="math display">\[\begin{align}
+\mathcal{L} &amp;= \log p(y|x;\theta) \nonumber \\
+&amp;= \log \sum_z p(z,x,y| \theta) - \log \sum_z p(z,x | \theta),
+\end{align}\]</span> where we can’t apply Jensen’s to the second term (as we would to the first in the standard EM algorithm) to get a lower bound on the likelihood.</p>
+<p>The CEM solution (Jebara Pentland 1998) is to bound the <em>change</em> in conditional log likelihood between iterations: <span class="math display">\[\Delta \mathcal{L}^c = \log p(y | x; \theta^t) - \log
+p(y|x;\theta^{t-1}).\]</span> Combine this with the (tight) upper bound, <span class="math inline">\(\log x \leq x - 1\)</span> leads to the lower bound on the change in log likelihood: <span class="math display">\[\Delta \mathcal{L}^c \geq Q^t:= \sum_{z \in \mathcal{Z}} h_z \log
+\frac{p(z,x,y|\theta^t)}{p(z,x,y|\theta^{t-1})} - \frac{\sum_z p(z,x |
+\theta^t)}{\sum_z p(z,x|\theta^{t-1})} + 1,\]</span> where <span class="math inline">\(h_z = p(z | x; \theta)\)</span>.</p>
+<p>The corresponding MAP estimate just adds a <span class="math inline">\(\log p(\theta)\)</span> to <span class="math inline">\(Q^t\)</span>.</p>
+<h3 id="mega-cem">MEGA CEM</h3>
+<p>See section 5 of paper for derivation of CEM for the MEGA model and complete training algorithm.</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1.</strong> Here, related knowledge is modeled by a general domain distribution <span class="math inline">\(q^{(g)}\)</span> mixed with a domain-specific distribution. What non-distributional approaches to domain adaptation/transfer learning are there? Learning analogies?</p>
+<p><strong>Question 2.</strong> When one creates a model, how do you determine whether it is identifiable? How do they know MEGA is identifiable?</p>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>[<a href="http://papers.nips.cc/paper/1537-maximum-conditional-likelihood-via-bound-maximization-and-the-cem-algorithm.pdf">Jebara Pentland 1998</a>] Maximum Conditional Likelihood via Bound Maximization and the CEM Algorithm</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>On Discriminative vs. Generative classifiers, A comparison of logistic regression and naive Bayes</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">On Discriminative vs. Generative classifiers, A comparison of logistic regression and naive Bayes</h1>
+  
+
+  <section class="date_posted">
+    Posted on August 15, 2018
+  </section>
+
+  <section>
+    <h2 id="summary">Summary</h2>
+<p>Let <span class="math inline">\(x\)</span> be inputs and <span class="math inline">\(y\)</span> be labels. <em>Generative classifiers</em> learn a model of the joint probability <span class="math inline">\(p(x,y)\)</span>. In contrast, <em>discrimative classifiers</em> learn <span class="math inline">\(p(y|x)\)</span> directly.</p>
+<p>In general, it is thought that learning the discriminative model is preferable. In addition to the sample complexity in the discriminative case being linear in the VC dimension, citing Vapnik:</p>
+<blockquote>
+<p>One should always solve the [classification] problem directly and never solve a more general problem as an intermediate step [such as modeling <em>p</em>(<em>x</em>|<em>y</em>)].</p>
+</blockquote>
+<p>When learning a model, we can either maximize the joint likelihood of inputs and labels <span class="math inline">\(p(x,y)\)</span>, or we can maximize the conditional likelihood <span class="math inline">\(p(y|x)\)</span> directly or the 0-1 loss by thresholding <span class="math inline">\(p(y|x)\)</span> to make predictions. Let the resulting classifiers be called <span class="math inline">\(h_\mathrm{Gen}\)</span> and <span class="math inline">\(h_\mathrm{Dis}\)</span>, respectively. The two are called a <em>generative-discriminative pair</em>.</p>
+<h3 id="setting">Setting</h3>
+<p>Consider the binary classification setting on <span class="math inline">\(\mathcal{X}\)</span> and labels <span class="math inline">\(\mathcal{Y} = \{0,1\}\)</span>. Let <span class="math inline">\(\mathcal{D}\)</span> be a joint distribution over <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span> from which a training set <span class="math inline">\(S = \{x^{(i)},y^{(i)}\}_{i=1}^m\)</span> is drawn.</p>
+<p><strong>Generative Classifier.</strong> The generative classifier <span class="math inline">\(h_\mathrm{Gen}\)</span> returns the argmax over <span class="math inline">\(y\)</span> of the joint probability <span class="math inline">\(p(x_1,\dotsc, x_n, y) = p(x_1,\dotsc, x_n| y) p(y)\)</span>. That is, <span class="math inline">\(h_\mathrm{Gen}(x) = 1\)</span> if and only if the following is positive: <span class="math display">\[\begin{equation*}
+l_\mathrm{Gen}(x) = \log \frac{p(x_1,\dotsc, x_n, y=1)}{p(x_1,\dotsc,
+x_n, y=0)} = \log \frac{p(x_1,\dotsc, x_n| y=1)}{p(x_1,\dotsc, x_n|
+y=0)} + \log \frac{p(y = 1)}{p(y=0)}.
+\end{equation*}\]</span> The naive Bayes assumption is that <span class="math inline">\(p(x_1,\dotsc, x_n|y) = \prod_{i=1}^n p(x_i|y)\)</span>.</p>
+<p><em>Discrete case.</em> Let <span class="math inline">\(\mathcal{X} = \{0,1\}^n\)</span>. We can compute estimates <span class="math inline">\(\hat{p}(x_i|y)\)</span> and <span class="math inline">\(\hat{p}(y)\)</span> based on samples: <span class="math display">\[\begin{equation*}
+\hat{p}(x_i = 1 | y = b) = \frac{\#_S\{x_i = 1, y=b\} + \ell}{\#_S\{y
+= b\} + 2\ell}.
+\end{equation*}\]</span> When <span class="math inline">\(\ell = 0\)</span>, this is the usual empirical estimate. But <span class="math inline">\(\ell\)</span> may also be set to a positive number, applying the Laplace smoothing to the probabilities.</p>
+<p><em>Continuous case.</em> Here, the only difference is that we let <span class="math inline">\(\mathcal{X} = [0,1]^n\)</span> and the class conditional distributions <span class="math inline">\(\hat{p}(x_i | y = b)\)</span> be parametrized by a univariate distribution <span class="math inline">\(\mathcal{N}(\hat{\mu}_{i|y = b} , \hat{\sigma}_i^2)\)</span>.</p>
+<p><strong>Discriminative Classifier.</strong> The discriminative classifier <span class="math inline">\(h_\mathrm{Dis}\)</span></p>
+<h2 id="discussion">Discussion</h2>
+<h3 id="further-reading">Further Reading</h3>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
