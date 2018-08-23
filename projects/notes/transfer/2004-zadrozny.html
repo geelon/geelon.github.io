@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Learning and Evaluating Classifiers under Sample Selection Bias</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">GS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+            <li><a href="../../../writing">writing</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	    <li><a href="../../../me">me</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Learning and Evaluating Classifiers under Sample Selection Bias</h1>
+  
+
+  <section class="date_posted">
+    Posted on August 22, 2018
+  </section>
+
+  <section>
+    <p>Zadrozny, Bianca. “Learning and evaluating classifiers under sample selection bias.” Proceedings of the twenty-first international conference on Machine learning. ACM, 2004.</p>
+<h2 id="summary">Summary</h2>
+<p>We often learn on training data that is sampled from a different distribution than the test data. In econometrics, this is called the <em>sample selection bias</em>. And in the context of linear regression models, there is work by Heckman 1979 to correct the bias. In statistics, this is related to the <em>missing data</em> problem. This paper presents a method to correct the bias using a form of rejection sampling.</p>
+<h3 id="setting">Setting</h3>
+<p>Consider a classification setting where samples <span class="math inline">\((x,y,s) \in \mathcal{X}\times \mathcal{Y} \times \mathcal{S}\)</span> are drawn from a distribution <span class="math inline">\(\mathcal{D}\)</span>. Here, <span class="math inline">\(s\)</span> is a binary variable that indicates whether the datapoint <span class="math inline">\((x,y)\)</span> is seen in training.</p>
+<p>There are four cases regarding the dependence of <span class="math inline">\(s\)</span> on the example <span class="math inline">\((x,y)\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(s\)</span> is independent of <span class="math inline">\(x\)</span> and independent of <span class="math inline">\(y\)</span>. In statistics, this is the <em>missing completely at random</em> (MCAR) case. Here, the selected sample is not biased.</li>
+<li><span class="math inline">\(s\)</span> is independent of <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span>: <span class="math display">\[\begin{equation*} P(s| x,y) = P(s|x).\end{equation*}\]</span> In statistics, this is the <em>missing at random</em> (MAR) case.</li>
+<li><span class="math inline">\(s\)</span> is independent of <span class="math inline">\(x\)</span> given <span class="math inline">\(y\)</span>: <span class="math display">\[\begin{equation*} P(s| x,y) = P(s|y).\end{equation*}\]</span> This corresponds to a change in the prior probabilities of the labels, and this setting is well-studied in the machine learning literature. See (Elkan 2001) and (Bishop 1995), for example.</li>
+<li>No independence assumption holds between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> and <span class="math inline">\(s\)</span>. This is the <em>not missing at random</em> (NMAR) case. In this case, there is no way to provide an unbiased estimate, unless we have access to additional features <span class="math inline">\(x_s\)</span> such that <span class="math inline">\(p(s|x_s,x,y) = p(s|x_s)\)</span>. This is the usual situation in econometrics, where <span class="math inline">\(x_s\)</span> contain all the features that are relevant to sample selection.</li>
+</ol>
+<p>In the classification setting, we mostly care about prediction and not the underlying generative model. And so, this paper focuses on case (2). In practice, to make <span class="math inline">\(p(s|x,y) = p(s|x)\)</span> true, <span class="math inline">\(x\)</span> must contain all the features used for sample selection.</p>
+<h3 id="local-and-global-learners">Local and Global Learners</h3>
+<p>This paper introduces two types of classifier learners:</p>
+<p><strong>Definition 1.</strong> A learner is <em>local</em> if its output is depends asymptotically only on <span class="math inline">\(P(y|x)\)</span>. Otherwise, the learner is <em>global</em> when it depends on <span class="math inline">\(P(y|x)\)</span> and <span class="math inline">\(P(x)\)</span>.</p>
+<p>Notice that sample selection bias does not affect local learners because their classification depends only on the distribution at a given input <span class="math inline">\(x\)</span>, and by definition, <span class="math inline">\(P(y|x) = P(y|x,s=1)\)</span>.</p>
+<p><strong>Example 2 (Bayes Classifier and Logistic Regression).</strong> Bayes classifiers depend only on the posterior probability <span class="math inline">\(P(y|x)\)</span> to make a decision. They are local learners. Similarly, logistic regression fits parametric model using MLE on: <span class="math display">\[\begin{equation*}
+  P(y= 1| x) = \frac{1}{1 + \mathrm{exp}(\beta_0 + \beta^\top x)}.
+  \end{equation*}\]</span> If <span class="math inline">\(P(s=1| x) &gt; 0\)</span> for all <span class="math inline">\(x\)</span> in the support of <span class="math inline">\(P(x)\)</span>, then logistic regression is also local.</p>
+<p><strong>Example 3 (Naive Bayes Classifier).</strong> The naive Bayes classifier uses MLE to maximize <span class="math inline">\(P(y|x_1) \dotsm P(y|x_n)\)</span>. However, in general, it is not the case that: <span class="math display">\[\begin{equation*}
+  \prod_{i=1}^n P(y|x_i) = \prod_{i=1}^n P(y|x_i, s=1),
+  \end{equation*}\]</span> so these are global learners.</p>
+<p><strong>Example 4 (Decision Trees).</strong> Decision trees recursively split the space <span class="math inline">\(\mathcal{X}\)</span> along a single feature, based on the impurity after the split. Thus, these classifiers depend on <span class="math inline">\(P(y|t)\)</span>, where <span class="math inline">\(t\)</span> is a test that uses one feature of <span class="math inline">\(x\)</span>. And in general, <span class="math inline">\(P(y|t)  \ne P(y|t, s=1)\)</span>. So, these are also global learners.</p>
+<p><strong>Example 5 (Hard SVM).</strong> Assuming separable data, if the selection probability <span class="math inline">\(P(s=1 | x) &gt; 0\)</span> for all <span class="math inline">\(x\)</span> such that <span class="math inline">\(P(x) &gt; 0\)</span>, then asymptotically, the decision boundary resulting from SVM will converge to the expecte decision boundary without sampling selection bias. Thus, these are local learners.</p>
+<p><strong>Example 6 (Soft SVM).</strong> On the other hand, soft-SVM takes into account the density of positive vs. negative points, and so they are global learners.</p>
+<h3 id="correcting-the-bias">Correcting the Bias</h3>
+<p>When learning a classifier, we often rely on estimating the risk, <span class="math display">\[\begin{equation*}
+\mathbb{E}_{(x,y) \sim \mathcal{D}}\left[\ell(x,y)\right] =
+\sum_{(x,y)} \ell(x,y) \cdot P(x,y).
+\end{equation*}\]</span> However, with sampling selection bias, we instead estimate: <span class="math display">\[\begin{equation*}
+\mathbb{E}_{(x,y,s) \sim \mathcal{D}} \left[\ell(x,y)\big| s =
+1\right] = \sum_{(x,y)} \ell(x,y) \cdot P(x,y|s=1). 
+\end{equation*}\]</span> To correct the bias, we should then reweight the sample <span class="math inline">\((x,y)\)</span> by <span class="math inline">\(P(x,y)/P(x,y|s=1)\)</span>. And as we have <span class="math inline">\(P(y|x) = P(y|x, s=1)\)</span>, this is equivalent to reweighting the sample by: <span class="math display">\[\begin{align}
+\frac{P(x,y)}{P(x,y|s=1)} &amp;= \frac{P(y|x)P(x)}{P(y|x, s=1)
+P(x|s=1)}\nonumber \\
+&amp;= \frac{P(x)}{P(x| s=1)}\nonumber \\
+&amp;= \frac{P(s=1)}{P(s=1|x)} 
+\end{align}\]</span> We obtain an unbiased estimate of the risk by reweighting the cost by this value. In practice, we would need to estimate <span class="math inline">\(P(s=1 | x)\)</span>; however, this is often feasible (e.g. in medical trials, the outcome <span class="math inline">\(y\)</span> of a patient <span class="math inline">\(x\)</span> is known only if they undergo a trial <span class="math inline">\(s\)</span>).</p>
+<h2 id="discussion">Discussion</h2>
+<p><strong>Question 1.</strong> What is rejection sampling? Is it related to importance sampling?</p>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li>[<a href="./">Heckman 1979</a>] Sample selection bias as a specification error</li>
+<li>[<a href="./">Elkan 2001</a>] The foundations of cost-sensitive learning</li>
+<li>[<a href="./">Bishop 1995</a>] Neural networks for pattern recognition</li>
+</ul>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
