@@ -35,7 +35,7 @@ I'm an M.S. student working on machine learning, hoping to help make knowledge a
 
 ## RESEARCH INTERESTS
 
-I'm interested in learning theory, theoretical computer science, and geometry, particularly, the *design of algorithms that require less time, space, and data*.
+I'm interested in learning theory, theoretical computer science, and geometry; these fields are all related the *design of algorithms that require less time, space, and data*.
 My thesis focuses on **active learning**, a subfield of machine learning that aims to use interactivity to reduce the amount of data needed to learn. I also enjoy perspectives from algebra, functional analysis, algebraic geometry, and information theory.  
 
 Here are some of my [reading notes](/projects/notes)
