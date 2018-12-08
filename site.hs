@@ -26,7 +26,7 @@ main = hakyll $ do
 
 
   {- Index Files -}
-  match ("writing/index.*" .||. "me/*" .||. "projects/*") $ do
+  match ("writing/index.*" .||. "me/*" .||. "projects/*" .||. "index.markdown" ) $ do
     route $ setExtension "html"
     compile $ pandocMathCompiler
       >>= applyStandardTemplate
@@ -76,8 +76,7 @@ main = hakyll $ do
 --------------------------------------------------------------------------------
 {- PATTERNS -}
 directCopy :: Pattern
-directCopy = "index.html"              .||.
-             "images/*"                .||.
+directCopy = "images/*"                .||.
              "writing/files/**"        .||.
              "projects/files/**"       .||.
              "projects/notes/files/**" .||.

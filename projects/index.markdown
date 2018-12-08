@@ -3,48 +3,73 @@ title: Projects
 ---
 
 # Projects
-## Thesis Work
-I am beginning work on my Master's thesis at Columbia University. At this point, I am working on clarifying my research direction by reading a lot. Here is an overview of my research direction followed by a [reading list](./files/research_direction.pdf). [Notes](./notes/)
 
-## Teaching
-I am passionate about teaching. Courses I have been a TA for at Columbia University:
+</br>
 
-- [COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), *by Nakul Verma* (graduate level). Slides/notes to my lectures:
-    + spectral graph theory, [notes](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec4_spectral_graph_theory_and_clustering.pdf)
-    + tensor decomposition, [slides](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec10_tensors_slides.pdf)
-    + topological data analysis, [slides](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec11_tda_slides.pdf)
-- [COMS 4771 Machine Learning](https://www.cs.columbia.edu/~verma/classes/ml/index.html), *by Nakul Verma*.
-- COMS 4203 Graph Theory, *by Tim Sun*.
-- QMSS 4070 GIS/Spatial Analysis, *by Michael Parrott* (graduate level). 
+## RESEARCH
+I began working on my Master's thesis at Columbia University in January 2018. At that point, I documented my intended [research direction](/projects/files/research_direction.pdf). Looking back, it's quite evident how broad and incoherent my original 'direction' was. Still, here are some of my [notes](/projects/notes/) from my readings. Now, I have a much more specific research direction within active learning; more to come later...
 
-## Graduate Courses
-In Fall 2017, I took four courses, each with a project component:
+</br>
 
-- [ECBM-4040 Neural Networks and Deep Learning](./files/2017-fall/neural-networks-final-report.pdf): reproduced and reinterpreted using information theory some results of [Zhang, et. al.](https://arxiv.org/abs/1611.03530) Understanding deep learning requires rethinking generalization. [Code](https://github.com/geelon/ecbm-generalization)
-- [COMS-6998-02 Information Theory](./files/2017-fall/information-theory-final-report.pdf): in this project, we look at some tradeoffs between the complexity and learnability of a hypothesis class.
-- [COMS-6998-04 Topics in Learning Theory](./files/2017-fall/learning-theory-final-report.pdf): this project compares the relative power of disagreement- and diameter-based active learning methods. [Slides](./files/2017-fall/learning-theory-presentation.pdf)
-- [COMS-6998-05 Algorithms through Geometric Lens](./files/2017-fall/algorithms-final-report.pdf): this is an expository paper on kernel methods and a specific application to locality sensitive hashing (LSH), resulting in kernel LSH (KLSH).
+## TEACHING
+I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), taught by Prof. Nakul Verma. For this course, I've given over 14 hours of class lectures, desiged over 9 homework problems, and taught over 100 hours during office hours or individual meetings. I have also previously TA'd for:
+
+- [Summer'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html) (graduate), *Prof. Nakul Verma*
+- [Summer'18 COMS 4771 Machine Learning](https://www.cs.columbia.edu/~verma/classes/ml/index.html), *Prof. Nakul Verma*
+- [Spring'18 COMS 4203 Graph Theory](http://www.cs.columbia.edu/~tim/teaching/cs4203/), *Tim Sun*
+- Fall'17 QMSS 4070 GIS/Spatial Analysis (graduate), *Prof. Michael Parrott*
+
+</br>
 
 
 
-## Undergraduate: Theoretical Machine Learning
-The language with which we ask questions makes a huge difference to *what* we can answer and *how* we can answer them. Indeed, this is a central idea in machine learning: the representations of features dictates what we can learn, no matter how good our algorithms are. My interests are in researching machine from a more theoretical perspective to address learning from a *structural* perspective. I've been able to find very natural inspiration from physics, algebra, topology, constructive mathematics, and so on. Here is some progress (perhaps some of the earlier works are a bit obsolete now, as the ideas are gradually refined):
+## CONSULTING
 
-- [Unsupervised learning final report](./files/ml_final_report.pdf) (May 31, 2017).
-- [Zeno's Paradox: how constructivism leads to topology](../writing/2017-04-20-zeno.html) (April 20, 2017).
-- [UCISTEM Undergraduate Research Poster](./files/poster.pdf) (September 22, 2016).
-- [Resources](./ml-resources.html)
+- Machine learning consulting, *02/2018-present*
+     + AumiPhyte Health, Inc.
+- Technology consulting, *09/2018-12/2018*
+     + Department of Defense, through Columbia's Hacking 4 Defense
+- Nonprofit consulting,  *03/2016-06/2016*
+     + [Options for Youth](http://options4youth.org/), through UChicago's campusCatalyst
 
-## Undergraduate: Math REU at UChicago
-I participated in the UChicago Math REU in [2014](http://math.uchicago.edu/~may/REU2014/) and [2015](http://math.uchicago.edu/~may/REU2015/). Here are the resulting expository papers on:
 
-- [Symbolic dynamics](http://math.uchicago.edu/~may/REU2014/REUPapers/So.pdf)
-- [Quantum computing](http://math.uchicago.edu/~may/REU2015/REUPapers/So.pdf)
+</br>
 
-## Undergraduate: Campus Catalyst Nonprofit Consulting
-As a student at the University of Chicago, I participated in a course titled *The Business of Nonprofits and the Evolving Social Sector*, which provided me and four others the chance to help a nonprofit in the Hyde Park area, [Options for Youth](http://options4youth.org/). 
+## TALKS
+I gave most of these talks for graduate course lectures and reading group presentations.
 
-The City of Chicago has been making cuts to nonprofits for lack of funding, and Options for Youth needed concrete measurements of their impact. We helped them calculate their return on investment and other impact statistics. They've been doing really great work; for every dollar spent, by the end of the year, the City of Chicago has most likely recuperated the costs elsewhere. By year 10, there is a 770% return, and a 2020% return within 25 years. It's certainly worth [donating](http://options4youth.org/we-need-your-help-landing-page/) to them. While I can't post our deliverables to them, here's an excerpt from the appendix detailing how we performed an [impact assessment](./files/impact-assessment-appendix.pdf). 
+- [Introduction to tensors for estimation](/projects/files/talks/2018-12-tensor_decomposition.pdf), *12/2018*
+- [Sums-of-squares for robust estimation](/projects/files/talks/2018-11-sos-robust-estimation.pdf), *11/2018*
+- [Spectral graph theory](/projects/files/talks/2018-10-sgt.pdf), *10/2018*
+- [Sums-of-squares for MAXCUT](/projects/files/talks/2018-09-sos_maxcut.pdf), *09/2018*
+- [Topological data analysis](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec11_tda_slides.pdf), *07/2018*
+- [Tensor decomposition for density estimation](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec10_tensors_slides.pdf), *07/2018*
+- [Spectral graph theory](http://www.cs.columbia.edu/~verma/classes/uml/lec/uml_lec4_spectral_graph_theory_and_clustering.pdf), *06/2018*
+- [PAC-Bayes for ReLu Neural Networks](/projects/files/talks/2018-04-pac-bayes.pdf), *04/2018*
+- [Graph robustness and percolation theory](/projects/files/talks/2018-03-graph_robustness.pdf), *03/2018*
+- Classical learning theory, *01/2018*
+- Kernel methods and kernelized LSH, *12/2018*
+- Splitting index for active learning, *10/2017*
+- Tensors in quantum mechanics, *08/2015*
+- Introduction to dynamical systems, *08/2014*
 
-## Personal Website
-You're looking at it! This website is written by hand from `HTML/CSS`. I'm using [hakyll](https://jaspervdj.be/hakyll/) to help me automatically generate the pages. The $\TeX$ math is produced by [MathJax](https://www.mathjax.org/).
+
+</br>
+
+
+
+
+## SCIENTIFIC WRITING
+
+- [Kernelized LSH](/projects/files/2017-fall/algorithms-final-report.pdf), expository paper from [Fall'17 Algorithms through Geometric Lens](https://ilyaraz.org/static/class/)
+- [Active learning](/projects/files/2017-fall/learning-theory-final-report.pdf), [slides](/projects/files/2017-fall/learning-theory-presentation.pdf), research project from [Fall'17 Topics in Learning Theory](http://www.cs.columbia.edu/~djhsu/coms6998-f17/)
+- [Learnability of hypothesis classes](/projects/files/2017-fall/information-theory-final-report.pdf), research project from [Fall'17 Information Theory](http://infotheorytcs.wikischolars.columbia.edu/)
+- [Determinants via exterior algebra](/projects/files/determinants.pdf), notes for earlier work in Masters' thesis
+- [Rethinking generalization](/projects/files/2017-fall/neural-networks-final-report.pdf), [code](https://github.com/geelon/ecbm-generalization) a project reproducing and reinterpreting literature result
+- [Graph embeddings and information theory](/writing/files/information-theory-scribe-notes.pdf), scribe notes for [Fall'17 Information Theory](http://infotheorytcs.wikischolars.columbia.edu/)
+- [Spectral graph theory notes](/writing/files/algorithms-scribe-notes.pdf), scribe notes for [Fall'17 Algorithms through Geometric Lens](https://ilyaraz.org/static/class/)
+- [Theory of word embeddings](https://www.learndatasci.com/tutorials/intro-to-word-embeddings-problems-theory/), freelance writing for data science blog
+- [Applications of word embeddings](https://www.springboard.com/blog/introduction-word-embeddings/), freelance writing for data science blog
+- [Quantum computing](http://math.uchicago.edu/~may/REU2015/REUPapers/So.pdf), expository paper from the [2015 UChicago Math REU](http://math.uchicago.edu/~may/REU2015/)
+- [Symbolic dynamics](http://math.uchicago.edu/~may/REU2014/REUPapers/So.pdf), expository paper from the [2014 UChicago Math REU](http://math.uchicago.edu/~may/REU2014/)
+

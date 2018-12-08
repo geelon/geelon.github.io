@@ -16,13 +16,38 @@ html {
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
+    line-height:140%;
     min-height: 100vh;
     background-image: url(../images/attractor.png);
     background-repeat: no-repeat;
     background-position: bottom right;
     background-opactiy: 0.6;
-
 }
+
+h1 {
+    font-size: 370%;
+    line-height:100%;
+    font-family: 'Mate';
+}
+
+
+
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 130%;
+    line-height:120%;
+    color: rgb(100,100,100);
+}
+
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 110%;
+    line-height:140%;
+    color: rgb(50,50,50);
+}
+
 
 p {
     text-align:left;
@@ -174,11 +199,16 @@ section.date_posted {
     text-transform: uppercase;
 }
 
+
+/*
 article h1 , h2 , h3 , h4 { font-family: 'Open Sans', sans serif; }
-article h1 { font-size: 180%; }
+article h1 { font-size: 280%; }
 article h2 { font-size: 160%; }
 article h3 { font-size: 140%; }
 article h4 { font-size: 120%; }
+*/
+
+
 
 
 main p { padding-bottom: 1em; }
@@ -186,13 +216,14 @@ main p { padding-bottom: 1em; }
 main ol {
     padding-left: 1.7em;
     padding-right: 2em;
+    padding-bottom:1em;
     /* For gray numbers: */
     /* list-style:none;
     counter-reset:li*/
 }
 
 main ol li {
-    padding-bottom: 1em;
+    padding-bottom: 0em;
 }
 
 /* For gray numbers:
@@ -209,12 +240,14 @@ main ol li::before {
 } */
 
 main ul {
+    padding-top: 0em;
+    padding-bottom:1em;
     padding-left: 1.7em;
     list-style: none;
 }
 
 main ul li {
-    padding-bottom: 1em;
+    padding-bottom: 0em;
 }
 main ul li::before {
     content: "▪";
