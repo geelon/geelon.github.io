@@ -12,7 +12,7 @@ I began working on my Master's thesis at Columbia University in January 2018. At
 </br>
 
 ## TEACHING
-I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), taught by Prof. Nakul Verma. For this course, I've given over 14 hours of class lectures, desiged over 9 homework problems, and taught over 100 hours during office hours or individual meetings. I have also previously TA'd for:
+I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), taught by Prof. Nakul Verma. For this course, I've given 15 hours of class lectures, desiged 9 homework problems, and taught over 100 hours during office hours or individual meetings. I have also previously TA'd for:
 
 - [Summer'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html) (graduate), *Prof. Nakul Verma*
 - [Summer'18 COMS 4771 Machine Learning](https://www.cs.columbia.edu/~verma/classes/ml/index.html), *Prof. Nakul Verma*
@@ -38,6 +38,7 @@ I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 49
 ## TALKS
 I gave most of these talks for graduate course lectures and reading group presentations.
 
+- [Approximate near neighbor search](/projects/files/talks/2018-12-ann.pdf), *12/2018*
 - [Introduction to tensors for estimation](/projects/files/talks/2018-12-tensor_decomposition.pdf), *12/2018*
 - [Sums-of-squares for robust estimation](/projects/files/talks/2018-11-sos-robust-estimation.pdf), *11/2018*
 - [Spectral graph theory](/projects/files/talks/2018-10-sgt.pdf), *10/2018*
