@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Information Theory and Statistics, a tutorial (Chapter 2)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">AGS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Information Theory and Statistics, a tutorial (Chapter 2)</h1>
+  
+
+  <section class="date_posted">
+    Posted on December 12, 2018
+  </section>
+
+  <section>
+    <p>Csiszár, I, and Shields, P.C. <a href="https://users.renyi.hu/~csiszar/Publications/Information_Theory_and_Statistics:_A_Tutorial.pdf">Information Theory and Statistics: A Tutorial</a></p>
+<ul>
+<li><a href="./2004-csiszar-info-theory-1.html">prev chapter</a>: Preliminaries</li>
+<li><a href="#">this chapter</a>: Large deviations, hypothesis testing</li>
+<li><a href="#">next chapter</a>: I-projections</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>In the following, we can study large deviations combinatorially. We consider the space of all possible finite samples, their sizes, and relationship with entropy and KL-divergence.</p>
+<h3 id="large-deviations-via-types">Large deviations via types</h3>
+<p>Let <span class="math inline">\(A\)</span> be a finite alphabet of size <span class="math inline">\(t\)</span>.</p>
+<ul>
+<li>the <strong>type</strong> of a sequence <span class="math inline">\(x_1^n \in A^n\)</span> is its empirical distribution <span class="math inline">\(P\)</span>, <span class="math display">\[\begin{equation*}
+P(a) = \frac{\# \{i : x_i = a\}}{n}
+\end{equation*}\]</span></li>
+<li>the <strong>type class of the <span class="math inline">\(n\)</span>-type <span class="math inline">\(P\)</span></strong>, <span class="math inline">\(T_P^n\)</span>, is the collection of all sequences of type <span class="math inline">\(P\)</span>.</li>
+<li>a distribution <span class="math inline">\(P\)</span> is an <span class="math inline">\(n\)</span>-<strong>type</strong> if it is the empirical distribution of some <span class="math inline">\(x_1^n \in A^n\)</span>.</li>
+<li>let <span class="math inline">\(\mathcal{P}_n\)</span> be the collection of all <span class="math inline">\(n\)</span>-types.</li>
+</ul>
+<p>We can list a few facts about this set of objects:</p>
+<ul>
+<li>by the stars-and-bars theorem, the number of <span class="math inline">\(n\)</span>-types is <span class="math display">\[\begin{equation*}
+|\mathcal{P}_n| = \binom{n + t - 1}{t - 1}.
+\end{equation*}\]</span></li>
+<li>let <span class="math inline">\(P\)</span> be an <span class="math inline">\(n\)</span>-type, <span class="math inline">\(k_i = n\cdot p_i\)</span> be the number each letter <span class="math inline">\(i\)</span> appears. The size of <span class="math inline">\(T_P^n\)</span> is <span class="math display">\[\begin{equation*}
+\left|T_P^n\right| = \frac{n!}{k_1! \dotsm k_t!}.
+\end{equation*}\]</span></li>
+<li>let <span class="math inline">\(P \in \mathcal{P}_n\)</span>. Denote by <span class="math inline">\(k_i = n \cdot p_i\)</span> be the expected number of times that each letter is seen. Suppose we draw <span class="math inline">\(x_1^n\)</span> from the distribution <span class="math inline">\(P^n\)</span>. Let’s say that <span class="math inline">\(x_1^n\)</span> has type <span class="math inline">\(Q\)</span>, where <span class="math inline">\(Q \in \mathcal{P}_n\)</span> amd each letter <span class="math inline">\(i\)</span> appears <span class="math inline">\(j_i\)</span> times in <span class="math inline">\(x_1^n\)</span>. The probability of seeing <span class="math inline">\(x_1^n\)</span> is: <span class="math display">\[\begin{equation*}
+P^n(x_1^n) = \frac{1}{n^n} \cdot  k_1^{j_1} \dotsm k_t^{j_t}.
+\end{equation*}\]</span> If <span class="math inline">\(Q = P\)</span>, then the probability of observing <span class="math inline">\(x_1^n\)</span> is: <span class="math display">\[\begin{equation} \label{entropy}
+P^n(x_1^n) = p_1^{k_1} \dotsm p_t^{k_t} = p_1^{n p_1} \dotsm p_t^{n
+p_t} = 2^{-n \cdot H(P)}. 
+\end{equation}\]</span> In general, the probability that a sample drawn from <span class="math inline">\(P^n\)</span> has type <span class="math inline">\(Q\)</span> is: <span class="math display">\[\begin{equation*}
+P^n(T_Q^n) = \frac{1}{n^n} \cdot\frac{n!}{j_1! \dotsm j_t!}k_1^{j_1}
+\dotsm k_t^{j_t}. 
+\end{equation*}\]</span> The following lemma shows that <span class="math inline">\(P(T_Q^n)\)</span> is maximized when <span class="math inline">\(Q = P\)</span>:</li>
+</ul>
+<p><strong>Lemma 1.</strong> <em>Let <span class="math inline">\(j_1,\dotsc, j_t\)</span> be nonnegative integers with sum <span class="math inline">\(j_1 + \dotsm + j_t = n\)</span>. The following is maximized when <span class="math inline">\(j_i = k_i\)</span> for all <span class="math inline">\(1 \leq i \leq t\)</span></em> <span class="math display">\[\begin{equation*}
+\frac{n!}{j_1! \dotsm j_t!} k_1^{j_1} \dotsm k_t^{j_t}.
+\end{equation*}\]</span></p>
+<em>Proof.</em> If <span class="math inline">\(j_r &gt; k_r\)</span> and <span class="math inline">\(j_s &lt; k_s\)</span>, then we can increase the overall value by decreasing <span class="math inline">\(j_r\)</span> by 1 and increasing <span class="math inline">\(j_s\)</span> by 1. This amounts to multiplying by: <span class="math display">\[\begin{equation*}
+\frac{j_r}{k_r} \frac{k_{s+1}}{j_s + 1} \geq \frac{j_r}{k_r} &gt; 1.
+\end{equation*}\]</span>
+<div align="right">
+☐
+</div>
+<p>This lets us relate <span class="math inline">\(|T_P^n|\)</span> to the entropy <span class="math inline">\(H(P)\)</span>, through the equation: <span class="math inline">\(\sum_{Q \in \mathcal{P}_n} P^n(T_Q^n) = 1\)</span> along with the previous lemma which shows that the largest term in the sum is: <span class="math display">\[\begin{equation*}
+P^n(T_P^n) = |T_P^n| \cdot 2^{- n \cdot H(P)}.
+\end{equation*}\]</span> Because there are <span class="math inline">\(\binom{n + t - 1}{t - 1}\)</span> terms in the sum, we obtain:</p>
+<p><strong>Lemma 2.</strong> <em>For any <span class="math inline">\(n\)</span>-type <span class="math inline">\(P\)</span>,</em> <span class="math display">\[\begin{equation*}
+\binom{n + t - 1}{t - 1}^{-1} 2^{n\cdot H(P)} \leq \left|T_P^n\right|
+\leq 2^{n\cdot H(P)}. 
+\end{equation*}\]</span></p>
+<p>Equation <span class="math inline">\(\ref{entropy}\)</span> related entropy to the probability of seeing a sequence <span class="math inline">\(x_1^n\)</span> of type <span class="math inline">\(P\)</span> when drawn from <span class="math inline">\(P^n\)</span>. Now, suppose that <span class="math inline">\(P\)</span> is any distribution, and we again draw a sequence <span class="math inline">\(x_1^n\)</span> of type <span class="math inline">\(Q\)</span>. Let’s compare the probabilities that <span class="math inline">\(x_1^n\)</span> was drawn from <span class="math inline">\(P^n\)</span> versus <span class="math inline">\(Q^n\)</span>: <span class="math display">\[\begin{equation}\label{kl-div}
+\frac{P^n(x_1^n)}{Q^n(x_1^n)} = \prod_{i=1}^t \frac{p_i^{n \cdot
+q_i}}{q_i^{n \cdot q_i}} = 2^{- n \cdot \mathrm{KL}(Q||P)}.
+\end{equation}\]</span> It quickly follows that:</p>
+<p><strong>Lemma 3.</strong> <em>For any distribution <span class="math inline">\(P\)</span>, <span class="math inline">\(n\)</span>-type <span class="math inline">\(Q\)</span>, and any <span class="math inline">\(x_1^n  \in T_Q^n\)</span>,</em> <span class="math display">\[\begin{equation*}
+\binom{n + t - 1}{t - 1}^{-1} 2^{-n \cdot \mathrm{KL}(Q||P)} \leq
+  P^n(T_Q^n) \leq 2^{-n \cdot \mathrm{KL}(Q||P)}.
+\end{equation*}\]</span></p>
+<p>This upper bound lets us show that the empirical distribution converges to <span class="math inline">\(P\)</span> in KL divergence as <span class="math inline">\(n\)</span> goes to infinity:</p>
+<p><strong>Corollary 4.</strong> <em>Let <span class="math inline">\(\hat{P}_n\)</span> denote the empirical distribution of a random sample of size <span class="math inline">\(n\)</span> drawn from <span class="math inline">\(P\)</span>. Then for all <span class="math inline">\(\delta &gt; 0\)</span>:</em> <span class="math display">\[\begin{equation*}
+\mathrm{Pr}\big[\mathrm{KL}(\hat{P}_n || P) \geq \delta\big] \leq
+  \binom{n + t - 1}{t - 1} 2^{-n \delta}
+\end{equation*}\]</span></p>
+<em>Proof.</em> The probability that the empirical distribution <span class="math inline">\(\hat{P}_n\)</span> is at least <span class="math inline">\(\delta\)</span> away from <span class="math inline">\(P\)</span> in KL-divergence is: <span class="math display">\[\begin{equation*}
+ \mathrm{Pr}\big[\mathrm{KL}(\hat{P}_n || P) \geq \delta\big] =
+ \sum_{\substack{Q \in \mathcal{P}_n \\ \mathrm{KL}(Q||P) \geq
+ \delta}} P^n(T_Q^n)  \leq |\mathcal{P}_n|\cdot  2^{-n \delta}.
+ \end{equation*}\]</span> Note that <span class="math inline">\(|\mathcal{P}_n| \cdot 2^{-n \delta} = O\left(2^{-n \delta +  t \log n} \right)\)</span>.
+<div align="right">
+☐
+</div>
+<p>This corollary combined with the Borel-Cantelli lemma implies that <span class="math inline">\(\hat{P}_n\)</span> converges to <span class="math inline">\(P\)</span> with probability 1 as <span class="math inline">\(n \to \infty\)</span>, a fact we also know from the law of large numbers.</p>
+<p>The following theorem is a special case of Sanov’s theorem over a finite space. It shows that if <span class="math inline">\(\Pi\)</span> is a collection of distributions bounded away from <span class="math inline">\(P\)</span> in KL-divergence, then the probability that <span class="math inline">\(\hat{P}_n\)</span> is contained in <span class="math inline">\(\Pi\)</span> is exponentially small. To state this formally, we define: <span class="math display">\[\mathrm{KL}(\Pi || P) := \inf_{Q \in \Pi} \mathrm{KL}(Q || P).\]</span></p>
+<p><strong>Theorem 5 (Sanov’s theorem).</strong> <em>Let <span class="math inline">\(\Pi\)</span> be a set of distributions such that its closure is equal to the closure of its interior: <span class="math inline">\(\mathrm{cl}(\Pi) = \mathrm{cl}(\mathrm{int}(\Pi))\)</span>. Let <span class="math inline">\(\hat{P}_n\)</span> be the empirical distribution of a random sample from <span class="math inline">\(P^n\)</span>. Then:</em> <span class="math display">\[\begin{equation*}
+  - \frac{1}{n} \log \mathrm{Pr}\big[\hat{P}_n \in
+  \mathrm{cl}(\Pi)\big] \to \mathrm{KL}(\Pi||P).
+  \end{equation*}\]</span></p>
+<em>Proof.</em> Notice that the set <span class="math inline">\(\bigcup \mathcal{P}_n\)</span> is dense in the probability simplex <span class="math inline">\(\Delta^{t-1}\)</span> (aside: each of the <span class="math inline">\(\mathcal{P}_n\)</span> is a lattice on the simplex). Let <span class="math inline">\(\Pi_n =  \mathrm{cl}(\Pi) \cap \mathcal{P}_n\)</span>. Then, we have: <span class="math display">\[\begin{equation*}
+ \mathrm{Pr}\big[\hat{P}_n \in \Pi_n\big] = P^n\left(\bigcup_{Q \in
+ \Pi_n} T_Q^n\right) = \sum_{Q \in \Pi_n} P^n(T_Q^n).
+ \end{equation*}\]</span> Lemma 3 implies: <span class="math display">\[\begin{equation*}
+ \binom{n + t - 1}{t - 1}^{-1} 2^{-n \cdot \mathrm{KL}(\Pi_n || P)}
+ \leq  \mathrm{Pr}\big[\hat{P}_n \in \Pi_n\big] \leq \binom{n + t -
+ 1}{t - 1} 2^{-n \cdot \mathrm{KL}(\Pi_n || P)}.
+ \end{equation*}\]</span> Taking logs and multiplying through by <span class="math inline">\(- \frac{1}{n}\)</span>, we obtain: <span class="math display">\[\begin{equation*}
+ \mathrm{KL}(\Pi_n||P) - \frac{t}{n} \log n \leq - \frac{1}{n}
+ \mathrm{Pr}\big[\hat{P}_n \in \Pi_n\big] \leq
+ \mathrm{KL}(\Pi_n ||P) + \frac{t}{n} \log n.
+ \end{equation*}\]</span> As <span class="math inline">\(\mathrm{KL}(Q||P)\)</span> is continuous in <span class="math inline">\(Q\)</span>, this shows that <span class="math inline">\(\mathrm{KL}(\Pi_n || P)\)</span> becomes arbitrarily close to <span class="math inline">\(\mathrm{KL}(\Pi||P)\)</span> as <span class="math inline">\(n\)</span> goes to infinity.
+<div align="right">
+☐
+</div>
+<p>Sanov’s theorem lets us obtain large-deviation bounds. For example, consider the collection <span class="math inline">\(\mathcal{F}\)</span> of functions <span class="math inline">\(f : A \to \mathbb{R}\)</span>. Let <span class="math inline">\(P\)</span> be any probability distribution. Then, the map <span class="math inline">\(\mathbb{E}_P\)</span> is dual to <span class="math inline">\(f \in \mathcal{F}\)</span>, where: <span class="math display">\[\begin{equation*}
+\mathbb{E}_P f := \sum_{i \in A} p_i \cdot f(i).
+\end{equation*}\]</span> The collection <span class="math inline">\(\Pi\)</span> of all probability distributions <span class="math inline">\(Q\)</span> such that <span class="math inline">\(\mathbb{E}_Q f &gt; \alpha\)</span> corresponds to the intersection of the probability simplex and a halfspace. The probability that the empirical estimate <span class="math inline">\(\mathbb{E}_{\hat{P}_n} f \geq \alpha\)</span> goes exponentially quickly to zero: <span class="math display">\[\begin{equation*}
+ \mathrm{Pr}\big[\mathbb{E}_{\hat{P}_n} f \geq \alpha
+\big] \to 2^{-n\cdot \mathrm{KL}(\Pi||P)},
+\end{equation*}\]</span> if <span class="math inline">\(\Pi\)</span> is bounded away from <span class="math inline">\(P\)</span> in KL-divergence.</p>
+<div class="center puzzle-figure">
+<p><img src="../files/csiszar-simplex.png" alt="probability-simplex" " /> <strong>Figure 1.</strong> <span class="math inline">\(P\)</span> is a probability distribution on the probability simplex. The function <span class="math inline">\(f\)</span> splits the simplex into two pieces; the green section correspond to those <span class="math inline">\(Q\)</span> such that <span class="math inline">\(\mathbb{E}_Q f &gt; \alpha\)</span>. The path extending out from <span class="math inline">\(P\)</span> is an exponential family of distributions <span class="math inline">\(P_t\)</span> meeting <span class="math inline">\(\mathrm{cl}(\Pi)\)</span> at <span class="math inline">\(Q^*\)</span>, defined below.</p>
+</div>
+<p></br></p>
+<p>In this example, consider the exponential family of distributions, parametrized by <span class="math inline">\(t\)</span>: <span class="math display">\[\begin{equation*}
+P_t(a) = \frac{1}{Z_t} P(a) \cdot 2^{t f(a)},
+\end{equation*}\]</span> where <span class="math inline">\(Z_t\)</span> is a normalization factor. Then, <span class="math inline">\(P_0 = P\)</span> and also: <span class="math display">\[\begin{equation*}
+\lim_{t \to \infty} \mathbb{E}_{P_t} f = \max_a f(a).
+\end{equation*}\]</span> It follows by continuity over <span class="math inline">\(t\)</span> that if <span class="math inline">\(\mathbb{E}_Pf &lt; \alpha\)</span> but <span class="math inline">\(\max_a f(a) &gt; \alpha\)</span>, there must exist some <span class="math inline">\(t^*\)</span> such that when <span class="math inline">\(Q^* = P_{t^*}\)</span>, then <span class="math inline">\(\mathbb{E}_{Q^*} f = \alpha\)</span>.</p>
+<h2 id="discussion">Discussion</h2>
+<ol start="0" style="list-style-type: decimal">
+<li>A central object we should understand is the following polynomial: <span class="math display">\[(X_1 + \dotsm + X_t)^n = \sum \frac{n!}{j_1! \dotsm j_t!} X_1^{j_1} \dotsm X_t^{j_t}.\]</span></li>
+<li>We wish to study a probability distribution <span class="math inline">\(P \in \Delta^{t-1}\)</span> over a space <span class="math inline">\(A\)</span>. To do this, we consider finite i.i.d. draws from <span class="math inline">\(A\)</span>. Because of the i.i.d. assumption, we can consider the symmetric tensor product: <span class="math display">\[\begin{equation*}
+(X_1 + \dotsm + X_t)^{\odot n} = \sum \frac{n!}{j_1! \dotsm j_t!} X_1^{\odot j_1} \odot \dotsm \odot X_t^{\odot j_t}.
+\end{equation*}\]</span> This reduces the space we need to consider from the size <span class="math inline">\(t^n\)</span> to <span class="math inline">\(\binom{n + t - 1}{t - 1}\)</span>. In particular, we can take this space as a lattice <span class="math inline">\(\mathcal{P}_n\)</span> on the probability simplex. And because <span class="math inline">\(\bigcup \mathcal{P}_n\)</span> is dense in <span class="math inline">\(\Delta^{t-1}\)</span>, <span class="math inline">\(\mathrm{KL}(Q||P)\)</span> is continuous in <span class="math inline">\(Q\)</span>, and <span class="math display">\[\begin{equation*}
+\frac{P^n(x_1^n)}{Q^n(x_1^n)} = 2^{-n \mathrm{KL}(Q||P)}
+\end{equation*}\]</span> for any <span class="math inline">\(Q\)</span> an <span class="math inline">\(n\)</span>-type and <span class="math inline">\(x_1^n \in T_Q^n\)</span>, we are ensured that as <span class="math inline">\(n\)</span> grows to infinity, <span class="math inline">\(Q\)</span> becomes a good approximation to <span class="math inline">\(P\)</span>, and we can study <span class="math inline">\(Q\)</span> from a sequence <span class="math inline">\(x_1^n\)</span>. Performing the same sort of reductions seems much more difficult when we lose the i.i.d. assumption. Is it still sensible to look at <span class="math inline">\(\bigcup \mathcal{P}_n \subset \Delta^{t-1}\)</span>?</li>
+</ol>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>

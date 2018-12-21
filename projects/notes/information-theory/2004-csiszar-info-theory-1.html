@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Information Theory and Statistics, a tutorial (Chapter 1)</title>
+        <link rel="stylesheet" href="../../../css/indexes.css" />
+	<link rel="icon" type="image/png" href="../../../images/haskell.png">
+	<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112599026-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-112599026-1');
+	</script>
+
+    </head>
+    
+    <body>
+
+      <header>
+	<div class="logo">
+          <a href="../../../">AGS</a>
+	</div>
+	<nav id="header_nav">
+	  <ul>
+	    <li><a href="../../../">home</a></li>
+	    <li><a href="../../../projects">projects</a></li>
+	  </ul>
+	</nav>
+      </header>
+      
+      <main role="main">
+        <article>
+  <h1 id="article_title">Information Theory and Statistics, a tutorial (Chapter 1)</h1>
+  
+
+  <section class="date_posted">
+    Posted on December 12, 2018
+  </section>
+
+  <section>
+    <p>Csiszár, I, and Shields, P.C. <a href="https://users.renyi.hu/~csiszar/Publications/Information_Theory_and_Statistics:_A_Tutorial.pdf">Information Theory and Statistics: A Tutorial</a></p>
+<ul>
+<li><a href="#">this chapter</a>: Preliminaries</li>
+<li><a href="./2004-csiszar-info-theory-2.html">next chapter</a>: Preliminaries: Large deviations, hypothesis testing</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>Brief review of information theory:</p>
+<ul>
+<li>Let <span class="math inline">\(A = \{a_1,\dotsc, a_{|A|}\}\)</span> be a finite space. Let <span class="math inline">\(P,Q\)</span> be distributions over <span class="math inline">\(A\)</span>. The entropy of <span class="math inline">\(P\)</span> is: <span class="math display">\[H(P) = - \sum_{a \in A} P(a) \log P(a).\]</span></li>
+<li>We interpret <span class="math inline">\(0 \log 0\)</span> as <span class="math inline">\(0\)</span>.</li>
+<li>The KL-divergence (a.k.a. information divergence or <span class="math inline">\(I\)</span>-divergence or relative entropy) of <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> is: <span class="math display">\[D(P||Q) = \sum_{a \in A} P(a) \log \frac{P(a)}{Q(a)}.\]</span></li>
+<li>The log-sum inequality shows that KL-divergence is nonnegative. It is also finite if <span class="math inline">\(\mathrm{supp}(P) \subset \mathrm{supp}(Q)\)</span>.</li>
+<li>A <em>code</em> for <span class="math inline">\(A\)</span> with image alphabet <span class="math inline">\(B\)</span> is an injective mapping <span class="math inline">\(C:  A \to B^*\)</span>, where <span class="math inline">\(B^*\)</span> are all finite sequences of letters in <span class="math inline">\(B\)</span>. If a sequence <span class="math inline">\(s = uv\)</span> is formed by the concatenation of two subsequences <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>, we write <span class="math inline">\(u \prec s\)</span> to denote that <span class="math inline">\(u\)</span> is a <em>prefix</em> of <span class="math inline">\(s\)</span>. Here, we let <span class="math inline">\(B = \{0,1\}\)</span>.</li>
+<li>A <em>prefix-free code</em> (or <em>prefix code</em>) is an encoding of <span class="math inline">\(A\)</span> such that <span class="math inline">\(C(a) \prec C(a')\)</span> if and only if <span class="math inline">\(a = a'\)</span>.</li>
+</ul>
+<p><strong>Lemma (Kraft’s inequality).</strong> A function <span class="math inline">\(L : A \to \mathbb{N}\)</span> is the length function of a prefix-free code if and only if it satisfies the Kraft inequality: <span class="math display">\[\sum_{a \in A} 2^{-L(a)} \leq 1.\]</span></p>
+<p><em>Proof.</em> Given a prefix-free code, each <span class="math inline">\(a \in A\)</span> maps to a dyadic number <span class="math inline">\(t(a)\)</span>: <span class="math display">\[\begin{equation*}a \mapsto 0.b_1\dotsc b_{L(a)}.\end{equation*}\]</span> The prefix-free condition implies that the intervals <span class="math inline">\([t(a), t(a) +  2^{-L(a)})\)</span> are disjoint over <span class="math inline">\(a \in A\)</span>. Thus, <span class="math inline">\(\sum 2^{-L(a)} \leq  1\)</span>.</p>
+Conversely, suppose <span class="math inline">\(\sum 2^{-L(a)} \leq 1\)</span>. Assume that <span class="math inline">\(L(a_i) \leq  L(a_{i+1})\)</span>. Then, represent <span class="math inline">\(t(a_i)\)</span> by <span class="math inline">\(\sum_{j &lt; i} 2^{-L(a_j)}\)</span>.
+<div align="right">
+☐
+</div>
+<p><strong>Theorem (Shannon’s noiseless coding).</strong> <em>Let <span class="math inline">\(P\)</span> be a probability distribution on <span class="math inline">\(A\)</span>. Then each prefix-free code has expected length:</em> <span class="math display">\[\mathbb{E}[L] \geq H(P).\]</span> <em>Furthermore, there exists a prefix-free code with length function <span class="math inline">\(\lceil - \log P(a) \rceil\)</span>; its expected length satisfies:</em> <span class="math display">\[\mathbb{E}[L] &lt; H(P) + 1.\]</span></p>
+<p><em>Proof.</em> By Kraft’s inequality, we have: <span class="math display">\[\begin{align*}
+\mathbb{E}[L] - H(P) &amp;= \sum_{a \in A} p(a) \log
+\frac{p(a)}{2^{-L(a)}}
+ \geq \log \frac{1}{ \sum_{a \in A} 2^{-L(a)}} \geq 0.\end{align*}\]</span></p>
+On the other hand, <span class="math inline">\(L(a) = \lceil - \log P(a)\rceil\)</span> satisfies Kraft’s inequality.
+<div align="right">
+☐
+</div>
+<h2 id="technical-notes">Technical Notes</h2>
+<p><strong>Lemma (Log-sum inequality).</strong> Let <span class="math inline">\(p_1,\dotsc, p_t\)</span> and <span class="math inline">\(q_1,\dotsc  q_t\)</span> be arbitrary nonnegative numbers. Let <span class="math inline">\(p = \sum_i p_i\)</span> and <span class="math inline">\(q =  \sum_i q_i\)</span>. Then: <span class="math display">\[ \sum_{i=1}^t p_i \log \frac{p_i}{q_i} \geq p \log \frac{p}{q}.\]</span></p>
+<em>Proof.</em> This follows from the convexity of <span class="math inline">\(f(x) = x \log x\)</span> and Jensen’s inequality.
+<div align="right">
+☐
+</div>
+  </section>
+
+</article>
+
+      </main>
+      
+      <footer>
+	
+      </footer>
+    </body>
+</html>
