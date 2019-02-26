@@ -18,6 +18,7 @@ Great references and surveys.
 ## Information Theory
 
 - Csiszár, I., Shields, P. [Information theory and statistics](https://users.renyi.hu/~csiszar/Publications/Information_Theory_and_Statistics:_A_Tutorial.pdf)
+- Gallager, R. [Information theory and reliable communication](http://www.de.ufpe.br/~hmo/B24.pdf)
 
 ## Learning Theory/Machine Learning
 
