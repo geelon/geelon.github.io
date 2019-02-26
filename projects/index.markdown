@@ -39,7 +39,7 @@ I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 49
 I gave most of these talks for graduate course lectures and reading group presentations.
 
 - [Geometric gradient descent and lower bounds](/projects/files/talks/2019-02-geometric_descent.pdf), *02/2019*
-- Homomorphic encrpytion, *02/2019*
+- [Homomorphic encryption](/projects/files/talks/2019-02-homomorphic_encryption.pdf), *02/2019*
 - [Approximate near neighbor search](/projects/files/talks/2018-12-ann.pdf), *12/2018*
 - [Introduction to tensors for estimation](/projects/files/talks/2018-12-tensor_decomposition.pdf), *12/2018*
 - [Sums-of-squares for robust estimation](/projects/files/talks/2018-11-sos-robust-estimation.pdf), *11/2018*
