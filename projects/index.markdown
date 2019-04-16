@@ -12,7 +12,7 @@ I began working on my Master's thesis at Columbia University in January 2018. At
 </br>
 
 ## TEACHING
-I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), taught by Prof. Nakul Verma. For this course, I've given 15 hours of class lectures, desiged 9 homework problems, and taught over 100 hours during office hours or individual meetings. I have also previously TA'd for:
+I am passionate about teaching. My experience includes being a TA Fellow for [Fall'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), taught by Prof. Nakul Verma. For this course, I gave 15 hours of class lectures, designed 9 homework problems, and taught over 100 hours during office hours or individual meetings. I have also previously TA'd for:
 
 - [Summer'18 COMS 4995 Unsupervised Learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html) (graduate), *Prof. Nakul Verma*
 - [Summer'18 COMS 4771 Machine Learning](https://www.cs.columbia.edu/~verma/classes/ml/index.html), *Prof. Nakul Verma*
@@ -25,7 +25,7 @@ I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 49
 
 ## CONSULTING
 
-- Machine learning consulting, *02/2018-present*
+- Machine learning consulting, *02/2018-03/2019*
      + AumiPhyte Health, Inc.
 - Technology consulting, *09/2018-12/2018*
      + Department of Defense, through Columbia's Hacking 4 Defense
@@ -38,6 +38,7 @@ I am passionate about teaching. Currently, I am a TA Fellow for [Fall'18 COMS 49
 ## TALKS
 I gave most of these talks for graduate course lectures and reading group presentations.
 
+- [Zero-knowledge proofs from secure multi-party computation](/projects/files/talks/2019-04-zkp-mpc.pdf), *04/2019*
 - [Geometric gradient descent and lower bounds](/projects/files/talks/2019-02-geometric_descent.pdf), *02/2019*
 - [Homomorphic encryption](/projects/files/talks/2019-02-homomorphic_encryption.pdf), *02/2019*
 - [Approximate near neighbor search](/projects/files/talks/2018-12-ann.pdf), *12/2018*
