@@ -38,6 +38,7 @@ I am passionate about teaching. My experience includes being a TA Fellow for [Fa
 ## TALKS
 I gave most of these talks for graduate course lectures and reading group presentations.
 
+- [Complexity, beyond space and time](/projects/files/talks/2019-08-complexity.pdf), [pptx](/projects/files/talks/2019-08-complexity.pptx), *08/2019*
 - [Zero-knowledge proofs from secure multi-party computation](/projects/files/talks/2019-04-zkp-mpc.pdf), *04/2019*
 - [Geometric gradient descent and lower bounds](/projects/files/talks/2019-02-geometric_descent.pdf), *02/2019*
 - [Homomorphic encryption](/projects/files/talks/2019-02-homomorphic_encryption.pdf), *02/2019*
@@ -65,6 +66,7 @@ I gave most of these talks for graduate course lectures and reading group presen
 
 ## SCIENTIFIC WRITING
 
+- [Active Learning with Noise](/projects/files/thesis.pdf), Master's thesis in Computer Science, Columbia University
 - [Kernelized LSH](/projects/files/2017-fall/algorithms-final-report.pdf), expository paper from [Fall'17 Algorithms through Geometric Lens](https://ilyaraz.org/static/class/)
 - [Active learning](/projects/files/2017-fall/learning-theory-final-report.pdf), [slides](/projects/files/2017-fall/learning-theory-presentation.pdf), research project from [Fall'17 Topics in Learning Theory](http://www.cs.columbia.edu/~djhsu/coms6998-f17/)
 - [Learnability of hypothesis classes](/projects/files/2017-fall/information-theory-final-report.pdf), research project from [Fall'17 Information Theory](http://infotheorytcs.wikischolars.columbia.edu/)
