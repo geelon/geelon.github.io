@@ -7,7 +7,7 @@ title: Projects
 </br>
 
 ## RESEARCH
-I began working on my Master's thesis at Columbia University in January 2018. At that point, I documented my intended [research direction](/projects/files/research_direction.pdf). Looking back, it's quite evident how broad and incoherent my original 'direction' was. Still, here are some of my [notes](/projects/notes/) from my readings. Now, I have a much more specific research direction within active learning; more to come later...
+My interests include interactive machine learning, interpretability, and privacy. more to come later...
 
 </br>
 
@@ -38,6 +38,7 @@ I am passionate about teaching. My experience includes being a TA Fellow for [Fa
 ## TALKS
 I gave most of these talks for graduate course lectures and reading group presentations.
 
+- [Generalization through differential privacy](/projects/files/talks/2019-11-DP_generalization.pdf), *11/2019*
 - [Complexity, beyond space and time](/projects/files/talks/2019-08-complexity.pdf), [pptx](/projects/files/talks/2019-08-complexity.pptx), *08/2019*
 - [Zero-knowledge proofs from secure multi-party computation](/projects/files/talks/2019-04-zkp-mpc.pdf), *04/2019*
 - [Geometric gradient descent and lower bounds](/projects/files/talks/2019-02-geometric_descent.pdf), *02/2019*
