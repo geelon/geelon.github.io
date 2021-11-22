@@ -2,7 +2,7 @@
 layout: default
 ---
 
-I’m a PhD Student at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). Previously, I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/).
+I’m a PhD Student at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/). Previously, I graduated from the University of Chicago with a BS in Mathematics.
 
 
 *Research areas:* algorithmic statistics, machine learning, probabilistic analysis.
