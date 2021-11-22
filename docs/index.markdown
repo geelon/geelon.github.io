@@ -84,13 +84,13 @@ Presentations given in various reading groups/seminars/graduate courses.
 ~~Home Partners of America tech talk, Aug 2019.~~
 
 [*Zero-knowledge proofs from secure multiparty computation*](/assets/talks/zkp.pdf) <br>
-~~Privacy-preserving technologies, Columbia University, Apr 2019.~~
+~~Privacy-preserving technologies lecture, Columbia University, Apr 2019.~~
 
 [*Geometry of gradient descent and lower bounds*](/assets/talks/geom-gd.pdf) <br>
 ~~Optimization reading group, Columbia University, Feb 2019.~~
 
 [*Homomorphic encryption*](/assets/talks/hom-enc.pdf) <br>
-~~Privacy-preserving technologies, Columbia University, Feb 2019.~~
+~~Privacy-preserving technologies lecture, Columbia University, Feb 2019.~~
 
 [*Approximate nearest-neighbor search*](/assets/talks/ann.pdf) <br>
 ~~Machine learning lecture, Columbia University, Dec 2018.~~
