@@ -4,11 +4,10 @@ layout: default
 
 I’m a PhD Student at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). Previously, I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/).
 
-### Research
 
-Algorithmic statistics, machine learning, stochastic analysis.
+*Research areas:* algorithmic statistics, machine learning, probabilistic analysis.
 
-### Papers
+## Papers
 
 [*Convergence of online k-means*](/assets/papers/conv-kmeans.pdf) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
@@ -18,7 +17,7 @@ Algorithmic statistics, machine learning, stochastic analysis.
 ~~Geelon So.~~ <br>
 ~~MS Thesis, Columbia University, 2019. [pdf](/assets/papers/msthesis.pdf)~~
 
-### Talks
+## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
 [*Scalable sampling for discrete distributions*](/assets/talks/gibbs-gradients.pdf) <br>
