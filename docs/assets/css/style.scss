@@ -1,0 +1,13 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+body { background-color: #fff; padding: 50px; font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; color: #727272; font-weight: 400; }
+
+a:hover, a:focus { color: #069; font-weight: normal; text-decoration: underline dotted;}
+.downloads a:hover, .downloads a:focus { font-weight: normal; }
+
+h1 a:hover, a:focus { font-weight: bold; }
+
+.tabbed {padding-left: 15px;}

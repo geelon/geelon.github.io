@@ -1,0 +1,11 @@
+{% comment %}
+<!-- This is the code block to define custom syntax -->
+{% endcomment %}
+{% assign output = content
+  | replace: '<del>', '<span class="tabbed">'
+  | replace: '</del>', '</span>'
+%}
+
+
+
+{{output}}
