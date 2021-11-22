@@ -33,7 +33,7 @@ Presentations given in various reading groups/seminars/graduate courses.
 ~~Sampling/optimization reading group, UCSD, Aug 2021.~~
 
 [*Linear system identification without mixing*](/assets/talks/ols-random.pdf) <br>
-~~DSC291 Sequential decision making, UCSD, Jun 2021.~~
+~~Sequential decision making lecture, UCSD, Jun 2021.~~
 
 [*Sequential kernel herding*](/assets/talks/seq-kernel-herding.pdf) <br>
 ~~Sampling/optimization reading group, UCSD, Jun 2021.~~
@@ -42,7 +42,7 @@ Presentations given in various reading groups/seminars/graduate courses.
 ~~Concentration inequalities reading group, UCSD, Apr 2021.~~
 
 [*Learning language games through interaction*](/assets/talks/lang-games.pdf) <br>
-~~CSE291 Continual learning, UCSD, Apr 2021.~~
+~~Continual learning lecture, UCSD, Apr 2021.~~
 
 [*Global non-convex optimization with discretized diffusions*](/assets/talks/langevin-conv.pdf) <br>
 ~~Sampling/optimization reading group, UCSD, Apr 2021.~~
@@ -51,7 +51,7 @@ Presentations given in various reading groups/seminars/graduate courses.
 ~~Sampling/optimization reading group, UCSD, Feb 2021.~~
 
 [*Model of conserved macroscopic dynamics predicts future motor commands*](/assets/talks/conserved-dynamics.pdf) <br>
-~~BGGN246 Computational neurobiology, UCSD, Feb 2021.~~
+~~Computational neurobiology lecture, UCSD, Feb 2021.~~
 
 [*A theory of universal learning*](/assets/talks/univ-learning.pdf) <br>
 ~~Learning theory reading group, UCSD, Nov 2020.~~
