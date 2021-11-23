@@ -9,6 +9,8 @@ I’m a PhD Student at UC San Diego, where I am advised by [Sanjoy Dasgupta](htt
 
 ## Papers
 
+Here a list of other [writings](/writing).
+
 [*Convergence of online k-means*](/assets/papers/conv-kmeans.pdf) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
 ~~Manuscript under review, 2021. [pdf](/assets/papers/conv-kmeans.pdf)~~
@@ -16,6 +18,7 @@ I’m a PhD Student at UC San Diego, where I am advised by [Sanjoy Dasgupta](htt
 [*Active learning with noise*](/assets/papers/msthesis.pdf) <br>
 ~~Geelon So.~~ <br>
 ~~MS Thesis, Columbia University, 2019. [pdf](/assets/papers/msthesis.pdf)~~
+
 
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
