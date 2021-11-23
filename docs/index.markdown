@@ -135,8 +135,9 @@ Presentations given in various reading groups/seminars/graduate courses.
 
 I was a teaching assistant for the following courses:
 
-- Fall 2020, [Probability and statistics for computer scientists](https://cseweb.ucsd.edu/~dasgupta/103/index.html), UCSD
+- Fall 2020, [Probability and statistics](https://cseweb.ucsd.edu/~dasgupta/103/index.html), UCSD
 - Fall 2018, [Machine learning](http://www.cs.columbia.edu/~verma/classes/ml/index.html), Columbia University
+- Fall 2018, [Unsupervised learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), Columbia University
 - Summer 2018, [Unsupervised learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), Columbia University
 - Spring 2018, [Graph theory](http://www.cs.columbia.edu/~tim/teaching/cs4203/), Columbia University
 - Fall 2017, [Geographic information systems](https://polisci.columbia.edu/content/michael-d-parrott), Columbia University
@@ -146,4 +147,5 @@ I was a teaching assistant for the following courses:
 - [AISTATS 2022](https://aistats.org/aistats2022/) reviewer
 - CSE PhD DEI fellowship reviewer (2020, 2021)
 - CSE/HDSI Visit Day AI coordinator (2020, 2021)
-- [ExploreCSR 2019-20](https://explorecsr.eng.ucsd.edu/) mentor
+- [ExploreCSR 2020](https://explorecsr.eng.ucsd.edu/) mentor
+- [Friends of Washington Park Youth Program](https://blueprint.uchicago.edu/organization/wpyp) mentor (2014--2017)
