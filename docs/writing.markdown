@@ -4,6 +4,9 @@ layout: default
 
 # Writing
 
+[*Closeness and independence testing*](/assets/writing/closeness-testing.pdf)
+~~Scribed notes for [Computational statistics](https://cseweb.ucsd.edu/~dakane/), 2019.~~
+
 [*Determinants via exterior algebras*](/assets/writing/determinants.pdf)
 ~~A short note on of determinants and Cauchy-Binet via geometry, 2019.~~
 

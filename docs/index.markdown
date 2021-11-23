@@ -89,6 +89,9 @@ Presentations given in various reading groups/seminars/graduate courses.
 [*Generalization and differential privacy*](/assets/talks/gen-dp.pdf) <br>
 ~~Generalization theory reading group, UCSD, Nov 2019.~~
 
+[*Invariant risk minimization*](/assets/talks/invariant-risk-minimization.pdf) <br>
+~~Learning theory reading group, UCSD, Nov 2019.~~
+
 [*Complexity: beyond space and time*](/assets/talks/hpa-complexity.pdf) <br>
 ~~Home Partners of America tech talk, Aug 2019.~~
 
