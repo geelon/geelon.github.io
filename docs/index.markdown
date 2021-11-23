@@ -81,7 +81,7 @@ Presentations given in various reading groups/seminars/graduate courses.
 ~~Learning theory reading group, UCSD, Feb 2020.~~
 
 [*Conditional mutual information and generalization*](/assets/talks/cmi.pdf) <br>
-~~Generalization theory reading group, Feb 2020.~~
+~~Generalization theory reading group, UCSD, Feb 2020.~~
 
 [*Generalization in adaptive data analysis*](/assets/talks/generalization-adaptive.pdf) <br>
 ~~Generalization theory reading group, UCSD, Jan 2020.~~
