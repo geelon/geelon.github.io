@@ -80,10 +80,10 @@ Presentations given in various reading groups/seminars/graduate courses.
 [*Using SVD to learn HMMs*](/assets/talks/spectral-hmm.pdf) <br>
 ~~Learning theory reading group, UCSD, Feb 2020.~~
 
-[*Conditional mutual information and generalization*](cmi.pdf) <br>
+[*Conditional mutual information and generalization*](/assets/talks/cmi.pdf) <br>
 ~~Generalization theory reading group, Feb 2020.~~
 
-[*Generalization in adaptive data analysis*](*generalization-adaptive.pdf) <br>
+[*Generalization in adaptive data analysis*](/assets/talks/generalization-adaptive.pdf) <br>
 ~~Generalization theory reading group, UCSD, Jan 2020.~~
 
 [*Generalization and differential privacy*](/assets/talks/gen-dp.pdf) <br>
