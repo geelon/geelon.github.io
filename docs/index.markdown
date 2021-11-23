@@ -2,14 +2,14 @@
 layout: default
 ---
 
-I’m a PhD Student at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/). Previously, I graduated from the University of Chicago with a BS in Mathematics.
+I’m a PhD Student at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/). Previously, I graduated from the University of Chicago with a BS in Mathematics. [[CV]](/assets/cv.pdf)
 
 
 *Research areas:* algorithmic statistics, machine learning, probabilistic analysis.
 
 ## Papers
 
-Here a list of other [writings](/writing).
+Here's a list of other [writings](/writing).
 
 [*Convergence of online k-means*](/assets/papers/conv-kmeans.pdf) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
@@ -130,3 +130,20 @@ Presentations given in various reading groups/seminars/graduate courses.
 
 [*Graph robustness and percolation theory*](/assets/talks/graph-robust.pdf) <br>
 ~~Emergent systems reading group, Columbia University, Mar 2018.~~
+
+## Teaching
+
+I was a teaching assistant for the following courses:
+
+- Fall 2020, [Probability and statistics for computer scientists](https://cseweb.ucsd.edu/~dasgupta/103/index.html), UCSD
+- Fall 2018, [Machine learning](http://www.cs.columbia.edu/~verma/classes/ml/index.html), Columbia University
+- Summer 2018, [Unsupervised learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), Columbia University
+- Spring 2018, [Graph theory](http://www.cs.columbia.edu/~tim/teaching/cs4203/), Columbia University
+- Fall 2017, [Geographic information systems](https://polisci.columbia.edu/content/michael-d-parrott), Columbia University
+
+## Service
+
+- [AISTATS 2022](https://aistats.org/aistats2022/) reviewer
+- CSE PhD DEI fellowship reviewer (2020, 2021)
+- CSE/HDSI Visit Day AI coordinator (2020, 2021)
+- [ExploreCSR 2019-20](https://explorecsr.eng.ucsd.edu/) mentor
