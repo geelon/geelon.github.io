@@ -5,12 +5,12 @@ layout: default
 I’m a PhD Student in Computer Science at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/). I graduated from the University of Chicago with a BS in Mathematics. [[CV]](/assets/cv.pdf)
 
 
-**Research interests.** My research especially arises out of problems in machine learning where (i) there is too much data, (ii) there is not enough data, (iii) the data keeps changing, and possibly any or all three at the same time. [[...]](./research)
+**Research areas:** algorithmic statistics, machine learning theory, unsupervised, interactive, continual learning, streaming algorithms
 
-*Areas:* algorithmic statistics, machine learning theory, unsupervised, interactive, continual learning, streaming algorithms
+My research interests especially arise out of problems in machine learning where (i) there is too much data, (ii) there is not enough data, (iii) the data keeps changing, and possibly any or all three at the same time. [[...]](./research)
 
 
-
+<br> 
 
 ## Papers
 
