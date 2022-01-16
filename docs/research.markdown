@@ -14,4 +14,4 @@ Taking up these demands of modern machine learning, I am interested in the desig
 
 <br>
 
-*Areas:* algorithmic statistics, machine learning theory, unsupervised, interactive, continual learning, streaming algorithms
+*Research areas:* algorithmic statistics, machine learning theory, unsupervised, interactive, continual learning, streaming algorithms
