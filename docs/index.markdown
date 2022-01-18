@@ -18,7 +18,7 @@ Here's a list of other [writings](/writing).
 
 [*Convergence of online k-means*](/assets/papers/conv-kmeans.pdf) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
-~~AISTATS 2022. [pdf](/assets/papers/conv-kmeans.pdf)~~
+~~*International Conference on Artificial Intelligence and Statistics*, 2022. [pdf](/assets/papers/conv-kmeans.pdf)~~
 
 [*Active learning with noise*](/assets/papers/msthesis.pdf) <br>
 ~~Geelon So.~~ <br>
