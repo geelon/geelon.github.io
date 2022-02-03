@@ -29,6 +29,9 @@ Here's a list of other [writings](/writing).
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Equilibrium computation: motivation and problems*](/assets/talks/equilibrium-computation-motivation.pdf) <br>
+~~Algorithmic game theory reading roup, UCSD, Feb 2022.~~
+
 [*Scalable sampling for discrete distributions*](/assets/talks/gibbs-gradients.pdf) <br>
 ~~Time series reading group, UCSD, Nov 2021.~~
 
