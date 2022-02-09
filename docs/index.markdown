@@ -29,6 +29,9 @@ Here's a list of other [writings](/writing).
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Independent component analysis*](/assets/talks/ica.pdf) <br>
+~~Unsupervised learning reading group, UCSD, Feb 2022.~~
+
 [*Equilibrium computation: motivation and problems*](/assets/talks/equilibrium-computation-motivation.pdf) <br>
 ~~Algorithmic game theory reading group, UCSD, Feb 2022.~~
 
