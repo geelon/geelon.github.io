@@ -29,6 +29,9 @@ Here's a list of other [writings](/writing).
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Computationally efficient approximation mechanisms*](/assets/talks/efficient-mechanisms.pdf) <br>
+~~Algorithmic game theory reading group, UCSD, Mar 2022.~~
+
 [*Independent component analysis*](/assets/talks/ica.pdf) <br>
 ~~Unsupervised learning reading group, UCSD, Feb 2022.~~
 
