@@ -14,7 +14,7 @@ My research interests especially arise out of problems in machine learning where
 
 ## Papers
 
-Here's a list of other [writings](/writing).
+Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
 [*Convergence of online k-means*](/assets/papers/conv-kmeans.pdf) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
