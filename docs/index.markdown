@@ -19,7 +19,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Convergence of online k-means*](/assets/papers/conv-kmeans.pdf) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
 ~~*International Conference on Artificial Intelligence and Statistics*, 2022.~~ <br>
-~~[arxiv](https://arxiv.org/abs/2202.10640) | [pdf](/assets/papers/conv-kmeans.pdf) | [intro video](https://youtu.be/1LOvnqb_kIU) | [poster](/assets/misc/conv-kmeans-poster.pdf) ~~
+~~[arxiv](https://arxiv.org/abs/2202.10640) | [pdf](/assets/papers/conv-kmeans.pdf) | [intro video](https://youtu.be/1LOvnqb_kIU) | [poster](/assets/misc/conv-kmeans-poster.pdf)~~
 
 [*Active learning with noise*](/assets/papers/msthesis.pdf) <br>
 ~~Geelon So.~~ <br>
