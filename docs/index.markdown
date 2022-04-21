@@ -29,6 +29,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Linear system identification with reverse experience replay*](/assets/talks/lsi-rer.pdf)
+~~Time series reading group UCSD, Apr 2022.~~
+
 [*Gradient play in smooth games*](/assets/talks/gradient-play.pdf) <br>
 ~~Algorithmic game theory reading group, UCSD, Apr 2022.~~
 
