@@ -29,6 +29,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Learning with multi-modal data: canonical correlation analysis*](/assets/talks/multimodal-cca.pdf)
+~~Seekr Research reading group, seekr, Sep 2022.~~
+
 [*Linear system identification with reverse experience replay*](/assets/talks/lsi-rer.pdf)
 ~~Time series reading group UCSD, Apr 2022.~~
 
