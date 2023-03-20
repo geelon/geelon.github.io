@@ -18,8 +18,8 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 [*Nearest neighbor for realizable online classification*]() <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
-~~*under review*, 2023.~~ <br>
-~~[talk](/assets/talks/realizable-online-nn.pdf) ~~
+~~*Under review*, 2023.~~ <br>
+~~[talk](/assets/talks/realizable-online-nn.pdf)~~
 
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
