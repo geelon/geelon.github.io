@@ -16,7 +16,7 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
-[*Nearest neighbor for realizable online classification*]() <br>
+[*Nearest neighbor for realizable online classification*](/assets/talks/realizable-online-nn.pdf) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Under review*, 2023.~~ <br>
 ~~[talk](/assets/talks/realizable-online-nn.pdf)~~
