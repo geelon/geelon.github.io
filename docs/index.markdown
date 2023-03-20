@@ -16,6 +16,11 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
+[*Nearest neighbor for realizable online classification*]() <br>
+~~Sanjoy Dasgupta and Geelon So.~~ <br>
+~~*under review*, 2023.~~ <br>
+~~[talk](/assets/talks/realizable-online-nn.pdf) ~~
+
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
 ~~*International Conference on Artificial Intelligence and Statistics*, 2022.~~ <br>
