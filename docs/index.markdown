@@ -34,6 +34,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Introduction to neural nets*](/assets/talks/neural-nets.pdf) 
+~~Machine learning course lecture, UCSD, Jul 2023.~~
+
 [*The double descent phenomenon*](/assets/talks/double-descent.pdf) [[handout version]](/assets/talks/double-descent-handout.pdf)
 ~~Machine learning course lecture, UCSD, Nov 2022.~~
 
