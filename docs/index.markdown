@@ -16,15 +16,21 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
+[**Optimization on Pareto sets: On a theory of multi-objective optimization**]
+~~Abhishek Roy*, Geelon So*, and Yi-An Ma.~~ <br>
+~~*Preprint*, 2023.~~ <br>
+~~[arXiv](https://arxiv.org/abs/2308.02145)~~
+
+
 [*Online nearest neighbor classification*](https://arxiv.org/abs/2307.01170) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Preprint*, 2023.~~ <br>
-~~[arxiv](https://arxiv.org/abs/2307.01170) | [talk](/assets/talks/realizable-online-nn.pdf)~~
+~~[arXiv](https://arxiv.org/abs/2307.01170) | [talk](/assets/talks/realizable-online-nn.pdf)~~
 
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
 ~~*International Conference on Artificial Intelligence and Statistics*, 2022.~~ <br>
-~~[arxiv](https://arxiv.org/abs/2202.10640) | [pdf](/assets/papers/conv-kmeans.pdf) | [intro video](https://youtu.be/1LOvnqb_kIU) | [poster](/assets/misc/conv-kmeans-poster.pdf)~~
+~~[arXiv](https://arxiv.org/abs/2202.10640) | [pdf](/assets/papers/conv-kmeans.pdf) | [intro video](https://youtu.be/1LOvnqb_kIU) | [poster](/assets/misc/conv-kmeans-poster.pdf)~~
 
 [*Active learning with noise*](/assets/papers/msthesis.pdf) <br>
 ~~Geelon So.~~ <br>
