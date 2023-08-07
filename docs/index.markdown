@@ -40,16 +40,16 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
-[*Introduction to neural nets*](/assets/talks/neural-nets.pdf) 
+[*Introduction to neural nets*](/assets/talks/neural-nets.pdf) <br>
 ~~Machine learning course lecture, UCSD, Jul 2023.~~
 
-[*The double descent phenomenon*](/assets/talks/double-descent.pdf) [[handout version]](/assets/talks/double-descent-handout.pdf)
+[*The double descent phenomenon*](/assets/talks/double-descent.pdf) [[handout version]](/assets/talks/double-descent-handout.pdf) <br>
 ~~Machine learning course lecture, UCSD, Nov 2022.~~
 
-[*Learning with multi-modal data: canonical correlation analysis*](/assets/talks/multimodal-cca.pdf)
+[*Learning with multi-modal data: canonical correlation analysis*](/assets/talks/multimodal-cca.pdf) <br>
 ~~Seekr Research reading group, seekr, Sep 2022.~~
 
-[*Linear system identification with reverse experience replay*](/assets/talks/lsi-rer.pdf)
+[*Linear system identification with reverse experience replay*](/assets/talks/lsi-rer.pdf) <br>
 ~~Time series reading group UCSD, Apr 2022.~~
 
 [*Gradient play in smooth games*](/assets/talks/gradient-play.pdf) <br>
