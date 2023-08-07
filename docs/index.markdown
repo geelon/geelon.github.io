@@ -16,8 +16,8 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
-[**Optimization on Pareto sets: On a theory of multi-objective optimization**]
-~~Abhishek Roy*, Geelon So*, and Yi-An Ma.~~ <br>
+[*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
+~~Abhishek Roy\*, Geelon So\*, and Yi-An Ma.~~ <br>
 ~~*Preprint*, 2023.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2308.02145)~~
 
