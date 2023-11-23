@@ -174,7 +174,7 @@ Presentations given in various reading groups/seminars/graduate courses.
 
 ## Teaching
 
-I was a lecturer for the 2023 [EnCORE Foundations in Data Science](https://encore.ucsd.edu/finds/) summer program.
+I was a lecturer for the 2023 [EnCORE Foundations in Data Science](https://encore.ucsd.edu/finds/) program.
 
 
 I was a teaching assistant for the following courses:
