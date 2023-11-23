@@ -174,8 +174,12 @@ Presentations given in various reading groups/seminars/graduate courses.
 
 ## Teaching
 
+I was a lecturer for the 2023 [EnCORE Foundations in Data Science](https://encore.ucsd.edu/finds/) summer program.
+
+
 I was a teaching assistant for the following courses:
 
+- Fall 2022, Machine learning, UCSD
 - Fall 2020, [Probability and statistics](https://cseweb.ucsd.edu/~dasgupta/103/index.html), UCSD
 - Fall 2018, [Machine learning](http://www.cs.columbia.edu/~verma/classes/ml/index.html), Columbia University
 - Fall 2018, [Unsupervised learning](http://www.cs.columbia.edu/~verma/classes/uml/index.html), Columbia University
@@ -185,7 +189,7 @@ I was a teaching assistant for the following courses:
 
 ## Service
 
-- [AISTATS 2022](https://aistats.org/aistats2022/) reviewer
+- Conference reveiwer: AISTATS 2022, 2023, 2024; NeurIPS 2023
 - CSE PhD DEI fellowship reviewer (2020, 2021)
 - CSE/HDSI Visit Day AI coordinator (2020, 2021)
 - [ExploreCSR 2020](https://explorecsr.eng.ucsd.edu/) mentor
