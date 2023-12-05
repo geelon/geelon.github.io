@@ -40,6 +40,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Calibrated learning in games*](/assets/talis/calibrated-learning.pdf) <br>
+~~Forecasting/calibration, UCSD, Dec 2023.~~
+
 [*Introduction to neural nets*](/assets/talks/neural-nets.pdf) <br>
 ~~Machine learning course lecture, UCSD, Jul 2023.~~
 
