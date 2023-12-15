@@ -40,6 +40,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Statistical and online learning, a tutorial*](/assets/talks/learning-frameworks.pdf) <br>
+~~Redwood Center, Berkeley, Dec 2023.~~
+
 [*Calibrated learning in games*](/assets/talks/calibrated-learning.pdf) <br>
 ~~Forecasting/calibration, UCSD, Dec 2023.~~
 
