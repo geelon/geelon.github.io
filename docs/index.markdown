@@ -185,6 +185,7 @@ I was a lecturer for the 2023 [EnCORE Foundations in Data Science](https://encor
 
 I was a teaching assistant for the following courses:
 
+- Winter 2024, Machine learning, UCSD
 - Fall 2022, Machine learning, UCSD
 - Fall 2020, [Probability and statistics](https://cseweb.ucsd.edu/~dasgupta/103/index.html), UCSD
 - Fall 2018, [Machine learning](http://www.cs.columbia.edu/~verma/classes/ml/index.html), Columbia University
