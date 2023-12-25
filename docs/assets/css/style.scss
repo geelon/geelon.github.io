@@ -13,7 +13,8 @@ h1 a:hover, a:focus { font-weight: bold; }
 .tabbed {display:inline-block;margin-left:15px;}
 
 header img {
-    width: 90%; /* Set the image width to 90% of the header width */
+    width: 70%; /* Set the image width to 90% of the header width */
     display: block; /* Ensures the image doesn't interact strangely with other elements */
-    margin: 0 auto; /* Center the image horizontally */
+    margin: 0; /* Left justify the image horizontally */
+    /*margin: 0 auto;  Center the image horizontally */
 }
