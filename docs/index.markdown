@@ -40,6 +40,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Learning mixed Nash equilibria*](/assets/talks/learning-equilibria.pdf) <br>
+~~Game theory reading group, UCSD, Feb 2023.~~
+
 [*Statistical and online learning, a tutorial*](/assets/talks/learning-frameworks.pdf) <br>
 ~~Redwood Center, Berkeley, Dec 2023.~~
 
