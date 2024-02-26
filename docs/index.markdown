@@ -17,7 +17,7 @@ My research interests especially arise out of problems in machine learning where
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
 [*Metric learning from limited pairwise preference comparisons*](/assets/papers/lazy-metric-learning.pdf) <br>
-~~Zhi Wang\*, Geelon So\*, and Ramya Korlakai Vinayak.~~ <br>
+~~Zhi Wang, Geelon So, and Ramya Korlakai Vinayak.~~ <br>
 ~~*Preprint*, 2024.~~ <br>
 ~~[pdf](/assets/papers/lazy-metric-learning.pdf)~~
 
