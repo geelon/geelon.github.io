@@ -49,6 +49,9 @@ Presentations given in various reading groups/seminars/graduate courses.
 [*Geometry of multi-objective optimization*](/assets/talks/pmm.pdf) <br>
 ~~Yale Theory Student Seminar, Yale, Mar 2024.~~
 
+[*Metric learning from lazy crowds*](/assets/talks/lazy-metric-learning.pdf) <br>
+~~EnCORE Student Social, UCSD, Feb 2024.~~
+
 [*Learning mixed Nash equilibria*](/assets/talks/learning-equilibria.pdf) <br>
 ~~Game theory reading group, UCSD, Feb 2024.~~
 
