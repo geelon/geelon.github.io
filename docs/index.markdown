@@ -25,7 +25,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
 ~~Abhishek Roy\*, Geelon So\*, Yi-An Ma.~~ <br>
 ~~*Preprint*, 2023.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2308.02145)~~
+~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf) ~~
 
 
 [*Online nearest neighbor classification*](https://arxiv.org/abs/2307.01170) <br>
@@ -46,8 +46,11 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Geometry of multi-objective optimization*](/assets/talks/pmm.pdf) <br>
+~~Yale Theory Student Seminar, Yale, Mar 2024.~~
+
 [*Learning mixed Nash equilibria*](/assets/talks/learning-equilibria.pdf) <br>
-~~Game theory reading group, UCSD, Feb 2023.~~
+~~Game theory reading group, UCSD, Feb 2024.~~
 
 [*Statistical and online learning, a tutorial*](/assets/talks/learning-frameworks.pdf) <br>
 ~~Redwood Center, Berkeley, Dec 2023.~~
