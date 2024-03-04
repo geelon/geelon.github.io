@@ -25,7 +25,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
 ~~Abhishek Roy\*, Geelon So\*, Yi-An Ma.~~ <br>
 ~~*Preprint*, 2023.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf) ~~
+~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf)~~
 
 
 [*Online nearest neighbor classification*](https://arxiv.org/abs/2307.01170) <br>
