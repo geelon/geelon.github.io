@@ -19,7 +19,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Metric learning from limited pairwise preference comparisons*](/assets/papers/lazy-metric-learning.pdf) <br>
 ~~Zhi Wang, Geelon So, Ramya Korlakai Vinayak.~~ <br>
 ~~*Preprint*, 2024.~~ <br>
-~~[pdf](/assets/papers/lazy-metric-learning.pdf) | [talk](/assets/talks/lazy-metric-learning.pdf)~~
+~~[pdf](/assets/papers/lazy-metric-learning.pdf) | [talk](/assets/talks/lazy-metric-learning-ii.pdf)~~
 
 
 [*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
@@ -45,6 +45,10 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
+
+[*Metric learning from lazy crowds*](/assets/talks/lazy-metric-learning-ii.pdf) <br>
+~~Signals, Information, and Algorithms Lab, MIT, Mar 2024.~~
+
 
 [*Geometry of multi-objective optimization*](/assets/talks/pmm.pdf) <br>
 ~~Yale Theory Student Seminar, Yale, Mar 2024.~~
