@@ -18,7 +18,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 [*Metric learning from limited pairwise preference comparisons*](https://arxiv.org/abs/2403.19629) <br>
 ~~Zhi Wang, Geelon So, Ramya Korlakai Vinayak.~~ <br>
-~~*Preprint*, 2024.~~ <br>
+~~*Conference on Uncertainty in Artificial Intelligence*, 2024.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2403.19629) | [talk](/assets/talks/lazy-metric-learning-ii.pdf)~~
 
 
