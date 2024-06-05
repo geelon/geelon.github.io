@@ -31,7 +31,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Online nearest neighbor classification*](https://arxiv.org/abs/2307.01170) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Preprint*, 2023.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2307.01170) | [talk](/assets/talks/realizable-online-nn.pdf) | [extended talk](/assets/talks/re.pdf)~~
+~~[arXiv](https://arxiv.org/abs/2307.01170) | [talk](/assets/talks/realizable-online-nn.pdf) | [extended talk](/assets/talks/thesis-proposal.pdf)~~
 
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
