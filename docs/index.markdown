@@ -18,7 +18,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 [*Online consistency of the nearest neighbor rule*](/assets/papers/nn-consistency.pdf) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
-~~*Neural Information Processing Systems*, 2024.~~ <br>
+~~*38th Conference on Neural Information Processing Systems*, 2024.~~ <br>
 ~~[arXiv](/assets/papers/nn-consistency.pdf) | [talk](/assets/talks/nn-lightning.pdf)~~
 
 
