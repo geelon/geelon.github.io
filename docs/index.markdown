@@ -2,7 +2,7 @@
 layout: default
 ---
 
-I’m a PhD Student in Computer Science at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/). I graduated from the University of Chicago with a BS in Mathematics. [[CV]](/assets/cv.pdf)
+I’m a PhD Candidate in Computer Science at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/). I graduated from the University of Chicago with a BS in Mathematics. [[CV]](/assets/cv.pdf)
 
 
 **Research areas:** algorithmic statistics, machine learning theory, unsupervised learning, continual learning, optimization
@@ -28,10 +28,10 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf)~~
 
 
-[*Online nearest neighbor classification*](https://arxiv.org/abs/2307.01170) <br>
+[*Online nearest neighbor classification*](/assets/papers/nn-consistency.pdf) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Preprint*, 2023.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2307.01170) | [talk](/assets/talks/realizable-online-nn.pdf) | [extended talk](/assets/talks/thesis-proposal.pdf)~~
+~~[arXiv](/assets/papers/nn-consistency.pdf) | [talk](/assets/talks/realizable-online-nn.pdf) | [extended talk](/assets/talks/thesis-proposal.pdf)~~
 
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
