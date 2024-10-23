@@ -16,6 +16,12 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
+[*Online nearest neighbor classification*](/assets/papers/nn-consistency.pdf) <br>
+~~Sanjoy Dasgupta and Geelon So.~~ <br>
+~~*Conference on Neural Information Processing Systems*, 2024.~~ <br>
+~~[arXiv](/assets/papers/nn-consistency.pdf) | [talk](/assets/talks/realizable-online-nn.pdf) | [extended talk](/assets/talks/thesis-proposal.pdf)~~
+
+
 [*Metric learning from limited pairwise preference comparisons*](https://arxiv.org/abs/2403.19629) <br>
 ~~Zhi Wang, Geelon So, Ramya Korlakai Vinayak.~~ <br>
 ~~*Conference on Uncertainty in Artificial Intelligence*, 2024.~~ <br>
@@ -26,12 +32,6 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~Abhishek Roy\*, Geelon So\*, Yi-An Ma.~~ <br>
 ~~*Preprint*, 2023.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf)~~
-
-
-[*Online nearest neighbor classification*](/assets/papers/nn-consistency.pdf) <br>
-~~Sanjoy Dasgupta and Geelon So.~~ <br>
-~~*Preprint*, 2023.~~ <br>
-~~[arXiv](/assets/papers/nn-consistency.pdf) | [talk](/assets/talks/realizable-online-nn.pdf) | [extended talk](/assets/talks/thesis-proposal.pdf)~~
 
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
