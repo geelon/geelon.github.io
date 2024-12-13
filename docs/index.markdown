@@ -19,7 +19,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Online consistency of the nearest neighbor rule*](/assets/papers/nn-consistency.pdf) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2024.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2410.23644) | [talk](/assets/talks/nn-consistency-long.pdf)~~
+~~[arXiv](https://arxiv.org/abs/2410.23644) | [talk](/assets/talks/nn-consistency-long.pdf) | [poster](/assets/misc/nn-poster.pdf) ~~
 
 
 [*Metric learning from limited pairwise preference comparisons*](https://arxiv.org/abs/2403.19629) <br>
