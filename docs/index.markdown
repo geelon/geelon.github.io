@@ -16,7 +16,7 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
-[*Online consistency of the nearest neighbor rule*](/assets/papers/nn-consistency.pdf) <br>
+[*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2024.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2410.23644) | [talk](/assets/talks/nn-consistency-long.pdf) | [poster](/assets/misc/nn-poster.pdf)~~
