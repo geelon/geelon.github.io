@@ -46,6 +46,11 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Online consistency of the nearest neighbor rule*](/assets/talks/nn-consistency-long.pdf) <br>
+~~Modern Paradigms of Generalization Talk, Simons Institute, Oct 2024.~~ <br>
+~~Chicago Junior Theorists Workshop, Northwestern and TTIC, Dec 2024.~~
+
+
 [*Metric learning from lazy crowds*](/assets/talks/lazy-metric-learning-ii.pdf) <br>
 ~~Signals, Information, and Algorithms Lab, MIT, Mar 2024.~~
 
