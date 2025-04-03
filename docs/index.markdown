@@ -221,7 +221,7 @@ I was a teaching assistant for the following courses:
 
 ## Service
 
-- Reveiwer: ACM CSUR 2024; AISTATS 2022, 2023, 2024, 2025; ALT 2025; ICML 2025; JOTA 2025; NeurIPS 2023
+- Reveiwer: ACM CSUR 2024; AISTATS 2022–2025; ALT 2025; ICML 2025; JOTA 2025; NeurIPS 2023
 - CSE PhD DEI fellowship reviewer (2020, 2021)
 - CSE/HDSI Visit Day AI coordinator (2020, 2021)
 - [ExploreCSR 2020](https://explorecsr.eng.ucsd.edu/) mentor
