@@ -18,6 +18,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 [*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
 ~~Tobias Wegel, Geelon So, Junhyung Park, Fanny Yang.~~ <br>
+~~*Preprint*, 2025.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2508.17152)~~
 
 
