@@ -16,6 +16,11 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
+[*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
+~~Tobias Wegel, Geelon So, Junhyung Park, Fanny Yang.~~ <br>
+~~[arXiv](https://arxiv.org/abs/2508.17152)~~
+
+
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2024.~~ <br>
