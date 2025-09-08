@@ -19,7 +19,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
 ~~Tobias Wegel, Geelon So, Junhyung Park, Fanny Yang.~~ <br>
 ~~*Preprint*, 2025.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2508.17152)~~
+~~[arXiv](https://arxiv.org/abs/2508.17152) | [lightning talk](/assets/talks/mol-lightning.pdf)~~
 
 
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
