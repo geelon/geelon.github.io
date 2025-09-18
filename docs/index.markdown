@@ -18,8 +18,14 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 [*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
 ~~Tobias Wegel, Geelon So, Junhyung Park, Fanny Yang.~~ <br>
-~~*Preprint*, 2025.~~ <br>
+~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2508.17152) | [lightning talk](/assets/talks/mol-lightning.pdf)~~
+
+
+[*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
+~~Abhishek Roy\*, Geelon So\*, Yi-An Ma.~~ <br>
+~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
+~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf)~~
 
 
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
@@ -33,11 +39,6 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~*Conference on Uncertainty in Artificial Intelligence*, 2024.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2403.19629) | [talk](/assets/talks/lazy-metric-learning-ii.pdf)~~
 
-
-[*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
-~~Abhishek Roy\*, Geelon So\*, Yi-An Ma.~~ <br>
-~~*Preprint*, 2023.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf)~~
 
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
 ~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
