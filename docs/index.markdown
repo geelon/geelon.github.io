@@ -17,37 +17,37 @@ My research interests especially arise out of problems in machine learning where
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
 [*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
-~~Tobias Wegel, Geelon So, Junhyung Park, Fanny Yang.~~ <br>
+~~with Tobias Wegel, Junhyung Park, and Fanny Yang.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2508.17152) | [lightning talk](/assets/talks/mol-lightning.pdf)~~
 
 
 [*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
-~~Abhishek Roy\*, Geelon So\*, Yi-An Ma.~~ <br>
+~~with Abhishek Roy and Yi-An Ma.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf)~~
 
 
 [*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
-~~Hadley Black, Kasper Green Larsen, Arya Mazumdar, Barna Saha, Geelon So.~~ <br>
+~~with Hadley Black, Kasper Green Larsen, Arya Mazumdar, and Barna Saha.~~ <br>
 ~~*Preprint*, 2025.~~ <br>
 ~~[arXiv](http://arxiv.org/abs/2509.20848)~~
 
 
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
-~~Sanjoy Dasgupta and Geelon So.~~ <br>
+~~with Sanjoy Dasgupta.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2024.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2410.23644) | [talk](/assets/talks/nn-consistency-long.pdf) | [poster](/assets/misc/nn-poster.pdf)~~
 
 
 [*Metric learning from limited pairwise preference comparisons*](https://arxiv.org/abs/2403.19629) <br>
-~~Zhi Wang, Geelon So, Ramya Korlakai Vinayak.~~ <br>
+~~with Zhi Wang and Ramya Korlakai Vinayak.~~ <br>
 ~~*Conference on Uncertainty in Artificial Intelligence*, 2024.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2403.19629) | [talk](/assets/talks/lazy-metric-learning-ii.pdf)~~
 
 
 [*Convergence of online k-means*](https://proceedings.mlr.press/v151/so22a.html) <br>
-~~Sanjoy Dasgupta, Gaurav Mahajan, Geelon So.~~ <br>
+~~with Sanjoy Dasgupta and Gaurav Mahajan.~~ <br>
 ~~*International Conference on Artificial Intelligence and Statistics*, 2022.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2202.10640) | [pdf](/assets/papers/conv-kmeans.pdf) | [intro video](https://youtu.be/1LOvnqb_kIU) | [poster](/assets/misc/conv-kmeans-poster.pdf)~~
 
