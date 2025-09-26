@@ -28,6 +28,12 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf)~~
 
 
+[*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
+~~Hadley Black, Kasper Green Larsen, Arya Mazumdar, Barna Saha, Geelon So.~~ <br>
+~~*Preprint*, 2025.~~ <br>
+~~[arXiv](http://arxiv.org/abs/2509.20848)~~
+
+
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
 ~~Sanjoy Dasgupta and Geelon So.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2024.~~ <br>
