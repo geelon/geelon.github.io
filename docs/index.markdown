@@ -19,7 +19,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
 ~~with Tobias Wegel, Junhyung Park, and Fanny Yang.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2508.17152) | [lightning talk](/assets/talks/mol-lightning.pdf)~~
+~~[arXiv](https://arxiv.org/abs/2508.17152) | [lightning talk](/assets/talks/mol-lightning.pdf) | [talk](/assets/talks/mol-full.pdf)~~
 
 
 [*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
