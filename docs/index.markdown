@@ -16,6 +16,13 @@ My research interests especially arise out of problems in machine learning where
 
 Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrbKwAAAAJ) profile. Here's a list of other [writings](/writing).
 
+
+[*Learnable mixed Nash equilibria are collectively rational*](https://arxiv.org/abs/2510.14907) <br>
+~~with Yi-An Ma.~~ <br>
+~~*Preprint*, 2025.~~ <br>
+~~[arXiv](hhttps://arxiv.org/abs/2510.14907)~~
+
+
 [*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
 ~~with Tobias Wegel, Junhyung Park, and Fanny Yang.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
