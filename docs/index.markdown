@@ -66,6 +66,11 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*On the sample complexity of semi-supervised multi-objective learning*](/assets/talks/mol-full.pdf)<br>
+~~EnCORE Collaboration Workshop, UCSD, Sep 2025.~~ <br>
+~~Symposium on Mathematical Foundations of Trustworthy Learning, Switzerland, Oct 2025.~~
+
+
 [*Online consistency of the nearest neighbor rule*](/assets/talks/nn-consistency-long.pdf) <br>
 ~~Modern Paradigms of Generalization Talk, Simons Institute, Oct 2024.~~ <br>
 ~~Chicago Junior Theorists Workshop, Northwestern and TTIC, Dec 2024.~~
