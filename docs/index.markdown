@@ -23,6 +23,12 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~[arXiv](hhttps://arxiv.org/abs/2510.14907)~~
 
 
+[*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
+~~with Hadley Black, Kasper Green Larsen, Arya Mazumdar, and Barna Saha.~~ <br>
+~~*Preprint*, 2025.~~ <br>
+~~[arXiv](http://arxiv.org/abs/2509.20848)~~
+
+
 [*On the sample complexity of semi-supervised multi-objective learning*](https://arxiv.org/abs/2508.17152) <br>
 ~~with Tobias Wegel, Junhyung Park, and Fanny Yang.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
@@ -35,10 +41,10 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf) | [code](https://github.com/geelon/preference-pareto)~~
 
 
-[*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
-~~with Hadley Black, Kasper Green Larsen, Arya Mazumdar, and Barna Saha.~~ <br>
-~~*Preprint*, 2025.~~ <br>
-~~[arXiv](http://arxiv.org/abs/2509.20848)~~
+[*Online consistency of the kn-nearest neighbor rule*](/assets/papers/online-knn.pdf) <br>
+~~with Robi Bhattacharjee and Sanjoy Dasgupta.~~ <br>
+~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
+~~[[pdf](/assets/papers/online-knn.pdf)~~
 
 
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
