@@ -41,7 +41,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf) | [code](https://github.com/geelon/preference-pareto)~~
 
 
-[*Online consistency of the kn-nearest neighbor rule*](/assets/papers/online-knn.pdf) <br>
+[*Consistency of the kn-nearest neighbor rule under adaptive sampling*](/assets/papers/online-knn.pdf) <br>
 ~~with Robi Bhattacharjee and Sanjoy Dasgupta.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
 ~~[pdf](/assets/papers/online-knn.pdf)~~
