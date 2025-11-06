@@ -44,7 +44,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Consistency of the kn-nearest neighbor rule under adaptive sampling*](/assets/papers/online-knn.pdf) <br>
 ~~with Robi Bhattacharjee and Sanjoy Dasgupta.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
-~~[pdf](/assets/papers/online-knn.pdf)~~
+~~[pdf](/assets/papers/online-knn.pdf) | [lightning talk](/assets/talks/knn-lightning.pdf)~~
 
 
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
