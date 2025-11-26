@@ -15,3 +15,7 @@ layout: default
 ### Algebra
 
 - [Algebra](maclane-birkhoff-algebra.pdf), MacLane and Birkhoff
+
+### Dynamical systems
+
+- [An Introduction to the Modern Theory of Dynamical Systems](katok-dynamical-systems.pdf), Katok and Hasselblatt
