@@ -35,7 +35,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~[arXiv](https://arxiv.org/abs/2508.17152) | [lightning talk](/assets/talks/mol-lightning.pdf) | [talk](/assets/talks/mol-full.pdf)~~
 
 
-[*Optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
+[*Preference optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
 ~~with Abhishek Roy and Yi-An Ma.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
 ~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf) | [code](https://github.com/geelon/preference-pareto)~~
@@ -44,7 +44,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Consistency of the kn-nearest neighbor rule under adaptive sampling*](/assets/papers/online-knn.pdf) <br>
 ~~with Robi Bhattacharjee and Sanjoy Dasgupta.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
-~~[pdf](/assets/papers/online-knn.pdf) | [lightning talk](/assets/talks/knn-lightning.pdf)~~
+~~[pdf](/assets/papers/online-knn.pdf) | [lightning talk](/assets/talks/knn-lightning.pdf) | [poster](/assets/misc/knn-poster.pdf)~~
 
 
 [*Online consistency of the nearest neighbor rule*](https://arxiv.org/pdf/2410.23644) <br>
