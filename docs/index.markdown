@@ -38,7 +38,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Preference optimization on Pareto sets: On a theory of multi-objective optimization*](https://arxiv.org/abs/2308.02145) <br>
 ~~with Abhishek Roy and Yi-An Ma.~~ <br>
 ~~*Conference on Neural Information Processing Systems*, 2025.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf) | [code](https://github.com/geelon/preference-pareto)~~
+~~[arXiv](https://arxiv.org/abs/2308.02145) | [talk](/assets/talks/pmm.pdf) | [code](https://github.com/geelon/preference-pareto) | [poster](/assets/misc/moo-poster.pdf)~~
 
 
 [*Consistency of the kn-nearest neighbor rule under adaptive sampling*](/assets/papers/online-knn.pdf) <br>
