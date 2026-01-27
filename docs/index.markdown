@@ -20,7 +20,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Learnable mixed Nash equilibria are collectively rational*](https://arxiv.org/abs/2510.14907) <br>
 ~~with Yi-An Ma.~~ <br>
 ~~*Preprint*, 2025.~~ <br>
-~~[arXiv](hhttps://arxiv.org/abs/2510.14907)~~
+~~[arXiv](hhttps://arxiv.org/abs/2510.14907) | [talk](/assets/talks/games-cse-theory-seminar.pdf)~~
 
 
 [*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
@@ -71,6 +71,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
+
+[*The Invisible Hand of Stability: Dynamics of Decentralized Decision Making*](/assets/talks/games-cse-theory-seminar.pdf)<br>
+~~CSE Theory Seminar, UCSD, Jan 2026.~~ <br>
 
 [*On the sample complexity of semi-supervised multi-objective learning*](/assets/talks/mol-full.pdf)<br>
 ~~EnCORE Collaboration Workshop, UCSD, Sep 2025.~~ <br>
