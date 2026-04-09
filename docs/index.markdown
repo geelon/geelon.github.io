@@ -74,6 +74,7 @@ Presentations given in various reading groups/seminars/graduate courses.
 
 [*The Invisible Hand of Stability: Dynamics of Decentralized Decision Making*](/assets/talks/games-cse-theory-seminar.pdf)<br>
 ~~CSE Theory Seminar, UCSD, Jan 2026.~~ <br>
+~~Economics Theory Seminar, UCSD, Apr 2026.~~<br>
 
 [*On the sample complexity of semi-supervised multi-objective learning*](/assets/talks/mol-full.pdf)<br>
 ~~EnCORE Collaboration Workshop, UCSD, Sep 2025.~~ <br>
