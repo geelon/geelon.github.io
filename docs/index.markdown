@@ -20,7 +20,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Learnable mixed Nash equilibria are collectively rational*](https://arxiv.org/abs/2510.14907) <br>
 ~~with Yi-An Ma.~~ <br>
 ~~*Preprint*, 2025.~~ <br>
-~~[arXiv](hhttps://arxiv.org/abs/2510.14907) | [talk](/assets/talks/games-cse-theory-seminar.pdf)~~
+~~[arXiv](hhttps://arxiv.org/abs/2510.14907) | [talk](/assets/talks/games-cse-theory-seminar.pdf) | [technical talk](/assets/talks/learning-NE-econ-talk.pdf) ~~
 
 
 [*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
