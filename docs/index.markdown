@@ -25,7 +25,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 [*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
 ~~with Hadley Black, Kasper Green Larsen, Arya Mazumdar, and Barna Saha.~~ <br>
-~~*Preprint*, 2025.~~ <br>
+~~*Conference on Learning Theory*, 2026.~~ <br>
 ~~[arXiv](http://arxiv.org/abs/2509.20848)~~
 
 
