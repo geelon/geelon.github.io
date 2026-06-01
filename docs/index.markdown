@@ -22,6 +22,10 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ~~*Preprint*, 2025.~~ <br>
 ~~[arXiv](hhttps://arxiv.org/abs/2510.14907) | [cs talk](/assets/talks/games-cse-theory-seminar.pdf) | [econ talk](/assets/talks/learning-NE-econ-talk.pdf)~~
 
+[*Hedging on the frontier: Learning new tasks with few samples*](https://arxiv.org/abs/2605.30997) <br>
+~~with Tobias Wegel, Federico Di Gennaro, and Fanny Yang.~~ <br>
+~~*International Conference for Machine Learning*, 2026.~~ <br>
+~~[arXiv](https://arxiv.org/abs/2605.30997)~~
 
 [*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
 ~~with Hadley Black, Kasper Green Larsen, Arya Mazumdar, and Barna Saha.~~ <br>
