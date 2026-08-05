@@ -2,10 +2,10 @@
 layout: default
 ---
 
-I’m a PhD Candidate in Computer Science at UC San Diego, where I am advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, where I was advised by [Daniel Hsu](https://www.cs.columbia.edu/~djhsu/). I graduated from the University of Chicago with a BS in Mathematics. [[CV]](/assets/cv.pdf)
+I’m a Postdoctoral Researcher working on machine learning theory at ETH Zürich, where I am hosted by [Fanny Yang](https://sml.inf.ethz.ch/group/fannyy/). I obtained my PhD in Computer Science at UC San Diego, where I was advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). [[CV]](/assets/cv.pdf)
 
 
-**Research areas:** algorithmic statistics, machine learning theory, unsupervised learning, continual learning, optimization
+**Research areas:** algorithmic statistics, machine learning theory, game theory, continual learning, optimization
 
 My research interests especially arise out of problems in machine learning where (i) there is too much data, (ii) there is not enough data, (iii) the data keeps changing, and possibly any or all three at the same time. [[...]](./research)
 
@@ -75,6 +75,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
+
+[*Learning in a Dynamic and Strategic World*](/assets/talks/defense.pdf)<br>
+~~PhD Defense, UCSD, May 2026.~~<br>
 
 [*The Invisible Hand of Stability: Dynamics of Decentralized Decision Making*](/assets/talks/games-cse-theory-seminar.pdf)<br>
 ~~CSE Theory Seminar, UCSD, Jan 2026.~~ <br>
