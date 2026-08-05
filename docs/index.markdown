@@ -2,7 +2,7 @@
 layout: default
 ---
 
-I’m a Postdoctoral Researcher working on machine learning theory at ETH Zürich, where I am hosted by [Fanny Yang](https://sml.inf.ethz.ch/group/fannyy/). I obtained my PhD in Computer Science at UC San Diego, where I was advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). [[CV]](/assets/cv.pdf)
+I’m a Postdoctoral Researcher at ETH Zürich hosted by [Fanny Yang](https://sml.inf.ethz.ch/group/fannyy/). I completed my PhD in Computer Science at UC San Diego, where I was advised by [Sanjoy Dasgupta](https://cseweb.ucsd.edu/~dasgupta/) and [Yian Ma](https://sites.google.com/view/yianma/home). I obtained my MS in Computer Science at Columbia University, advised by [Daniel Hsu](https://cs.columbia.edu/~djhsu). I graduated from the University of Chicago with BS in Mathematics. [[CV]](/assets/cv.pdf)
 
 
 **Research areas:** algorithmic statistics, machine learning theory, game theory, continual learning, optimization
