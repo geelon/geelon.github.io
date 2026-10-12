@@ -81,6 +81,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
 
+[*Learnability and the Dynamics of Language*](/assets/talks/language-evolution.pdf)<br>
+~~Language Reading Group, ETH, Oct 2026.~~<br>
+
 [*Learning in a Dynamic and Strategic World*](/assets/talks/defense.pdf)<br>
 ~~PhD Defense, UCSD, May 2026.~~<br>
 
