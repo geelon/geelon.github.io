@@ -89,8 +89,8 @@ Presentations given in various reading groups/seminars/graduate courses.
 [*The Invisible Hand of Stability: Dynamics of Decentralized Decision Making*](/assets/talks/nash-talk.pdf)<br>
 ~~CSE Theory Seminar, UCSD, Jan 2026.~~ <br>
 ~~Economics Theory Seminar, UCSD, Apr 2026.~~<br>
-~~Cambridge ML/Statistics Seminar, Cambridge, Nov 2026.~~<br>
-~~Oxford ML Seminar, Oxford, Nov 2026.~~<br>
+~~Cambridge Statistics Seminar, Cambridge, Nov 2026.~~<br>
+~~Oxford Statistics Seminar, Oxford, Nov 2026.~~<br>
 
 [*Learnability and the Dynamics of Language*](/assets/talks/language-evolution.pdf)<br>
 ~~Language Reading Group, ETH, Oct 2026.~~<br>
@@ -278,7 +278,7 @@ I was a teaching assistant for the following courses:
 
 ## Service
 
-- Reveiwer: ACM CSUR 2024; AISTATS 2022–2026; ALT 2025-2026; ICLR 2026; ICML 2025; JOTA 2025; NeurIPS 2023, 2025
+- Reveiwer: ACM CSUR 2024; AISTATS 2022–2027; ALT 2025-2027; ICLR 2026-2027; ICML 2025; JMLR 2027; JOTA 2025; MSL 2027; NeurIPS 2023, 2025
 - CSE PhD DEI fellowship reviewer (2020, 2021)
 - CSE/HDSI Visit Day AI coordinator (2020, 2021)
 - [ExploreCSR 2020](https://explorecsr.eng.ucsd.edu/) mentor
