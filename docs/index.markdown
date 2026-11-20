@@ -35,7 +35,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 [*Hedging on the frontier: Learning new tasks with few samples*](https://arxiv.org/abs/2605.30997) <br>
 ~~with Tobias Wegel, Federico Di Gennaro, and Fanny Yang.~~ <br>
 ~~*International Conference for Machine Learning*, 2026.~~ <br>
-~~[arXiv](https://arxiv.org/abs/2605.30997)~~
+~~[arXiv](https://arxiv.org/abs/2605.30997) | [talk](/assets/talks/monotonicity.pdf)~~
 
 [*Actively learning halfspaces without synthetic data*](http://arxiv.org/abs/2509.20848) <br>
 ~~with Hadley Black, Kasper Green Larsen, Arya Mazumdar, and Barna Saha.~~ <br>
@@ -85,6 +85,9 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 ## Talks
 Presentations given in various reading groups/seminars/graduate courses.
+
+[*A Few Simple Thoughts on Complex Problems, and On Solving Them*](/assets/talks/monotonicity.pdf)<br>
+~~FIM-IMS Joint Workshop, NUS, Nov 2026.~~<br>
 
 [*The Invisible Hand of Stability: Dynamics of Decentralized Decision Making*](/assets/talks/nash-talk.pdf)<br>
 ~~CSE Theory Seminar, UCSD, Jan 2026.~~ <br>
