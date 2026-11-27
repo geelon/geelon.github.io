@@ -19,10 +19,10 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 
 [*Learnable mixed Nash equilibria are collectively rational*](https://arxiv.org/abs/2510.14907) <br>
 ~~with Yi-An Ma.~~ <br>
-~~*Preprint*, 2025.~~ <br>
+~~*Preprint*, 2026.~~ <br>
 ~~[arXiv](hhttps://arxiv.org/abs/2510.14907) | [talk](/assets/talks/nash-talk.pdf) | [poster](/assets/misc/nash-poster.pdf)~~
 
-[*Query Complexity of Learning Axis-Aligned Partitions*](http://arxiv.org/abs/2610.35495) <br>
+[*Query complexity of learning axis-aligned partitions*](http://arxiv.org/abs/2610.35495) <br>
 ~~with Hadley Black, Arya Mazumdar, and Barna Saha.~~ <br>
 ~~*Preprint*, 2026.~~ <br>
 ~~[arXiv](http://arxiv.org/abs/2610.35495)~~
