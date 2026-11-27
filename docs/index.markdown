@@ -87,7 +87,7 @@ Here's my [Google Scholar](https://scholar.google.com/citations?hl=en&user=yqhrb
 Presentations given in various reading groups/seminars/graduate courses.
 
 [*A Few Simple Thoughts on Complex Problems, and On Solving Them*](/assets/talks/monotonicity.pdf)<br>
-~~FIM-IMS Joint Workshop, NUS, Nov 2026.~~<br>
+~~[FIM-IMS Joint Workshop](/assets/misc/IMS-FIM-Schedule.pdf), NUS, Nov 2026.~~<br>
 
 [*The Invisible Hand of Stability: Dynamics of Decentralized Decision Making*](/assets/talks/nash-talk.pdf)<br>
 ~~CSE Theory Seminar, UCSD, Jan 2026.~~ <br>
